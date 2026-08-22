@@ -29,17 +29,22 @@ python3 -m http.server 8000
 - **SEO quasi absent** → balises meta description, Open Graph, et données structurées `schema.org/Restaurant` (aide Google à afficher horaires/adresse/téléphone directement dans les résultats de recherche).
 - **Nom "La Vigne" sans mise en avant du vin** → à vous de me dire si vous voulez une vraie section "cave à vins" (je peux l'ajouter dès que vous avez la liste).
 
+## Contenu déjà réel
+
+- **Menu et prix** : la carte affichée sur le site (6 catégories, plats phares) et le PDF téléchargeable (`assets/carte-la-vigne.pdf`, 4 pages, généré automatiquement à partir du script `build_menu_pdf.py`) reprennent l'intégralité de votre vraie carte — entrées, moules, mer, salades, grillades au feu de bois, rôtisserie du jour, pâtes, menu enfants, apéritifs, cocktails, bières, champagnes — avec les prix exacts que vous m'avez transmis.
+- **Instagram** : lien réel vers `@lavignebxl` (barre du haut + footer).
+- **"Depuis 1985"** : repris de l'en-tête de votre carte actuelle.
+
 ## À compléter avant publication (obligatoire)
 
-Je n'ai pas accès à internet depuis mon environnement de travail, donc je n'ai pas pu récupérer vos vraies photos ni le contenu exact de votre PDF de carte. Tout est prêt à recevoir vos éléments réels :
+Je n'ai pas accès à internet depuis mon environnement de travail, donc je n'ai pas pu récupérer vos vraies photos. Tout est prêt à les recevoir :
 
 1. **Photos** — déposer vos fichiers dans `assets/img/gallery/` et `assets/img/team/`, puis remplacer les emplacements marqués `<!-- TODO -->`/`ph-label` dans `index.html` (section "L'adresse" et section "Galerie") par de vraies balises `<img>`. Les blocs actuels sont des emplacements stylisés, pas de fausses photos.
-2. **Carte / menu réel** — les plats affichés (côte de bœuf, poisson du jour, salade grecque…) sont des exemples représentatifs de votre concept, **sans prix inventés**. Remplacez-les par vos plats et prix réels, ou envoyez-les-moi et je les intègre.
-3. **Lien vers le PDF de la carte** — le bouton "Télécharger la carte (PDF)" pointe vers `#` (placeholder), à remplacer par l'URL réelle.
-4. **Réservation en ligne** — j'ai mis en avant l'appel téléphonique (100% fonctionnel dès maintenant : `tel:+3225381207`) et l'e-mail. Pour réintégrer votre widget Zenchef (ou équivalent), collez son code d'intégration dans l'emplacement marqué `widget-slot` de la section Réservation.
-5. **Réseaux sociaux** — les icônes TripAdvisor / Instagram / Facebook pointent vers `#`, à remplacer par vos vraies URLs (barre du haut + footer).
-6. **E-mail de contact** — j'ai gardé `nc-invest@outlook.com` (celui du site actuel), mais il ressemble à une adresse interne/investisseur plutôt qu'à un contact client. Je recommande une adresse dédiée type `info@la-vigne.be` ou `reservation@la-vigne.be` si vous en avez une.
-7. **Image de partage réseaux sociaux (Open Graph)** — prévoir une image 1200×630px, puis décommenter la ligne `og:image` dans le `<head>` de `index.html`.
+2. **Réservation en ligne** — j'ai mis en avant l'appel téléphonique (100% fonctionnel dès maintenant : `tel:+3225381207`) et l'e-mail. Pour réintégrer votre widget Zenchef (ou équivalent), collez son code d'intégration dans l'emplacement marqué `widget-slot` de la section Réservation.
+3. **Facebook** — le nom de votre page ("La Vigne Restaurant") est connu mais pas son URL exacte ; à compléter dans la barre du haut et le footer (actuellement `href="#"`).
+4. **E-mail de contact** — j'ai gardé `nc-invest@outlook.com` (celui du site actuel), mais il ressemble à une adresse interne/investisseur plutôt qu'à un contact client. Je recommande une adresse dédiée type `info@la-vigne.be` ou `reservation@la-vigne.be` si vous en avez une.
+5. **Image de partage réseaux sociaux (Open Graph)** — prévoir une image 1200×630px, puis décommenter la ligne `og:image` dans le `<head>` de `index.html`.
+6. **Mise à jour future de la carte** — si les plats ou les prix changent, éditez les listes dans `tools/build_menu_pdf.py` puis, depuis le dossier `tools/`, lancez `pip install reportlab && python3 build_menu_pdf.py` pour régénérer `assets/carte-la-vigne.pdf`. Pensez aussi à mettre à jour les prix affichés directement dans `index.html`.
 
 ## Structure des fichiers
 
