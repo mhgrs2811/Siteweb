@@ -1,7 +1,7 @@
-# CILÉA — Plan d'exécution complet d'une boutique Shopify mono-produit premium (niche cils)
+# wispr — Plan d'exécution complet d'une boutique Shopify mono-produit premium (niche cils)
 
 > Document stratégique : produit, marge, branding, landing page, stack technique.
-> Marque d'illustration retenue pour tout le document : **CILÉA** (voir Étape 2.1 pour les alternatives).
+> Marque retenue pour tout le document : **wispr** (voir Étape 2.1 — nom finalisé après itérations sur la direction créative, en remplacement du nom de travail initial CILÉA).
 
 ---
 
@@ -58,15 +58,20 @@ C'est le plus puissant car il combine trois leviers de conversion simultanément
 
 ### 2.1 Noms de marque
 
+**Nom retenu : wispr.**
+Construit sur "wisp" (terme du métier — *wispy lashes*, le style de cils fins et effilés très recherché) associé à une orthographe à voyelle coupée façon Fluttr/Tumblr/Flickr, pour un rendu résolument anglophone, international, prononçable dans toutes les langues et sans accent. Direction visuelle validée : wordmark en minuscules, confiant et gras façon Kylie Cosmetics, associé à une chaleur "glow" façon Paalm — évocation : douceur (wisp/whisper), légèreté, confiance.
+
+*Nom de travail initial exploré durant la phase de brainstorming (conservé ci-dessous à titre de trace du raisonnement) :*
+
 | Nom | Évocation | Disponibilité probable .com/.fr | Ton / univers |
 |---|---|---|---|
-| **CILÉA** | Contraction de "cil" + sonorité "-éa" (aura, éclat) | Probable en .fr, .com à vérifier (variante ciléabeauty.com si pris) | Sensuel, chaleureux, clean beauty méditerranéen |
+| **CILÉA** *(écarté)* | Contraction de "cil" + sonorité "-éa" (aura, éclat) | Probable en .fr, .com à vérifier (variante ciléabeauty.com si pris) | Sensuel, chaleureux, clean beauty méditerranéen |
 | **LUMYS** | "Lumière" + suffixe clinique/moderne (type Typology, Ren) | Bonne dispo probable (nom peu commun) | Épuré, lumineux, minimaliste scandinave |
 | **MAISON DE CILS** | Évoque l'atelier français, le savoir-faire artisanal | .com générique probablement pris, .fr plus accessible | Luxe patrimonial, storytelling "maison" |
 | **VELYA** | "Velvet" (velours) + prénom doux "-ya" | Bonne dispo (nom inventé, rare) | Doux, féminin, contemporain |
 | **OSCIL** | Jeu de mots : "cil" caché dans "osciller/osé" | Bonne dispo (nom court inventé) | Audacieux, tech-beauty, disruptif |
 
-*(Note : la disponibilité réelle des noms de domaine doit être vérifiée sur un registrar avant tout dépôt de marque — ces estimations sont indicatives et basées sur la rareté du terme.)*
+*(Note : la disponibilité réelle des noms de domaine doit être vérifiée sur un registrar avant tout dépôt de marque — ces estimations sont indicatives et basées sur la rareté du terme. À vérifier en priorité : wispr.com / wispr.fr — nom court à forte probabilité de conflit avec des marques tech existantes portant un nom proche, une recherche de disponibilité juridique est recommandée avant tout dépôt.)*
 
 ### 2.2 Palette de couleurs & ambiance visuelle
 
@@ -128,7 +133,7 @@ Logo centré. Menu gauche : "Le Kit" · "Comment ça marche" · "Avis" · "Notre
 *Objectif conversion : réassurance immédiate par la preuve sociale avant l'argumentaire produit.*
 
 ### 5. Module Problème / Solution
-Deux colonnes côte à côte : à gauche photo/texte "Avant CILÉA" (rendez-vous en institut, budget mensuel, colle irritante, entretien contraignant) ; à droite photo/texte "Avec CILÉA" (3 minutes chez soi, formule hypoallergénique, résultat identique, budget divisé par 4).
+Deux colonnes côte à côte : à gauche photo/texte "Avant wispr" (rendez-vous en institut, budget mensuel, colle irritante, entretien contraignant) ; à droite photo/texte "Avec wispr" (3 minutes chez soi, formule hypoallergénique, résultat identique, budget divisé par 4).
 
 *Objectif conversion : cristalliser la douleur puis la résoudre visuellement, créer le contraste qui justifie le passage à l'achat.*
 
@@ -154,7 +159,7 @@ Trois colonnes avec icônes animées Lottie (déclenchées au scroll) :
 
 ### 9. Tableau comparatif détaillé
 
-| Critère | Kit CILÉA | Extensions en institut | Faux-cils classiques à colle |
+| Critère | Kit wispr | Extensions en institut | Faux-cils classiques à colle |
 |---|---|---|---|
 | Prix mensuel moyen | 19-39 € | 120-180 € | 15-25 € |
 | Temps d'application | 3-5 min | 90-120 min (rendez-vous) | 10-15 min |
@@ -222,12 +227,12 @@ R : Non, il est résiliable à tout moment en un clic depuis votre espace client
 
 ### 14. Garantie
 **Texte complet :**
-"**Garantie Regard Satisfait — 30 jours.** Nous sommes convaincues que CILÉA transformera votre routine beauté. Si, pour une quelconque raison, le résultat ne vous convient pas, contactez notre équipe dans les 30 jours suivant la réception de votre commande : nous vous remboursons intégralement, sans question, sans complication. Notre conseillère beauté reste également disponible par WhatsApp pour vous accompagner avant même d'envisager un retour — 92% des clientes qui nous contactent trouvent une solution sans avoir besoin d'être remboursées."
+"**Garantie Regard Satisfait — 30 jours.** Nous sommes convaincues que wispr transformera votre routine beauté. Si, pour une quelconque raison, le résultat ne vous convient pas, contactez notre équipe dans les 30 jours suivant la réception de votre commande : nous vous remboursons intégralement, sans question, sans complication. Notre conseillère beauté reste également disponible par WhatsApp pour vous accompagner avant même d'envisager un retour — 92% des clientes qui nous contactent trouvent une solution sans avoir besoin d'être remboursées."
 
 *Objectif conversion : supprimer le dernier frein psychologique (peur de l'achat raté) et renforcer la crédibilité de marque par le chiffre de réassurance.*
 
 ### 15. CTA final + Footer
-**Bandeau final :** "Prête à transformer votre regard ?" — CTA "Je commande mon kit CILÉA" — micro-copie sous le bouton : "Livraison offerte dès 39 € · Garantie 30 jours · Paiement sécurisé."
+**Bandeau final :** "Prête à transformer votre regard ?" — CTA "Je commande mon kit wispr" — micro-copie sous le bouton : "Livraison offerte dès 39 € · Garantie 30 jours · Paiement sécurisé."
 
 **Footer :** colonnes — "Boutique" (Le Kit, Recharges, Abonnement) / "Aide" (FAQ, Livraison & Retours, Contact WhatsApp) / "La Marque" (Notre Histoire, Engagement responsable, Presse) / Newsletter ("Recevez -10% sur votre première commande" + champ email) / icônes réseaux sociaux / mentions légales, CGV, politique de confidentialité.
 
