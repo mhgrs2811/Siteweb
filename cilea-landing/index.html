@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CILÉA — Le regard qui change tout, sans rendez-vous</title>
+<meta name="description" content="CILÉA — Kit de clusters de cils premium à poser soi-même. Résultat salon, tenue 7 jours, sans rendez-vous.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- 1. BARRE D'ANNONCE -->
+<div class="announce-bar" id="announceBar" role="region" aria-label="Annonces">
+  <p class="announce-msg is-active">🚚 Livraison offerte dès 39&nbsp;€ · Expédiée sous 48h depuis la France</p>
+  <p class="announce-msg">⭐ 4,8/5 sur 2&nbsp;300+ avis vérifiés</p>
+  <p class="announce-msg">🎁 -15% sur votre première commande avec le code <strong>REGARD15</strong></p>
+</div>
+
+<!-- 2. HEADER / NAVIGATION -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <nav class="nav-left" aria-label="Navigation principale">
+      <a href="#kit">Le Kit</a>
+      <a href="#comment-ca-marche">Comment ça marche</a>
+      <a href="#avis">Avis</a>
+      <a href="#histoire">Notre Histoire</a>
+    </nav>
+    <a class="logo" href="#top" aria-label="CILÉA — Accueil">CILÉA</a>
+    <div class="nav-right">
+      <button class="icon-btn" aria-label="Rechercher" type="button">
+        <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="21" y1="21" x2="16.6" y2="16.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Mon compte" type="button">
+        <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Panier" type="button">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 6h2l1.5 11a2 2 0 002 2h7a2 2 0 002-2L20 9H7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.2" fill="currentColor"/><circle cx="17" cy="21" r="1.2" fill="currentColor"/></svg>
+      </button>
+      <a href="#offres" class="btn btn-primary btn-sm sticky-cta" id="stickyCta">Commander</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 3. HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-media placeholder-media" aria-hidden="true">
+      <span class="placeholder-tag">🎥 Placeholder vidéo — boucle 8-12s, macro application clusters</span>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="eyebrow">Le kit de clusters à faire soi-même</p>
+      <h1>Le regard qui change tout,<br>sans rendez-vous.</h1>
+      <p class="hero-sub">Le kit d'extensions à faire soi-même, pensé avec des expertes du regard, pour un résultat salon qui tient jusqu'à 7 jours.</p>
+      <div class="hero-ctas">
+        <a href="#offres" class="btn btn-primary">Je découvre le kit</a>
+        <button class="btn btn-ghost" id="openVideoModal" type="button">
+          <svg viewBox="0 0 24 24" width="16" height="16"><polygon points="6,4 20,12 6,20" fill="currentColor"/></svg>
+          Voir la technique en vidéo
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. BANDEAU PREUVES SOCIALES -->
+  <section class="social-proof" aria-label="Preuves sociales">
+    <div class="social-proof-inner">
+      <div class="proof-item">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span>4,8/5 — 2&nbsp;347 avis vérifiés</span>
+      </div>
+      <div class="proof-sep" aria-hidden="true"></div>
+      <div class="proof-item proof-press">
+        <span class="proof-label">Vu dans</span>
+        <span class="press-logo">ELLE</span>
+        <span class="press-logo">GRAZIA</span>
+        <span class="press-logo">MARIE&nbsp;CLAIRE</span>
+      </div>
+      <div class="proof-sep" aria-hidden="true"></div>
+      <div class="proof-item">+15M de vues sur TikTok</div>
+      <div class="proof-sep" aria-hidden="true"></div>
+      <div class="proof-item">120&nbsp;000 kits vendus en France</div>
+    </div>
+  </section>
+
+  <!-- 5. PROBLÈME / SOLUTION -->
+  <section class="section problem-solution" id="kit">
+    <div class="section-inner">
+      <div class="ps-grid">
+        <div class="ps-card ps-before">
+          <div class="placeholder-media ps-media" aria-hidden="true">
+            <span class="placeholder-tag">📷 Placeholder photo — institut</span>
+          </div>
+          <h3>Avant CILÉA</h3>
+          <ul>
+            <li>Un rendez-vous à caler chaque mois</li>
+            <li>120 à 180&nbsp;€ de budget mensuel</li>
+            <li>Colle en institut parfois irritante</li>
+            <li>Entretien et retouches contraignants</li>
+          </ul>
+        </div>
+        <div class="ps-card ps-after">
+          <div class="placeholder-media ps-media" aria-hidden="true">
+            <span class="placeholder-tag">📷 Placeholder photo — résultat CILÉA</span>
+          </div>
+          <h3>Avec CILÉA</h3>
+          <ul>
+            <li>3 minutes chez vous, quand vous voulez</li>
+            <li>Budget divisé par 4 en moyenne</li>
+            <li>Formule hypoallergénique certifiée</li>
+            <li>Résultat identique, sans rendez-vous</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. MODULE ANIMATION 3D INTERACTIVE -->
+  <section class="section module-3d" aria-label="Découverte interactive du produit">
+    <div class="section-inner">
+      <p class="eyebrow center">Découvrez le kit</p>
+      <h2 class="center">Chaque détail compte</h2>
+      <p class="section-lede center">Faites glisser pour explorer le kit à 360° et découvrez ce qui se cache à l'intérieur.</p>
+
+      <div class="stage-3d" id="stage3d">
+        <div class="box-3d" id="box3d">
+          <div class="face face-front"><span>CILÉA</span></div>
+          <div class="face face-back"></div>
+          <div class="face face-right"></div>
+          <div class="face face-left"></div>
+          <div class="face face-top"></div>
+          <div class="face face-bottom"></div>
+        </div>
+        <button class="hotspot hotspot-1" data-info="Formule hypoallergénique testée dermatologiquement." aria-label="Info colle">💧</button>
+        <button class="hotspot hotspot-2" data-info="Précision chirurgicale pour un geste sans erreur." aria-label="Info pince">🧷</button>
+        <button class="hotspot hotspot-3" data-info="Packaging pensé pour durer, 100% recyclable." aria-label="Info packaging">📦</button>
+      </div>
+      <p class="drag-hint">↔ Glissez pour faire pivoter le kit</p>
+      <p class="hotspot-info" id="hotspotInfo" aria-live="polite">Touchez un point pour en savoir plus.</p>
+      <p class="placeholder-note">Prototype interactif de démonstration — à remplacer par l'export 3D Spline (GLB/Draco). Fallback vidéo 360° automatique prévu sur connexion lente ou navigateur sans support (voir plan §4.1).</p>
+    </div>
+  </section>
+
+  <!-- 7. UGC SHOPPABLE -->
+  <section class="section ugc" aria-label="Vidéos de nos clientes">
+    <div class="section-inner">
+      <p class="eyebrow center">Elles ont testé</p>
+      <h2 class="center">Le kit, vu par nos clientes</h2>
+      <div class="ugc-carousel-wrap">
+        <button class="carousel-arrow carousel-prev" id="ugcPrev" aria-label="Précédent">‹</button>
+        <div class="ugc-carousel" id="ugcCarousel">
+          <div class="ugc-card">
+            <div class="placeholder-media ugc-media" aria-hidden="true">
+              <span class="play-btn">▶</span>
+              <span class="placeholder-tag">🎬 Placeholder vidéo verticale · @lea.beauty</span>
+            </div>
+            <button class="btn btn-primary btn-sm ugc-cta">Ajouter au panier — 39&nbsp;€</button>
+          </div>
+          <div class="ugc-card">
+            <div class="placeholder-media ugc-media" aria-hidden="true">
+              <span class="play-btn">▶</span>
+              <span class="placeholder-tag">🎬 Placeholder vidéo verticale · @sofia.glow</span>
+            </div>
+            <button class="btn btn-primary btn-sm ugc-cta">Ajouter au panier — 39&nbsp;€</button>
+          </div>
+          <div class="ugc-card">
+            <div class="placeholder-media ugc-media" aria-hidden="true">
+              <span class="play-btn">▶</span>
+              <span class="placeholder-tag">🎬 Placeholder vidéo verticale · @manon.mkp</span>
+            </div>
+            <button class="btn btn-primary btn-sm ugc-cta">Ajouter au panier — 39&nbsp;€</button>
+          </div>
+          <div class="ugc-card">
+            <div class="placeholder-media ugc-media" aria-hidden="true">
+              <span class="play-btn">▶</span>
+              <span class="placeholder-tag">🎬 Placeholder vidéo verticale · @claire.otd</span>
+            </div>
+            <button class="btn btn-primary btn-sm ugc-cta">Ajouter au panier — 39&nbsp;€</button>
+          </div>
+          <div class="ugc-card">
+            <div class="placeholder-media ugc-media" aria-hidden="true">
+              <span class="play-btn">▶</span>
+              <span class="placeholder-tag">🎬 Placeholder vidéo verticale · @ines.dailylook</span>
+            </div>
+            <button class="btn btn-primary btn-sm ugc-cta">Ajouter au panier — 39&nbsp;€</button>
+          </div>
+        </div>
+        <button class="carousel-arrow carousel-next" id="ugcNext" aria-label="Suivant">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. TECHNOLOGIE / BÉNÉFICES -->
+  <section class="section benefits" aria-label="Bénéfices">
+    <div class="section-inner">
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon" aria-hidden="true">⏱️</div>
+          <h3>3 minutes chrono</h3>
+          <p>Une application aussi rapide qu'un trait d'eyeliner.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon" aria-hidden="true">🛡️</div>
+          <h3>Hypoallergénique certifiée</h3>
+          <p>Formule testée dermatologiquement, sans latex ni formaldéhyde.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon" aria-hidden="true">🌙</div>
+          <h3>Tenue jusqu'à 7 jours</h3>
+          <p>Douche, sport, sommeil&nbsp;: le résultat ne bouge pas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. TABLEAU COMPARATIF -->
+  <section class="section comparison" aria-label="Tableau comparatif">
+    <div class="section-inner">
+      <p class="eyebrow center">La comparaison</p>
+      <h2 class="center">Pourquoi CILÉA change la donne</h2>
+      <div class="table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th scope="col">Critère</th>
+              <th scope="col" class="col-highlight">Kit CILÉA</th>
+              <th scope="col">Extensions en institut</th>
+              <th scope="col">Faux-cils classiques à colle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Prix mensuel moyen</th><td class="col-highlight">19-39&nbsp;€</td><td>120-180&nbsp;€</td><td>15-25&nbsp;€</td></tr>
+            <tr><th scope="row">Temps d'application</th><td class="col-highlight">3-5 min</td><td>90-120 min (rendez-vous)</td><td>10-15 min</td></tr>
+            <tr><th scope="row">Tenue</th><td class="col-highlight">5-7 jours</td><td>3-4 semaines (retouches requises)</td><td>1 jour</td></tr>
+            <tr><th scope="row">Confort porté</th><td class="col-highlight">Léger, sur-mesure</td><td>Peut alourdir la paupière</td><td>Souvent rigide, colle visible</td></tr>
+            <tr><th scope="row">Risque allergène</th><td class="col-highlight">Formule hypoallergénique certifiée</td><td>Variable selon le salon</td><td>Colle générique, souvent irritante</td></tr>
+            <tr><th scope="row">Rendez-vous nécessaire</th><td class="col-highlight">Non</td><td>Oui, récurrent</td><td>Non</td></tr>
+            <tr><th scope="row">Praticité voyage</th><td class="col-highlight">Kit compact, autonome</td><td>Non applicable</td><td>Fragile, casse facilement</td></tr>
+            <tr><th scope="row">Réutilisable</th><td class="col-highlight">Recharges disponibles</td><td>Non</td><td>Non (usage unique réel)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-hint">← Faites glisser pour voir toutes les colonnes sur mobile →</p>
+    </div>
+  </section>
+
+  <!-- 10. COMMENT ÇA MARCHE -->
+  <section class="section how-it-works" id="comment-ca-marche">
+    <div class="section-inner">
+      <p class="eyebrow center">Le rituel</p>
+      <h2 class="center">Comment ça marche</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="placeholder-media step-media" aria-hidden="true">
+            <span class="placeholder-tag">📷 Placeholder — préparation</span>
+          </div>
+          <h3>Préparez</h3>
+          <p>Nettoyez et recourbez vos cils naturels en 30 secondes.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="placeholder-media step-media" aria-hidden="true">
+            <span class="placeholder-tag">📷 Placeholder — application</span>
+          </div>
+          <h3>Appliquez</h3>
+          <p>Positionnez chaque cluster à la pince, au ras de la ligne de cils.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="placeholder-media step-media" aria-hidden="true">
+            <span class="placeholder-tag">📷 Placeholder — résultat</span>
+          </div>
+          <h3>Scellez</h3>
+          <p>Un léger temps de pose et votre regard est transformé pour 7 jours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. OFFRES & BUNDLES -->
+  <section class="section offers" id="offres" aria-label="Nos offres">
+    <div class="section-inner">
+      <p class="eyebrow center">Nos formules</p>
+      <h2 class="center">Choisissez votre rituel</h2>
+      <div class="offers-grid" id="offersGrid">
+        <div class="offer-card" data-offer="decouverte">
+          <h3>Kit Découverte</h3>
+          <p class="offer-desc">1 palette clusters + mini colle 3ml + pince</p>
+          <p class="offer-price">29&nbsp;€ <span class="offer-value">valeur 45&nbsp;€</span></p>
+          <button class="btn btn-outline offer-select" type="button">Choisir</button>
+        </div>
+        <div class="offer-card offer-featured" data-offer="signature">
+          <span class="offer-badge">🏆 Le plus populaire</span>
+          <h3>Kit Signature</h3>
+          <p class="offer-desc">Palette complète 3 longueurs + colle format pro 5ml + pince + mini-brosse + miroir de poche</p>
+          <p class="offer-price">39&nbsp;€ <span class="offer-value">valeur 68&nbsp;€</span></p>
+          <button class="btn btn-primary offer-select" type="button">Choisir</button>
+        </div>
+        <div class="offer-card" data-offer="rituel">
+          <span class="offer-badge offer-badge-alt">✨ Meilleure valeur</span>
+          <h3>Le Rituel Complet</h3>
+          <p class="offer-desc">Kit Signature + 1 recharge de clusters (1 mois) + trousse velours</p>
+          <p class="offer-price">59&nbsp;€ <span class="offer-value">valeur 98&nbsp;€</span></p>
+          <button class="btn btn-outline offer-select" type="button">Choisir</button>
+        </div>
+        <div class="offer-card offer-subscription" data-offer="abonnement">
+          <span class="offer-badge offer-badge-alt">🔄 Économisez 20%</span>
+          <h3>Abonnement Recharge</h3>
+          <p class="offer-desc">Recharge mensuelle de clusters + colle, livrée automatiquement, résiliable à tout moment</p>
+          <p class="offer-price">19&nbsp;€<span class="offer-period">/mois</span> <span class="offer-value">au lieu de 24&nbsp;€</span></p>
+          <button class="btn btn-outline offer-select" type="button">Choisir</button>
+        </div>
+      </div>
+      <p class="offer-summary" id="offerSummary" aria-live="polite">Sélectionnez une formule pour continuer.</p>
+    </div>
+  </section>
+
+  <!-- 12. AVIS CLIENTS ENRICHIS -->
+  <section class="section reviews" id="avis" aria-label="Avis clients">
+    <div class="section-inner">
+      <p class="eyebrow center">Preuve sociale</p>
+      <h2 class="center">Ce qu'elles en disent</h2>
+
+      <div class="review-scores">
+        <div class="score-chip">Tenue <strong>4,7/5</strong></div>
+        <div class="score-chip">Confort <strong>4,8/5</strong></div>
+        <div class="score-chip">Facilité d'application <strong>4,6/5</strong></div>
+      </div>
+
+      <div class="review-filters" id="reviewFilters">
+        <button class="filter-chip is-active" data-filter="all" type="button">Tous les avis</button>
+        <button class="filter-chip" data-filter="tenue" type="button">Tenue</button>
+        <button class="filter-chip" data-filter="confort" type="button">Confort</button>
+        <button class="filter-chip" data-filter="application" type="button">Facilité d'application</button>
+        <button class="filter-chip" data-filter="amande" type="button">Yeux amande</button>
+        <button class="filter-chip" data-filter="rond" type="button">Yeux ronds</button>
+        <button class="filter-chip" data-filter="tombant" type="button">Yeux tombants</button>
+      </div>
+
+      <div class="review-grid" id="reviewGrid">
+        <figure class="review-card" data-tags="tenue amande">
+          <div class="placeholder-media review-media" aria-hidden="true"><span class="placeholder-tag">📷 Photo cliente</span></div>
+          <figcaption>
+            <div class="review-head"><span class="avatar">LM</span><strong>Léa M.</strong><span class="verified">✓ Achat vérifié</span></div>
+            <span class="stars small">★★★★★</span>
+            <p>« Toujours nickel au bout d'une semaine, même à la salle de sport. »</p>
+          </figcaption>
+        </figure>
+        <figure class="review-card" data-tags="confort rond">
+          <div class="placeholder-media review-media" aria-hidden="true"><span class="placeholder-tag">🎬 Vidéo cliente</span></div>
+          <figcaption>
+            <div class="review-head"><span class="avatar">SB</span><strong>Sofia B.</strong><span class="verified">✓ Achat vérifié</span></div>
+            <span class="stars small">★★★★★</span>
+            <p>« Ultra léger, j'oublie complètement que je les porte. »</p>
+          </figcaption>
+        </figure>
+        <figure class="review-card" data-tags="application tombant">
+          <div class="placeholder-media review-media" aria-hidden="true"><span class="placeholder-tag">📷 Photo cliente</span></div>
+          <figcaption>
+            <div class="review-head"><span class="avatar">MC</span><strong>Manon C.</strong><span class="verified">✓ Achat vérifié</span></div>
+            <span class="stars small">★★★★★</span>
+            <p>« La pince fournie change tout, j'ai réussi du premier coup. »</p>
+          </figcaption>
+        </figure>
+        <figure class="review-card" data-tags="tenue rond">
+          <div class="placeholder-media review-media" aria-hidden="true"><span class="placeholder-tag">📷 Photo cliente</span></div>
+          <figcaption>
+            <div class="review-head"><span class="avatar">CD</span><strong>Claire D.</strong><span class="verified">✓ Achat vérifié</span></div>
+            <span class="stars small">★★★★☆</span>
+            <p>« Tenue impeccable 6 jours, j'ai adopté l'abonnement recharge. »</p>
+          </figcaption>
+        </figure>
+        <figure class="review-card" data-tags="confort application amande">
+          <div class="placeholder-media review-media" aria-hidden="true"><span class="placeholder-tag">🎬 Vidéo cliente</span></div>
+          <figcaption>
+            <div class="review-head"><span class="avatar">IN</span><strong>Inès N.</strong><span class="verified">✓ Achat vérifié</span></div>
+            <span class="stars small">★★★★★</span>
+            <p>« Zéro irritation, ma peau est sensible et ça passe très bien. »</p>
+          </figcaption>
+        </figure>
+        <figure class="review-card" data-tags="tenue tombant">
+          <div class="placeholder-media review-media" aria-hidden="true"><span class="placeholder-tag">📷 Photo cliente</span></div>
+          <figcaption>
+            <div class="review-head"><span class="avatar">AP</span><strong>Alice P.</strong><span class="verified">✓ Achat vérifié</span></div>
+            <span class="stars small">★★★★★</span>
+            <p>« Effet ouvert du regard immédiat, mes collègues m'ont posé la question. »</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. FAQ -->
+  <section class="section faq" aria-label="Questions fréquentes">
+    <div class="section-inner section-inner-narrow">
+      <p class="eyebrow center">Questions fréquentes</p>
+      <h2 class="center">Tout ce qu'il faut savoir</h2>
+      <div class="faq-list" id="faqList">
+        <details class="faq-item" name="faq">
+          <summary>Est-ce que la pose est vraiment simple pour une débutante&nbsp;?</summary>
+          <p>Oui. Le kit est conçu pour une première application sans expérience préalable — un tutoriel vidéo pas-à-pas de 3 minutes est inclus via QR code, et notre SAV répond à vos questions par WhatsApp.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary>Combien de temps tiennent les clusters&nbsp;?</summary>
+          <p>Entre 5 et 7 jours en usage normal (douche, sport et sommeil inclus), grâce à notre formule de colle longue tenue hypoallergénique.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary>La colle est-elle sans danger pour les yeux sensibles&nbsp;?</summary>
+          <p>Notre formule est testée dermatologiquement, sans latex ni formaldéhyde, et chaque lot est tracé par un numéro visible sur le flacon.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary>Puis-je retirer les clusters moi-même sans abîmer mes cils naturels&nbsp;?</summary>
+          <p>Oui, un dissolvant doux (non inclus, disponible en recharge) permet un retrait en douceur en moins d'une minute, sans tirer sur vos cils.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary>Combien de temps dure une palette de clusters&nbsp;?</summary>
+          <p>Une palette Kit Signature permet 3 à 4 applications complètes, soit environ 3-4 semaines d'utilisation.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary>Livrez-vous rapidement&nbsp;?</summary>
+          <p>Oui, toutes les commandes sont expédiées depuis notre entrepôt en France sous 24 à 48h, avec suivi Colissimo inclus.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary>Que se passe-t-il si le résultat ne me convient pas&nbsp;?</summary>
+          <p>Vous disposez de 30 jours pour nous contacter et être remboursée intégralement, sans justification à fournir (voir notre garantie ci-dessous).</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary>L'abonnement recharge est-il engageant&nbsp;?</summary>
+          <p>Non, il est résiliable à tout moment en un clic depuis votre espace client, sans frais ni justification.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14. GARANTIE -->
+  <section class="section guarantee" id="histoire" aria-label="Garantie">
+    <div class="section-inner section-inner-narrow guarantee-inner">
+      <div class="guarantee-badge" aria-hidden="true">30<span>jours</span></div>
+      <div>
+        <h2>Garantie Regard Satisfait</h2>
+        <p>Nous sommes convaincues que CILÉA transformera votre routine beauté. Si, pour une quelconque raison, le résultat ne vous convient pas, contactez notre équipe dans les 30 jours suivant la réception de votre commande&nbsp;: nous vous remboursons intégralement, sans question, sans complication. Notre conseillère beauté reste également disponible par WhatsApp pour vous accompagner avant même d'envisager un retour — 92% des clientes qui nous contactent trouvent une solution sans avoir besoin d'être remboursées.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15. CTA FINAL -->
+  <section class="section final-cta" aria-label="Appel à l'action final">
+    <div class="section-inner center">
+      <h2>Prête à transformer votre regard&nbsp;?</h2>
+      <a href="#offres" class="btn btn-primary btn-lg">Je commande mon kit CILÉA</a>
+      <p class="final-cta-note">Livraison offerte dès 39&nbsp;€ · Garantie 30 jours · Paiement sécurisé</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="section-inner footer-grid">
+    <div class="footer-col footer-brand">
+      <p class="logo footer-logo">CILÉA</p>
+      <p>Le regard qui change tout, sans rendez-vous.</p>
+      <div class="social-icons" aria-label="Réseaux sociaux">
+        <a href="#" aria-label="Instagram">◎</a>
+        <a href="#" aria-label="TikTok">♪</a>
+        <a href="#" aria-label="Pinterest">◍</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Boutique</h4>
+      <a href="#offres">Le Kit</a>
+      <a href="#offres">Recharges</a>
+      <a href="#offres">Abonnement</a>
+    </div>
+    <div class="footer-col">
+      <h4>Aide</h4>
+      <a href="#">FAQ</a>
+      <a href="#">Livraison &amp; Retours</a>
+      <a href="#">Contact WhatsApp</a>
+    </div>
+    <div class="footer-col">
+      <h4>La Marque</h4>
+      <a href="#">Notre Histoire</a>
+      <a href="#">Engagement responsable</a>
+      <a href="#">Presse</a>
+    </div>
+    <div class="footer-col footer-newsletter">
+      <h4>Newsletter</h4>
+      <p>Recevez -10% sur votre première commande.</p>
+      <form id="newsletterForm" class="newsletter-form">
+        <label for="newsletterEmail" class="sr-only">Adresse email</label>
+        <input type="email" id="newsletterEmail" placeholder="Votre email" required>
+        <button type="submit" class="btn btn-primary btn-sm">S'inscrire</button>
+      </form>
+      <p class="newsletter-confirm" id="newsletterConfirm" hidden>Merci ! Votre code -10% arrive par email.</p>
+    </div>
+  </div>
+  <div class="footer-legal section-inner">
+    <p>© 2026 CILÉA. Tous droits réservés.</p>
+    <div class="footer-legal-links">
+      <a href="#">Mentions légales</a>
+      <a href="#">CGV</a>
+      <a href="#">Politique de confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<!-- MODALE VIDÉO (placeholder) -->
+<div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Vidéo de démonstration">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" id="closeVideoModal" aria-label="Fermer la vidéo">✕</button>
+    <div class="placeholder-media video-modal-media" aria-hidden="true">
+      <span class="placeholder-tag">🎬 Placeholder — vidéo tutoriel complet (2-3 min)</span>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
