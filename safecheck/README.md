@@ -31,6 +31,30 @@ npm run supabase:types         # régénère src/core/supabase/database.types.ts
 npm run check                  # typecheck + lint + tests
 ```
 
+## Builds natifs (EAS)
+
+```bash
+npm i -g eas-cli && eas login
+eas init                       # crée le projet et renseigne EAS_PROJECT_ID
+eas build --profile preview --platform all
+```
+
+Profils (`eas.json`) : `development` (dev client, mock), `preview` (APK / ad hoc, staging),
+`production` (stores, incrément automatique de version).
+
+En CI, le job « EAS Build » du workflow `safecheck-ci.yml` se lance après les
+contrôles, sur `main` (profil preview) ou manuellement (Actions → Run workflow,
+choix du profil et de la plateforme). Il requiert dans les réglages du dépôt :
+
+| Type     | Nom                              | Rôle                                  |
+| -------- | -------------------------------- | ------------------------------------- |
+| Secret   | `EXPO_TOKEN`                     | Jeton d'accès Expo (expo.dev → Access tokens) |
+| Variable | `EAS_PROJECT_ID`                 | Identifiant du projet EAS             |
+| Variable | `EXPO_PUBLIC_SUPABASE_URL`       | URL du projet Supabase (preview/prod) |
+| Variable | `EXPO_PUBLIC_SUPABASE_ANON_KEY`  | Clé anonyme Supabase (publique)       |
+
+Sans `EXPO_TOKEN` et `EAS_PROJECT_ID`, le job affiche un avertissement et se termine sans échec.
+
 ## Documentation
 
 - [Architecture](docs/ARCHITECTURE.md)

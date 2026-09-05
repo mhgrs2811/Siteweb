@@ -11,7 +11,7 @@
 - [ ] Icônes et splash définitifs
 - [ ] Tests de composants (Testing Library) sur les écrans clés
 - [x] Pipeline CI GitHub Actions (typecheck, lint, tests)
-- [ ] EAS Build
+- [x] Job EAS Build (profils development / preview / production)
 
 ## V1.1 — Lancement
 
