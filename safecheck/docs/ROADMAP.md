@@ -10,7 +10,8 @@
 - [x] Design tokens accessibles, i18n fr/en, feature flags
 - [ ] Icônes et splash définitifs
 - [ ] Tests de composants (Testing Library) sur les écrans clés
-- [ ] Pipeline CI (typecheck, lint, tests) + EAS Build
+- [x] Pipeline CI GitHub Actions (typecheck, lint, tests)
+- [ ] EAS Build
 
 ## V1.1 — Lancement
 
