@@ -81,6 +81,7 @@ E-mail reçu : objet `Réservation · Samedi 12 octobre · 20:00 · 4 personnes`
 - [ ] Logo : le logotype actuel est une proposition typographique
 - [ ] Plats, descriptions et prix (`index.html`, `carte.html`) : valeurs indicatives
 - [ ] Horaires : objet `HOURS` dans `assets/js/main.js` et tableau de `index.html`. Seule la fermeture à 23:00 est connue
+- [ ] Livraison : à confirmer avec le restaurant. Si oui, la remettre dans le texte du hero, la meta description et la liste des services (`index.html`), ainsi que dans l’introduction de `carte.html`
 - [ ] Réservation : relier `RESERVATION.endpoint` à l'adresse e-mail du restaurant, puis faire un envoi test
 - [ ] Réservation : nombre maximal de couverts (12), délai minimum, dernier créneau
 - [ ] Données personnelles : durée de conservation, service d'envoi, adresse e-mail de contact (`mentions-legales.html#donnees`)
