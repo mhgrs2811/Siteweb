@@ -722,7 +722,8 @@ select.input { appearance: none; padding-right: 44px; background: #FFFFFF url("d
             </div>
             <div class="field">
               <label for="notes">Demande particulière <span class="field__opt">(facultatif)</span></label>
-              <textarea class="input" id="notes" name="notes" maxlength="500" placeholder="Allergie, chaise haute, anniversaire, terrasse si possible…"></textarea>
+              <textarea class="input" id="notes" name="notes" maxlength="500" placeholder="Allergie, chaise haute, anniversaire, terrasse si possible…" aria-describedby="err-notes"></textarea>
+              <p class="field__error" id="err-notes" data-error-for="notes"></p>
             </div>
             <div class="hp" aria-hidden="true">
               <label for="website">Ne pas remplir ce champ</label>
@@ -973,13 +974,14 @@ select.input { appearance: none; padding-right: 44px; background: #FFFFFF url("d
 
   /* ------------------------------------------------------------------
      Réservation
-     Relier le formulaire à un service d'envoi (Web3Forms, Formspree,
-     Netlify Forms…) via RESERVATION.endpoint. Tant que endpoint est vide,
-     la page fonctionne en démonstration : rien n'est envoyé.
+     Les demandes partent vers functions/api/reservation.js, qui les
+     vérifie et les transmet par e-mail au restaurant. endpoint vide =
+     démonstration (rien n'est envoyé), utilisé par les aperçus autonomes.
+     Les règles de créneaux sont reprises côté serveur : garder les deux alignées.
      ------------------------------------------------------------------ */
   var RESERVATION = {
-    endpoint: "",            // ex. "https://api.web3forms.com/submit" ou "https://formspree.io/f/xxxxxxx"
-    extra: {},               // champs propres au service, ex. { access_key: "…" } pour Web3Forms
+    endpoint: "",
+    turnstileSiteKey: "",    // clé publique Cloudflare Turnstile, si la vérification anti-robot est activée
     daysAhead: 14,           // jours proposés en pastilles
     maxDaysAhead: 60,        // limite du champ « autre date »
     slotStep: 30,            // minutes entre deux créneaux
@@ -1003,6 +1005,31 @@ select.input { appearance: none; padding-right: 44px; background: #FFFFFF url("d
     var recap = form.querySelector("[data-recap]");
     var done = document.querySelector("[data-booking-done]");
     var state = { guests: 2, date: null, time: null };
+    var startedAt = Date.now();
+    var LINK_RE = /(https?:\/\/|www\.|\[url|<a\s)/i;
+    var MESSAGES = {
+      guests: "Indiquez le nombre de personnes.",
+      date: "Choisissez une date.",
+      time: "Choisissez un horaire.",
+      name: "Indiquez votre nom.",
+      phone: "Indiquez un numéro valide, par exemple 0470 12 34 56.",
+      email: "Cette adresse e-mail n’est pas valide.",
+      notes: "Les liens ne sont pas acceptés dans la demande particulière.",
+      consent: "Cochez cette case pour envoyer votre demande."
+    };
+
+    // Vérification anti-robot facultative (Cloudflare Turnstile)
+    if (RESERVATION.endpoint && RESERVATION.turnstileSiteKey) {
+      var widget = document.createElement("div");
+      widget.className = "cf-turnstile";
+      widget.setAttribute("data-sitekey", RESERVATION.turnstileSiteKey);
+      widget.setAttribute("data-language", "fr");
+      form.querySelector(".form-actions").before(widget);
+      var tsScript = document.createElement("script");
+      tsScript.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      tsScript.async = true;
+      document.head.appendChild(tsScript);
+    }
 
     var fmtDow = new Intl.DateTimeFormat("fr-BE", { weekday: "short", timeZone: "UTC" });
     var fmtMonth = new Intl.DateTimeFormat("fr-BE", { month: "short", timeZone: "UTC" });
@@ -1161,17 +1188,19 @@ select.input { appearance: none; padding-right: 44px; background: #FFFFFF url("d
       var phone = form.elements.phone.value.trim();
       var email = form.elements.email;
       var digits = phone.replace(/\D/g, "");
+      var notes = form.elements.notes.value;
       var checks = [
-        ["guests", !state.guests, "Indiquez le nombre de personnes."],
-        ["date", !state.date, "Choisissez une date."],
-        ["time", !state.time, "Choisissez un horaire."],
-        ["name", name.length < 2, "Indiquez votre nom."],
-        ["phone", digits.length < 9 || !/^[0-9+()./\s-]+$/.test(phone), "Indiquez un numéro valide, par exemple 0470 12 34 56."],
-        ["email", email.value.trim() !== "" && !email.validity.valid, "Cette adresse e-mail n’est pas valide."],
-        ["consent", !form.elements.consent.checked, "Cochez cette case pour envoyer votre demande."]
+        ["guests", !state.guests],
+        ["date", !state.date],
+        ["time", !state.time],
+        ["name", name.length < 2 || /[<>]/.test(name) || LINK_RE.test(name)],
+        ["phone", digits.length < 9 || digits.length > 15 || !/^[0-9+()./\s-]+$/.test(phone)],
+        ["email", email.value.trim() !== "" && !email.validity.valid],
+        ["notes", notes.length > 500 || LINK_RE.test(notes)],
+        ["consent", !form.elements.consent.checked]
       ];
       checks.forEach(function (c) {
-        setError(c[0], c[1] ? c[2] : "");
+        setError(c[0], c[1] ? MESSAGES[c[0]] : "");
         if (c[1]) errors.push(c[0]);
       });
       return errors;
@@ -1210,17 +1239,20 @@ select.input { appearance: none; padding-right: 44px; background: #FFFFFF url("d
       // Champ piège rempli : un robot. On affiche une confirmation sans rien envoyer.
       if (form.elements.website.value) { showDone(firstName, false); return; }
 
-      var payload = Object.assign({}, RESERVATION.extra, {
-        subject: "Réservation · " + longDate(state.date) + " · " + state.time + " · " + guestsLabel(state.guests),
-        from_name: "Site Has Pide Kebap",
-        nom: form.elements.name.value.trim(),
-        telephone: form.elements.phone.value.trim(),
-        email: form.elements.email.value.trim(),
-        personnes: state.guests,
+      var tsField = form.querySelector("[name='cf-turnstile-response']");
+      var payload = {
+        guests: state.guests,
         date: state.date,
-        heure: state.time,
-        demande: form.elements.notes.value.trim()
-      });
+        time: state.time,
+        name: form.elements.name.value.trim(),
+        phone: form.elements.phone.value.trim(),
+        email: form.elements.email.value.trim(),
+        notes: form.elements.notes.value.trim(),
+        consent: form.elements.consent.checked,
+        website: form.elements.website.value,
+        elapsed: Date.now() - startedAt,
+        turnstile: tsField ? tsField.value : undefined
+      };
 
       submit.setAttribute("aria-busy", "true");
       submit.disabled = true;
@@ -1238,16 +1270,36 @@ select.input { appearance: none; padding-right: 44px; background: #FFFFFF url("d
           signal: controller ? controller.signal : undefined
         }).then(function (res) {
           if (timer) clearTimeout(timer);
-          if (!res.ok) throw new Error("HTTP " + res.status);
+          if (res.ok) return;
+          return res.json().catch(function () { return {}; }).then(function (body) {
+            var err = new Error("HTTP " + res.status);
+            err.status = res.status;
+            err.body = body || {};
+            throw err;
+          });
         });
       }
 
+      var callUs = 'appelez-nous au <a href="tel:+3222038300">' + RESERVATION.phone + "</a>.";
       request.then(function () {
         showDone(firstName, !RESERVATION.endpoint);
-      }).catch(function () {
-        formError.innerHTML = "L’envoi n’a pas abouti. Réessayez dans un instant ou appelez-nous au " +
-          '<a href="tel:+3222038300">' + RESERVATION.phone + "</a>.";
-        formError.focus && formError.focus();
+      }).catch(function (err) {
+        var body = (err && err.body) || {};
+        if (body.error === "invalid" && body.fields && body.fields.length) {
+          body.fields.forEach(function (f) {
+            setError(f, f === "time" ? "Ce créneau n’est plus disponible. Choisissez-en un autre." : MESSAGES[f] || "Vérifiez ce champ.");
+          });
+          if (body.fields.indexOf("time") !== -1) renderSlots();
+          formError.textContent = "Vérifiez les champs signalés.";
+          focusField(body.fields[0]);
+        } else if (body.error === "rate_limited") {
+          formError.innerHTML = "Plusieurs demandes viennent d’être envoyées depuis cette connexion. Réessayez plus tard ou " + callUs;
+        } else if (body.error === "captcha") {
+          formError.innerHTML = "La vérification anti-robot n’a pas abouti. Rechargez la page ou " + callUs;
+        } else {
+          formError.innerHTML = "L’envoi n’a pas abouti. Réessayez dans un instant ou " + callUs;
+        }
+        if (window.turnstile && RESERVATION.turnstileSiteKey) window.turnstile.reset();
       }).then(function () {
         submit.removeAttribute("aria-busy");
         submit.disabled = false;

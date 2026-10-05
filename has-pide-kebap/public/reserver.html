@@ -160,7 +160,8 @@
             </div>
             <div class="field">
               <label for="notes">Demande particulière <span class="field__opt">(facultatif)</span></label>
-              <textarea class="input" id="notes" name="notes" maxlength="500" placeholder="Allergie, chaise haute, anniversaire, terrasse si possible…"></textarea>
+              <textarea class="input" id="notes" name="notes" maxlength="500" placeholder="Allergie, chaise haute, anniversaire, terrasse si possible…" aria-describedby="err-notes"></textarea>
+              <p class="field__error" id="err-notes" data-error-for="notes"></p>
             </div>
             <div class="hp" aria-hidden="true">
               <label for="website">Ne pas remplir ce champ</label>

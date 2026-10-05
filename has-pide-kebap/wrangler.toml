@@ -1,0 +1,10 @@
+# Cloudflare Pages : site statique (public/) + fonctions (functions/)
+name = "has-pide-kebap"
+pages_build_output_dir = "public"
+compatibility_date = "2026-09-01"
+
+# Limite du nombre de demandes par adresse IP (facultatif).
+# Créer l'espace KV dans le tableau de bord Cloudflare, puis décommenter :
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "<identifiant de l'espace KV>"

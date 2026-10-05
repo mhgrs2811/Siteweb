@@ -5,8 +5,9 @@ import { readFile, writeFile, mkdir, access } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const out = path.join(root, "apercu");
+const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const root = path.join(project, "public");
+const out = path.join(project, "apercu");
 const pages = ["index.html", "carte.html", "reserver.html", "mentions-legales.html"];
 const mime = { ".woff2": "font/woff2", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".svg": "image/svg+xml" };
 
@@ -46,7 +47,7 @@ for (const page of pages) {
     .replace('href="favicon.svg"', `href="${favicon}"`)
     .replace('<link rel="stylesheet" href="assets/css/main.css">', () => `<style>\n${css}</style>`)
     .replace(/\s*<script src="assets\/js\/main\.js" defer><\/script>/, "")
-    .replace("</body>", () => `<script>\n${js}</script>\n</body>`);
+    .replace("</body>", () => `<script>\n${js.replace('endpoint: "/api/reservation"', 'endpoint: ""')}</script>\n</body>`);
   const result = await inlineImages(html);
   await writeFile(path.join(out, page), result.html);
   console.log(`apercu/${page}${result.missing ? ` (${result.missing} photo(s) manquante(s))` : ""}`);
