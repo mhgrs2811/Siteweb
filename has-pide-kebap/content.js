@@ -21,18 +21,18 @@ window.SITE_CONTENT = {
 
   brand: {
     name: 'HAS PIDE KEBAP',                         // wordmark (header, loader, footer géant)
-    title: 'HAS PIDE KEBAP — Pide, kebab & lahmacun, street-food turque',
-    description: 'HAS PIDE KEBAP : pide, kebab, lahmacun et assiettes turques servis vite, généreux et brûlants — sur place, à emporter ou en livraison.',
-    kicker: 'HAS PIDE KEBAP — STREET-FOOD TURQUE',
-    copyright: '© 2026 — HAS PIDE KEBAP',
+    title: 'HAS PIDE KEBAP — Kebab halal à Schaerbeek, Bruxelles',
+    description: 'HAS PIDE KEBAP, kebab halal à Schaerbeek : pide, kebab, lahmacun et assiettes turques servis brûlants — en terrasse, à emporter ou en livraison. Chaussée de Haecht 115, 1030 Bruxelles.',
+    kicker: 'HAS PIDE KEBAP — KEBAB HALAL, SCHAERBEEK',
+    copyright: '© 2026 — SCHAERBEEK, BRUXELLES',
     signature: 'AFIYET OLSUN — BON APPÉTIT',
     socials: [
       { label: 'INSTAGRAM ↗', url: 'https://www.instagram.com/haspidekebap' },
-      { label: 'TIKTOK ↗', url: 'https://www.tiktok.com/@haspidekebap' }
+      { label: 'ITINÉRAIRE ↗', url: 'https://www.google.com/maps/search/?api=1&query=Has+Pide+Kebap+Chauss%C3%A9e+de+Haecht+115+1030+Schaerbeek' }
     ]
   },
 
-  nav: { proof: 'CARTE', universes: 'SERVICE', cta: 'COMMANDER' },
+  nav: { proof: 'CARTE', universes: 'SERVICE', cta: 'RÉSERVER' },
 
   hook: {
     line1: 'Pide et kebab généreux,',
@@ -54,10 +54,10 @@ window.SITE_CONTENT = {
     ]
   },
 
-  positioning: 'Street-food turque — sur place ou livrée.',
+  positioning: 'Street-food turque halal — Schaerbeek.',
 
   manifesto: {
-    text: 'En turc, has veut dire vrai. Ici, rien ne tiédit sous une lampe : la viande est tranchée à la broche, le pide sort du four à la commande, et tout part [[encore brûlant]] — en quelques minutes.'
+    text: 'En turc, has veut dire vrai. Ici, tout est halal et rien ne tiédit sous une lampe : la viande est tranchée à la broche, le pide sort du four à la commande, et tout part [[encore brûlant]].'
   },
 
   proof: {
@@ -83,7 +83,7 @@ window.SITE_CONTENT = {
     words: [
       { word: 'Chaud', hint: 'Rien n’attend sous une lampe : tout part à la commande.' },
       { word: 'Vite', hint: 'Commandé, préparé, servi — quelques minutes, pas plus.' },
-      { word: 'Généreux', hint: 'Des assiettes pleines, pour repartir calé.' }
+      { word: 'Généreux', hint: 'Des assiettes pleines, de 10 à 20 € par personne.' }
     ]
   },
 
@@ -91,19 +91,19 @@ window.SITE_CONTENT = {
     introA: 'Une',
     introB: 'faim,',
     introC: '3 étapes.',
-    cta: 'Commander →',
+    cta: 'Réserver une table →',
     image: 'images/process.jpg',
     items: [
       { name: 'Choisir', meta: 'ÉTAPE — 01', desc: 'Pide, kebab, lahmacun ou assiette : au comptoir, par téléphone ou en livraison.' },
       { name: 'Cuisiner', meta: 'ÉTAPE — 02', desc: 'La viande est tranchée à la broche, le pide passe au four. Rien n’est préparé à l’avance.' },
-      { name: 'Servir', meta: 'ÉTAPE — 03', desc: 'Sur place, à emporter ou livré chez vous — chaud, en quelques minutes.' }
+      { name: 'Servir', meta: 'ÉTAPE — 03', desc: 'En terrasse, à emporter ou livré chez vous — chaud, en quelques minutes.' }
     ]
   },
 
   testimonial: {
-    kicker: 'SUR PLACE, À L’HEURE DU DÉJEUNER',
-    figure: '7',
-    unit: 'min',
+    kicker: 'NOTÉ 4,5/5 SUR GOOGLE',
+    figure: '947',
+    unit: 'avis',
     quote: 'Je viens deux fois par semaine entre midi et deux. Je commande, je m’assois, et mon pide arrive encore brûlant avant que j’aie fini mon ayran.',
     author: 'KARIM B. — CLIENT HABITUÉ'
   },
@@ -115,9 +115,32 @@ window.SITE_CONTENT = {
   },
 
   contact: {
-    kicker: 'UNE COMMANDE DE GROUPE, UNE QUESTION ?',
+    kicker: 'UNE COMMANDE, UNE QUESTION ? APPELEZ-NOUS',
+    phone: '02 203 83 00',                         // affiché à la place de l'e-mail (lien tel:)
+    tel: '+3222038300',                             // format international du lien tel:
     email: 'haspide2026@gmail.com',
-    reassurance: 'SUR PLACE — À EMPORTER — EN LIVRAISON'
+    reassurance: 'CHAUSSÉE DE HAECHT 115, 1030 SCHAERBEEK — TERRASSE · À EMPORTER · LIVRAISON'
+  },
+
+  /* RÉSERVATION DE TABLE (reservation.js) — formulaire en panneau, ouvert
+     par le CTA du header, le CTA du processus et le bouton du footer.
+     Les demandes arrivent par e-mail via Web3Forms : créer la clé GRATUITE
+     sur https://web3forms.com avec l'adresse `email` ci-dessous, puis la
+     coller dans `accessKey`. Clé vide = repli : le formulaire ouvre
+     l'application e-mail du client avec la demande pré-remplie. */
+  reservation: {
+    accessKey: '',
+    email: 'haspide2026@gmail.com',
+    firstSlot: '11:00',
+    lastSlot: '22:30',
+    stepMinutes: 30,
+    closedDays: [4],                                // 0 = dimanche … 4 = jeudi (fermé)
+    daysAhead: 30,
+    maxGuests: 12,
+    footerCta: 'RÉSERVER UNE TABLE →',
+    title: 'Réserver une table',
+    intro: 'Ouvert tous les jours de 11 h à 23 h, sauf le jeudi. Plus de 12 personnes : appelez le 02 203 83 00.',
+    note: 'LE RESTAURANT VOUS RAPPELLE POUR CONFIRMER LA TABLE.'
   },
 
   trail: [
@@ -241,7 +264,12 @@ window.SITE_CONTENT = {
   // 10 · conversion
   set('.footer-kicker', C.contact.kicker);
   const mail = $('.footer-mail');
-  if (mail) { mail.href = 'mailto:' + C.contact.email; mail.querySelector('.footer-mail-text').textContent = C.contact.email; }
+  if (mail) {
+    // HAS PIDE KEBAP : le téléphone remplace l'e-mail quand il est renseigné
+    const ph = C.contact.phone;
+    mail.href = ph ? 'tel:' + (C.contact.tel || ph).replace(/[^\d+]/g, '') : 'mailto:' + C.contact.email;
+    mail.querySelector('.footer-mail-text').textContent = ph || C.contact.email;
+  }
   set('.footer-reassurance', C.contact.reassurance);
   const fname = $('#footerName');
   if (fname) { fname.textContent = C.brand.name; fname.setAttribute('aria-label', C.brand.name); }

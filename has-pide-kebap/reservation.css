@@ -1,0 +1,141 @@
+/* ═══════════════════════════════════════════════════════════
+   HAS PIDE KEBAP — réservation de table (reservation.js)
+   Panneau latéral piloté par les tokens du template : il suit
+   le thème et l'accent posés dans styles.css.
+   ═══════════════════════════════════════════════════════════ */
+
+:root { --resa-error: #b3361f; }
+html[data-theme="dark"] { --resa-error: #f4a191; }
+
+html.resa-lock { overflow: hidden; }
+
+/* bouton ajouté sous la réassurance du footer */
+.footer-resa {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 16px 22px;
+  background: var(--lime);
+  color: var(--lime-ink);
+  border-radius: var(--radius);
+  font-size: 13px;
+  transition: filter .3s;
+}
+.footer-resa:hover { filter: brightness(0.96); }
+
+.resa {
+  position: fixed; inset: 0;
+  z-index: 400;
+  visibility: hidden;
+  transition: visibility 0s .6s;
+}
+.resa.is-open { visibility: visible; transition: none; }
+
+.resa-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transition: opacity .5s var(--ease-out);
+}
+.resa.is-open .resa-backdrop { opacity: 1; }
+
+.resa-panel {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: min(520px, 100%);
+  background: var(--white);
+  color: var(--ink);
+  padding: 22px clamp(20px, 3vw, 40px) 40px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transform: translateX(100%);
+  transition: transform .6s var(--ease-out);
+}
+.resa.is-open .resa-panel { transform: translateX(0); }
+
+.resa-head {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--ink-faint);
+}
+.resa-close {
+  background: none; border: 0; cursor: pointer;
+  color: var(--ink);
+  padding: 6px 0;
+}
+
+.resa-title {
+  margin-top: 6vh;
+  font-size: var(--t-heading);
+  letter-spacing: -0.02em; line-height: 1.05;
+  text-wrap: balance;
+}
+.resa-intro { margin-top: 14px; color: var(--ash); font-size: 17px; max-width: 40ch; }
+
+.resa-form { display: grid; gap: 20px; margin-top: 4vh; }
+.resa-form[hidden] { display: none; }
+.resa-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.resa-row-date { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); }
+
+.resa-field { display: grid; gap: 6px; min-width: 0; }
+.resa-field input,
+.resa-field select,
+.resa-field textarea {
+  width: 100%;
+  font: inherit; font-size: 19px;
+  color: var(--ink);
+  background: transparent;
+  border: 0; border-bottom: 1px solid var(--ink-faint);
+  border-radius: 0;
+  padding: 8px 0 10px;
+  transition: border-color .3s;
+}
+.resa-field textarea { resize: vertical; min-height: 3.2em; }
+.resa-field select {
+  appearance: none; -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 22px;
+  background: linear-gradient(45deg, transparent 50%, var(--ash) 50%) right 6px center / 6px 6px no-repeat,
+              linear-gradient(-45deg, transparent 50%, var(--ash) 50%) right 0 center / 6px 6px no-repeat;
+  background-position: right 6px top 55%, right 0 top 55%;
+}
+.resa-field select option { background: var(--white); color: var(--ink); }
+.resa-field input::placeholder,
+.resa-field textarea::placeholder { color: var(--ash); opacity: 0.7; }
+.resa-field input:focus,
+.resa-field select:focus,
+.resa-field textarea:focus { outline: none; border-bottom-color: var(--lime); }
+
+.resa-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+.resa-error { color: var(--resa-error); font-size: 15px; min-height: 0; }
+.resa-error:empty { display: none; }
+
+.resa-submit {
+  width: 100%;
+  padding: 18px 20px;
+  background: var(--lime);
+  color: var(--lime-ink);
+  border: 0; border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 13px;
+  transition: filter .3s;
+}
+.resa-submit:hover { filter: brightness(0.96); }
+.resa-submit:disabled { cursor: progress; filter: saturate(0.4); }
+.resa-note { text-align: center; }
+
+.resa-done { display: none; margin-top: 2vh; }
+/* une fois la demande partie, la confirmation remplace le titre du panneau */
+.resa-panel.is-done > .resa-title,
+.resa-panel.is-done > .resa-intro { display: none; }
+.resa-done.is-shown { display: grid; gap: 14px; }
+.resa-done .resa-title { margin-top: 2vh; }
+.resa-done .resa-submit { margin-top: 3vh; }
+
+.resa-close:focus-visible,
+.resa-submit:focus-visible,
+.footer-resa:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+
+@media (max-width: 480px) {
+  .resa-row { grid-template-columns: 1fr; gap: 20px; }
+  .resa-title { margin-top: 4vh; }
+}
