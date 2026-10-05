@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "has-pide-kebap",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/serve-has-pide-kebap.mjs"],
+      "port": 4385
+    }
+  ]
+}
