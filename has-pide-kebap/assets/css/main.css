@@ -394,28 +394,6 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
 @media (min-width: 1000px) { .action-bar { display: none; } }
 
 /* ==========================================================================
-   Fenêtre « Commander »
-   ========================================================================== */
-
-.order { width: min(520px, calc(100% - 32px)); max-width: none; max-height: calc(100% - 32px); padding: 0; border: 0; border-radius: 0; background: var(--porcelain); color: var(--ink); }
-.order::backdrop { background: rgba(11, 12, 15, .62); }
-.order__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 28px 28px 8px; }
-.order__head h2 { font-size: var(--step-3); line-height: 1; }
-.order__close { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); background: none; }
-.order__close:hover { border-color: var(--ink); }
-.order__body { display: grid; padding: 8px 28px 28px; }
-.order__option { display: grid; gap: 10px; padding-block: 24px; border-bottom: 1px solid var(--line); }
-.order__option:last-child { border-bottom: 0; padding-bottom: 0; }
-.order__option h3 { font-size: var(--step-2); }
-.order__option p { color: var(--stone); font-size: 15px; }
-.order__option .btn { margin-top: 8px; }
-.partners { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 8px; }
-.partners .btn { margin-top: 0; padding: 0 10px; }
-@media (max-width: 599px) {
-  .order { width: 100%; max-height: 92%; margin: auto 0 0; padding-bottom: env(safe-area-inset-bottom, 0px); }
-}
-
-/* ==========================================================================
    Page « La carte »
    ========================================================================== */
 

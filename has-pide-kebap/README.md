@@ -26,14 +26,14 @@ python3 -m http.server 4321
 ```
 assets/
   css/main.css     tokens (couleurs, typo, espacements) en tête de fichier
-  js/main.js       horaires, statut ouvert/fermé, menu mobile, fenêtre Commander, navigation de la carte, réservation
+  js/main.js       horaires, statut ouvert/fermé, menu mobile, navigation de la carte, réservation
   fonts/           Gloock + Schibsted Grotesk en woff2 (latin + latin-ext pour ı ş ğ İ)
   img/             photos (voir ci-dessous)
 scripts/build-preview.mjs
 favicon.svg, site.webmanifest, robots.txt
 ```
 
-L'en-tête, le pied de page, la barre mobile et la fenêtre « Commander » sont identiques sur les quatre pages : une modification doit être reportée sur chacune.
+L'en-tête, le pied de page et la barre mobile sont identiques sur les quatre pages : une modification doit être reportée sur chacune.
 
 ## Direction artistique
 
@@ -74,14 +74,13 @@ Conseil de prise de vue : lumière naturelle ou flash direct, fond sombre, plans
 
 E-mail reçu : objet `Réservation · Samedi 12 octobre · 20:00 · 4 personnes`, puis nom, téléphone, e-mail, nombre de personnes, date (`AAAA-MM-JJ`), heure et demande particulière. Un champ piège (`website`) filtre les robots.
 
-**Disponibilités en temps réel** : si le restaurant veut des réservations confirmées automatiquement, avec gestion des tables et rappels SMS, il faut un logiciel de réservation (Zenchef, TheFork Manager, Resengo…), sur abonnement. Leur module remplace alors le formulaire, sans toucher au reste du site.
+**Disponibilités en temps réel** : si le restaurant veut des réservations confirmées automatiquement, avec gestion des tables et rappels SMS, il faut un logiciel de réservation sur abonnement : environ 40 à 250 € HT par mois selon l'outil et la formule (Resengo, Guestplan, Zenchef…), plus une commission par couvert chez TheFork. Prix à confirmer sur devis. Leur module remplace alors le formulaire, sans toucher au reste du site.
 
 ## À valider avec le restaurant avant la mise en ligne
 
 - [ ] Logo : le logotype actuel est une proposition typographique
 - [ ] Plats, descriptions et prix (`index.html`, `carte.html`) : valeurs indicatives
 - [ ] Horaires : objet `HOURS` dans `assets/js/main.js` et tableau de `index.html`. Seule la fermeture à 23:00 est connue
-- [ ] Plateformes de livraison réellement utilisées (fenêtre « Commander »)
 - [ ] Réservation : relier `RESERVATION.endpoint` à l'adresse e-mail du restaurant, puis faire un envoi test
 - [ ] Réservation : nombre maximal de couverts (12), délai minimum, dernier créneau
 - [ ] Données personnelles : durée de conservation, service d'envoi, adresse e-mail de contact (`mentions-legales.html#donnees`)
@@ -97,7 +96,7 @@ E-mail reçu : objet `Réservation · Samedi 12 octobre · 20:00 · 4 personnes`
 - Données structurées `schema.org/Restaurant` sur l'accueil.
 - Accessibilité : lien d'évitement, navigation clavier, focus visible, `aria-current`, `lang="tr"` sur les mots turcs, animations désactivées si `prefers-reduced-motion`.
 - Statut « Ouvert / Fermé » calculé à l'heure de Bruxelles, quel que soit le fuseau du visiteur.
-- Les liens `tel:` et Google Maps fonctionnent directement sur mobile ; une barre d'actions fixe (Appeler, Commander, Réserver) s'affiche sous 1000 px.
+- Les liens `tel:` et Google Maps fonctionnent directement sur mobile ; une barre d'actions fixe (Appeler, Itinéraire, Réserver) s'affiche sous 1000 px.
 - Formulaire de réservation accessible : vrais boutons radio (navigation clavier), messages d'erreur reliés aux champs, récapitulatif annoncé aux lecteurs d'écran.
 
 ## Prochaines étapes possibles

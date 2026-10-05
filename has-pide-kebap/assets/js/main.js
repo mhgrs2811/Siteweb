@@ -121,25 +121,7 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) setMenu(false); });
   }
 
-  /* ------------------------------------------------------------------
-     Fenêtre « Commander »
-     ------------------------------------------------------------------ */
-  var dialog = document.getElementById("order");
-  if (dialog) {
-    document.addEventListener("click", function (e) {
-      var trigger = e.target.closest("[data-order]");
-      if (!trigger) return;
-      e.preventDefault();
-      setMenu(false);
-      if (typeof dialog.showModal === "function") dialog.showModal();
-      else dialog.setAttribute("open", "");
-    });
-    dialog.addEventListener("click", function (e) {
-      if (e.target === dialog || e.target.closest("[data-close]")) dialog.close();
-    });
-  }
-
-  /* Liens en attente (réseaux sociaux, plateformes) : ne pas remonter en haut de page */
+  /* Liens en attente (réseaux sociaux) : ne pas remonter en haut de page */
   document.addEventListener("click", function (e) {
     if (e.target.closest("[data-pending]")) e.preventDefault();
   });
