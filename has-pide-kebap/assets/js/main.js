@@ -173,6 +173,294 @@
     });
   }
 
+  /* ------------------------------------------------------------------
+     Réservation
+     Relier le formulaire à un service d'envoi (Web3Forms, Formspree,
+     Netlify Forms…) via RESERVATION.endpoint. Tant que endpoint est vide,
+     la page fonctionne en démonstration : rien n'est envoyé.
+     ------------------------------------------------------------------ */
+  var RESERVATION = {
+    endpoint: "",            // ex. "https://api.web3forms.com/submit" ou "https://formspree.io/f/xxxxxxx"
+    extra: {},               // champs propres au service, ex. { access_key: "…" } pour Web3Forms
+    daysAhead: 14,           // jours proposés en pastilles
+    maxDaysAhead: 60,        // limite du champ « autre date »
+    slotStep: 30,            // minutes entre deux créneaux
+    lastSlotBeforeClose: 60, // dernier créneau une heure avant la fermeture
+    minNotice: 60,           // délai minimum pour réserver le jour même
+    lunchUntil: "16:00",     // sépare les créneaux « Déjeuner » et « Dîner »
+    phone: "02 203 83 00"
+  };
+
+  var bookingForm = document.querySelector("[data-reservation]");
+  if (bookingForm) initReservation(bookingForm);
+
+  function initReservation(form) {
+    var datesEl = form.querySelector("[data-dates]");
+    var slotsEl = form.querySelector("[data-slots]");
+    var otherDate = form.querySelector("#date-other");
+    var moreWrap = form.querySelector("[data-guests-more]");
+    var moreSelect = form.querySelector("#guests-more");
+    var formError = form.querySelector("[data-form-error]");
+    var submit = form.querySelector("[type='submit']");
+    var recap = form.querySelector("[data-recap]");
+    var done = document.querySelector("[data-booking-done]");
+    var state = { guests: 2, date: null, time: null };
+
+    var fmtDow = new Intl.DateTimeFormat("fr-BE", { weekday: "short", timeZone: "UTC" });
+    var fmtMonth = new Intl.DateTimeFormat("fr-BE", { month: "short", timeZone: "UTC" });
+    var fmtLong = new Intl.DateTimeFormat("fr-BE", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
+
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    function toHHMM(min) { return pad(Math.floor(min / 60)) + ":" + pad(min % 60); }
+    function fromISO(iso) { return new Date(iso + "T12:00:00Z"); }
+    function addDays(iso, n) {
+      var d = fromISO(iso);
+      d.setUTCDate(d.getUTCDate() + n);
+      return d.toISOString().slice(0, 10);
+    }
+    function todayISO() {
+      try {
+        return new Intl.DateTimeFormat("en-CA", { timeZone: TIME_ZONE, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+      } catch (e) {
+        var d = new Date();
+        return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+      }
+    }
+    function shortLabel(text) { return text.replace(".", ""); }
+    function longDate(iso) {
+      var t = fmtLong.format(fromISO(iso));
+      return t.charAt(0).toUpperCase() + t.slice(1);
+    }
+    function guestsLabel(n) { return n + (n > 1 ? " personnes" : " personne"); }
+
+    function slotsFor(iso) {
+      var hours = HOURS[fromISO(iso).getUTCDay()];
+      if (!hours) return [];
+      var first = toMinutes(hours[0]);
+      var last = toMinutes(hours[1]) - RESERVATION.lastSlotBeforeClose;
+      var earliest = iso === todayISO() ? nowInBrussels().minutes + RESERVATION.minNotice : -1;
+      var slots = [];
+      for (var m = first; m <= last; m += RESERVATION.slotStep) {
+        slots.push({ time: toHHMM(m), minutes: m, disabled: m < earliest });
+      }
+      return slots;
+    }
+    function isBookable(iso) {
+      return slotsFor(iso).some(function (s) { return !s.disabled; });
+    }
+
+    function renderDates() {
+      var today = todayISO();
+      var html = "";
+      for (var i = 0; i < RESERVATION.daysAhead; i++) {
+        var iso = addDays(today, i);
+        var d = fromISO(iso);
+        var open = isBookable(iso);
+        var dow = i === 0 ? "Auj." : i === 1 ? "Demain" : shortLabel(fmtDow.format(d));
+        html += '<label class="chip"><input type="radio" name="date" value="' + iso + '"' +
+          (open ? "" : " disabled") + ' aria-label="' + longDate(iso) + (open ? "" : ", indisponible") + '">' +
+          '<span><span class="date__dow">' + dow + '</span><span class="date__day">' + d.getUTCDate() +
+          '</span><span class="date__month">' + shortLabel(fmtMonth.format(d)) + "</span></span></label>";
+      }
+      datesEl.innerHTML = html;
+      otherDate.min = today;
+      otherDate.max = addDays(today, RESERVATION.maxDaysAhead);
+    }
+
+    function renderSlots() {
+      if (!state.date) {
+        slotsEl.innerHTML = '<p class="slots-empty">Choisissez d’abord une date.</p>';
+        return;
+      }
+      var slots = slotsFor(state.date);
+      if (!slots.some(function (s) { return !s.disabled; })) {
+        state.time = null;
+        slotsEl.innerHTML = '<p class="slots-empty">Plus de créneau disponible ce jour-là. Choisissez une autre date ou appelez-nous au ' + RESERVATION.phone + ".</p>";
+        return;
+      }
+      var lunch = toMinutes(RESERVATION.lunchUntil);
+      var groups = [
+        ["Déjeuner", slots.filter(function (s) { return s.minutes < lunch; })],
+        ["Dîner", slots.filter(function (s) { return s.minutes >= lunch; })]
+      ];
+      var stillValid = slots.some(function (s) { return s.time === state.time && !s.disabled; });
+      if (!stillValid) state.time = null;
+      slotsEl.innerHTML = groups.filter(function (g) { return g[1].length; }).map(function (g) {
+        return '<p class="step__sub">' + g[0] + '</p><div class="chips">' + g[1].map(function (s) {
+          return '<label class="chip"><input type="radio" name="time" value="' + s.time + '"' +
+            (s.disabled ? " disabled" : "") + (s.time === state.time ? " checked" : "") +
+            "><span>" + s.time + "</span></label>";
+        }).join("") + "</div>";
+      }).join("");
+    }
+
+    function renderSummary() {
+      var values = {
+        guests: state.guests ? guestsLabel(state.guests) : "",
+        date: state.date ? longDate(state.date) : "",
+        time: state.time || ""
+      };
+      Object.keys(values).forEach(function (key) {
+        var dd = document.querySelector('[data-sum="' + key + '"]');
+        if (!dd) return;
+        dd.textContent = values[key] || "—";
+        dd.classList.toggle("is-empty", !values[key]);
+      });
+      if (recap) {
+        recap.textContent = [values.guests, values.date, values.time].filter(Boolean).join(" · ");
+      }
+    }
+
+    function setError(name, message) {
+      var slot = form.querySelector('[data-error-for="' + name + '"]');
+      if (slot) slot.textContent = message || "";
+      var field = form.querySelector("#" + name);
+      if (field) field.setAttribute("aria-invalid", message ? "true" : "false");
+      // Plus aucun champ en erreur : on retire aussi le message général
+      if (!message && formError.textContent) {
+        var remaining = [].some.call(form.querySelectorAll("[data-error-for]"), function (el) { return el.textContent; });
+        if (!remaining) formError.textContent = "";
+      }
+    }
+
+    form.addEventListener("change", function (e) {
+      var t = e.target;
+      if (t.name === "guests") {
+        var more = t.value === "more";
+        moreWrap.hidden = !more;
+        state.guests = more ? +moreSelect.value : +t.value;
+        setError("guests");
+      } else if (t === moreSelect) {
+        state.guests = +moreSelect.value;
+      } else if (t.name === "date") {
+        state.date = t.value;
+        otherDate.value = "";
+        setError("date");
+        renderSlots();
+      } else if (t === otherDate) {
+        if (!otherDate.value) return;
+        form.querySelectorAll("input[name='date']").forEach(function (r) { r.checked = false; });
+        var inRange = otherDate.value >= otherDate.min && otherDate.value <= otherDate.max;
+        state.date = inRange ? otherDate.value : null;
+        setError("date", inRange ? "" : "Choisissez une date dans les " + RESERVATION.maxDaysAhead + " prochains jours.");
+        renderSlots();
+      } else if (t.name === "time") {
+        state.time = t.value;
+        setError("time");
+      } else if (t.id === "consent" && t.checked) {
+        setError("consent");
+      }
+      renderSummary();
+    });
+
+    form.addEventListener("input", function (e) {
+      if (e.target.id && e.target.getAttribute("aria-invalid") === "true") setError(e.target.id);
+    });
+
+    function validate() {
+      var errors = [];
+      var name = form.elements.name.value.trim();
+      var phone = form.elements.phone.value.trim();
+      var email = form.elements.email;
+      var digits = phone.replace(/\D/g, "");
+      var checks = [
+        ["guests", !state.guests, "Indiquez le nombre de personnes."],
+        ["date", !state.date, "Choisissez une date."],
+        ["time", !state.time, "Choisissez un horaire."],
+        ["name", name.length < 2, "Indiquez votre nom."],
+        ["phone", digits.length < 9 || !/^[0-9+()./\s-]+$/.test(phone), "Indiquez un numéro valide, par exemple 0470 12 34 56."],
+        ["email", email.value.trim() !== "" && !email.validity.valid, "Cette adresse e-mail n’est pas valide."],
+        ["consent", !form.elements.consent.checked, "Cochez cette case pour envoyer votre demande."]
+      ];
+      checks.forEach(function (c) {
+        setError(c[0], c[1] ? c[2] : "");
+        if (c[1]) errors.push(c[0]);
+      });
+      return errors;
+    }
+
+    function focusField(name) {
+      var target = form.querySelector("#" + name) ||
+        form.querySelector("input[name='" + name + "']:not(:disabled)");
+      if (!target) return;
+      target.focus({ preventScroll: true });
+      target.closest("fieldset, .field, .consent").scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+
+    function showDone(firstName, demo) {
+      var text = (firstName ? "Merci " + firstName + ". " : "Merci. ") +
+        "Votre demande pour " + guestsLabel(state.guests) + ", " + longDate(state.date).toLowerCase() +
+        " à " + state.time + ", a bien été transmise. Nous vous confirmons la table par téléphone ou par e-mail.";
+      done.querySelector("[data-done-text]").textContent = text;
+      done.querySelector("[data-demo-note]").hidden = !demo;
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+      done.scrollIntoView({ block: "start" });
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      formError.textContent = "";
+      var errors = validate();
+      if (errors.length) {
+        formError.textContent = errors.length > 1 ? "Quelques informations manquent : voir les champs signalés." : "Une information manque : voir le champ signalé.";
+        focusField(errors[0]);
+        return;
+      }
+      var firstName = form.elements.name.value.trim().split(/\s+/)[0];
+      // Champ piège rempli : un robot. On affiche une confirmation sans rien envoyer.
+      if (form.elements.website.value) { showDone(firstName, false); return; }
+
+      var payload = Object.assign({}, RESERVATION.extra, {
+        subject: "Réservation · " + longDate(state.date) + " · " + state.time + " · " + guestsLabel(state.guests),
+        from_name: "Site Has Pide Kebap",
+        nom: form.elements.name.value.trim(),
+        telephone: form.elements.phone.value.trim(),
+        email: form.elements.email.value.trim(),
+        personnes: state.guests,
+        date: state.date,
+        heure: state.time,
+        demande: form.elements.notes.value.trim()
+      });
+
+      submit.setAttribute("aria-busy", "true");
+      submit.disabled = true;
+
+      var request;
+      if (!RESERVATION.endpoint) {
+        request = new Promise(function (resolve) { setTimeout(resolve, 700); });
+      } else {
+        var controller = "AbortController" in window ? new AbortController() : null;
+        var timer = controller ? setTimeout(function () { controller.abort(); }, 15000) : null;
+        request = fetch(RESERVATION.endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(payload),
+          signal: controller ? controller.signal : undefined
+        }).then(function (res) {
+          if (timer) clearTimeout(timer);
+          if (!res.ok) throw new Error("HTTP " + res.status);
+        });
+      }
+
+      request.then(function () {
+        showDone(firstName, !RESERVATION.endpoint);
+      }).catch(function () {
+        formError.innerHTML = "L’envoi n’a pas abouti. Réessayez dans un instant ou appelez-nous au " +
+          '<a href="tel:+3222038300">' + RESERVATION.phone + "</a>.";
+        formError.focus && formError.focus();
+      }).then(function () {
+        submit.removeAttribute("aria-busy");
+        submit.disabled = false;
+      });
+    });
+
+    renderDates();
+    renderSlots();
+    renderSummary();
+  }
+
   /* Année du pied de page */
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = String(new Date().getFullYear());

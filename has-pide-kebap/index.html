@@ -29,7 +29,7 @@
     "priceRange": "10–20 €",
     "telephone": "+32 2 203 83 00",
     "hasMenu": "carte.html",
-    "acceptsReservations": false,
+    "acceptsReservations": true,
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Chaussée de Haecht 115",
@@ -49,6 +49,8 @@
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.5 4h3.2l1.6 4.4-2.1 1.4a10.5 10.5 0 0 0 6 6l1.4-2.1 4.4 1.6v3.2A1.5 1.5 0 0 1 18.5 20 15.5 15.5 0 0 1 4 5.5 1.5 1.5 0 0 1 5.5 4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.9-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.1 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="9.8" r="2.3" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8.5h14l-1 11.5H6L5 8.5zM9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M4.5 6.5h15v13h-15zM4.5 10.5h15M8.5 4v4M15.5 4v4" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z" fill="currentColor"/></symbol>
   <symbol id="i-star-half" viewBox="0 0 24 24"><clipPath id="half"><rect width="12" height="24"/></clipPath><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z" fill="currentColor" opacity=".25"/><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z" fill="currentColor" clip-path="url(#half)"/></symbol>
@@ -70,7 +72,8 @@
     </nav>
     <div class="header-actions">
       <a class="header-phone" href="tel:+3222038300">02 203 83 00</a>
-      <button class="btn btn--light btn--sm header-order" type="button" data-order>Commander</button>
+      <button class="btn btn--ghost-light btn--sm header-cta" type="button" data-order>Commander</button>
+      <a class="btn btn--light btn--sm header-cta" href="reserver.html">Réserver</a>
       <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-nav">
         <span data-menu-label>Menu</span>
         <span class="menu-toggle__bars" aria-hidden="true"><span></span><span></span></span>
@@ -82,6 +85,7 @@
 <nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile" hidden>
   <ul>
     <li><a href="carte.html">La carte</a></li>
+    <li><a href="reserver.html">Réserver une table</a></li>
     <li><a href="#pide">Le pide</a></li>
     <li><a href="#avis">Avis</a></li>
     <li><a href="#infos">Nous trouver</a></li>
@@ -105,8 +109,8 @@
         <h1 id="hero-title" class="rise rise--2">Pide <span class="amp">&amp;</span> kebap, à&nbsp;Schaerbeek.</h1>
         <p class="hero__lead rise rise--3">Pide cuit au four, grillades et lahmacun, 100&nbsp;% halal. Sur place, en terrasse, à emporter ou en livraison, tous les jours jusqu’à 23&nbsp;h.</p>
         <div class="hero__actions rise rise--4">
-          <a class="btn btn--light" href="carte.html">Voir la carte <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <button class="btn btn--ghost-light" type="button" data-order>Commander</button>
+          <a class="btn btn--light" href="reserver.html">Réserver une table <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost-light" href="carte.html">Voir la carte</a>
         </div>
         <div class="hero__rating rise rise--4">
           <span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star-half"/></svg></span>
@@ -131,20 +135,6 @@
           <p>Au 115 de la Chaussée de Haecht, on passe pour un déjeuner rapide, un dîner en famille ou une commande à emporter. Aux beaux jours, la salle s’ouvre sur la terrasse.</p>
           <p>La pâte est étirée en forme de barque, garnie, puis cuite à très haute température. Au grill : Adana, döner et brochettes de poulet, servis avec boulgour, salade et lavash.</p>
         </div>
-      </div>
-      <div class="house__gallery">
-        <figure>
-          <div class="media media--4x5" data-label="Le four">
-            <img src="assets/img/maison-four.jpg" width="1200" height="1500" alt="Le four du restaurant, un pide en cuisson" loading="lazy">
-          </div>
-          <figcaption class="caption">Le four, du déjeuner jusqu’à la fermeture.</figcaption>
-        </figure>
-        <figure>
-          <div class="media media--3x2" data-label="La salle et la terrasse">
-            <img src="assets/img/maison-salle.jpg" width="1500" height="1000" alt="La salle du restaurant et sa terrasse sur la Chaussée de Haecht" loading="lazy">
-          </div>
-          <figcaption class="caption">La terrasse, Chaussée de Haecht.</figcaption>
-        </figure>
       </div>
     </div>
   </section>
@@ -300,13 +290,27 @@
       <div class="services">
         <h2 id="services-title">Sur place, à emporter ou livré.</h2>
         <ul class="services__list">
-          <li class="service"><h3>Sur place</h3><p>En salle, pour manger le pide à la sortie du four.</p></li>
+          <li class="service"><h3>Sur place</h3><p>En salle, avec ou sans réservation.</p></li>
           <li class="service"><h3>Terrasse</h3><p>Dehors, sur la Chaussée de Haecht, dès les beaux jours.</p></li>
           <li class="service"><h3>À emporter</h3><p>Commandez par téléphone, passez récupérer votre commande.</p></li>
           <li class="service"><h3>Livraison</h3><p>Via nos plateformes de livraison partenaires.</p></li>
           <li class="service"><h3>Menu enfant</h3><p>Mini pide au fromage, frites et boisson.</p></li>
           <li class="service"><h3>100 % halal</h3><p>Toute la viande servie est halal, sans exception.</p></li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Réservation -->
+  <section class="section section--band on-ink" aria-labelledby="book-title">
+    <div class="container band">
+      <div>
+        <p class="eyebrow">Réservation</p>
+        <h2 id="book-title">Réservez votre table en&nbsp;ligne.</h2>
+      </div>
+      <div class="band__side">
+        <p>De 1 à 12 personnes, midi et soir, 7 jours sur 7. Chaque demande est confirmée par téléphone ou par e-mail.</p>
+        <a class="btn btn--light" href="reserver.html">Choisir une date <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -391,6 +395,7 @@
         <h2>Contact</h2>
         <ul>
           <li><a href="tel:+3222038300">02 203 83 00</a></li>
+          <li><a href="reserver.html">Réserver une table</a></li>
           <li><a href="#" data-order>Commander</a></li>
         </ul>
       </div>
@@ -411,8 +416,8 @@
 
 <nav class="action-bar" aria-label="Actions rapides">
   <a href="tel:+3222038300"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Appeler</a>
-  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Chauss%C3%A9e+de+Haecht+115+1030+Schaerbeek" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Itinéraire</a>
-  <button class="action-bar__main" type="button" data-order><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>Commander</button>
+  <button type="button" data-order><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>Commander</button>
+  <a class="action-bar__main" href="reserver.html"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Réserver</a>
 </nav>
 
 <dialog class="order" id="order" aria-labelledby="order-title">

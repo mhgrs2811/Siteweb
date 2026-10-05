@@ -9,8 +9,8 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_BE">
   <meta property="og:site_name" content="Has Pide Kebap">
-  <meta property="og:title" content="La carte · Has Pide Kebap">
-  <meta property="og:description" content="Pide, grillades, lahmacun et douceurs. Viande 100 % halal.">
+  <meta property="og:title" content="La carte · Has Pide Kebap, Schaerbeek">
+  <meta property="og:description" content="La carte de Has Pide Kebap : pide cuits au four, grillades, lahmacun, dürüm, menu enfant, douceurs et boissons. Viande 100 % halal. Chaussée de Haecht 115, Schaerbeek.">
   <meta property="og:image" content="assets/img/og.jpg">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
@@ -29,6 +29,8 @@
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.5 4h3.2l1.6 4.4-2.1 1.4a10.5 10.5 0 0 0 6 6l1.4-2.1 4.4 1.6v3.2A1.5 1.5 0 0 1 18.5 20 15.5 15.5 0 0 1 4 5.5 1.5 1.5 0 0 1 5.5 4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.9-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.1 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="9.8" r="2.3" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8.5h14l-1 11.5H6L5 8.5zM9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M4.5 6.5h15v13h-15zM4.5 10.5h15M8.5 4v4M15.5 4v4" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z" fill="currentColor"/></symbol>
   <symbol id="i-star-half" viewBox="0 0 24 24"><clipPath id="half"><rect width="12" height="24"/></clipPath><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z" fill="currentColor" opacity=".25"/><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z" fill="currentColor" clip-path="url(#half)"/></symbol>
@@ -50,7 +52,8 @@
     </nav>
     <div class="header-actions">
       <a class="header-phone" href="tel:+3222038300">02 203 83 00</a>
-      <button class="btn btn--light btn--sm header-order" type="button" data-order>Commander</button>
+      <button class="btn btn--ghost-light btn--sm header-cta" type="button" data-order>Commander</button>
+      <a class="btn btn--light btn--sm header-cta" href="reserver.html">Réserver</a>
       <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-nav">
         <span data-menu-label>Menu</span>
         <span class="menu-toggle__bars" aria-hidden="true"><span></span><span></span></span>
@@ -62,6 +65,7 @@
 <nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile" hidden>
   <ul>
     <li><a href="carte.html" aria-current="page">La carte</a></li>
+    <li><a href="reserver.html">Réserver une table</a></li>
     <li><a href="index.html#pide">Le pide</a></li>
     <li><a href="index.html#avis">Avis</a></li>
     <li><a href="index.html#infos">Nous trouver</a></li>
@@ -303,8 +307,8 @@
       <div class="menu-foot__inner">
         <p>Une allergie, une question sur un plat ? L’équipe vous renseigne sur place ou au 02 203 83 00. Toute la viande servie est halal.</p>
         <div class="hero__actions">
-          <button class="btn btn--ink" type="button" data-order>Commander <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-          <a class="btn btn--ghost" href="tel:+3222038300"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Appeler</a>
+          <a class="btn btn--ink" href="reserver.html">Réserver une table <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <button class="btn btn--ghost" type="button" data-order>Commander</button>
         </div>
       </div>
     </div>
@@ -327,6 +331,7 @@
         <h2>Contact</h2>
         <ul>
           <li><a href="tel:+3222038300">02 203 83 00</a></li>
+          <li><a href="reserver.html">Réserver une table</a></li>
           <li><a href="#" data-order>Commander</a></li>
         </ul>
       </div>
@@ -347,8 +352,8 @@
 
 <nav class="action-bar" aria-label="Actions rapides">
   <a href="tel:+3222038300"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Appeler</a>
-  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Chauss%C3%A9e+de+Haecht+115+1030+Schaerbeek" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Itinéraire</a>
-  <button class="action-bar__main" type="button" data-order><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>Commander</button>
+  <button type="button" data-order><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>Commander</button>
+  <a class="action-bar__main" href="reserver.html"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Réserver</a>
 </nav>
 
 <dialog class="order" id="order" aria-labelledby="order-title">

@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const out = path.join(root, "apercu");
-const pages = ["index.html", "carte.html", "mentions-legales.html"];
+const pages = ["index.html", "carte.html", "reserver.html", "mentions-legales.html"];
 const mime = { ".woff2": "font/woff2", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".svg": "image/svg+xml" };
 
 const exists = (p) => access(p).then(() => true, () => false);

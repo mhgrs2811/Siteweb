@@ -83,6 +83,8 @@
   --mist: #A4A9B4;
   --line: rgba(11, 12, 15, .13);
   --line-ink: rgba(246, 246, 244, .14);
+  --line-strong: #8C9099; /* bordures de champs : contraste 3:1 sur porcelaine */
+  --error: #A63D2E;
   --open: #4FB477;
   --closed: #D46B5A;
 
@@ -215,10 +217,10 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
 .nav a:hover, .nav a[aria-current="page"] { color: var(--porcelain); }
 .nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
 
-.header-actions { display: flex; align-items: center; gap: 22px; margin-left: auto; }
-.header-phone { display: none; font-size: 15px; text-decoration: none; color: rgba(246, 246, 244, .82); }
+.header-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.header-phone { display: none; margin-right: 10px; font-size: 15px; text-decoration: none; color: rgba(246, 246, 244, .82); }
 .header-phone:hover { color: var(--porcelain); }
-.header-order { display: none; }
+.header-cta { display: none; }
 .menu-toggle { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 4px; border: 0; background: none; color: var(--porcelain); font-size: 15px; }
 .menu-toggle__bars { display: grid; gap: 5px; width: 22px; }
 .menu-toggle__bars span { height: 1.5px; background: currentColor; }
@@ -227,7 +229,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
   :root { --header-h: 84px; }
   .nav { display: flex; }
   .header-actions { margin-left: 16px; }
-  .header-order { display: inline-flex; }
+  .header-cta { display: inline-flex; }
   .menu-toggle { display: none; }
 }
 @media (min-width: 1180px) { .header-phone { display: inline; } }
@@ -286,16 +288,12 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
 .house__intro { display: grid; gap: 28px; }
 .house__statement { font-family: var(--font-display); font-size: var(--step-3); line-height: 1.1; letter-spacing: -.015em; text-wrap: balance; }
 .house__body { display: grid; gap: 18px; max-width: 62ch; color: var(--stone); }
-.house__gallery { display: grid; gap: 40px; margin-top: clamp(56px, 8vw, 112px); }
 @media (min-width: 960px) {
   .house__intro { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: 48px; }
   .house__intro > .eyebrow { padding-top: 14px; }
   .house__intro > :not(.eyebrow) { grid-column: 2; }
   .house__body { grid-template-columns: 1fr 1fr; column-gap: 40px; max-width: none; }
-  .house__gallery { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start; }
-  .house__gallery > :first-child { grid-column: 1 / span 5; }
-  .house__gallery > :last-child { grid-column: 7 / span 6; margin-top: clamp(80px, 12vw, 200px); }
-}
+  }
 
 /* Plats incontournables */
 .dishes { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(250px, 76%); gap: 20px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none; }
@@ -487,6 +485,117 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
 .prose ul { display: grid; gap: 6px; padding-left: 1.1em; list-style: square; }
 .prose a { color: var(--cobalt); }
 .todo { background: rgba(29, 63, 149, .1); color: var(--cobalt); padding: 0 .3em; }
+
+/* ==========================================================================
+   Bandeau « Réserver » (accueil)
+   ========================================================================== */
+
+.section--band { padding-block: clamp(72px, 9vw, 128px); }
+.band { display: grid; gap: 28px; }
+.band h2 { margin-top: 20px; font-size: var(--step-3); line-height: 1.04; max-width: 14ch; }
+.band__side { display: grid; gap: 28px; justify-items: start; align-content: end; }
+.band__side p { max-width: 44ch; color: rgba(246, 246, 244, .78); }
+@media (min-width: 960px) { .band { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 64px; align-items: end; } }
+
+/* ==========================================================================
+   Page « Réserver »
+   ========================================================================== */
+
+.booking { display: grid; gap: 56px; padding-bottom: clamp(80px, 10vw, 140px); }
+.booking__main { min-width: 0; }
+.booking-form { display: grid; gap: 56px; }
+@media (min-width: 960px) { .booking { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; align-items: start; } }
+
+.step { min-width: 0; margin: 0; padding: 0; border: 0; }
+.step__legend { display: flex; align-items: baseline; gap: 14px; padding: 0; margin-bottom: 20px; font-family: var(--font-display); font-size: var(--step-2); line-height: 1.15; }
+.step__num { font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: .14em; color: var(--cobalt); }
+.step__hint { margin: -8px 0 18px; font-size: 14px; color: var(--stone); }
+.step__sub { margin: 22px 0 10px; font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--stone); }
+.step__sub:first-of-type { margin-top: 0; }
+
+/* Choix sous forme de pastilles (boutons radio natifs, masqués visuellement) */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; display: block; }
+.chip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.chip > span { display: grid; place-items: center; min-width: 54px; min-height: 52px; padding: 0 14px; border: 1px solid var(--line-strong); font-size: 16px; line-height: 1.2; text-align: center; transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease); }
+.chip:hover input:not(:disabled):not(:checked) + span { border-color: var(--ink); }
+.chip input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--porcelain); }
+.chip input:focus-visible + span { outline: 2px solid var(--cobalt); outline-offset: 2px; }
+.chip input:disabled { cursor: not-allowed; }
+.chip input:disabled + span { color: var(--mist); border-color: var(--line); text-decoration: line-through; }
+
+.dates { display: grid; grid-auto-flow: column; grid-auto-columns: 76px; gap: 8px; margin-inline: calc(var(--gutter) * -1); padding: 2px var(--gutter) 6px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; }
+.dates::-webkit-scrollbar { display: none; }
+.dates .chip { scroll-snap-align: start; }
+.dates .chip > span { gap: 2px; min-height: 84px; padding: 10px 6px; }
+.date__dow, .date__month { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.date__day { font-family: var(--font-display); font-size: 28px; line-height: 1; }
+.chip input:checked + span .date__dow, .chip input:checked + span .date__month { color: var(--mist); }
+@media (min-width: 640px) {
+  .dates { grid-auto-flow: row; grid-template-columns: repeat(7, minmax(0, 1fr)); margin-inline: 0; padding-inline: 2px; overflow: visible; }
+}
+.more-date { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 16px; font-size: 15px; color: var(--stone); }
+.more-date input { width: auto; }
+
+.guests-more { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 14px; }
+.guests-more select { width: auto; min-width: 140px; }
+.guests-more p { font-size: 14px; color: var(--stone); }
+
+.slots-empty { padding: 18px 20px; border: 1px dashed var(--line-strong); color: var(--stone); font-size: 15px; }
+
+/* Champs */
+.fields { display: grid; gap: 20px; }
+@media (min-width: 640px) { .fields--2 { grid-template-columns: 1fr 1fr; } }
+.field { display: grid; gap: 8px; min-width: 0; }
+.field label, .field__label { font-size: 14px; font-weight: 500; }
+.field__opt { font-weight: 400; color: var(--stone); }
+.input { width: 100%; min-height: 52px; padding: 0 16px; border: 1px solid var(--line-strong); border-radius: 0; background: #FFFFFF; color: var(--ink); font: 400 16px/1.4 var(--font-body); transition: border-color .2s; }
+textarea.input { min-height: 120px; padding: 14px 16px; resize: vertical; }
+select.input { appearance: none; padding-right: 44px; background: #FFFFFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5' fill='none' stroke='%230B0C0F' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 14px center / 18px; }
+.input:hover { border-color: var(--ink); }
+.input:focus { border-color: var(--ink); outline: 2px solid var(--cobalt); outline-offset: 2px; }
+.input[aria-invalid="true"] { border-color: var(--error); }
+.field__error { font-size: 14px; color: var(--error); }
+.field__error:empty { display: none; }
+
+.consent { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; font-size: 15px; color: var(--stone); }
+.consent input { width: 22px; height: 22px; margin: 2px 0 0; accent-color: var(--ink); }
+.consent a { color: var(--ink); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.form-error { padding: 16px 20px; border-left: 2px solid var(--error); background: rgba(166, 61, 46, .07); color: var(--ink); font-size: 15px; }
+.form-error:empty { display: none; }
+.form-error a { color: var(--ink); }
+.form-actions { display: grid; gap: 16px; justify-items: start; }
+.form-actions p { font-size: 14px; color: var(--stone); max-width: 52ch; }
+.btn[aria-busy="true"] { opacity: .7; pointer-events: none; }
+@media (max-width: 639px) { .form-actions .btn { width: 100%; } }
+
+/* Récapitulatif */
+.summary { padding: clamp(24px, 3vw, 36px); background: var(--ink); color: var(--porcelain); }
+@media (min-width: 960px) { .summary { position: sticky; top: calc(var(--header-h) + 32px); } }
+.summary h2 { font-size: var(--step-2); }
+.summary dl { display: grid; margin-top: 20px; border-top: 1px solid var(--line-ink); }
+.summary dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--line-ink); }
+.summary dt { font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--mist); }
+.summary dd { margin: 0; font-family: var(--font-display); font-size: 21px; text-align: right; }
+.summary dd.is-empty { color: var(--mist); }
+.summary__info { display: grid; gap: 6px; margin-top: 24px; font-size: 15px; color: rgba(246, 246, 244, .78); }
+.summary__info a { color: var(--porcelain); }
+
+/* Confirmation */
+.booking-done { display: grid; gap: 24px; justify-items: start; padding-block: 8px; scroll-margin-top: calc(var(--header-h) + 32px); }
+.booking-done:focus { outline: none; }
+.booking-done__mark { display: grid; place-items: center; width: 56px; height: 56px; border: 1px solid var(--ink); }
+.booking-done__mark .icon { width: 26px; height: 26px; }
+.booking-done h2 { font-size: var(--step-3); line-height: 1.04; }
+.booking-done p { max-width: 52ch; color: var(--stone); }
+.booking-done .note-demo { padding: 10px 14px; border: 1px dashed var(--line-strong); font-size: 14px; }
+.form-recap { font-family: var(--font-display); font-size: var(--step-1); }
+.form-recap:empty { display: none; }
+@media (min-width: 960px) { .form-recap { display: none; } }
+.booking-done .hero__actions { margin-top: 8px; }
+.prose h2[id] { scroll-margin-top: calc(var(--header-h) + 24px); }
 </style>
   <!-- Photo absente : on retire l'image et on garde l'emplacement dessiné -->
   <script>document.addEventListener("error",function(e){var t=e.target;if(t&&t.tagName==="IMG"){var m=t.closest(".media");if(m){m.classList.add("is-empty");}t.remove();}},true);</script>
@@ -499,6 +608,8 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.5 4h3.2l1.6 4.4-2.1 1.4a10.5 10.5 0 0 0 6 6l1.4-2.1 4.4 1.6v3.2A1.5 1.5 0 0 1 18.5 20 15.5 15.5 0 0 1 4 5.5 1.5 1.5 0 0 1 5.5 4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.9-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.1 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="9.8" r="2.3" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8.5h14l-1 11.5H6L5 8.5zM9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M4.5 6.5h15v13h-15zM4.5 10.5h15M8.5 4v4M15.5 4v4" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z" fill="currentColor"/></symbol>
   <symbol id="i-star-half" viewBox="0 0 24 24"><clipPath id="half"><rect width="12" height="24"/></clipPath><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z" fill="currentColor" opacity=".25"/><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z" fill="currentColor" clip-path="url(#half)"/></symbol>
@@ -520,7 +631,8 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
     </nav>
     <div class="header-actions">
       <a class="header-phone" href="tel:+3222038300">02 203 83 00</a>
-      <button class="btn btn--light btn--sm header-order" type="button" data-order>Commander</button>
+      <button class="btn btn--ghost-light btn--sm header-cta" type="button" data-order>Commander</button>
+      <a class="btn btn--light btn--sm header-cta" href="reserver.html">Réserver</a>
       <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-nav">
         <span data-menu-label>Menu</span>
         <span class="menu-toggle__bars" aria-hidden="true"><span></span><span></span></span>
@@ -532,6 +644,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
 <nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile" hidden>
   <ul>
     <li><a href="carte.html">La carte</a></li>
+    <li><a href="reserver.html">Réserver une table</a></li>
     <li><a href="index.html#pide">Le pide</a></li>
     <li><a href="index.html#avis">Avis</a></li>
     <li><a href="index.html#infos">Nous trouver</a></li>
@@ -559,7 +672,8 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
       Chaussée de Haecht 115, 1030 Schaerbeek, Belgique<br>
       Numéro d’entreprise (BCE) : <span class="todo">[0000.000.000]</span><br>
       Numéro de TVA : <span class="todo">[BE 0000.000.000]</span><br>
-      Téléphone : 02 203 83 00</p>
+      Téléphone : 02 203 83 00<br>
+      E-mail : <span class="todo">[adresse e-mail]</span></p>
 
       <h2>Hébergement</h2>
       <p><span class="todo">[Nom de l’hébergeur, adresse, site web]</span></p>
@@ -567,9 +681,17 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
       <h2>Conception et réalisation</h2>
       <p><span class="todo">[Nom de l’agence, site web]</span></p>
 
-      <h2>Données personnelles</h2>
-      <p>Ce site ne comporte aucun formulaire et ne collecte aucune donnée personnelle. Il n’utilise ni cookie, ni outil de mesure d’audience, ni traceur publicitaire.</p>
-      <p>Les polices de caractères sont hébergées sur le serveur du site : aucune requête n’est envoyée à un service tiers lors de la consultation.</p>
+      <h2 id="donnees">Données personnelles</h2>
+      <p>Le responsable du traitement est <span class="todo">[Dénomination sociale]</span>, à l’adresse ci-dessus.</p>
+      <p>Le formulaire de réservation collecte votre nom, votre numéro de téléphone, votre adresse e-mail si vous la donnez, le nombre de personnes, la date et l’heure souhaitées, ainsi que votre éventuelle demande particulière.</p>
+      <ul>
+        <li>Finalité : traiter votre demande de réservation et vous la confirmer.</li>
+        <li>Base légale : les mesures préalables à la réservation prises à votre demande (article 6.1.b du RGPD).</li>
+        <li>Destinataires : l’équipe du restaurant. La demande transite par <span class="todo">[service d’envoi du formulaire]</span>, qui agit comme sous-traitant.</li>
+        <li>Durée de conservation : <span class="todo">[3 mois]</span> après la date de la réservation, puis suppression.</li>
+      </ul>
+      <p>Vous pouvez demander l’accès à vos données, leur rectification ou leur effacement, ou vous opposer à leur traitement, en écrivant à <span class="todo">[adresse e-mail]</span>. Vous pouvez aussi introduire une réclamation auprès de l’Autorité de protection des données (<a href="https://www.autoriteprotectiondonnees.be" target="_blank" rel="noopener">autoriteprotectiondonnees.be</a>).</p>
+      <p>Le site n’utilise ni cookie, ni outil de mesure d’audience, ni traceur publicitaire. Les polices de caractères sont hébergées sur le serveur du site : aucune requête n’est envoyée à un service tiers lors de la consultation.</p>
       <p>Les liens vers Google Maps et les plateformes de livraison ouvrent des services externes, soumis à leurs propres conditions d’utilisation et politiques de confidentialité.</p>
 
       <h2>Propriété intellectuelle</h2>
@@ -597,6 +719,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
         <h2>Contact</h2>
         <ul>
           <li><a href="tel:+3222038300">02 203 83 00</a></li>
+          <li><a href="reserver.html">Réserver une table</a></li>
           <li><a href="#" data-order>Commander</a></li>
         </ul>
       </div>
@@ -617,8 +740,8 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
 
 <nav class="action-bar" aria-label="Actions rapides">
   <a href="tel:+3222038300"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Appeler</a>
-  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Chauss%C3%A9e+de+Haecht+115+1030+Schaerbeek" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Itinéraire</a>
-  <button class="action-bar__main" type="button" data-order><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>Commander</button>
+  <button type="button" data-order><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>Commander</button>
+  <a class="action-bar__main" href="reserver.html"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Réserver</a>
 </nav>
 
 <dialog class="order" id="order" aria-labelledby="order-title">
@@ -818,6 +941,294 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
       var section = document.getElementById(id);
       if (section) spy.observe(section);
     });
+  }
+
+  /* ------------------------------------------------------------------
+     Réservation
+     Relier le formulaire à un service d'envoi (Web3Forms, Formspree,
+     Netlify Forms…) via RESERVATION.endpoint. Tant que endpoint est vide,
+     la page fonctionne en démonstration : rien n'est envoyé.
+     ------------------------------------------------------------------ */
+  var RESERVATION = {
+    endpoint: "",            // ex. "https://api.web3forms.com/submit" ou "https://formspree.io/f/xxxxxxx"
+    extra: {},               // champs propres au service, ex. { access_key: "…" } pour Web3Forms
+    daysAhead: 14,           // jours proposés en pastilles
+    maxDaysAhead: 60,        // limite du champ « autre date »
+    slotStep: 30,            // minutes entre deux créneaux
+    lastSlotBeforeClose: 60, // dernier créneau une heure avant la fermeture
+    minNotice: 60,           // délai minimum pour réserver le jour même
+    lunchUntil: "16:00",     // sépare les créneaux « Déjeuner » et « Dîner »
+    phone: "02 203 83 00"
+  };
+
+  var bookingForm = document.querySelector("[data-reservation]");
+  if (bookingForm) initReservation(bookingForm);
+
+  function initReservation(form) {
+    var datesEl = form.querySelector("[data-dates]");
+    var slotsEl = form.querySelector("[data-slots]");
+    var otherDate = form.querySelector("#date-other");
+    var moreWrap = form.querySelector("[data-guests-more]");
+    var moreSelect = form.querySelector("#guests-more");
+    var formError = form.querySelector("[data-form-error]");
+    var submit = form.querySelector("[type='submit']");
+    var recap = form.querySelector("[data-recap]");
+    var done = document.querySelector("[data-booking-done]");
+    var state = { guests: 2, date: null, time: null };
+
+    var fmtDow = new Intl.DateTimeFormat("fr-BE", { weekday: "short", timeZone: "UTC" });
+    var fmtMonth = new Intl.DateTimeFormat("fr-BE", { month: "short", timeZone: "UTC" });
+    var fmtLong = new Intl.DateTimeFormat("fr-BE", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
+
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    function toHHMM(min) { return pad(Math.floor(min / 60)) + ":" + pad(min % 60); }
+    function fromISO(iso) { return new Date(iso + "T12:00:00Z"); }
+    function addDays(iso, n) {
+      var d = fromISO(iso);
+      d.setUTCDate(d.getUTCDate() + n);
+      return d.toISOString().slice(0, 10);
+    }
+    function todayISO() {
+      try {
+        return new Intl.DateTimeFormat("en-CA", { timeZone: TIME_ZONE, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+      } catch (e) {
+        var d = new Date();
+        return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+      }
+    }
+    function shortLabel(text) { return text.replace(".", ""); }
+    function longDate(iso) {
+      var t = fmtLong.format(fromISO(iso));
+      return t.charAt(0).toUpperCase() + t.slice(1);
+    }
+    function guestsLabel(n) { return n + (n > 1 ? " personnes" : " personne"); }
+
+    function slotsFor(iso) {
+      var hours = HOURS[fromISO(iso).getUTCDay()];
+      if (!hours) return [];
+      var first = toMinutes(hours[0]);
+      var last = toMinutes(hours[1]) - RESERVATION.lastSlotBeforeClose;
+      var earliest = iso === todayISO() ? nowInBrussels().minutes + RESERVATION.minNotice : -1;
+      var slots = [];
+      for (var m = first; m <= last; m += RESERVATION.slotStep) {
+        slots.push({ time: toHHMM(m), minutes: m, disabled: m < earliest });
+      }
+      return slots;
+    }
+    function isBookable(iso) {
+      return slotsFor(iso).some(function (s) { return !s.disabled; });
+    }
+
+    function renderDates() {
+      var today = todayISO();
+      var html = "";
+      for (var i = 0; i < RESERVATION.daysAhead; i++) {
+        var iso = addDays(today, i);
+        var d = fromISO(iso);
+        var open = isBookable(iso);
+        var dow = i === 0 ? "Auj." : i === 1 ? "Demain" : shortLabel(fmtDow.format(d));
+        html += '<label class="chip"><input type="radio" name="date" value="' + iso + '"' +
+          (open ? "" : " disabled") + ' aria-label="' + longDate(iso) + (open ? "" : ", indisponible") + '">' +
+          '<span><span class="date__dow">' + dow + '</span><span class="date__day">' + d.getUTCDate() +
+          '</span><span class="date__month">' + shortLabel(fmtMonth.format(d)) + "</span></span></label>";
+      }
+      datesEl.innerHTML = html;
+      otherDate.min = today;
+      otherDate.max = addDays(today, RESERVATION.maxDaysAhead);
+    }
+
+    function renderSlots() {
+      if (!state.date) {
+        slotsEl.innerHTML = '<p class="slots-empty">Choisissez d’abord une date.</p>';
+        return;
+      }
+      var slots = slotsFor(state.date);
+      if (!slots.some(function (s) { return !s.disabled; })) {
+        state.time = null;
+        slotsEl.innerHTML = '<p class="slots-empty">Plus de créneau disponible ce jour-là. Choisissez une autre date ou appelez-nous au ' + RESERVATION.phone + ".</p>";
+        return;
+      }
+      var lunch = toMinutes(RESERVATION.lunchUntil);
+      var groups = [
+        ["Déjeuner", slots.filter(function (s) { return s.minutes < lunch; })],
+        ["Dîner", slots.filter(function (s) { return s.minutes >= lunch; })]
+      ];
+      var stillValid = slots.some(function (s) { return s.time === state.time && !s.disabled; });
+      if (!stillValid) state.time = null;
+      slotsEl.innerHTML = groups.filter(function (g) { return g[1].length; }).map(function (g) {
+        return '<p class="step__sub">' + g[0] + '</p><div class="chips">' + g[1].map(function (s) {
+          return '<label class="chip"><input type="radio" name="time" value="' + s.time + '"' +
+            (s.disabled ? " disabled" : "") + (s.time === state.time ? " checked" : "") +
+            "><span>" + s.time + "</span></label>";
+        }).join("") + "</div>";
+      }).join("");
+    }
+
+    function renderSummary() {
+      var values = {
+        guests: state.guests ? guestsLabel(state.guests) : "",
+        date: state.date ? longDate(state.date) : "",
+        time: state.time || ""
+      };
+      Object.keys(values).forEach(function (key) {
+        var dd = document.querySelector('[data-sum="' + key + '"]');
+        if (!dd) return;
+        dd.textContent = values[key] || "—";
+        dd.classList.toggle("is-empty", !values[key]);
+      });
+      if (recap) {
+        recap.textContent = [values.guests, values.date, values.time].filter(Boolean).join(" · ");
+      }
+    }
+
+    function setError(name, message) {
+      var slot = form.querySelector('[data-error-for="' + name + '"]');
+      if (slot) slot.textContent = message || "";
+      var field = form.querySelector("#" + name);
+      if (field) field.setAttribute("aria-invalid", message ? "true" : "false");
+      // Plus aucun champ en erreur : on retire aussi le message général
+      if (!message && formError.textContent) {
+        var remaining = [].some.call(form.querySelectorAll("[data-error-for]"), function (el) { return el.textContent; });
+        if (!remaining) formError.textContent = "";
+      }
+    }
+
+    form.addEventListener("change", function (e) {
+      var t = e.target;
+      if (t.name === "guests") {
+        var more = t.value === "more";
+        moreWrap.hidden = !more;
+        state.guests = more ? +moreSelect.value : +t.value;
+        setError("guests");
+      } else if (t === moreSelect) {
+        state.guests = +moreSelect.value;
+      } else if (t.name === "date") {
+        state.date = t.value;
+        otherDate.value = "";
+        setError("date");
+        renderSlots();
+      } else if (t === otherDate) {
+        if (!otherDate.value) return;
+        form.querySelectorAll("input[name='date']").forEach(function (r) { r.checked = false; });
+        var inRange = otherDate.value >= otherDate.min && otherDate.value <= otherDate.max;
+        state.date = inRange ? otherDate.value : null;
+        setError("date", inRange ? "" : "Choisissez une date dans les " + RESERVATION.maxDaysAhead + " prochains jours.");
+        renderSlots();
+      } else if (t.name === "time") {
+        state.time = t.value;
+        setError("time");
+      } else if (t.id === "consent" && t.checked) {
+        setError("consent");
+      }
+      renderSummary();
+    });
+
+    form.addEventListener("input", function (e) {
+      if (e.target.id && e.target.getAttribute("aria-invalid") === "true") setError(e.target.id);
+    });
+
+    function validate() {
+      var errors = [];
+      var name = form.elements.name.value.trim();
+      var phone = form.elements.phone.value.trim();
+      var email = form.elements.email;
+      var digits = phone.replace(/\D/g, "");
+      var checks = [
+        ["guests", !state.guests, "Indiquez le nombre de personnes."],
+        ["date", !state.date, "Choisissez une date."],
+        ["time", !state.time, "Choisissez un horaire."],
+        ["name", name.length < 2, "Indiquez votre nom."],
+        ["phone", digits.length < 9 || !/^[0-9+()./\s-]+$/.test(phone), "Indiquez un numéro valide, par exemple 0470 12 34 56."],
+        ["email", email.value.trim() !== "" && !email.validity.valid, "Cette adresse e-mail n’est pas valide."],
+        ["consent", !form.elements.consent.checked, "Cochez cette case pour envoyer votre demande."]
+      ];
+      checks.forEach(function (c) {
+        setError(c[0], c[1] ? c[2] : "");
+        if (c[1]) errors.push(c[0]);
+      });
+      return errors;
+    }
+
+    function focusField(name) {
+      var target = form.querySelector("#" + name) ||
+        form.querySelector("input[name='" + name + "']:not(:disabled)");
+      if (!target) return;
+      target.focus({ preventScroll: true });
+      target.closest("fieldset, .field, .consent").scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+
+    function showDone(firstName, demo) {
+      var text = (firstName ? "Merci " + firstName + ". " : "Merci. ") +
+        "Votre demande pour " + guestsLabel(state.guests) + ", " + longDate(state.date).toLowerCase() +
+        " à " + state.time + ", a bien été transmise. Nous vous confirmons la table par téléphone ou par e-mail.";
+      done.querySelector("[data-done-text]").textContent = text;
+      done.querySelector("[data-demo-note]").hidden = !demo;
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+      done.scrollIntoView({ block: "start" });
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      formError.textContent = "";
+      var errors = validate();
+      if (errors.length) {
+        formError.textContent = errors.length > 1 ? "Quelques informations manquent : voir les champs signalés." : "Une information manque : voir le champ signalé.";
+        focusField(errors[0]);
+        return;
+      }
+      var firstName = form.elements.name.value.trim().split(/\s+/)[0];
+      // Champ piège rempli : un robot. On affiche une confirmation sans rien envoyer.
+      if (form.elements.website.value) { showDone(firstName, false); return; }
+
+      var payload = Object.assign({}, RESERVATION.extra, {
+        subject: "Réservation · " + longDate(state.date) + " · " + state.time + " · " + guestsLabel(state.guests),
+        from_name: "Site Has Pide Kebap",
+        nom: form.elements.name.value.trim(),
+        telephone: form.elements.phone.value.trim(),
+        email: form.elements.email.value.trim(),
+        personnes: state.guests,
+        date: state.date,
+        heure: state.time,
+        demande: form.elements.notes.value.trim()
+      });
+
+      submit.setAttribute("aria-busy", "true");
+      submit.disabled = true;
+
+      var request;
+      if (!RESERVATION.endpoint) {
+        request = new Promise(function (resolve) { setTimeout(resolve, 700); });
+      } else {
+        var controller = "AbortController" in window ? new AbortController() : null;
+        var timer = controller ? setTimeout(function () { controller.abort(); }, 15000) : null;
+        request = fetch(RESERVATION.endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(payload),
+          signal: controller ? controller.signal : undefined
+        }).then(function (res) {
+          if (timer) clearTimeout(timer);
+          if (!res.ok) throw new Error("HTTP " + res.status);
+        });
+      }
+
+      request.then(function () {
+        showDone(firstName, !RESERVATION.endpoint);
+      }).catch(function () {
+        formError.innerHTML = "L’envoi n’a pas abouti. Réessayez dans un instant ou appelez-nous au " +
+          '<a href="tel:+3222038300">' + RESERVATION.phone + "</a>.";
+        formError.focus && formError.focus();
+      }).then(function () {
+        submit.removeAttribute("aria-busy");
+        submit.disabled = false;
+      });
+    });
+
+    renderDates();
+    renderSlots();
+    renderSummary();
   }
 
   /* Année du pied de page */
