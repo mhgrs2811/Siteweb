@@ -2,11 +2,12 @@
 (function () {
   'use strict';
 
-  var TEL_AFFICHE = '02 203 83 00';
+  var TEL_AFFICHE = '02 203 83 00';
   var TEL_LIEN = 'tel:+3222038300';
   var ADRESSE_CARTE = 'Has Pide Kebap, Chaussée de Haecht 115, 1030 Schaerbeek';
 
   // Horaires : index 0 = dimanche … 6 = samedi. null = fermé.
+  // À garder synchronisé avec le tableau .horaires et le JSON-LD de index.html.
   var HORAIRES = {
     0: [11, 23],
     1: [11, 23],
@@ -23,9 +24,9 @@
 
   function $(sel, ctx) { return (ctx || document).querySelector(sel); }
   function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
-  function heureTexte(h) { return h + ' h'; }
+  function h(n) { return n + ' h'; }
 
-  /* ---------- Heure de Bruxelles (indépendante du fuseau du visiteur) ---------- */
+  /* ---------- Heure de Bruxelles, quel que soit le fuseau du visiteur ---------- */
   function maintenantBruxelles() {
     var parts = {};
     new Intl.DateTimeFormat('en-GB', {
@@ -42,11 +43,163 @@
     };
   }
 
+  /* ==========================================================================
+     Carreaux d'İznik : motif étoile-et-croix dessiné au canvas.
+     Les étoiles à huit branches se touchent pointe contre pointe ; l'espace
+     laissé entre elles forme les croix. Chaque étoile varie un peu de teinte,
+     comme un émail posé à la main.
+     ========================================================================== */
+  var PALETTES = {
+    facade:    { etoile: '#1f3f9a', croix: '#2a9a98', joint: '#0a0d10', motif: '#eef2f0', coeur: '#3fb8b5', cellule: function (w) { return Math.max(58, Math.min(92, w / 6.2)); } },
+    frise:     { etoile: '#1f3f9a', croix: '#2a9a98', joint: '#0a0d10', motif: '#eef2f0', coeur: '#3fb8b5', cellule: function (w, hh) { return hh; } },
+    plan:      { etoile: '#1f3f9a', croix: '#2a9a98', joint: '#0a0d10', motif: '#eef2f0', coeur: '#3fb8b5', cellule: function () { return 64; } },
+    signature: { etoile: '#eef2f0', croix: '#3fb8b5', joint: '#1f3f9a', motif: '#1f3f9a', coeur: '#1f3f9a', cellule: function (w) { return w; } }
+  };
+
+  function alea(i, j) {
+    var x = Math.sin(i * 127.1 + j * 311.7) * 43758.5453;
+    return x - Math.floor(x);
+  }
+  function nuance(hex, t) {
+    var n = parseInt(hex.slice(1), 16);
+    var c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(function (v) {
+      return Math.round(t >= 0 ? v + (255 - v) * t : v * (1 + t));
+    });
+    return 'rgb(' + c.join(',') + ')';
+  }
+  function cheminEtoile(ctx, cx, cy, R) {
+    var r = R * 0.7654;
+    ctx.beginPath();
+    for (var k = 0; k < 16; k++) {
+      var a = -Math.PI / 2 + k * Math.PI / 8;
+      var rad = k % 2 ? r : R;
+      ctx.lineTo(cx + Math.cos(a) * rad, cy + Math.sin(a) * rad);
+    }
+    ctx.closePath();
+  }
+
+  function dessinerCarreaux(canvas, progression) {
+    var pal = PALETTES[canvas.getAttribute('data-carreaux')] || PALETTES.facade;
+    var w = canvas.clientWidth, hh = canvas.clientHeight;
+    if (!w || !hh) return;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(hh * dpr)) {
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(hh * dpr);
+    }
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var s = pal.cellule(w, hh);
+    var R = s / 2;
+    var joint = Math.max(1.5, s * 0.035);
+    var ox = (w / 2) % s, oy = (hh / 2) % s;
+    var cols = Math.ceil(w / s) + 2, rows = Math.ceil(hh / s) + 2;
+    var diag = cols + rows;
+
+    ctx.fillStyle = pal.croix;
+    ctx.fillRect(0, 0, w, hh);
+
+    for (var j = -1; j < rows; j++) {
+      for (var i = -1; i < cols; i++) {
+        var cx = ox + i * s, cy = oy + j * s;
+        var p = progression ? progression((i + j + 2) / diag) : 1;
+
+        // Petit losange au cœur de chaque croix
+        var dx = cx + s / 2, dy = cy + s / 2, q = s * 0.07;
+        ctx.globalAlpha = 0.55;
+        ctx.fillStyle = pal.motif;
+        ctx.beginPath();
+        ctx.moveTo(dx, dy - q); ctx.lineTo(dx + q, dy); ctx.lineTo(dx, dy + q); ctx.lineTo(dx - q, dy);
+        ctx.closePath();
+        ctx.fill();
+
+        if (p <= 0) continue;
+        ctx.globalAlpha = p;
+        var Rp = R * (0.94 + 0.06 * p);
+
+        // Émail de l'étoile, légèrement irrégulier
+        cheminEtoile(ctx, cx, cy, Rp);
+        ctx.fillStyle = nuance(pal.etoile, (alea(i, j) - 0.5) * 0.16);
+        ctx.fill();
+        ctx.lineWidth = joint;
+        ctx.strokeStyle = pal.joint;
+        ctx.stroke();
+
+        // Reflet de glaçure
+        ctx.save();
+        cheminEtoile(ctx, cx, cy, Rp);
+        ctx.clip();
+        var g = ctx.createLinearGradient(cx - R, cy - R, cx + R, cy + R);
+        g.addColorStop(0, 'rgba(255,255,255,0.16)');
+        g.addColorStop(0.5, 'rgba(255,255,255,0)');
+        g.addColorStop(1, 'rgba(0,0,0,0.16)');
+        ctx.fillStyle = g;
+        ctx.fillRect(cx - R, cy - R, s, s);
+        ctx.restore();
+
+        // Rosace à huit pétales
+        ctx.globalAlpha = p * 0.9;
+        ctx.fillStyle = pal.motif;
+        for (var k = 0; k < 8; k++) {
+          var ang = k * Math.PI / 4 - Math.PI / 2;
+          var L = (k % 2 ? 0.4 : 0.5) * R;
+          ctx.beginPath();
+          ctx.ellipse(cx + Math.cos(ang) * L / 2, cy + Math.sin(ang) * L / 2, L / 2, L * 0.17, ang, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = p;
+        ctx.fillStyle = pal.coeur;
+        ctx.beginPath();
+        ctx.arc(cx, cy, R * 0.13, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Filet intérieur
+        ctx.globalAlpha = p * 0.35;
+        cheminEtoile(ctx, cx, cy, Rp * 0.82);
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = pal.motif;
+        ctx.stroke();
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  var carreaux = $$('canvas[data-carreaux]');
+  carreaux.forEach(function (canvas) {
+    var anime = canvas.hasAttribute('data-anim') && !reduceMotion;
+    if (anime) {
+      // Un seul moment animé sur la page : les carreaux de la façade se posent en diagonale.
+      var debut = null, DUREE = 1300, ETOILE = 420;
+      var pas = function (t) {
+        if (debut === null) debut = t;
+        var e = t - debut;
+        dessinerCarreaux(canvas, function (rang) {
+          return Math.max(0, Math.min(1, (e - rang * (DUREE - ETOILE)) / ETOILE));
+        });
+        if (e < DUREE + 50) requestAnimationFrame(pas);
+      };
+      requestAnimationFrame(pas);
+    } else {
+      dessinerCarreaux(canvas);
+    }
+  });
+  if ('ResizeObserver' in window) {
+    var enAttente = false;
+    var ro = new ResizeObserver(function () {
+      if (enAttente) return;
+      enAttente = true;
+      requestAnimationFrame(function () {
+        enAttente = false;
+        carreaux.forEach(function (c) { dessinerCarreaux(c); });
+      });
+    });
+    carreaux.forEach(function (c) { ro.observe(c); });
+  }
+
   /* ---------- En-tête ---------- */
   var header = $('[data-header]');
-  function majHeader() {
-    if (header) header.classList.toggle('is-scrolled', window.scrollY > 24);
-  }
+  function majHeader() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 24); }
   majHeader();
   window.addEventListener('scroll', majHeader, { passive: true });
 
@@ -67,76 +220,55 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && root.classList.contains('nav-open')) { fermerNav(); toggle.focus(); }
     });
-    window.matchMedia('(min-width: 961px)').addEventListener('change', function (e) { if (e.matches) fermerNav(); });
-  }
-
-  /* ---------- Apparitions au défilement ---------- */
-  $$('[data-reveal-group]').forEach(function (groupe) {
-    $$('[data-reveal]', groupe).forEach(function (el, i) { el.style.setProperty('--d', (i * 0.08) + 's'); });
-  });
-  var aReveler = $$('[data-reveal]');
-  if ('IntersectionObserver' in window && !reduceMotion) {
-    var revealObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
-    aReveler.forEach(function (el) { revealObs.observe(el); });
-  } else {
-    aReveler.forEach(function (el) { el.classList.add('is-visible'); });
+    window.matchMedia('(min-width: 981px)').addEventListener('change', function (e) { if (e.matches) fermerNav(); });
   }
 
   /* ---------- Lien actif dans la navigation ---------- */
   var liensNav = $$('.nav-list a[href^="#"]:not(.btn)');
   if ('IntersectionObserver' in window && liensNav.length) {
-    var spyObs = new IntersectionObserver(function (entries) {
+    var spy = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         var id = '#' + entry.target.id;
         liensNav.forEach(function (a) { a.classList.toggle('is-active', a.getAttribute('href') === id); });
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    $$('main section[id]').forEach(function (s) { spyObs.observe(s); });
+    $$('main section[id]').forEach(function (s) { spy.observe(s); });
   }
 
-  /* ---------- Statut ouvert / fermé + jour en cours ---------- */
+  /* ---------- Ouvert / fermé ---------- */
   function prochaineOuverture(now) {
     for (var i = 0; i < 8; i++) {
       var j = (now.jour + i) % 7;
-      var h = HORAIRES[j];
-      if (!h) continue;
-      if (i === 0 && now.minutes >= h[0] * 60) continue;
+      var hj = HORAIRES[j];
+      if (!hj) continue;
+      if (i === 0 && now.minutes >= hj[0] * 60) continue;
       var quand = i === 0 ? "aujourd'hui" : i === 1 ? 'demain' : JOURS[j];
-      return 'ouvre ' + quand + ' à ' + heureTexte(h[0]);
+      return 'réouverture ' + quand + ' à ' + h(hj[0]);
     }
     return '';
   }
 
   function majStatut() {
     var now = maintenantBruxelles();
-    var h = HORAIRES[now.jour];
-    var ouvert = !!h && now.minutes >= h[0] * 60 && now.minutes < h[1] * 60;
-    var texte;
+    var hj = HORAIRES[now.jour];
+    var ouvert = !!hj && now.minutes >= hj[0] * 60 && now.minutes < hj[1] * 60;
+    var detail;
     if (ouvert) {
-      var reste = h[1] * 60 - now.minutes;
-      texte = reste <= 60
-        ? 'Ouvert · ferme bientôt (' + heureTexte(h[1]) + ')'
-        : "Ouvert maintenant · jusqu'à " + heureTexte(h[1]);
-    } else if (!h) {
-      texte = "Fermé aujourd'hui · " + prochaineOuverture(now);
+      detail = (hj[1] * 60 - now.minutes <= 60 ? 'Ouvert, fermeture à ' : "Ouvert jusqu'à ") + h(hj[1]);
     } else {
-      texte = 'Fermé · ' + prochaineOuverture(now);
+      var suite = prochaineOuverture(now);
+      detail = (hj ? 'Fermé, ' : "Fermé aujourd'hui, ") + suite;
     }
-    $$('[data-open-status]').forEach(function (el) {
-      el.setAttribute('data-state', ouvert ? 'open' : 'closed');
-      var t = $('[data-open-text]', el);
-      if (t) t.textContent = texte;
-    });
+    $$('[data-statut-court]').forEach(function (el) { el.textContent = detail; });
+    var pancarte = $('[data-pancarte]');
+    if (pancarte) {
+      pancarte.setAttribute('data-state', ouvert ? 'open' : 'closed');
+      $('[data-pancarte-mot]', pancarte).textContent = ouvert ? 'AÇIK' : 'KAPALI';
+      $('[data-pancarte-detail]', pancarte).textContent = detail;
+    }
     $$('.horaires tr[data-day]').forEach(function (tr) {
-      tr.classList.toggle('is-today', +tr.getAttribute('data-day') === now.jour);
+      tr.classList.toggle('aujourdhui', +tr.getAttribute('data-day') === now.jour);
     });
   }
   majStatut();
@@ -147,8 +279,8 @@
   if (menu) {
     var onglets = $$('[role="tab"]', menu);
     var panneaux = $$('[role="tabpanel"]', menu);
-    var barre = $('.menu-tabs', menu);
-    var barreWrap = $('.menu-tabs-wrap', menu);
+    var barre = $('.onglets', menu);
+    var barreWrap = $('.onglets-barre', menu);
 
     var activer = function (onglet, opts) {
       opts = opts || {};
@@ -160,20 +292,19 @@
       panneaux.forEach(function (p) { p.hidden = p.id !== onglet.getAttribute('aria-controls'); });
       if (opts.focus) onglet.focus({ preventScroll: true });
 
-      // Garde l'onglet visible dans la barre (mobile)
-      var gauche = onglet.offsetLeft - barre.offsetLeft;
-      var cible = gauche - (barre.clientWidth - onglet.offsetWidth) / 2;
+      var cible = onglet.offsetLeft - barre.offsetLeft - (barre.clientWidth - onglet.offsetWidth) / 2;
       barre.scrollTo({ left: Math.max(0, cible), behavior: reduceMotion ? 'auto' : 'smooth' });
 
       // Si la barre est collée en haut, on remonte au début du panneau
       if (opts.recentrer) {
         var headerH = header ? header.offsetHeight : 0;
-        var haut = barreWrap.getBoundingClientRect().top;
-        if (haut <= headerH + 1) {
-          var y = menu.getBoundingClientRect().top + window.scrollY - headerH;
+        if (barreWrap.getBoundingClientRect().top <= headerH + 1) {
+          var y = barreWrap.parentNode.getBoundingClientRect().top + window.scrollY - headerH;
           window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
         }
       }
+      // Le canvas du plat signature peut devenir visible : on le redessine à sa taille.
+      $$('canvas[data-carreaux]', menu).forEach(function (c) { dessinerCarreaux(c); });
     };
 
     onglets.forEach(function (o, i) {
@@ -190,38 +321,31 @@
     activer(onglets[0]);
   }
 
-  /* ---------- Carte Google Maps chargée au clic (RGPD) ---------- */
-  var boutonCarte = $('[data-map-load]');
-  if (boutonCarte) {
-    boutonCarte.addEventListener('click', function () {
-      var conteneur = $('[data-map]');
+  /* ---------- Plan Google Maps, chargé seulement au clic (RGPD) ---------- */
+  var boutonPlan = $('[data-plan-charger]');
+  if (boutonPlan) {
+    boutonPlan.addEventListener('click', function () {
+      var plan = $('[data-plan]');
       var iframe = document.createElement('iframe');
       iframe.src = 'https://www.google.com/maps?q=' + encodeURIComponent(ADRESSE_CARTE) + '&z=16&output=embed';
       iframe.title = 'Plan d’accès : ' + ADRESSE_CARTE;
       iframe.loading = 'lazy';
       iframe.referrerPolicy = 'no-referrer-when-downgrade';
-      iframe.setAttribute('allowfullscreen', '');
-      var placeholder = $('[data-map-placeholder]', conteneur);
-      if (placeholder) placeholder.remove();
-      conteneur.appendChild(iframe);
+      $$('canvas, [data-plan-cta]', plan).forEach(function (el) { el.remove(); });
+      plan.appendChild(iframe);
     });
   }
 
   /* ---------- Barre d'action mobile ---------- */
-  var barreMobile = $('[data-mobile-bar]');
+  var barreMobile = $('[data-barre-mobile]');
   var hero = $('[data-hero]');
   var reservation = $('#reserver');
   if (barreMobile && hero && 'IntersectionObserver' in window) {
-    var heroVisible = true;
-    var resaVisible = false;
+    var heroVisible = true, resaVisible = false;
     var majBarre = function () { barreMobile.classList.toggle('is-visible', !heroVisible && !resaVisible); };
-    new IntersectionObserver(function (entries) {
-      heroVisible = entries[0].isIntersecting; majBarre();
-    }, { rootMargin: '-30% 0px 0px 0px' }).observe(hero);
+    new IntersectionObserver(function (e) { heroVisible = e[0].isIntersecting; majBarre(); }, { rootMargin: '-30% 0px 0px 0px' }).observe(hero);
     if (reservation) {
-      new IntersectionObserver(function (entries) {
-        resaVisible = entries[0].isIntersecting; majBarre();
-      }, { threshold: 0.25 }).observe(reservation);
+      new IntersectionObserver(function (e) { resaVisible = e[0].isIntersecting; majBarre(); }, { threshold: 0.25 }).observe(reservation);
     }
   }
 
@@ -240,27 +364,26 @@
   var MARGE_MINUTES = 45; // délai minimum entre la demande et l'heure réservée
 
   function isoDepuisDate(d) {
-    var m = String(d.getMonth() + 1).padStart(2, '0');
-    var j = String(d.getDate()).padStart(2, '0');
-    return d.getFullYear() + '-' + m + '-' + j;
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
   function dateDepuisIso(iso) {
     var p = iso.split('-');
     return new Date(+p[0], +p[1] - 1, +p[2]);
   }
 
-  var now = maintenantBruxelles();
-  champDate.min = now.iso;
-  var max = new Date(now.date); max.setDate(max.getDate() + 90);
+  var maintenant = maintenantBruxelles();
+  champDate.min = maintenant.iso;
+  var max = new Date(maintenant.date);
+  max.setDate(max.getDate() + 90);
   champDate.max = isoDepuisDate(max);
 
   function marquer(champ, enErreur) {
-    var field = champ.closest('.field');
-    if (field) field.classList.toggle('has-error', enErreur);
+    var bloc = champ.closest('.champ');
+    if (bloc) bloc.classList.toggle('has-error', enErreur);
     champ.setAttribute('aria-invalid', String(enErreur));
-    var msg = form.querySelector('[data-error-for="' + (champ.id || champ.name) + '"]');
+    var msg = form.querySelector('[data-error-for="' + champ.id + '"]');
     if (msg) {
-      msg.id = msg.id || 'err-' + (champ.id || champ.name);
+      msg.id = msg.id || 'err-' + champ.id;
       if (enErreur) champ.setAttribute('aria-describedby', msg.id);
       else champ.removeAttribute('aria-describedby');
     }
@@ -268,12 +391,11 @@
 
   function majCreneaux() {
     var n = maintenantBruxelles();
-    var estAujourdhui = champDate.value === n.iso;
+    var aujourdhui = champDate.value === n.iso;
     $$('option', champHeure).forEach(function (opt) {
       if (!opt.value) return;
       var hm = opt.value.split(':');
-      var minutes = +hm[0] * 60 + +hm[1];
-      opt.disabled = estAujourdhui && minutes < n.minutes + MARGE_MINUTES;
+      opt.disabled = aujourdhui && +hm[0] * 60 + +hm[1] < n.minutes + MARGE_MINUTES;
     });
     if (champHeure.selectedOptions[0] && champHeure.selectedOptions[0].disabled) champHeure.value = '';
   }
@@ -282,6 +404,16 @@
     if (!champDate.value) return false;
     if (champDate.value < champDate.min || champDate.value > champDate.max) return false;
     return HORAIRES[dateDepuisIso(champDate.value).getDay()] !== null;
+  }
+
+  function champValide(champ) {
+    if (champ === champDate) return dateValide();
+    if (champ.type === 'checkbox') return !champ.required || champ.checked;
+    if (champ.required && !champ.value.trim()) return false;
+    if (champ.type === 'tel') return /^[0-9 +().\-/]{8,}$/.test(champ.value.trim());
+    if (champ.type === 'email' && champ.value.trim()) return champ.checkValidity();
+    if (champ.tagName === 'SELECT' && champ.required) return !!champ.value && !(champ.selectedOptions[0] || {}).disabled;
+    return true;
   }
 
   champDate.addEventListener('change', function () {
@@ -294,22 +426,12 @@
   $$('input, select, textarea', form).forEach(function (champ) {
     var evt = champ.type === 'checkbox' || champ.tagName === 'SELECT' ? 'change' : 'input';
     champ.addEventListener(evt, function () {
-      if (champ.closest('.field.has-error')) marquer(champ, !champValide(champ));
+      if (champ.closest('.champ.has-error')) marquer(champ, !champValide(champ));
     });
   });
 
-  function champValide(champ) {
-    if (champ === champDate) return dateValide();
-    if (champ.type === 'checkbox') return !champ.required || champ.checked;
-    if (champ.required && !champ.value.trim()) return false;
-    if (champ.type === 'tel') return /^[0-9 +().\-/]{8,}$/.test(champ.value.trim());
-    if (champ.type === 'email' && champ.value.trim()) return champ.checkValidity();
-    if (champ.tagName === 'SELECT' && champ.required) return !!champ.value && !(champ.selectedOptions[0] || {}).disabled;
-    return true;
-  }
-
   function valider() {
-    var champs = [$('#f-nom', form), $('#f-tel', form), $('#f-email', form), champDate, champHeure, champPersonnes, form.elements.consentement];
+    var champs = [$('#f-nom', form), $('#f-tel', form), $('#f-email', form), champDate, champHeure, champPersonnes, $('#f-consentement', form)];
     var premier = null;
     champs.forEach(function (champ) {
       var ok = champValide(champ);
@@ -326,10 +448,11 @@
     var pers = n === '10+' ? 'plus de 10 personnes' : n + (n === '1' ? ' personne' : ' personnes');
     var dateLongue = new Intl.DateTimeFormat('fr-BE', { weekday: 'long', day: 'numeric', month: 'long' })
       .format(dateDepuisIso(donnees.get('date')));
-    var heure = donnees.get('heure').replace(':', ' h ').replace(/ h 00$/, ' h');
-    return (prenom ? 'Merci ' + prenom + ' ! ' : '') +
+    var hm = donnees.get('heure').split(':');
+    var heure = +hm[0] + ' h' + (hm[1] !== '00' ? ' ' + hm[1] : '');
+    return (prenom ? 'Merci ' + prenom + '. ' : '') +
       'Votre demande pour ' + pers + ', le ' + dateLongue + ' à ' + heure +
-      ', est bien arrivée. Nous vous rappelons très vite pour confirmer votre table.';
+      ', est bien arrivée. Nous vous rappelons pour confirmer votre table.';
   }
 
   form.addEventListener('submit', function (e) {
@@ -357,8 +480,8 @@
         succes.focus();
       })
       .catch(function () {
-        statut.innerHTML = 'Oups, l’envoi n’a pas fonctionné. Appelez-nous au <a href="' + TEL_LIEN + '">' +
-          TEL_AFFICHE.replace(/ /g, ' ') + '</a>, on note votre table tout de suite.';
+        statut.innerHTML = 'La demande n’est pas partie. Appelez-nous au <a href="' + TEL_LIEN + '">' +
+          TEL_AFFICHE + '</a> et on note votre table directement.';
         statut.hidden = false;
       })
       .then(function () {

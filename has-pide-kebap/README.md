@@ -18,6 +18,23 @@ HTML/CSS/JS statique, sans framework ni étape de build : le dossier se met en l
 
 Les sections 4 à 8 sont une proposition, à valider avec le restaurant.
 
+## Direction artistique
+
+« Lokanta de nuit » : la façade noire de la chaussée de Haecht, éclairée par le turquoise
+de l'enseigne, s'ouvre sur des pans de porcelaine à l'encre cobalt (la carte et la réservation),
+comme les assiettes et carreaux d'İznik.
+
+- **Couleurs** : noir façade, turquoise de faïence, bleu cobalt, porcelaine, encre cobalt
+  (jetons en haut de `assets/css/style.css`).
+- **Typographie** : Gloock pour les titres et les noms de plats, Sofia Sans pour le texte,
+  Sofia Sans Extra Condensed pour les prix et étiquettes, à la manière des enseignes de lokanta.
+- **Signature** : le motif étoile-et-croix des carreaux d'İznik, dessiné en canvas
+  (`main.js`, fonction `dessinerCarreaux`) sur le mur de l'accueil, le plat signature,
+  le plan et la frise du pied de page. La photo de la devanture est cadrée dans un arc brisé ottoman.
+- **Détails propres au lieu** : prononciation des noms turcs sous chaque plat, pancarte
+  de porte « AÇIK / KAPALI » calculée à l'heure de Bruxelles, adresse bilingue
+  (Haachtsesteenweg), « Afiyet olsun » en pied de page.
+
 ## Fichiers
 
 ```
@@ -27,7 +44,7 @@ merci.html              page de confirmation (formulaire envoyé sans JavaScript
 404.html                page d'erreur
 assets/css/style.css    styles (jetons de couleur en haut du fichier)
 assets/js/main.js       onglets, statut ouvert/fermé, formulaire, carte, menu mobile
-assets/fonts/           Fraunces + Manrope, auto-hébergées (licence OFL)
+assets/fonts/           Gloock + Sofia Sans, auto-hébergées (licence OFL)
 assets/img/             devanture, favicon, icônes, image de partage (og-image.jpg)
 netlify.toml            en-têtes de sécurité et de cache pour Netlify
 robots.txt, sitemap.xml, site.webmanifest
