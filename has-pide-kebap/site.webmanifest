@@ -1,0 +1,12 @@
+{
+  "name": "Has Pide Kebap",
+  "short_name": "Has Pide",
+  "lang": "fr-BE",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#F6F6F4",
+  "theme_color": "#0B0C0F",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
