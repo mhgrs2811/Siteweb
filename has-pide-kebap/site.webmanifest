@@ -1,0 +1,14 @@
+{
+  "name": "Has Pide Kebap",
+  "short_name": "Has",
+  "description": "Pides, kebabs et grillades halal — Chaussée de Haecht 115, Schaerbeek.",
+  "lang": "fr-BE",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08090a",
+  "theme_color": "#08090a",
+  "icons": [
+    { "src": "/assets/img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/img/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
