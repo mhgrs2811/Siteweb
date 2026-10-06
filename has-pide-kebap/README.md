@@ -123,7 +123,7 @@ Conseil de prise de vue : lumière naturelle ou flash direct, fond sombre, plans
 - [ ] Fiche Google : remplacer le lien « Site Web » (`haskebab.be`) par `https://haspidekebap.be`
 - [ ] Données personnelles : durée de conservation (`mentions-legales.html#donnees`)
 - [ ] Réseaux sociaux : aucun pour l’instant. S’ils en ouvrent, ajouter une colonne « Suivre » au pied de page des quatre pages
-- [ ] Mentions légales : dénomination, BCE, TVA, agence
+- [ ] Mentions légales : nom de l'agence (société, BCE et TVA renseignés)
 - [ ] Textes de présentation (« La maison »)
 
 ## Choix techniques
