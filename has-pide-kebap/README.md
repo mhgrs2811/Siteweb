@@ -53,7 +53,7 @@ Pour `npm run dev`, copier `.dev.vars.example` en `.dev.vars` et le remplir. Ce 
 ### Adresse du propriétaire : jamais visible
 
 - Elle est stockée dans la variable secrète `RESTAURANT_EMAIL` de Cloudflare, jamais dans le code du site.
-- L'accusé de réception part de l'adresse d'envoi (`SENDER_EMAIL`, par exemple `reservations@domaine`) et ne contient pas l'adresse du propriétaire.
+- L'accusé de réception part de l'adresse d'envoi (`SENDER_EMAIL` : `reservations@haspidekebap.be`) et ne contient pas l'adresse du propriétaire.
 - L'e-mail reçu par le restaurant n'a pas de « répondre à » vers le client : une réponse depuis la boîte du propriétaire dévoilerait son adresse. Pour écrire au client, utiliser l'adresse générique du restaurant.
 
 ### Filtrage des demandes inutiles
@@ -81,7 +81,7 @@ Les règles de créneaux existent côté site (`HOURS` et `RESERVATION` dans `pu
    | --- | --- | --- |
    | `BREVO_API_KEY` | secret | `xkeysib-…` |
    | `RESTAURANT_EMAIL` | secret | adresse du propriétaire |
-   | `SENDER_EMAIL` | texte | `reservations@domaine-du-restaurant.be` |
+   | `SENDER_EMAIL` | texte | `reservations@haspidekebap.be` |
    | `SENDER_NAME` | texte, facultatif | `Has Pide Kebap` |
    | `TURNSTILE_SECRET` | secret, facultatif | clé secrète Turnstile |
 
@@ -118,12 +118,13 @@ Conseil de prise de vue : lumière naturelle ou flash direct, fond sombre, plans
 - [ ] Livraison : à confirmer avec le restaurant. Si oui, la remettre dans le texte du hero, la meta description et la liste des services (`index.html`), ainsi que dans l’introduction de `carte.html`
 - [ ] Réservation : comptes Brevo et Cloudflare, domaine authentifié, variables renseignées, réservation test
 - [ ] Réservation : nombre maximal de couverts (12), délai minimum, dernier créneau
-- [ ] Adresse de contact générique (ex. `contact@domaine`) pour les mentions légales, obligatoire en Belgique, et pour écrire aux clients
+- [ ] Nom de domaine `haspidekebap.be` : à acheter au nom du restaurant (l'ancien `haskebab.be`, créé par un inconnu, n'est pas récupérable simplement)
+- [ ] Créer `contact@haspidekebap.be` (affichée dans les mentions légales, obligatoire en Belgique) et `reservations@haspidekebap.be` (expéditeur des e-mails), redirigées vers la boîte du propriétaire
+- [ ] Fiche Google : remplacer le lien « Site Web » (`haskebab.be`) par `https://haspidekebap.be`
 - [ ] Données personnelles : durée de conservation (`mentions-legales.html#donnees`)
 - [ ] Réseaux sociaux : aucun pour l’instant. S’ils en ouvrent, ajouter une colonne « Suivre » au pied de page des quatre pages
 - [ ] Mentions légales : dénomination, BCE, TVA, agence
 - [ ] Textes de présentation (« La maison »)
-- [ ] Domaine définitif : ajouter `<link rel="canonical">`, `og:url`, un `sitemap.xml` et des URL absolues pour `og:image`
 
 ## Choix techniques
 

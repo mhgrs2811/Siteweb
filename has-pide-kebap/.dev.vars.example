@@ -1,5 +1,5 @@
 # Copier en .dev.vars pour tester en local (npm run dev). Ne jamais publier .dev.vars.
 BREVO_API_KEY=xkeysib-...
 RESTAURANT_EMAIL=adresse-du-proprietaire@exemple.be
-SENDER_EMAIL=reservations@domaine-du-restaurant.be
+SENDER_EMAIL=reservations@haspidekebap.be
 # TURNSTILE_SECRET=0x...
