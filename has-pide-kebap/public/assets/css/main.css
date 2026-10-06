@@ -380,7 +380,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px; margin-top: 64px; font-size: 13px; color: var(--mist); }
 .footer-bottom a { text-decoration: none; }
 .footer-bottom a:hover { color: var(--porcelain); }
-@media (min-width: 760px) { .footer-cols { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 760px) { .footer-cols { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* ==========================================================================
    Barre d'actions mobile

@@ -391,7 +391,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing:
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px; margin-top: 64px; font-size: 13px; color: var(--mist); }
 .footer-bottom a { text-decoration: none; }
 .footer-bottom a:hover { color: var(--porcelain); }
-@media (min-width: 760px) { .footer-cols { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 760px) { .footer-cols { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* ==========================================================================
    Barre d'actions mobile
@@ -698,13 +698,6 @@ select.input { appearance: none; padding-right: 44px; background: #FFFFFF url("d
           <li><a href="reserver.html">Réserver une table</a></li>
         </ul>
       </div>
-      <div>
-        <h2>Suivre</h2>
-        <ul>
-          <li><a href="#" data-pending>Instagram</a></li>
-          <li><a href="#" data-pending>Facebook</a></li>
-        </ul>
-      </div>
     </div>
     <div class="footer-bottom">
       <span>© <span data-year>2026</span> Has Pide Kebap</span>
@@ -843,11 +836,6 @@ select.input { appearance: none; padding-right: 44px; background: #FFFFFF url("d
     panel.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) setMenu(false); });
   }
-
-  /* Liens en attente (réseaux sociaux) : ne pas remonter en haut de page */
-  document.addEventListener("click", function (e) {
-    if (e.target.closest("[data-pending]")) e.preventDefault();
-  });
 
   /* ------------------------------------------------------------------
      Carte : catégorie active dans la navigation

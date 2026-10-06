@@ -120,7 +120,7 @@ Conseil de prise de vue : lumière naturelle ou flash direct, fond sombre, plans
 - [ ] Réservation : nombre maximal de couverts (12), délai minimum, dernier créneau
 - [ ] Adresse de contact générique (ex. `contact@domaine`) pour les mentions légales, obligatoire en Belgique, et pour écrire aux clients
 - [ ] Données personnelles : durée de conservation (`mentions-legales.html#donnees`)
-- [ ] Liens Instagram / Facebook (`data-pending` dans le pied de page)
+- [ ] Réseaux sociaux : aucun pour l’instant. S’ils en ouvrent, ajouter une colonne « Suivre » au pied de page des quatre pages
 - [ ] Mentions légales : dénomination, BCE, TVA, agence
 - [ ] Textes de présentation (« La maison »)
 - [ ] Domaine définitif : ajouter `<link rel="canonical">`, `og:url`, un `sitemap.xml` et des URL absolues pour `og:image`

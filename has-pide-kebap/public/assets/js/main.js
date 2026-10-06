@@ -121,11 +121,6 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) setMenu(false); });
   }
 
-  /* Liens en attente (réseaux sociaux) : ne pas remonter en haut de page */
-  document.addEventListener("click", function (e) {
-    if (e.target.closest("[data-pending]")) e.preventDefault();
-  });
-
   /* ------------------------------------------------------------------
      Carte : catégorie active dans la navigation
      ------------------------------------------------------------------ */
