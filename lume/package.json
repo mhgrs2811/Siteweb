@@ -20,6 +20,7 @@
     "doctor": "expo-doctor",
     "setup:web": "setup-skia-web public",
     "assets:generate": "node scripts/generate-assets.mjs",
+    "preview:web": "node scripts/preview-web.mjs",
     "postinstall": "setup-skia-web public"
   },
   "dependencies": {
