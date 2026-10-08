@@ -28,6 +28,14 @@ export interface ToneColors {
   soft: string;
 }
 
+/** Tints of the generative "aura" visual: blurred discs of warm light on the page background. */
+export interface AuraColors {
+  champagne: string;
+  terracotta: string;
+  sage: string;
+  highlight: string;
+}
+
 export interface ThemeColors {
   background: string;
   surface: string;
@@ -46,6 +54,7 @@ export interface ThemeColors {
   champagne: ToneColors;
   success: ToneColors;
   warning: ToneColors;
+  aura: AuraColors;
   /** Scrim behind sheets and dialogs. */
   overlay: string;
   skeleton: { base: string; highlight: string };
@@ -83,6 +92,12 @@ export const lightColors: ThemeColors = {
     text: '#8C5A1C',
     soft: '#F6EBDA',
   },
+  aura: {
+    champagne: '#E9D7BC',
+    terracotta: '#E8BBA3',
+    sage: '#D6DFD1',
+    highlight: '#FFFFFF',
+  },
   overlay: 'rgba(28, 26, 23, 0.40)',
   skeleton: { base: '#EFE9E1', highlight: '#F7F3EE' },
   shadow: '#1C1A17',
@@ -118,6 +133,12 @@ export const darkColors: ThemeColors = {
     base: '#D89C52',
     text: '#E3AE6A',
     soft: '#2A2117',
+  },
+  aura: {
+    champagne: '#3F3425',
+    terracotta: '#4F2E22',
+    sage: '#22302A',
+    highlight: '#2C2824',
   },
   overlay: 'rgba(0, 0, 0, 0.55)',
   skeleton: { base: '#26231F', highlight: '#302C27' },

@@ -1,5 +1,5 @@
 export { colorsByScheme, darkColors, lightColors } from './colors';
-export type { AccentColors, ColorScheme, ThemeColors, ToneColors } from './colors';
+export type { AccentColors, AuraColors, ColorScheme, ThemeColors, ToneColors } from './colors';
 export {
   AA_LARGE_TEXT,
   AA_NORMAL_TEXT,
