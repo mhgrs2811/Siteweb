@@ -1,0 +1,189 @@
+{
+  "common": {
+    "appName": "Lumé",
+    "tagline": "Your skin, read with precision.",
+    "continue": "Continue",
+    "back": "Back",
+    "close": "Close",
+    "skip": "Skip",
+    "cancel": "Cancel",
+    "retry": "Try again",
+    "loading": "Loading",
+    "ok": "OK",
+    "outOf100": "out of 100",
+    "disclaimer": "A cosmetic estimate of how your skin looks, not a medical diagnosis."
+  },
+  "home": {
+    "phase": "Phase 0 · Foundations",
+    "title": "A skin coach, calm and precise.",
+    "body": "The foundations are in place: palette, typography, components and motion. The onboarding screens arrive in Phase 1.",
+    "openDesignSystem": "Open the design system",
+    "appearance": "Appearance",
+    "language": "Language"
+  },
+  "theme": {
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "language": {
+    "fr": "Français",
+    "en": "English"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This screen does not exist, or not anymore.",
+    "cta": "Back to home"
+  },
+  "a11y": {
+    "themeSelector": "Choose the appearance",
+    "languageSelector": "Choose the language",
+    "scoreRing": "Skin score {{score}} out of 100",
+    "loadingButton": "Loading",
+    "selected": "Selected",
+    "notSelected": "Not selected",
+    "openSheet": "Open the detail sheet"
+  },
+  "designSystem": {
+    "title": "Design system",
+    "subtitle": "Phase 0 tokens and components, to review in light and dark mode.",
+    "sections": {
+      "colors": "Colours",
+      "typography": "Typography",
+      "spacing": "Spacing and radii",
+      "icons": "Icons",
+      "buttons": "Buttons",
+      "selection": "Selection",
+      "controls": "Controls",
+      "surfaces": "Surfaces and lists",
+      "loading": "Loading",
+      "signature": "Score ring",
+      "motion": "Motion",
+      "haptics": "Haptics",
+      "sheet": "Native sheet"
+    },
+    "colors": {
+      "background": "Background",
+      "surface": "Surface",
+      "surfaceSunken": "Sunken surface",
+      "ink": "Ink",
+      "textSecondary": "Secondary text",
+      "line": "Line",
+      "accentBase": "Terracotta",
+      "accentStrong": "Strong terracotta",
+      "accentText": "Accent text",
+      "accentSoft": "Soft accent",
+      "champagne": "Champagne",
+      "success": "Sage",
+      "warning": "Amber",
+      "sample": "Aa",
+      "contrastTitle": "Measured contrast",
+      "contrastHint": "Running text: 4.5 minimum. Large text and components: 3 minimum.",
+      "levelAa": "AA",
+      "levelAaLarge": "Large text",
+      "levelFail": "Decorative",
+      "pairs": {
+        "inkOnBackground": "Ink on background",
+        "secondaryOnBackground": "Secondary on background",
+        "accentTextOnBackground": "Accent text on background",
+        "labelOnAccentStrong": "Label on button",
+        "accentBaseOnBackground": "Terracotta on background",
+        "successTextOnBackground": "Sage text on background",
+        "warningTextOnBackground": "Amber text on background",
+        "champagneTextOnBackground": "Champagne text on background"
+      }
+    },
+    "typography": {
+      "display": "Your skin, read with precision.",
+      "h1": "Good evening, Léa.",
+      "h2": "Well balanced",
+      "h3": "Evening routine",
+      "body": "A cosmetic estimate of how your skin looks, never a diagnosis.",
+      "bodySmall": "Fragrance-free cleansing gel, morning and evening, on damp skin.",
+      "caption": "Updated 2 days ago",
+      "overline": "Detailed indicators",
+      "scoreLabel": "Score numerals, tabular"
+    },
+    "spacing": {
+      "hint": "4 pt base. Side margins 20 pt, 24 pt on large screens.",
+      "radiusXs": "Chip · 4",
+      "radiusMd": "Card · 12",
+      "radiusLg": "Sheet · 24",
+      "radiusPill": "Pill"
+    },
+    "icons": {
+      "hint": "Phosphor, light weight, two sizes: 20 and 24 pt."
+    },
+    "buttons": {
+      "primary": "Continue",
+      "secondary": "Retake the photo",
+      "ghost": "Skip this step",
+      "disabled": "Unavailable",
+      "loading": "Loading"
+    },
+    "selection": {
+      "hint": "Up to three goals.",
+      "goals": {
+        "glow": "Glow",
+        "blemishes": "Blemishes",
+        "texture": "Texture",
+        "spots": "Dark spots",
+        "wrinkles": "Wrinkles",
+        "pores": "Pores",
+        "redness": "Redness",
+        "hydration": "Hydration"
+      }
+    },
+    "controls": {
+      "eveningReminder": "Evening reminder",
+      "keepPhotos": "Keep my photos",
+      "morning": "Morning",
+      "evening": "Evening",
+      "progress": "Step {{current}} of {{total}}",
+      "firstNameLabel": "First name",
+      "firstNamePlaceholder": "Your first name",
+      "ageLabel": "Age",
+      "ageError": "Lumé is for ages 16 and up."
+    },
+    "surfaces": {
+      "nextScan_one": "Next scan in {{count}} day",
+      "nextScan_other": "Next scan in {{count}} days",
+      "nextScanBody": "Same light, no make-up, face centred.",
+      "scanRowTitle": "Scan from 7 October",
+      "scanRowSubtitle": "Score 72 · natural light",
+      "productRowTitle": "Niacinamide 10% serum",
+      "productRowSubtitle": "Compatible with your profile",
+      "verdictCompatible": "Compatible",
+      "verdictCaution": "Use with care",
+      "verdictUnsuitable": "Not a good fit"
+    },
+    "loading": {
+      "hint": "Soft shimmer skeletons, never a spinner."
+    },
+    "signature": {
+      "label": "Skin score",
+      "replay": "Replay",
+      "hint": "Drawn in Skia: the ring fills with a spring and the number counts along."
+    },
+    "motion": {
+      "gentle": "Gentle",
+      "snappy": "Snappy",
+      "bouncy": "Bouncy",
+      "hint": "Tap a spring to see it."
+    },
+    "haptics": {
+      "selection": "Selection",
+      "confirm": "Confirm",
+      "success": "Success",
+      "warning": "Warning",
+      "unavailable": "Haptic feedback is not available on the web.",
+      "enabled": "Haptic feedback"
+    },
+    "sheet": {
+      "open": "Open a sheet",
+      "title": "Apparent hydration",
+      "body": "Native sheets hold the details: a short explanation, a tip, ingredients. They close with a gesture.",
+      "tip": "Tip: apply your moisturiser while the skin is still slightly damp."
+    }
+  }
+}

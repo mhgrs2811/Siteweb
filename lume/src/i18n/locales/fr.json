@@ -1,0 +1,189 @@
+{
+  "common": {
+    "appName": "Lumé",
+    "tagline": "Votre peau, lue avec précision.",
+    "continue": "Continuer",
+    "back": "Retour",
+    "close": "Fermer",
+    "skip": "Passer",
+    "cancel": "Annuler",
+    "retry": "Réessayer",
+    "loading": "Chargement",
+    "ok": "OK",
+    "outOf100": "sur 100",
+    "disclaimer": "Estimation cosmétique de l'apparence de la peau, pas un diagnostic médical."
+  },
+  "home": {
+    "phase": "Phase 0 · Fondations",
+    "title": "Un coach de peau, calme et précis.",
+    "body": "Les fondations sont posées : palette, typographie, composants et mouvement. Les écrans de l'onboarding arrivent en Phase 1.",
+    "openDesignSystem": "Ouvrir le design system",
+    "appearance": "Apparence",
+    "language": "Langue"
+  },
+  "theme": {
+    "system": "Système",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "language": {
+    "fr": "Français",
+    "en": "English"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "body": "Cet écran n'existe pas, ou plus.",
+    "cta": "Revenir à l'accueil"
+  },
+  "a11y": {
+    "themeSelector": "Choisir l'apparence",
+    "languageSelector": "Choisir la langue",
+    "scoreRing": "Score de peau {{score}} sur 100",
+    "loadingButton": "Chargement en cours",
+    "selected": "Sélectionné",
+    "notSelected": "Non sélectionné",
+    "openSheet": "Ouvrir la feuille de détail"
+  },
+  "designSystem": {
+    "title": "Design system",
+    "subtitle": "Tokens et composants de la Phase 0, à valider en clair et en sombre.",
+    "sections": {
+      "colors": "Couleurs",
+      "typography": "Typographie",
+      "spacing": "Espacements et rayons",
+      "icons": "Icônes",
+      "buttons": "Boutons",
+      "selection": "Sélection",
+      "controls": "Contrôles",
+      "surfaces": "Surfaces et listes",
+      "loading": "Chargement",
+      "signature": "Anneau de score",
+      "motion": "Mouvement",
+      "haptics": "Haptique",
+      "sheet": "Feuille native"
+    },
+    "colors": {
+      "background": "Fond",
+      "surface": "Surface",
+      "surfaceSunken": "Surface creuse",
+      "ink": "Encre",
+      "textSecondary": "Texte secondaire",
+      "line": "Ligne",
+      "accentBase": "Terre cuite",
+      "accentStrong": "Terre cuite forte",
+      "accentText": "Accent texte",
+      "accentSoft": "Accent doux",
+      "champagne": "Champagne",
+      "success": "Sauge",
+      "warning": "Ambre",
+      "sample": "Aa",
+      "contrastTitle": "Contrastes mesurés",
+      "contrastHint": "Texte courant : 4,5 minimum. Grand texte et composants : 3 minimum.",
+      "levelAa": "AA",
+      "levelAaLarge": "Grand texte",
+      "levelFail": "Décor",
+      "pairs": {
+        "inkOnBackground": "Encre sur fond",
+        "secondaryOnBackground": "Secondaire sur fond",
+        "accentTextOnBackground": "Accent texte sur fond",
+        "labelOnAccentStrong": "Libellé sur bouton",
+        "accentBaseOnBackground": "Terre cuite sur fond",
+        "successTextOnBackground": "Sauge texte sur fond",
+        "warningTextOnBackground": "Ambre texte sur fond",
+        "champagneTextOnBackground": "Champagne texte sur fond"
+      }
+    },
+    "typography": {
+      "display": "Votre peau, lue avec précision.",
+      "h1": "Bonsoir, Léa.",
+      "h2": "Bel équilibre",
+      "h3": "Routine du soir",
+      "body": "Une estimation cosmétique de l'apparence de votre peau, jamais un diagnostic.",
+      "bodySmall": "Gel nettoyant sans parfum, matin et soir, sur peau humide.",
+      "caption": "Mis à jour il y a 2 jours",
+      "overline": "Indicateurs détaillés",
+      "scoreLabel": "Chiffres de score, tabulaires"
+    },
+    "spacing": {
+      "hint": "Base 4 pt. Marges latérales 20 pt, 24 pt sur grand écran.",
+      "radiusXs": "Puce · 4",
+      "radiusMd": "Carte · 12",
+      "radiusLg": "Feuille · 24",
+      "radiusPill": "Pilule"
+    },
+    "icons": {
+      "hint": "Phosphor, graisse light, deux tailles : 20 et 24 pt."
+    },
+    "buttons": {
+      "primary": "Continuer",
+      "secondary": "Reprendre la photo",
+      "ghost": "Passer cette étape",
+      "disabled": "Indisponible",
+      "loading": "Chargement"
+    },
+    "selection": {
+      "hint": "Jusqu'à trois objectifs.",
+      "goals": {
+        "glow": "Éclat",
+        "blemishes": "Imperfections",
+        "texture": "Texture",
+        "spots": "Taches",
+        "wrinkles": "Rides",
+        "pores": "Pores",
+        "redness": "Rougeurs",
+        "hydration": "Hydratation"
+      }
+    },
+    "controls": {
+      "eveningReminder": "Rappel du soir",
+      "keepPhotos": "Conserver mes photos",
+      "morning": "Matin",
+      "evening": "Soir",
+      "progress": "Étape {{current}} sur {{total}}",
+      "firstNameLabel": "Prénom",
+      "firstNamePlaceholder": "Votre prénom",
+      "ageLabel": "Âge",
+      "ageError": "Lumé est réservée aux 16 ans et plus."
+    },
+    "surfaces": {
+      "nextScan_one": "Prochain scan dans {{count}} jour",
+      "nextScan_other": "Prochain scan dans {{count}} jours",
+      "nextScanBody": "Même lumière, sans maquillage, visage centré.",
+      "scanRowTitle": "Scan du 7 octobre",
+      "scanRowSubtitle": "Score 72 · lumière naturelle",
+      "productRowTitle": "Sérum niacinamide 10 %",
+      "productRowSubtitle": "Compatible avec votre profil",
+      "verdictCompatible": "Compatible",
+      "verdictCaution": "Avec précaution",
+      "verdictUnsuitable": "Peu adapté"
+    },
+    "loading": {
+      "hint": "Squelettes à shimmer doux, jamais de spinner."
+    },
+    "signature": {
+      "label": "Score de peau",
+      "replay": "Rejouer",
+      "hint": "Tracé en Skia : l'anneau se remplit au ressort et le chiffre compte en même temps."
+    },
+    "motion": {
+      "gentle": "Doux",
+      "snappy": "Vif",
+      "bouncy": "Rebond",
+      "hint": "Touchez un ressort pour le voir."
+    },
+    "haptics": {
+      "selection": "Sélection",
+      "confirm": "Confirmation",
+      "success": "Succès",
+      "warning": "Attention",
+      "unavailable": "Retour haptique indisponible sur le web.",
+      "enabled": "Retour haptique"
+    },
+    "sheet": {
+      "open": "Ouvrir une feuille",
+      "title": "Hydratation apparente",
+      "body": "Les feuilles natives accueillent les détails : explication courte, conseil, ingrédients. Elles se ferment d'un geste.",
+      "tip": "Conseil : appliquez votre hydratant sur peau encore légèrement humide."
+    }
+  }
+}
