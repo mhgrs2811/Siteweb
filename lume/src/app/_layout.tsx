@@ -1,12 +1,18 @@
 import {
+  Fraunces_300Light,
+  Fraunces_300Light_Italic,
   Fraunces_400Regular,
   Fraunces_400Regular_Italic,
   Fraunces_500Medium,
 } from '@expo-google-fonts/fraunces';
-import { Inter_400Regular, Inter_500Medium, Inter_600SemiBold } from '@expo-google-fonts/inter';
+import {
+  InstrumentSans_400Regular,
+  InstrumentSans_500Medium,
+  InstrumentSans_600SemiBold,
+} from '@expo-google-fonts/instrument-sans';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Stack, type NativeStackNavigationOptions } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import * as SystemUI from 'expo-system-ui';
@@ -32,12 +38,14 @@ SplashScreen.setOptions({ duration: 400, fade: true });
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
+    Fraunces_300Light,
+    Fraunces_300Light_Italic,
     Fraunces_400Regular,
     Fraunces_400Regular_Italic,
     Fraunces_500Medium,
-    Inter_400Regular,
-    Inter_500Medium,
-    Inter_600SemiBold,
+    InstrumentSans_400Regular,
+    InstrumentSans_500Medium,
+    InstrumentSans_600SemiBold,
   });
   const hasHydrated = usePreferences((state) => state.hasHydrated);
   const language = usePreferences((state) => state.language);
@@ -91,6 +99,15 @@ function RootNavigator() {
     });
   }, [theme.colors.background]);
 
+  /** Native form sheet that hugs its content, with the brand corner radius. */
+  const sheet: NativeStackNavigationOptions = {
+    presentation: 'formSheet',
+    sheetAllowedDetents: 'fitToContents',
+    sheetGrabberVisible: true,
+    sheetCornerRadius: theme.radii.lg,
+    contentStyle: { backgroundColor: theme.colors.surface },
+  };
+
   return (
     <>
       <StatusBar style={theme.isDark ? 'light' : 'dark'} />
@@ -102,6 +119,9 @@ function RootNavigator() {
       >
         <Stack.Screen name="index" />
         <Stack.Screen name="dev" />
+        <Stack.Screen name="settings/appearance" options={sheet} />
+        <Stack.Screen name="settings/language" options={sheet} />
+        <Stack.Screen name="next-step" options={sheet} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </>
