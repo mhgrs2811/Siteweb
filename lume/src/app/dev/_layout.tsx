@@ -19,17 +19,6 @@ export default function DevLayout() {
       }}
     >
       <Stack.Screen name="design-system" />
-      <Stack.Screen
-        name="sheet"
-        options={{
-          presentation: 'formSheet',
-          sheetAllowedDetents: [0.55, 0.92],
-          sheetInitialDetentIndex: 0,
-          sheetGrabberVisible: true,
-          sheetCornerRadius: theme.radii.lg,
-          contentStyle: { backgroundColor: theme.colors.surface },
-        }}
-      />
     </Stack>
   );
 }

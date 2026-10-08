@@ -1,31 +1,34 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { Wordmark } from '@/components/brand/Wordmark';
 import { ContrastRow } from '@/components/dev/ContrastRow';
 import { Section } from '@/components/dev/Section';
 import { SpringDemo } from '@/components/dev/SpringDemo';
 import { Swatch } from '@/components/dev/Swatch';
+import { Aura } from '@/components/signature/Aura';
 import { ScoreRing } from '@/components/signature/ScoreRing';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Chip } from '@/components/ui/Chip';
+import { Gauge } from '@/components/ui/Gauge';
+import { Headline } from '@/components/ui/Headline';
 import { Icon, ICON_NAMES, type IconName } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
 import { ListRow } from '@/components/ui/ListRow';
 import { ProgressBar } from '@/components/ui/ProgressBar';
-import { Screen } from '@/components/ui/Screen';
+import { Screen, useGutter } from '@/components/ui/Screen';
 import { SegmentedControl } from '@/components/ui/SegmentedControl';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { Surface } from '@/components/ui/Surface';
 import { Text } from '@/components/ui/Text';
 import { TextField } from '@/components/ui/TextField';
 import { Toggle } from '@/components/ui/Toggle';
+import { useHaptics } from '@/hooks/useHaptics';
 import { resolveLanguage, type Language } from '@/i18n';
 import { hapticsSupported, HAPTIC_INTENTS, type HapticIntent } from '@/lib/haptics';
-import { useHaptics } from '@/hooks/useHaptics';
 import { usePreferences, type ThemeMode } from '@/store/preferences';
 import { spacing, useTheme, type TypographyVariant } from '@/theme';
 
@@ -37,7 +40,7 @@ const GOALS: { key: GoalKey; icon: IconName }[] = [
   { key: 'blemishes', icon: 'target' },
   { key: 'texture', icon: 'waves' },
   { key: 'spots', icon: 'circlesThree' },
-  { key: 'wrinkles', icon: 'slidersHorizontal' },
+  { key: 'wrinkles', icon: 'waveSine' },
   { key: 'pores', icon: 'circlesThree' },
   { key: 'redness', icon: 'sunHorizon' },
   { key: 'hydration', icon: 'drop' },
@@ -45,11 +48,9 @@ const GOALS: { key: GoalKey; icon: IconName }[] = [
 
 const MAX_GOALS = 3;
 
-type TypeSampleKey = 'display' | 'h1' | 'h2' | 'h3' | 'body' | 'bodySmall' | 'caption' | 'overline';
+type TypeSampleKey = 'h2' | 'h3' | 'body' | 'bodySmall' | 'caption' | 'overline';
 
 const TYPE_SAMPLES: { variant: TypographyVariant; key: TypeSampleKey }[] = [
-  { variant: 'display', key: 'display' },
-  { variant: 'h1', key: 'h1' },
   { variant: 'h2', key: 'h2' },
   { variant: 'h3', key: 'h3' },
   { variant: 'body', key: 'body' },
@@ -68,6 +69,8 @@ export default function DesignSystemScreen() {
   const { colors } = theme;
   const router = useRouter();
   const haptic = useHaptics();
+  const gutter = useGutter();
+  const { width } = useWindowDimensions();
 
   const themeMode = usePreferences((state) => state.themeMode);
   const setThemeMode = usePreferences((state) => state.setThemeMode);
@@ -112,6 +115,7 @@ export default function DesignSystemScreen() {
 
   const parsedAge = Number.parseInt(age, 10);
   const ageError = age.length > 0 && Number.isFinite(parsedAge) && parsedAge < 16;
+  const auraWidth = width - gutter * 2;
 
   const swatches: { label: string; color: string }[] = [
     { label: t('designSystem.colors.background'), color: colors.background },
@@ -212,6 +216,17 @@ export default function DesignSystemScreen() {
         />
       </View>
 
+      <Section title={t('designSystem.sections.brand')} hint={t('designSystem.brand.hint')}>
+        <View style={{ borderRadius: theme.radii.lg, overflow: 'hidden' }}>
+          <Aura width={auraWidth} height={220} fade={false} />
+          <View style={[StyleSheet.absoluteFill, styles.auraOverlay]}>
+            <Wordmark size="lg" />
+          </View>
+        </View>
+        <Headline text={t('designSystem.typography.display')} />
+        <Headline text={t('designSystem.typography.h1')} variant="h1" />
+      </Section>
+
       <Section
         title={t('designSystem.sections.colors')}
         hint={t('designSystem.colors.contrastHint')}
@@ -232,7 +247,7 @@ export default function DesignSystemScreen() {
       <Section title={t('designSystem.sections.typography')}>
         {TYPE_SAMPLES.map((sample) => (
           <View key={sample.variant} style={styles.typeRow}>
-            <Text variant="caption" color="secondary" style={styles.typeLabel}>
+            <Text variant="caption" color="secondary">
               {sample.variant}
             </Text>
             <Text variant={sample.variant} style={styles.typeSample}>
@@ -241,7 +256,7 @@ export default function DesignSystemScreen() {
           </View>
         ))}
         <View style={styles.typeRow}>
-          <Text variant="caption" color="secondary" style={styles.typeLabel}>
+          <Text variant="caption" color="secondary">
             {t('designSystem.typography.scoreLabel')}
           </Text>
           <View style={styles.scoreNumerals}>
@@ -282,14 +297,15 @@ export default function DesignSystemScreen() {
           ).map(([key, label]) => (
             <View key={key} style={styles.radiusItem}>
               <View
-                style={{
-                  width: 64,
-                  height: 64,
-                  borderRadius: key === 'pill' ? 32 : theme.radii[key],
-                  backgroundColor: colors.surface,
-                  borderWidth: 1,
-                  borderColor: colors.lineStrong,
-                }}
+                style={[
+                  {
+                    width: 64,
+                    height: 64,
+                    borderRadius: key === 'pill' ? 32 : theme.radii[key],
+                    backgroundColor: colors.surface,
+                  },
+                  theme.shadows.soft,
+                ]}
               />
               <Text variant="caption" color="secondary">
                 {label}
@@ -351,7 +367,7 @@ export default function DesignSystemScreen() {
       </Section>
 
       <Section title={t('designSystem.sections.controls')}>
-        <Surface radius="md" padding={4} style={{ gap: theme.spacing[2] }}>
+        <Surface radius="lg" padding={4} style={{ gap: theme.spacing[2] }}>
           <Toggle
             label={t('designSystem.controls.eveningReminder')}
             value={reminder}
@@ -450,6 +466,16 @@ export default function DesignSystemScreen() {
             onPress={() => {}}
           />
         </Surface>
+        <Surface variant="elevated" radius="lg" padding={5}>
+          <View style={{ gap: theme.spacing[3] }}>
+            <Text variant="overline" color="secondary">
+              {t('designSystem.typography.overline')}
+            </Text>
+            <Gauge label={t('indicators.texture')} value={68} />
+            <Gauge label={t('indicators.glow')} value={61} />
+            <Gauge label={t('indicators.hydration')} value={79} />
+          </View>
+        </Surface>
         <View style={styles.rowGap}>
           <Badge label={t('designSystem.surfaces.verdictCompatible')} tone="success" dot />
           <Badge label={t('designSystem.surfaces.verdictCaution')} tone="warning" dot />
@@ -472,7 +498,7 @@ export default function DesignSystemScreen() {
 
       <Section title={t('designSystem.sections.signature')} hint={t('designSystem.signature.hint')}>
         <View style={styles.ringRow}>
-          <ScoreRing score={score} size={160} replayKey={replayKey} />
+          <ScoreRing score={score} size={168} replayKey={replayKey} />
           <View style={styles.ringControls}>
             <Text variant="overline" color="secondary">
               {t('designSystem.signature.label')}
@@ -512,6 +538,13 @@ export default function DesignSystemScreen() {
             showCaption={false}
             hapticOnSettle={false}
           />
+          <ScoreRing
+            score={score}
+            size={116}
+            strokeWidth={8}
+            showCaption={false}
+            hapticOnSettle={false}
+          />
         </View>
       </Section>
 
@@ -547,12 +580,12 @@ export default function DesignSystemScreen() {
         </View>
       </Section>
 
-      <Section title={t('designSystem.sections.sheet')}>
+      <Section title={t('designSystem.sections.sheet')} hint={t('designSystem.sheet.hint')}>
         <Button
           label={t('designSystem.sheet.open')}
           variant="secondary"
           accessibilityHint={t('a11y.openSheet')}
-          onPress={() => router.push('/dev/sheet')}
+          onPress={() => router.push('/settings/appearance')}
         />
       </Section>
 
@@ -579,6 +612,10 @@ const styles = StyleSheet.create({
   intro: {
     gap: 8,
   },
+  auraOverlay: {
+    padding: 20,
+    justifyContent: 'flex-end',
+  },
   wrap: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -586,9 +623,6 @@ const styles = StyleSheet.create({
   },
   typeRow: {
     gap: 4,
-  },
-  typeLabel: {
-    textTransform: 'none',
   },
   typeSample: {
     flexShrink: 1,

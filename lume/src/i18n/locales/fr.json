@@ -2,6 +2,7 @@
   "common": {
     "appName": "Lumé",
     "tagline": "Votre peau, lue avec précision.",
+    "start": "Commencer",
     "continue": "Continuer",
     "back": "Retour",
     "close": "Fermer",
@@ -14,12 +15,35 @@
     "disclaimer": "Estimation cosmétique de l'apparence de la peau, pas un diagnostic médical."
   },
   "home": {
-    "phase": "Phase 0 · Fondations",
-    "title": "Un coach de peau, calme et précis.",
-    "body": "Les fondations sont posées : palette, typographie, composants et mouvement. Les écrans de l'onboarding arrivent en Phase 1.",
-    "openDesignSystem": "Ouvrir le design system",
-    "appearance": "Apparence",
-    "language": "Langue"
+    "kicker": "Coach de peau personnel",
+    "headline": "Votre peau, *lue* avec précision.",
+    "body": "Un selfie, une estimation cosmétique de votre peau, puis une routine matin et soir qui vous ressemble.",
+    "preview": {
+      "label": "Score de peau",
+      "verdict": "Bel équilibre"
+    },
+    "openDesignSystem": "Design system"
+  },
+  "indicators": {
+    "texture": "Texture",
+    "glow": "Éclat",
+    "hydration": "Hydratation",
+    "pores": "Pores",
+    "redness": "Rougeurs",
+    "spots": "Taches",
+    "darkCircles": "Cernes",
+    "fineLines": "Ridules"
+  },
+  "settings": {
+    "title": "Préférences",
+    "appearance": {
+      "title": "Apparence",
+      "body": "Lumé suit le réglage de votre appareil, ou l'apparence que vous choisissez."
+    },
+    "language": {
+      "title": "Langue",
+      "body": "Les textes de l'application, les routines et les explications."
+    }
   },
   "theme": {
     "system": "Système",
@@ -29,6 +53,16 @@
   "language": {
     "fr": "Français",
     "en": "English"
+  },
+  "nextStep": {
+    "overline": "Prochaine étape",
+    "title": "Votre premier scan arrive",
+    "body": "L'onboarding de la Phase 1 commence ici. Trois minutes pour faire connaissance, puis votre première analyse.",
+    "steps": {
+      "profile": "Votre profil de peau et vos objectifs",
+      "scan": "Un selfie à la lumière du jour",
+      "routine": "Votre routine matin et soir"
+    }
   },
   "notFound": {
     "title": "Page introuvable",
@@ -48,6 +82,7 @@
     "title": "Design system",
     "subtitle": "Tokens et composants de la Phase 0, à valider en clair et en sombre.",
     "sections": {
+      "brand": "Marque",
       "colors": "Couleurs",
       "typography": "Typographie",
       "spacing": "Espacements et rayons",
@@ -61,6 +96,9 @@
       "motion": "Mouvement",
       "haptics": "Haptique",
       "sheet": "Feuille native"
+    },
+    "brand": {
+      "hint": "Aura générative en Skia, wordmark Fraunces, accent italique dans les titres."
     },
     "colors": {
       "background": "Fond",
@@ -94,8 +132,8 @@
       }
     },
     "typography": {
-      "display": "Votre peau, lue avec précision.",
-      "h1": "Bonsoir, Léa.",
+      "display": "Votre peau, *lue* avec précision.",
+      "h1": "Une routine qui *vous* ressemble.",
       "h2": "Bel équilibre",
       "h3": "Routine du soir",
       "body": "Une estimation cosmétique de l'apparence de votre peau, jamais un diagnostic.",
@@ -163,7 +201,7 @@
     "signature": {
       "label": "Score de peau",
       "replay": "Rejouer",
-      "hint": "Tracé en Skia : l'anneau se remplit au ressort et le chiffre compte en même temps."
+      "hint": "Tracé en Skia : cadran de soixante repères, anneau qui se remplit au ressort, chiffre qui compte en même temps."
     },
     "motion": {
       "gentle": "Doux",
@@ -181,9 +219,7 @@
     },
     "sheet": {
       "open": "Ouvrir une feuille",
-      "title": "Hydratation apparente",
-      "body": "Les feuilles natives accueillent les détails : explication courte, conseil, ingrédients. Elles se ferment d'un geste.",
-      "tip": "Conseil : appliquez votre hydratant sur peau encore légèrement humide."
+      "hint": "Les réglages et les détails s'ouvrent dans une feuille native ajustée à son contenu."
     }
   }
 }

@@ -2,6 +2,7 @@
   "common": {
     "appName": "Lumé",
     "tagline": "Your skin, read with precision.",
+    "start": "Get started",
     "continue": "Continue",
     "back": "Back",
     "close": "Close",
@@ -14,12 +15,35 @@
     "disclaimer": "A cosmetic estimate of how your skin looks, not a medical diagnosis."
   },
   "home": {
-    "phase": "Phase 0 · Foundations",
-    "title": "A skin coach, calm and precise.",
-    "body": "The foundations are in place: palette, typography, components and motion. The onboarding screens arrive in Phase 1.",
-    "openDesignSystem": "Open the design system",
-    "appearance": "Appearance",
-    "language": "Language"
+    "kicker": "Personal skin coach",
+    "headline": "Your skin, *read* with precision.",
+    "body": "One selfie, a cosmetic estimate of your skin, then a morning and evening routine that fits you.",
+    "preview": {
+      "label": "Skin score",
+      "verdict": "Well balanced"
+    },
+    "openDesignSystem": "Design system"
+  },
+  "indicators": {
+    "texture": "Texture",
+    "glow": "Glow",
+    "hydration": "Hydration",
+    "pores": "Pores",
+    "redness": "Redness",
+    "spots": "Dark spots",
+    "darkCircles": "Dark circles",
+    "fineLines": "Fine lines"
+  },
+  "settings": {
+    "title": "Preferences",
+    "appearance": {
+      "title": "Appearance",
+      "body": "Lumé follows your device setting, or the appearance you choose."
+    },
+    "language": {
+      "title": "Language",
+      "body": "The app's texts, routines and explanations."
+    }
   },
   "theme": {
     "system": "System",
@@ -29,6 +53,16 @@
   "language": {
     "fr": "Français",
     "en": "English"
+  },
+  "nextStep": {
+    "overline": "Next step",
+    "title": "Your first scan is coming",
+    "body": "The Phase 1 onboarding starts here. Three minutes to get acquainted, then your first analysis.",
+    "steps": {
+      "profile": "Your skin profile and goals",
+      "scan": "A selfie in daylight",
+      "routine": "Your morning and evening routine"
+    }
   },
   "notFound": {
     "title": "Page not found",
@@ -48,6 +82,7 @@
     "title": "Design system",
     "subtitle": "Phase 0 tokens and components, to review in light and dark mode.",
     "sections": {
+      "brand": "Brand",
       "colors": "Colours",
       "typography": "Typography",
       "spacing": "Spacing and radii",
@@ -61,6 +96,9 @@
       "motion": "Motion",
       "haptics": "Haptics",
       "sheet": "Native sheet"
+    },
+    "brand": {
+      "hint": "Generative aura in Skia, Fraunces wordmark, one italic accent in headlines."
     },
     "colors": {
       "background": "Background",
@@ -94,8 +132,8 @@
       }
     },
     "typography": {
-      "display": "Your skin, read with precision.",
-      "h1": "Good evening, Léa.",
+      "display": "Your skin, *read* with precision.",
+      "h1": "A routine that fits *you*.",
       "h2": "Well balanced",
       "h3": "Evening routine",
       "body": "A cosmetic estimate of how your skin looks, never a diagnosis.",
@@ -163,7 +201,7 @@
     "signature": {
       "label": "Skin score",
       "replay": "Replay",
-      "hint": "Drawn in Skia: the ring fills with a spring and the number counts along."
+      "hint": "Drawn in Skia: a sixty-mark dial, a ring that fills with a spring and a number that counts along."
     },
     "motion": {
       "gentle": "Gentle",
@@ -181,9 +219,7 @@
     },
     "sheet": {
       "open": "Open a sheet",
-      "title": "Apparent hydration",
-      "body": "Native sheets hold the details: a short explanation, a tip, ingredients. They close with a gesture.",
-      "tip": "Tip: apply your moisturiser while the skin is still slightly damp."
+      "hint": "Settings and details open in a native sheet sized to its content."
     }
   }
 }
