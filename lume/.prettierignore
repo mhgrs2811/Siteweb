@@ -1,0 +1,12 @@
+node_modules
+dist
+coverage
+PRD.md
+docs/
+.expo
+ios
+android
+public/canvaskit.wasm
+*.png
+*.ttf
+package-lock.json
