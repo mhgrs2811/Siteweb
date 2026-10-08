@@ -96,6 +96,8 @@ const styles = StyleSheet.create({
     padding: 0,
     margin: 0,
     minHeight: 24,
+    // The field draws its own focus border; the browser's focus ring would double it on web.
+    outlineWidth: 0,
   },
   helper: {
     marginTop: 6,
