@@ -62,6 +62,22 @@ const SHOTS = [
   { file: 'home-light-fr.png', route: '/', theme: 'light', language: 'fr', fullPage: false },
   { file: 'home-dark-fr.png', route: '/', theme: 'dark', language: 'fr', fullPage: false },
   { file: 'home-light-en.png', route: '/', theme: 'light', language: 'en', fullPage: false },
+  { file: 'home-full-light-fr.png', route: '/', theme: 'light', language: 'fr', fullPage: true },
+  { file: 'home-full-dark-fr.png', route: '/', theme: 'dark', language: 'fr', fullPage: true },
+  {
+    file: 'sheet-appearance-light-fr.png',
+    route: '/settings/appearance',
+    theme: 'light',
+    language: 'fr',
+    fullPage: false,
+  },
+  {
+    file: 'sheet-next-step-dark-fr.png',
+    route: '/next-step',
+    theme: 'dark',
+    language: 'fr',
+    fullPage: false,
+  },
   {
     file: 'design-system-light-fr.png',
     route: '/dev/design-system',
