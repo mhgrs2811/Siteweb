@@ -262,6 +262,28 @@ Sur ton appareil :
 - écran design-system parcouru en clair, en sombre, en FR, en EN, avec une taille de police système agrandie et VoiceOver ou TalkBack activé ;
 - ScoreRing fluide (60 fps), haptiques perçues, feuille native ouverte et fermée.
 
+---
+
+## 5. Compte rendu de livraison (2026-10-08)
+
+Décisions validées : dossier `lume/`, Fraunces, Phosphor, barre d'onglets custom, option A pour EAS.
+
+Vérifié depuis la session cloud :
+
+- `npm run check` vert : typecheck strict, ESLint (config Expo, Prettier, règle i18n, règles React Compiler), Prettier, 494 tests Jest (contraste, palette AA dans les deux modes, parité FR/EN, résolution de langue).
+- `npx expo export --platform web` réussi avec le React Compiler activé ; captures Playwright de l'accueil et du design-system en clair, sombre, FR et EN.
+- `npx expo-doctor` : 19 contrôles sur 21 passés ; les deux restants interrogent expo.dev et le React Native Directory, injoignables depuis cette session, et sont à relancer depuis ton poste.
+
+Écarts par rapport au plan, tous motivés :
+
+- Stockage des préférences avec AsyncStorage plutôt que `expo-sqlite/kv-store` : fonctionne aussi sur le web pour les captures, et Supabase Auth l'utilisera en Phase 1.
+- Polices chargées au démarrage avec `useFonts` plutôt qu'embarquées par le plugin `expo-font` : même nom de famille sur iOS, Android et web, splash maintenu jusqu'au chargement. L'embarquement natif reste possible plus tard sans changer les composants.
+- `expo-build-properties` retiré : les minimums du SDK 57 (iOS 16.4, Android 7) suffisent. `babel-plugin-react-compiler` ajouté pour activer le React Compiler.
+- Deux tokens ajustés pour tenir le seuil de 3:1 des composants d'interface : la bordure des contrôles non cochés (`lineStrong`) et le texte champagne (`#74602F` en clair). Les valeurs du PRD restent intactes pour les fonds, anneaux et décors.
+- Le composant `Badge` (verdicts produit, niveaux de contraste) a été ajouté à la liste de la section 3.5.
+
+Reste à faire par toi pour clore la Phase 0 : `eas init`, puis un build `development` sur ton appareil et la revue de l'écran `/dev/design-system` (voir README, section « Dev build »).
+
 ### 3.11 Définition de « terminé » pour la Phase 0
 
 - [ ] Projet `lume/` initialisé en SDK 57, TypeScript strict, Expo Router, CNG.
