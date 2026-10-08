@@ -11,18 +11,276 @@
     "retry": "Try again",
     "loading": "Loading",
     "ok": "OK",
+    "edit": "Edit",
     "outOf100": "out of 100",
     "disclaimer": "A cosmetic estimate of how your skin looks, not a medical diagnosis."
   },
-  "home": {
-    "kicker": "Personal skin coach",
-    "headline": "Your skin, *read* with precision.",
-    "body": "One selfie, a cosmetic estimate of your skin, then a morning and evening routine that fits you.",
-    "preview": {
-      "label": "Skin score",
-      "verdict": "Well balanced"
+  "onboarding": {
+    "stepCounter": "{{current}} / {{total}}",
+    "resume": "Resume",
+    "restart": "Start over",
+    "welcome": {
+      "kicker": "Personal skin coach",
+      "headline": "Your skin, *read* with precision.",
+      "body": "One selfie, a cosmetic estimate of your skin, then a morning and evening routine that fits you.",
+      "preview": {
+        "label": "Skin score",
+        "verdict": "Well balanced"
+      },
+      "resumeHint": "You will pick up at step {{step}} of {{total}}."
     },
-    "openDesignSystem": "Design system"
+    "name": {
+      "overline": "Let's get acquainted",
+      "title": "What is *your* first name?",
+      "helper": "It personalises your screens, nothing more.",
+      "label": "First name",
+      "placeholder": "Your first name"
+    },
+    "age": {
+      "overline": "Your age",
+      "title": "Which *age range* are you in?",
+      "helper": "Skin needs change over the years. This answer adjusts the recommendations."
+    },
+    "tooYoung": {
+      "overline": "One moment",
+      "title": "Lumé is for ages *16 and up*.",
+      "body": "Thank you for your curiosity. No account was created and nothing was saved. If you picked the wrong range by mistake, you can correct your answer.",
+      "cta": "Correct my answer"
+    },
+    "skinType": {
+      "overline": "Your skin",
+      "title": "How would you describe *your skin*?",
+      "helper": "Bare, at the end of the day. If in doubt, the first scan will refine the answer."
+    },
+    "goals": {
+      "overline": "Your goals",
+      "title": "What would you like to *improve* first?",
+      "helper": "Three goals at most, to keep the routine readable.",
+      "remaining_one": "{{count}} more choice available",
+      "remaining_other": "{{count}} more choices available",
+      "full": "Three goals chosen. Remove one to change."
+    },
+    "sensitivities": {
+      "overline": "Your sensitivities",
+      "title": "Any ingredients your skin *tolerates poorly*?",
+      "helper": "They will be left out of your recommendations and flagged when you scan products."
+    },
+    "routine": {
+      "overline": "Your habits",
+      "title": "Where does your *routine* stand today?",
+      "helper": "There is no right answer: we start from where you are.",
+      "levelLabel": "Current routine",
+      "budgetLabel": "Monthly budget"
+    },
+    "lifestyle": {
+      "overline": "Your everyday",
+      "title": "A few markers of your *lifestyle*.",
+      "helper": "Sleep, hydration and sun show on the skin. These markers put your results in context.",
+      "sleep": "Sleep per night",
+      "water": "Water per day",
+      "sun": "Sun exposure",
+      "makeup": "Daily make-up"
+    },
+    "proof": {
+      "overline": "What you will see",
+      "title": "*Visible* progress, at your own pace.",
+      "helper": "A regular scan, in the same light, draws your curve. You watch your skin evolve, with no numbers promised.",
+      "caption": "Illustrative curve",
+      "axisStart": "First scan",
+      "axisEnd": "Week after week",
+      "pillars": {
+        "routine": {
+          "title": "Morning and evening routine",
+          "body": "Built from your profile and your first scan."
+        },
+        "scan": {
+          "title": "Guided scan",
+          "body": "Same light, same framing: comparable results."
+        },
+        "progress": {
+          "title": "Progress tracking",
+          "body": "Your indicators evolve, scan after scan."
+        }
+      }
+    },
+    "consent": {
+      "overline": "Your photos",
+      "title": "Your photos stay *yours*.",
+      "helper": "Lumé needs a selfie to estimate how your skin looks. Here is exactly what we do with it.",
+      "facts": {
+        "purpose": "Your photos are used only for the cosmetic estimate of your skin, never to train a model.",
+        "hosting": "They are hosted in the European Union, in a private space reachable from your account only.",
+        "retention": "You choose to keep them to track your progress, or to delete them after each analysis.",
+        "deletion": "You can withdraw this consent and delete your account at any time, from the app."
+      },
+      "keepPhotos": "Keep my photos",
+      "keepPhotosHint": "To compare your scans over time. When off, each photo is deleted after the analysis.",
+      "statement": "I agree that Lumé analyses my face photos to estimate how my skin looks, under the conditions described above.",
+      "readSummary": "Read the privacy summary",
+      "accept": "I agree",
+      "later": "Decide later",
+      "givenOn": "Consent given on {{date}}",
+      "notGiven": "Consent not given",
+      "withdraw": "Withdraw my consent",
+      "give": "Give my consent"
+    },
+    "notifications": {
+      "overline": "Reminders",
+      "title": "A *discreet* reminder, at the right time.",
+      "helper": "Two reminders a day at most, at the time you choose. Changeable at any time.",
+      "benefits": {
+        "routine": {
+          "title": "Morning and evening",
+          "body": "A brief reminder for your routine, at your hours."
+        },
+        "rescan": {
+          "title": "Next scan",
+          "body": "When it is time to measure your progress."
+        },
+        "quiet": {
+          "title": "Never intrusive",
+          "body": "No promotions, no nagging."
+        }
+      },
+      "enable": "Turn on reminders",
+      "later": "Later"
+    },
+    "captureGuide": {
+      "overline": "Before the first scan",
+      "title": "Three habits for a *reliable* scan.",
+      "helper": "Consistency makes precision: same light, same framing, every scan.",
+      "tips": {
+        "light": {
+          "title": "Natural light",
+          "body": "Facing a window, without backlight or a lamp pointed at you."
+        },
+        "bare": {
+          "title": "Bare skin",
+          "body": "No make-up or glossy skincare, hair pulled back."
+        },
+        "center": {
+          "title": "Face centred",
+          "body": "Front on, eyes on the lens, at arm's length."
+        }
+      },
+      "cta": "Save my profile"
+    },
+    "done": {
+      "overline": "Profile saved",
+      "title": "Thank you {{name}}, your *profile* is ready.",
+      "body": "Your routine will be built from these answers and your first scan.",
+      "cta": "Go to my space"
+    },
+    "options": {
+      "ageBand": {
+        "under_16": "Under 16",
+        "16_19": "16 to 19",
+        "20_24": "20 to 24",
+        "25_29": "25 to 29",
+        "30_34": "30 to 34",
+        "35_40": "35 to 40",
+        "over_40": "Over 40"
+      },
+      "skinType": {
+        "dry": "Dry",
+        "oily": "Oily",
+        "combination": "Combination",
+        "normal": "Normal",
+        "unknown": "I don't know"
+      },
+      "skinTypeHint": {
+        "dry": "Tightness, dull look, sometimes flaking.",
+        "oily": "Shine by midday, visible pores.",
+        "combination": "Shiny T-zone, drier cheeks.",
+        "normal": "Comfortable, neither shiny nor tight.",
+        "unknown": "The first scan will help you find out."
+      },
+      "goals": {
+        "glow": "Glow",
+        "blemishes": "Blemishes",
+        "texture": "Texture",
+        "spots": "Dark spots",
+        "wrinkles": "Wrinkles",
+        "pores": "Pores",
+        "redness": "Redness",
+        "hydration": "Hydration"
+      },
+      "sensitivities": {
+        "fragrance": "Fragrance",
+        "alcohol": "Alcohol",
+        "essential_oils": "Essential oils",
+        "exfoliating_acids": "Exfoliating acids",
+        "retinoids": "Retinoids",
+        "none": "None"
+      },
+      "routineLevel": {
+        "none": "None",
+        "basic": "Basic",
+        "complete": "Complete"
+      },
+      "routineLevelHint": {
+        "none": "No routine yet, or water and that's it.",
+        "basic": "Cleanser and moisturiser, more or less regularly.",
+        "complete": "Cleanser, serum, moisturiser, sun protection."
+      },
+      "monthlyBudget": {
+        "under_20": "Under €20",
+        "20_50": "€20 to €50",
+        "50_100": "€50 to €100",
+        "over_100": "Over €100",
+        "undisclosed": "I'd rather not say"
+      },
+      "sleep": {
+        "under_6": "Under 6 h",
+        "6_7": "6 to 7 h",
+        "7_8": "7 to 8 h",
+        "over_8": "Over 8 h"
+      },
+      "water": {
+        "under_1": "Under 1 L",
+        "1_2": "1 to 2 L",
+        "over_2": "Over 2 L"
+      },
+      "sun": {
+        "rarely": "Rarely",
+        "sometimes": "Sometimes",
+        "often": "Often"
+      },
+      "makeup": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "makeupShort": {
+        "yes": "Make-up",
+        "no": "No make-up"
+      }
+    }
+  },
+  "home": {
+    "greetingMorning": "Good morning {{name}}",
+    "greetingAfternoon": "Good afternoon {{name}}",
+    "greetingEvening": "Good evening {{name}}",
+    "headline": "Your *profile* is saved.",
+    "body": "Your routine will be built from these answers and your first scan.",
+    "nextScan": {
+      "overline": "Next step",
+      "title": "Your first scan",
+      "body": "A selfie in daylight, no make-up, face centred. Lumé will guide you step by step."
+    },
+    "profile": {
+      "title": "Skin profile"
+    },
+    "openDesignSystem": "Design system",
+    "resetOnboarding": "Reset onboarding (dev)"
+  },
+  "profile": {
+    "skinType": "Skin type",
+    "goals": "Goals",
+    "sensitivities": "Sensitivities",
+    "routine": "Routine",
+    "budget": "Budget",
+    "lifestyle": "Lifestyle",
+    "none": "Not provided"
   },
   "indicators": {
     "texture": "Texture",
@@ -43,6 +301,28 @@
     "language": {
       "title": "Language",
       "body": "The app's texts, routines and explanations."
+    },
+    "photos": {
+      "title": "Photo consent",
+      "body": "Your consent and the retention of your photos are managed here, at any time.",
+      "version": "Wording version: {{version}}"
+    }
+  },
+  "legal": {
+    "privacy": {
+      "overline": "Privacy",
+      "title": "Privacy summary",
+      "body": "The essentials of what Lumé does with your data, in plain language.",
+      "points": {
+        "sensitive": "Your face photos and your answers about your skin are sensitive data under the GDPR. They are processed only with your explicit consent.",
+        "hosting": "Your data is hosted in the European Union.",
+        "storage": "Photos are stored in a private space; every access goes through a signed link valid for a few minutes.",
+        "ai": "The analysis is performed by a vision model called from our servers. The chosen provider commits not to train its models on your images.",
+        "retention": "You choose to keep your photos to track your progress, or to delete them after each analysis.",
+        "deletion": "You can withdraw your consent and delete your entire account from the app.",
+        "analytics": "Usage statistics contain no skin data and no photos.",
+        "notMedical": "Lumé provides cosmetic estimates of how the skin looks, never a medical diagnosis."
+      }
     }
   },
   "theme": {
@@ -54,16 +334,6 @@
     "fr": "Français",
     "en": "English"
   },
-  "nextStep": {
-    "overline": "Next step",
-    "title": "Your first scan is coming",
-    "body": "The Phase 1 onboarding starts here. Three minutes to get acquainted, then your first analysis.",
-    "steps": {
-      "profile": "Your skin profile and goals",
-      "scan": "A selfie in daylight",
-      "routine": "Your morning and evening routine"
-    }
-  },
   "notFound": {
     "title": "Page not found",
     "body": "This screen does not exist, or not anymore.",
@@ -72,6 +342,7 @@
   "a11y": {
     "themeSelector": "Choose the appearance",
     "languageSelector": "Choose the language",
+    "changeLanguage": "Change the language",
     "scoreRing": "Skin score {{score}} out of 100",
     "loadingButton": "Loading",
     "selected": "Selected",

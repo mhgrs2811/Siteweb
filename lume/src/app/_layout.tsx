@@ -21,16 +21,22 @@ import { Platform, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { useOnboarding } from '@/features/onboarding/store';
+import { useProfileSync } from '@/features/profile/useProfileSync';
 import { detectDeviceLanguage, initI18n, resolveLanguage } from '@/i18n';
+import { initAnalytics } from '@/lib/analytics';
 import { createQueryClient } from '@/lib/query-client';
 import { loadSkiaWeb } from '@/lib/skia-web';
+import { bindSessionRefreshToAppState } from '@/lib/supabase';
 import { usePreferences } from '@/store/preferences';
 import { ThemeProvider, useTheme } from '@/theme';
 
 // Translations are bundled, so i18n is ready synchronously before the first render.
 initI18n(detectDeviceLanguage());
+// Analytics is a silent no-op until a PostHog key is configured.
+initAnalytics();
 
-// Keep the native splash screen up until fonts, preferences and (on web) Skia are ready.
+// Keep the native splash screen up until fonts, persisted state and (on web) Skia are ready.
 SplashScreen.preventAutoHideAsync().catch(() => {
   /* already hidden or unavailable (web): nothing to do */
 });
@@ -47,7 +53,8 @@ export default function RootLayout() {
     InstrumentSans_500Medium,
     InstrumentSans_600SemiBold,
   });
-  const hasHydrated = usePreferences((state) => state.hasHydrated);
+  const preferencesHydrated = usePreferences((state) => state.hasHydrated);
+  const onboardingHydrated = useOnboarding((state) => state.hasHydrated);
   const language = usePreferences((state) => state.language);
   const [skiaReady, setSkiaReady] = useState(Platform.OS !== 'web');
   const [queryClient] = useState(createQueryClient);
@@ -64,7 +71,8 @@ export default function RootLayout() {
       .finally(() => setSkiaReady(true));
   }, []);
 
-  const ready = (fontsLoaded || fontError !== null) && hasHydrated && skiaReady;
+  const ready =
+    (fontsLoaded || fontError !== null) && preferencesHydrated && onboardingHydrated && skiaReady;
 
   useEffect(() => {
     if (ready) {
@@ -92,6 +100,13 @@ export default function RootLayout() {
 function RootNavigator() {
   const theme = useTheme();
 
+  // Background sync of the profile; the anonymous session is created on first need.
+  useProfileSync();
+
+  useEffect(() => {
+    bindSessionRefreshToAppState();
+  }, []);
+
   useEffect(() => {
     // Root view colour behind every screen: avoids a white flash when switching themes.
     SystemUI.setBackgroundColorAsync(theme.colors.background).catch(() => {
@@ -118,10 +133,13 @@ function RootNavigator() {
         }}
       >
         <Stack.Screen name="index" />
+        <Stack.Screen name="(onboarding)" />
+        <Stack.Screen name="(app)" />
         <Stack.Screen name="dev" />
         <Stack.Screen name="settings/appearance" options={sheet} />
         <Stack.Screen name="settings/language" options={sheet} />
-        <Stack.Screen name="next-step" options={sheet} />
+        <Stack.Screen name="settings/photos" options={sheet} />
+        <Stack.Screen name="legal/privacy" options={sheet} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </>
