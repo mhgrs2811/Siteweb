@@ -1,6 +1,6 @@
 # Lumé · Phase 1 — Onboarding
 
-Statut : **plan en attente de validation**. Aucun code de Phase 1 n'a été écrit.
+Statut : **livrée** le 2026-10-08 (plan validé par « GO code Phase 1 », hypothèses par défaut appliquées). Le rapport de livraison est en section 5.
 Rédigé le 2026-10-08 à partir de `PRD.md`, sections 5.1, 6 et 8, et de la signature visuelle validée en Phase 0.
 
 ---
@@ -128,12 +128,12 @@ Depuis cette session : `npm run check` vert, export web, captures de chaque écr
 
 ### 3.9 Définition de « terminé »
 
-- [ ] Douze écrans plus `too-young` et `done`, sans texte en dur, FR et EN.
-- [ ] Reprise de parcours et retour arrière sans perte de réponse.
-- [ ] Session anonyme créée, lignes `profiles` et `skin_profiles` écrites et protégées par RLS.
-- [ ] Consentement photo horodaté et versionné, modifiable.
-- [ ] Événements du funnel émis (vérifiables dans PostHog dès que la clé existe).
-- [ ] Tests verts, CI verte, captures livrées.
+- [x] Douze écrans plus `too-young` et `done`, sans texte en dur, FR et EN.
+- [x] Reprise de parcours et retour arrière sans perte de réponse.
+- [x] Session anonyme créée, lignes `profiles` et `skin_profiles` écrites et protégées par RLS (code et migrations livrés ; exécution réelle à vérifier sur ton projet, voir 5.4).
+- [x] Consentement photo horodaté et versionné, modifiable.
+- [x] Événements du funnel émis (vérifiables dans PostHog dès que la clé existe).
+- [x] Tests verts, CI verte, captures livrées.
 
 ### 3.10 Hors périmètre
 
@@ -151,3 +151,60 @@ Caméra et analyse (Phase 2), paywall (Phase 3), routine et notifications progra
 6. `ProofChart` et `CaptureGuide` en Skia.
 7. Analytics.
 8. Vérification, captures, commits atomiques.
+
+---
+
+## 5. Rapport de livraison
+
+### 5.1 Ce qui est livré
+
+| Route | Écran | Détails |
+|---|---|---|
+| `/` | aiguillage | `completed` → accueil, `blocked_age` → `too-young`, sinon `welcome`. Attend l'hydratation du store avant le premier rendu. |
+| `(onboarding)/welcome` | accueil éditorial | « Commencer », ou « Reprendre » à la dernière étape atteinte et « Recommencer » ; bouton de langue en haut à droite. |
+| `(onboarding)/name` | prénom | clavier ouvert, normalisation des espaces, 40 caractères maximum. |
+| `(onboarding)/age` | tranche d'âge | cartes compactes ; « Moins de 16 ans » mène à `too-young`. |
+| `(onboarding)/too-young` | fin bienveillante | aucun compte créé, rien synchronisé ; « Corriger ma réponse » efface la tranche et revient à la question. |
+| `(onboarding)/skin-type` | type de peau | cinq cartes en ligne avec icône et description. |
+| `(onboarding)/goals` | objectifs | huit cartes, trois au maximum, compteur « Encore n choix possible ». |
+| `(onboarding)/sensitivities` | sensibilités | multi-choix, « aucune » exclusif dans les deux sens. |
+| `(onboarding)/routine` | routine et budget | niveau en cartes avec description, budget en pilules. |
+| `(onboarding)/lifestyle` | mode de vie | sommeil, eau, soleil, maquillage, en pilules. |
+| `(onboarding)/proof` | preuve | `ProofChart` en Skia (courbe qui se dessine, aire teintée, badge « Courbe illustrative »), trois piliers. |
+| `(onboarding)/consent` | consentement photo | quatre faits, choix de conservation, case jamais pré-cochée, lien vers le résumé de confidentialité ; « Décider plus tard » autorisé. |
+| `(onboarding)/notifications` | rappels | `PermissionPrimer` avec médaillon aura, puis demande système ; « Plus tard » enregistre un refus. |
+| `(onboarding)/capture-guide` | guide de prise de vue | `CaptureGuide` en Skia (lumière, ovale, repères), trois conseils, « Enregistrer mon profil ». |
+| `(onboarding)/done` | profil enregistré | récapitulatif complet, « Accéder à mon espace ». |
+| `(app)/home` | accueil post-onboarding | salutation selon l'heure, carte « Votre premier scan », profil avec « Modifier », préférences (consentement photo, apparence, langue). |
+| `settings/photos` | feuille | statut du consentement (date, version), conservation des photos, retrait ; ou nouveau consentement. |
+| `legal/privacy` | feuille | résumé de confidentialité en huit points. |
+
+Couche de données : `src/features/onboarding/` (modèle, règles pures, store persisté `lume.onboarding.v1`, navigation, options), `src/features/profile/` (mapping bidirectionnel réponses ↔ lignes, synchronisation idempotente avec nouvel essai toutes les 60 s et au retour au premier plan), `src/features/auth/session.ts` (session anonyme partagée), `src/lib/supabase.ts`, `src/lib/secure-storage.ts` (clé AES dans le trousseau, session chiffrée dans AsyncStorage), `src/lib/analytics.ts` (PostHog UE, no-op sans clé), `src/lib/notifications.ts`. Migrations `supabase/migrations/20261008000100_profiles.sql` et `20261008000200_skin_profiles.sql`, guide `supabase/README.md`.
+
+### 5.2 Décisions prises pendant la réalisation
+
+- **Session anonyme à la première synchronisation, pas au lancement.** Elle est créée après la porte d'âge, quand le prénom et la tranche existent. Ainsi une personne de moins de 16 ans n'a réellement aucun compte, comme l'écran le promet. La synchronisation ignore explicitement `under_16`.
+- **Retour à l'accueil après édition du profil.** « Modifier » rejoue le parcours depuis le prénom ; l'écran `done` revient à l'accueil par `router.dismissTo`, qui dépile l'onboarding si l'accueil est déjà dans la pile et le remplace sinon. Pas de doublon d'écran.
+- **Retrait implicite.** Décocher un consentement déjà donné puis « Décider plus tard » retire le consentement ; le retrait explicite vit dans Préférences → Consentement photo.
+- **Prénom et aiguillage.** Le titre de `done` interpole le prénom dans un `Headline` à accent italique ; les astérisques éventuels du prénom sont retirés pour ne pas casser le balisage.
+- **Cartes compactes.** `Chip` en taille `lg` gagne une disposition `row` (icône à gauche, texte, badge inline) pour les listes à une colonne, et un mode compact (60 pt) pour les réponses courtes comme les tranches d'âge.
+- **Typage Supabase.** Les lignes de `database.types.ts` sont des alias de type, pas des interfaces : le schéma générique du client exige une signature d'index implicite.
+
+### 5.3 Vérification
+
+- `npm run check` vert : typecheck, ESLint (règle i18n incluse), Prettier, Jest (1 106 tests, dont règles d'onboarding, mapping, parité des locales).
+- Export web avec React Compiler, aucune erreur console sur les 42 captures (`npm run preview:web`, clair et sombre, FR et EN, états injectés : vierge, en cours, terminé, bloqué par l'âge).
+- Parcours complet piloté par Playwright sur l'export web : premier lancement, porte d'âge et correction, plafond de trois objectifs, exclusivité de « aucune », budget requis, consentement horodaté et versionné, refus des rappels, profil enregistré, relance qui ouvre l'accueil, édition complète depuis l'accueil, reprise à l'étape 8, recommencer.
+- Non vérifiable depuis cette session : supabase.com et PostHog sont inaccessibles ici. La couche serveur est écrite pour tes clés et se dégrade proprement sans elles.
+
+### 5.4 À faire de ton côté
+
+1. Créer le projet Supabase (région UE), activer **Anonymous sign-ins**, appliquer les deux migrations (`npx supabase db push` ou SQL Editor), renseigner `EXPO_PUBLIC_SUPABASE_URL` et `EXPO_PUBLIC_SUPABASE_ANON_KEY` dans `lume/.env`.
+2. Créer le projet PostHog UE et renseigner `EXPO_PUBLIC_POSTHOG_KEY`.
+3. Sur l'appareil (dev build EAS) : parcours au doigt, haptiques, clavier sur l'écran prénom, popup de notifications, feuilles natives, puis vérifier les lignes `profiles` et `skin_profiles` dans le dashboard.
+4. Relire les textes FR et EN dans `src/i18n/locales/` : ils sont écrits dans le ton « esthéticienne diplômée », à ajuster à ta voix.
+
+### 5.5 Limites connues
+
+- Sur le web (aperçu uniquement), les feuilles s'affichent en pages et la permission de notifications est « indisponible » : le parcours continue normalement.
+- La suppression complète du compte depuis l'application arrive avec l'Edge Function de la Phase 7 ; le texte du résumé de confidentialité l'annonce déjà, comme le PRD l'exige.

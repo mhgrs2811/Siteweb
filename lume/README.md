@@ -11,7 +11,7 @@ Le produit est décrit dans [`PRD.md`](./PRD.md). Le plan de chaque phase vit da
 | Phase | Contenu                                                  | Statut  |
 | ----- | -------------------------------------------------------- | ------- |
 | 0     | Fondations : projet, design system, i18n, thème, EAS, CI | livrée  |
-| 1     | Onboarding, auth anonyme Supabase, consentement          | à venir |
+| 1     | Onboarding, auth anonyme Supabase, consentement          | livrée  |
 | 2     | Capture selfie, analyse IA, résultats                    | à venir |
 | 3     | Paywall et abonnements RevenueCat                        | à venir |
 | 4     | Routine, accueil, streak, notifications                  | à venir |
@@ -24,10 +24,12 @@ Le produit est décrit dans [`PRD.md`](./PRD.md). Le plan de chaque phase vit da
 - Expo SDK 57, React Native 0.86, React 19.2, Expo Router, TypeScript strict.
 - Development build via EAS (pas Expo Go), New Architecture, React Compiler activé.
 - UI : React Native Reanimated 4, React Native Skia (anneau de score, aura générative), expo-blur, expo-haptics, expo-image, Phosphor (icônes), Fraunces et Instrument Sans (Google Fonts).
-- État : Zustand (client) et TanStack Query (serveur). Préférences persistées avec AsyncStorage.
+- État : Zustand (client) et TanStack Query (serveur). Préférences et réponses d'onboarding persistées avec AsyncStorage.
+- Backend : Supabase (session anonyme, Postgres avec RLS, migrations versionnées dans `supabase/`), jetons de session chiffrés via `expo-secure-store`.
+- Analytics : PostHog sur l'instance UE, no-op sans clé, aucune donnée de peau dans les événements.
 - i18n : i18next, fichiers FR et EN complets, détection de la langue de l'appareil.
 - Qualité : ESLint, Prettier, Jest, CI GitHub Actions.
-- À venir : Supabase (Phase 1), fournisseur d'IA vision côté serveur (Phase 2), RevenueCat (Phase 3), PostHog (Phase 1).
+- À venir : fournisseur d'IA vision côté serveur (Phase 2), RevenueCat (Phase 3).
 
 ## Démarrer
 
@@ -39,6 +41,8 @@ npm install            # copie aussi canvaskit.wasm dans public/ pour l'aperçu 
 cp .env.example .env   # puis renseigner les valeurs disponibles
 npm run check          # typecheck + lint + format + tests
 ```
+
+Sans `EXPO_PUBLIC_SUPABASE_URL` ni clé PostHog, l'application fonctionne entièrement en local : l'onboarding s'enregistre sur l'appareil, la synchronisation et l'analytics restent silencieuses. Le branchement se fait en renseignant `.env` (voir [`supabase/README.md`](./supabase/README.md)).
 
 ### Dev build sur appareil (option A)
 
@@ -80,6 +84,13 @@ npm run web            # serveur de développement
 npx expo export --platform web && npx serve dist
 ```
 
+Captures de tous les écrans (clair et sombre, FR et EN, état d'onboarding injecté) avec Playwright :
+
+```bash
+EXPO_PUBLIC_ENABLE_DEV_SCREENS=true npx expo export --platform web --clear
+npm run preview:web    # écrit .preview/*.png
+```
+
 ## Scripts
 
 | Script                     | Rôle                                                       |
@@ -93,6 +104,7 @@ npx expo export --platform web && npx serve dist
 | `npm run check`            | tout ce qui précède, en lecture seule, comme en CI         |
 | `npm run doctor`           | `expo-doctor`                                              |
 | `npm run assets:generate`  | régénère les assets de marque provisoires (Playwright)     |
+| `npm run preview:web`      | captures d'écran de l'export web (Playwright)              |
 
 ## Arborescence
 
@@ -101,24 +113,46 @@ lume/
 ├── app.config.ts          # configuration Expo dynamique (variantes dev / preview / prod)
 ├── eas.json               # profils de build EAS
 ├── assets/images/         # icône, icône adaptative, splash (clair et sombre), favicon
-├── scripts/               # outillage local (génération des assets)
+├── scripts/               # outillage local (génération des assets, captures web)
+├── supabase/              # migrations SQL versionnées et guide de mise en place
 └── src/
     ├── app/               # routes Expo Router
-    │   ├── _layout.tsx    # providers, polices, splash, i18n
-    │   ├── index.tsx      # accueil provisoire de la Phase 0
-    │   └── dev/           # écrans de développement (design-system, feuille native)
+    │   ├── _layout.tsx    # providers, polices, splash, i18n, analytics, synchronisation
+    │   ├── index.tsx      # aiguillage : onboarding, écran « moins de 16 ans » ou accueil
+    │   ├── (onboarding)/  # les douze étapes, too-young et done
+    │   ├── (app)/         # accueil post-onboarding (onglet « Aujourd'hui » en Phase 4)
+    │   ├── settings/      # feuilles natives : apparence, langue, consentement photo
+    │   ├── legal/         # résumé de confidentialité
+    │   └── dev/           # écrans de développement (design-system)
     ├── components/
-    │   ├── ui/            # composants de base (Text, Button, Chip, Toggle, Skeleton, …)
-    │   ├── signature/     # composants signature (ScoreRing en Skia)
+    │   ├── ui/            # composants de base (Text, Button, Chip, Toggle, Checkbox, …)
+    │   ├── onboarding/    # OnboardingStep, ChoiceGrid, ConsentCard, PermissionPrimer, …
+    │   ├── signature/     # Aura, ScoreRing, ProofChart, CaptureGuide (Skia)
     │   ├── brand/         # wordmark
     │   └── dev/           # aides pour l'écran design-system
+    ├── features/
+    │   ├── onboarding/    # modèle, règles pures, store persisté, navigation, tests
+    │   ├── profile/       # mapping réponses ↔ lignes Supabase, synchronisation, tests
+    │   └── auth/          # session anonyme Supabase
     ├── theme/             # tokens (couleurs, typographie, espacements, rayons, ombres, mouvement),
     │                      # ThemeProvider, createStyles, calcul de contraste et tests
     ├── i18n/              # i18next, locales fr/en, types, tests de parité
     ├── store/             # préférences Zustand persistées
-    ├── lib/               # env validé par zod, haptique, logger, QueryClient, chargement Skia web
+    ├── lib/               # env, Supabase, stockage chiffré, analytics, notifications, haptique, logger
     └── hooks/
 ```
+
+## Onboarding (Phase 1)
+
+Douze étapes (`src/app/(onboarding)/`) : accueil, prénom, âge, type de peau, objectifs (trois au maximum), sensibilités (« aucune » exclusif), routine et budget, mode de vie, courbe de progrès illustrative, consentement photo, rappels, guide de prise de vue. Puis l'écran « Profil enregistré » et l'accueil post-onboarding.
+
+- Les réponses sont écrites sur l'appareil à chaque écran (`src/features/onboarding/store.ts`). Fermer l'application et revenir propose de reprendre à la dernière étape atteinte, ou de recommencer.
+- Les règles (porte d'âge, plafond d'objectifs, exclusivité, validation du prénom) sont des fonctions pures testées dans `src/features/onboarding/`.
+- Moins de 16 ans : écran de fin bienveillant, aucun compte créé, rien n'est synchronisé.
+- Consentement photo : écran dédié, case jamais pré-cochée, horodaté et versionné (`PHOTO_CONSENT_VERSION`). Il n'est pas requis pour finir l'onboarding, il le sera pour le premier scan. Modifiable à tout moment dans Préférences → Consentement photo, avec le choix de conserver ou non les photos.
+- Rappels : écran de valeur avant la popup système ; refuser n'est jamais bloquant.
+- La session anonyme Supabase est créée à la première synchronisation (après la porte d'âge), pas au lancement. Les lignes `profiles` et `skin_profiles` sont mises à jour en arrière-plan, avec nouvel essai automatique.
+- Analytics : `onboarding_started`, `onboarding_step_completed` (index, étape), `photo_consent_given` (version, conservation), `notifications_opt_in`, `onboarding_completed`. Jamais de réponse ni de prénom.
 
 ## Design system
 
@@ -155,7 +189,8 @@ Les réglages (apparence, langue) et les détails s'ouvrent dans des feuilles na
 
 Engagements tenus par l'architecture, à vérifier à chaque phase :
 
-- Photos de visage et informations de peau sont des données sensibles au sens du RGPD. Consentement explicite et séparé avant le premier scan, hébergement UE, stockage privé avec URLs signées courtes, option « ne pas conserver mes photos », suppression complète du compte depuis l'application.
+- Photos de visage et informations de peau sont des données sensibles au sens du RGPD. Consentement explicite et séparé avant le premier scan (écran dédié de la Phase 1, résumé de confidentialité en langage clair dans `src/app/legal/privacy.tsx`), hébergement UE, stockage privé avec URLs signées courtes, option « ne pas conserver mes photos », suppression complète du compte depuis l'application.
+- Les tables `profiles` et `skin_profiles` sont protégées par Row Level Security : une utilisatrice ne lit et n'écrit que ses lignes. Les jetons de session sont chiffrés sur l'appareil (clé AES dans le trousseau, session chiffrée dans AsyncStorage).
 - L'appel au modèle de vision se fait uniquement côté serveur (Edge Function Supabase, Phase 2). Aucune clé d'IA dans l'app.
 - Le fournisseur de vision est sélectionné par la variable serveur `VISION_PROVIDER`. Le fournisseur retenu doit garantir contractuellement que les images ne servent pas à entraîner ses modèles ; cette garantie et sa référence documentaire seront ajoutées ici en Phase 2, au moment du choix définitif.
 - Chaque scan enregistre la version du prompt et du modèle utilisés, pour expliquer toute variation de score.
