@@ -284,6 +284,19 @@ Vérifié depuis la session cloud :
 
 Reste à faire par toi pour clore la Phase 0 : `eas init`, puis un build `development` sur ton appareil et la revue de l'écran `/dev/design-system` (voir README, section « Dev build »).
 
+## 6. Passe design premium (2026-10-08)
+
+Retour reçu : « j'aime pas le design ». Diagnostic : une première livraison propre mais générique, sans moment de marque, avec une serif trop lourde et un sans-serif vu partout. Corrections :
+
+- **Typographie** : Fraunces en graisse Light pour le display et Regular pour les titres, avec un accent italique dans chaque titre éditorial (composant `Headline`, marqué par des astérisques dans la traduction). Instrument Sans remplace Inter pour le texte courant.
+- **Visuel de marque** : composant `Aura`, trois disques de lumière chaude floutés en Skia, grain papier, respiration lente, déclinés en clair et en sombre. Aucun asset image.
+- **Anneau de score** : cadran de soixante repères façon horlogerie, halo terre cuite sur l'arc, chiffre plus serré.
+- **Surfaces et boutons** : cartes sans bordure en clair, posées par une ombre chaude très diffuse ; bouton primaire éclairé par un halo teinté ; chips et contrôles allégés.
+- **Accueil** : véritable écran d'accueil éditorial, visuel plein cadre, promesse en deux lignes, carte d'aperçu avec anneau et jauges, appel à l'action visible dès le premier écran, préférences en bas.
+- **Feuilles natives** : apparence, langue et « prochaine étape » s'ouvrent dans des feuilles `formSheet` ajustées à leur contenu, depuis l'accueil comme depuis le design system.
+
+Vérifié : `npm run check` vert, export web, captures clair et sombre, FR et EN. Validation finale sur appareil toujours attendue.
+
 ### 3.11 Définition de « terminé » pour la Phase 0
 
 - [ ] Projet `lume/` initialisé en SDK 57, TypeScript strict, Expo Router, CNG.

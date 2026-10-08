@@ -23,7 +23,7 @@ Le produit est décrit dans [`PRD.md`](./PRD.md). Le plan de chaque phase vit da
 
 - Expo SDK 57, React Native 0.86, React 19.2, Expo Router, TypeScript strict.
 - Development build via EAS (pas Expo Go), New Architecture, React Compiler activé.
-- UI : React Native Reanimated 4, React Native Skia, expo-blur, expo-haptics, expo-image, Phosphor (icônes).
+- UI : React Native Reanimated 4, React Native Skia (anneau de score, aura générative), expo-blur, expo-haptics, expo-image, Phosphor (icônes), Fraunces et Instrument Sans (Google Fonts).
 - État : Zustand (client) et TanStack Query (serveur). Préférences persistées avec AsyncStorage.
 - i18n : i18next, fichiers FR et EN complets, détection de la langue de l'appareil.
 - Qualité : ESLint, Prettier, Jest, CI GitHub Actions.
@@ -125,13 +125,17 @@ lume/
 Tout passe par `src/theme`. Les écrans n'écrivent jamais une couleur, une taille de police ou un espacement en dur : ils consomment `useTheme()` ou `createStyles()`.
 
 - **Couleurs** : chaque rôle existe en variante `base` (fonds, anneaux, grands chiffres) et `text` (texte courant). Les paires texte / fond passent le seuil AA de 4,5:1 dans les deux modes ; `src/theme/__tests__/palette.test.ts` le garantit. Ajouter un nouvel usage de couleur en texte commence par ajouter la paire au test.
-- **Typographie** : Fraunces pour display, titres et chiffres de score (chiffres tabulaires), Inter pour le texte. Les polices sont chargées au démarrage par `useFonts`, le splash reste affiché jusqu'au chargement. Chaque variante a un plafond de taille dynamique.
+- **Typographie** : Fraunces Light pour le display, Regular pour les titres, Medium pour les chiffres de score (chiffres tabulaires) ; Instrument Sans pour le texte. Chaque titre éditorial porte un accent italique, posé par le composant `Headline` à partir d'astérisques dans la chaîne traduite. Les polices sont chargées au démarrage par `useFonts`, le splash reste affiché jusqu'au chargement. Chaque variante a un plafond de taille dynamique.
+- **Visuel de marque** : `Aura`, trois disques de lumière chaude floutés sous un grain papier, dessinés en Skia et déclinés dans les deux modes. Aucun asset image.
+- **Surfaces** : cartes sans bordure en clair, posées par une ombre chaude très diffuse ; hairline en sombre. Le bouton primaire est éclairé par un halo terre cuite.
 - **Espacements** : base 4 pt, marges latérales 20 pt (24 pt sur grand écran). Rayons 4, 12, 24 et pilule.
 - **Mouvement** : trois ressorts nommés (`gentle`, `snappy`, `bouncy`), apparitions décalées via `Stagger`, respect du réglage de réduction des animations.
 - **Haptique** : quatre intentions (`selection`, `confirm`, `success`, `warning`) via `haptic()`, désactivables dans les préférences, sans effet sur le web.
 - **Icônes** : Phosphor en graisse light, importées une par une, deux tailles (20 et 24).
 
 L'écran `/dev/design-system` présente tous les tokens et composants avec les ratios de contraste calculés en direct. Il n'existe que dans les builds de développement, ou si `EXPO_PUBLIC_ENABLE_DEV_SCREENS=true`.
+
+Les réglages (apparence, langue) et les détails s'ouvrent dans des feuilles natives `formSheet` ajustées à leur contenu (`src/app/settings/*`, composant `Sheet`). Sur le web, qui n'est pas une cible produit, elles s'affichent comme des pages.
 
 ## Internationalisation
 
