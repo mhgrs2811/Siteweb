@@ -16,6 +16,8 @@ export interface ScreenProps extends PropsWithChildren {
   scroll?: boolean;
   /** Apply the horizontal gutter. Turn off for edge-to-edge content. */
   padded?: boolean;
+  /** Keep content under the status bar: off for screens that open on a full-bleed visual. */
+  safeTop?: boolean;
   background?: 'background' | 'surface';
   /** Pinned under the content, above the bottom safe area (primary actions). */
   footer?: ReactNode;
@@ -38,6 +40,7 @@ export function Screen({
   children,
   scroll = true,
   padded = true,
+  safeTop = true,
   background = 'background',
   footer,
   contentContainerStyle,
@@ -49,7 +52,7 @@ export function Screen({
   const backgroundColor = theme.colors[background];
 
   const horizontal = padded ? gutter : 0;
-  const paddingTop = insets.top + theme.spacing[4];
+  const paddingTop = safeTop ? insets.top + theme.spacing[4] : 0;
   const paddingBottom = footer ? theme.spacing[4] : insets.bottom + theme.spacing[6];
 
   const content = scroll ? (

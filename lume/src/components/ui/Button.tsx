@@ -25,8 +25,13 @@ export interface ButtonProps extends Omit<PressableProps, 'style' | 'children' |
 }
 
 const HEIGHT: Record<ButtonSize, number> = { md: 48, lg: 56 };
-const PADDING: Record<ButtonSize, number> = { md: 20, lg: 24 };
+const PADDING: Record<ButtonSize, number> = { md: 20, lg: 28 };
 
+/**
+ * The three button voices: primary (terracotta, lit by a warm glow), secondary (hairline
+ * outline) and ghost (text only). Loading replaces the label with three pulsing dots and keeps
+ * the button's footprint so nothing shifts.
+ */
 export function Button({
   label,
   variant = 'primary',
@@ -43,22 +48,25 @@ export function Button({
   const theme = useTheme();
   const { colors } = theme;
   const inactive = disabled || loading;
+  const dimmed = disabled && !loading;
 
   let backgroundColor = 'transparent';
   let borderColor = 'transparent';
   let labelColor = colors.ink;
+  let shadow: ViewStyle | null = null;
 
   switch (variant) {
     case 'primary':
-      backgroundColor = inactive && !loading ? colors.line : colors.accent.strong;
-      labelColor = inactive && !loading ? colors.textSecondary : colors.textOnAccent;
+      backgroundColor = dimmed ? colors.surfaceSunken : colors.accent.strong;
+      labelColor = dimmed ? colors.textSecondary : colors.textOnAccent;
+      shadow = dimmed ? null : theme.shadows.accent;
       break;
     case 'secondary':
-      borderColor = inactive ? colors.lineStrong : colors.ink;
-      labelColor = inactive ? colors.textSecondary : colors.ink;
+      borderColor = dimmed ? colors.line : colors.ink;
+      labelColor = dimmed ? colors.textSecondary : colors.ink;
       break;
     case 'ghost':
-      labelColor = inactive ? colors.textSecondary : colors.accent.text;
+      labelColor = dimmed ? colors.textSecondary : colors.accent.text;
       break;
   }
 
@@ -79,9 +87,10 @@ export function Button({
           borderRadius: theme.radii.pill,
           backgroundColor,
           borderColor,
-          borderWidth: variant === 'secondary' ? 1.5 : 0,
+          borderWidth: variant === 'secondary' ? 1 : 0,
           alignSelf: fullWidth ? 'stretch' : 'flex-start',
         },
+        shadow,
         style,
       ]}
     >

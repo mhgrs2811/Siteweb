@@ -21,8 +21,8 @@ export interface ChipProps {
 }
 
 /**
- * Selectable chip. Selected state uses the soft accent fill with a strong border, so it reads
- * in both colour schemes without relying on colour alone (the check badge confirms it).
+ * Selectable chip. Selected state uses the soft accent fill with a hairline accent border, so
+ * it reads in both colour schemes without relying on colour alone (the check badge confirms it).
  */
 export function Chip({
   label,
@@ -36,7 +36,7 @@ export function Chip({
 }: ChipProps) {
   const theme = useTheme();
   const { colors, radii } = theme;
-  const borderColor = selected ? colors.accent.strong : colors.line;
+  const borderColor = selected ? colors.accent.base : colors.line;
   const iconColor = selected ? colors.accent.text : colors.textSecondary;
   const large = size === 'lg';
 
@@ -54,10 +54,11 @@ export function Chip({
         {
           backgroundColor: selected ? colors.accent.soft : colors.surface,
           borderColor,
-          borderWidth: selected ? 1.5 : 1,
-          borderRadius: radii.md,
+          borderWidth: 1,
+          borderRadius: large ? radii.lg : radii.md,
           opacity: disabled ? 0.5 : 1,
         },
+        !selected && !theme.isDark ? theme.shadows.soft : null,
         style,
       ]}
     >
@@ -79,23 +80,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 48,
-    paddingHorizontal: 14,
+    paddingHorizontal: 16,
     gap: 10,
   },
   mediumLabel: {
     flexShrink: 1,
   },
   large: {
-    minHeight: 88,
-    padding: 16,
+    minHeight: 96,
+    padding: 18,
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    gap: 12,
+    gap: 14,
   },
   badge: {
     position: 'absolute',
-    top: 10,
-    right: 10,
+    top: 12,
+    right: 12,
     width: 22,
     height: 22,
     borderRadius: 11,

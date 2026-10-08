@@ -2,7 +2,7 @@ import { View, type ViewProps } from 'react-native';
 
 import { useTheme, type RadiusKey, type SpacingKey } from '@/theme';
 
-export type SurfaceVariant = 'default' | 'highlight' | 'elevated' | 'sunken';
+export type SurfaceVariant = 'default' | 'highlight' | 'elevated' | 'sunken' | 'outline';
 
 export interface SurfaceProps extends ViewProps {
   variant?: SurfaceVariant;
@@ -11,8 +11,9 @@ export interface SurfaceProps extends ViewProps {
 }
 
 /**
- * Card container. Radii are intentional: `md` (12) for rows and inputs, `lg` (24) for
- * hero cards and sheets. Never both at the same size on one screen by accident.
+ * Card container. In light mode cards are borderless sheets of white paper lifted by a warm,
+ * diffuse shadow; in dark mode they are a step lighter than the page with a hairline edge.
+ * Radii are intentional: `md` (12) for rows and inputs, `lg` (24) for hero cards and sheets.
  */
 export function Surface({
   variant = 'default',
@@ -30,9 +31,18 @@ export function Surface({
     highlight: colors.accent.soft,
     elevated: colors.surfaceElevated,
     sunken: colors.surfaceSunken,
+    outline: 'transparent',
   }[variant];
 
-  const bordered = variant === 'default' || (variant === 'elevated' && !theme.isDark);
+  const hairline =
+    variant === 'outline' || (theme.isDark && (variant === 'default' || variant === 'elevated'));
+
+  const shadow =
+    variant === 'default'
+      ? theme.shadows.soft
+      : variant === 'elevated'
+        ? theme.shadows.lifted
+        : null;
 
   return (
     <View
@@ -42,10 +52,10 @@ export function Surface({
           backgroundColor,
           borderRadius: theme.radii[radius],
           padding: theme.spacing[padding],
-          borderWidth: bordered ? 1 : 0,
-          borderColor: bordered ? colors.line : 'transparent',
+          borderWidth: hairline ? 1 : 0,
+          borderColor: hairline ? colors.line : 'transparent',
         },
-        variant === 'elevated' ? theme.shadows.lifted : null,
+        shadow,
         style,
       ]}
     >

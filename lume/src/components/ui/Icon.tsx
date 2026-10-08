@@ -13,6 +13,7 @@ import { CirclesThreeIcon } from 'phosphor-react-native/src/icons/CirclesThree';
 import { DeviceMobileIcon } from 'phosphor-react-native/src/icons/DeviceMobile';
 import { DropIcon } from 'phosphor-react-native/src/icons/Drop';
 import { EyeIcon } from 'phosphor-react-native/src/icons/Eye';
+import { FeatherIcon } from 'phosphor-react-native/src/icons/Feather';
 import { FlameIcon } from 'phosphor-react-native/src/icons/Flame';
 import { GlobeIcon } from 'phosphor-react-native/src/icons/Globe';
 import { HandTapIcon } from 'phosphor-react-native/src/icons/HandTap';
@@ -23,6 +24,7 @@ import { ListChecksIcon } from 'phosphor-react-native/src/icons/ListChecks';
 import { MoonIcon } from 'phosphor-react-native/src/icons/Moon';
 import { PaletteIcon } from 'phosphor-react-native/src/icons/Palette';
 import { RulerIcon } from 'phosphor-react-native/src/icons/Ruler';
+import { ScanIcon } from 'phosphor-react-native/src/icons/Scan';
 import { ShareNetworkIcon } from 'phosphor-react-native/src/icons/ShareNetwork';
 import { SlidersHorizontalIcon } from 'phosphor-react-native/src/icons/SlidersHorizontal';
 import { SparkleIcon } from 'phosphor-react-native/src/icons/Sparkle';
@@ -35,6 +37,7 @@ import { UserIcon } from 'phosphor-react-native/src/icons/User';
 import { VibrateIcon } from 'phosphor-react-native/src/icons/Vibrate';
 import { WarningCircleIcon } from 'phosphor-react-native/src/icons/WarningCircle';
 import { WavesIcon } from 'phosphor-react-native/src/icons/Waves';
+import { WaveSineIcon } from 'phosphor-react-native/src/icons/WaveSine';
 import { XIcon } from 'phosphor-react-native/src/icons/X';
 import type { StyleProp, ViewStyle } from 'react-native';
 
@@ -59,6 +62,7 @@ export const icons = {
   deviceMobile: DeviceMobileIcon,
   drop: DropIcon,
   eye: EyeIcon,
+  feather: FeatherIcon,
   flame: FlameIcon,
   globe: GlobeIcon,
   handTap: HandTapIcon,
@@ -69,6 +73,7 @@ export const icons = {
   moon: MoonIcon,
   palette: PaletteIcon,
   ruler: RulerIcon,
+  scan: ScanIcon,
   shareNetwork: ShareNetworkIcon,
   slidersHorizontal: SlidersHorizontalIcon,
   sparkle: SparkleIcon,
@@ -81,6 +86,7 @@ export const icons = {
   vibrate: VibrateIcon,
   warningCircle: WarningCircleIcon,
   waves: WavesIcon,
+  waveSine: WaveSineIcon,
   x: XIcon,
 } satisfies Record<string, PhosphorIcon>;
 

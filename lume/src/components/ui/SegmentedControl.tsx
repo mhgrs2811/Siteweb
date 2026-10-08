@@ -20,7 +20,7 @@ export interface SegmentedControlProps<T extends string> {
 }
 
 const PADDING = 3;
-const HEIGHT = 44;
+const HEIGHT = 42;
 
 /** Two to four mutually exclusive options; the indicator slides with a snappy spring. */
 export function SegmentedControl<T extends string>({
