@@ -258,8 +258,8 @@ section[id],footer[id]{scroll-margin-top:64px}
 .hero__meta{display:flex;align-items:center;gap:1.6rem;font-size:.85rem;color:rgba(255,255,255,.7)}
 .scroll-cue{display:inline-flex;align-items:center;gap:.7rem;font-weight:600;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blanc)}
 .scroll-cue__line{position:relative;width:1px;height:38px;background:rgba(255,255,255,.25);overflow:hidden}
-.scroll-cue__line::after{content:"";position:absolute;left:0;top:-40%;width:100%;height:40%;background:var(--rouge);animation:cue 2s var(--ease-io) infinite}
-@keyframes cue{to{top:100%}}
+.scroll-cue__line::after{content:"";position:absolute;left:0;top:0;width:100%;height:40%;background:var(--rouge);transform:translateY(-100%);animation:cue 2s var(--ease-io) infinite}
+@keyframes cue{to{transform:translateY(250%)}}
 
 /* Bandeau défilant */
 .marquee{position:relative;background:var(--rouge);color:var(--blanc);overflow:hidden;padding-block:1.05rem;border-block:1px solid rgba(0,0,0,.18)}
@@ -813,7 +813,7 @@ a.info__v:hover{color:var(--rouge)}
 
   <section class="hero is-dark" id="top" aria-labelledby="hero-title">
     <div class="hero__media" data-hero-media>
-      <img class="img-cover" data-parallax-hero
+      <img class="img-cover" data-photo="atelier" data-parallax-hero
            src="https://unsplash.com/photos/Hv_gKPOXmwE/download?w=1920"
            srcset="https://unsplash.com/photos/Hv_gKPOXmwE/download?w=900 900w, https://unsplash.com/photos/Hv_gKPOXmwE/download?w=1400 1400w, https://unsplash.com/photos/Hv_gKPOXmwE/download?w=1920 1920w"
            sizes="100vw" width="1920" height="1280" loading="lazy" decoding="async"
@@ -842,7 +842,7 @@ a.info__v:hover{color:var(--rouge)}
       </h1>
       <p class="hero__lead" data-hero-item data-i18n="hero.lead">Uw garage in Grimbergen voor mechanica, onderhoud en takeldienst 24/7. Waar klassieke garages stoppen bij bestelwagens en vrachtwagens, gaan wij gewoon verder.</p>
       <div class="hero__ctas">
-        <a class="btn btn--red btn--lg" href="tel:+32488316596" data-hero-item data-i18n-attr="aria-label:nav.cta.aria" aria-label="Bel de takeldienst 24/7: 0488 31 65 96">
+        <a class="btn btn--red btn--lg" href="tel:+32488316596" data-hero-item>
           <span class="btn__icon" aria-hidden="true"><svg class="ico ico--phone"><use href="#i-phone"/></svg></span>
           <span class="btn__stack"><span class="btn__small" data-i18n="hero.cta.tow">Takeldienst 24/7</span><span class="btn__big">0488 31 65 96</span></span>
         </a>
@@ -1017,7 +1017,7 @@ a.info__v:hover{color:var(--rouge)}
     <div class="container why__grid">
       <div class="why__media" data-reveal>
         <figure class="frame frame--main" data-parallax-wrap>
-          <img class="img-cover" data-parallax="7"
+          <img class="img-cover" data-photo="poids-lourd" data-parallax="7"
                src="https://unsplash.com/photos/pAV_Y7DBOSg/download?w=1200"
                srcset="https://unsplash.com/photos/pAV_Y7DBOSg/download?w=700 700w, https://unsplash.com/photos/pAV_Y7DBOSg/download?w=1200 1200w"
                sizes="(max-width:1024px) 90vw, 45vw" width="1200" height="1500" loading="lazy" decoding="async"
@@ -1025,7 +1025,7 @@ a.info__v:hover{color:var(--rouge)}
                onerror="this.style.visibility='hidden'">
         </figure>
         <figure class="frame frame--small" data-parallax-wrap>
-          <img class="img-cover" data-parallax="10"
+          <img class="img-cover" data-photo="mecanicien" data-parallax="10"
                src="https://unsplash.com/photos/vvmIhgAlBk0/download?w=800"
                srcset="https://unsplash.com/photos/vvmIhgAlBk0/download?w=500 500w, https://unsplash.com/photos/vvmIhgAlBk0/download?w=800 800w"
                sizes="(max-width:1024px) 45vw, 22vw" width="800" height="800" loading="lazy" decoding="async"
@@ -1075,7 +1075,7 @@ a.info__v:hover{color:var(--rouge)}
 
   <section class="section tow is-dark" id="takeldienst" aria-labelledby="tow-title" data-parallax-wrap>
     <div class="tow__media">
-      <img class="img-cover" data-parallax="9"
+      <img class="img-cover" data-photo="depanneuse" data-parallax="9"
            src="https://unsplash.com/photos/HZ_6ktzQWZ0/download?w=1920"
            srcset="https://unsplash.com/photos/HZ_6ktzQWZ0/download?w=900 900w, https://unsplash.com/photos/HZ_6ktzQWZ0/download?w=1400 1400w, https://unsplash.com/photos/HZ_6ktzQWZ0/download?w=1920 1920w"
            sizes="100vw" width="1920" height="1280" loading="lazy" decoding="async"
@@ -1223,7 +1223,7 @@ a.info__v:hover{color:var(--rouge)}
       </div>
       <div class="band__ctas" data-reveal>
         <a class="btn btn--white btn--lg" href="#contact"><span data-i18n="hero.cta.quote">Offerte aanvragen</span><svg class="ico ico--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn--black btn--lg" href="tel:+3226812204" data-i18n-attr="aria-label:band.call.aria" aria-label="Bel de werkplaats: 02 681 22 04">
+        <a class="btn btn--black btn--lg" href="tel:+3226812204">
           <span class="btn__icon" aria-hidden="true"><svg class="ico ico--phone"><use href="#i-phone"/></svg></span>
           <span class="btn__stack"><span class="btn__small" data-i18n="info.workshop">Werkplaats (vast)</span><span class="btn__big">02 681 22 04</span></span>
         </a>
@@ -1639,7 +1639,6 @@ document.addEventListener('DOMContentLoaded', function () {
       'band.title.1': 'Een vraag, een offerte,',
       'band.title.2': 'of pech onderweg?',
       'band.text': 'Bel ons of stuur uw aanvraag: wij bekijken uw situatie en doen u een duidelijk voorstel.',
-      'band.call.aria': 'Bel de werkplaats: 02 681 22 04',
       'contact.label': 'Contact',
       'contact.title.1': 'Contact',
       'contact.title.2': '& offerte.',
@@ -1889,7 +1888,6 @@ document.addEventListener('DOMContentLoaded', function () {
       'band.title.1': 'Une question, un devis,',
       'band.title.2': 'ou une panne ?',
       'band.text': 'Appelez-nous ou envoyez votre demande : nous étudions votre situation et vous faisons une proposition claire.',
-      'band.call.aria': 'Appeler l’atelier : 02 681 22 04',
       'contact.label': 'Contact',
       'contact.title.1': 'Contact',
       'contact.title.2': '& devis.',
@@ -2156,7 +2154,7 @@ document.addEventListener('DOMContentLoaded', function () {
     renderHours();
     renderStatus();
     if (persist) { try { localStorage.setItem('ahm-lang', lang); } catch (e) {} }
-    if (hasST) {
+    if (hasST && persist) {
       clearTimeout(refreshTimer);
       refreshTimer = setTimeout(function () { ScrollTrigger.refresh(); }, 150);
     }
@@ -2456,40 +2454,64 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var plTl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
   plTl
-    .set('.preloader__inner', { visibility: 'visible' })
-    .from('.pl-ahm span', { yPercent: 110, duration: .9, stagger: .08 })
-    .from('.pl-garage', { opacity: 0, letterSpacing: '1.1em', duration: 1 }, '-=.65')
-    .to('.preloader__bar span', { scaleX: 1, duration: 1, ease: 'power2.inOut' }, '-=.85')
-    .from('.preloader__tag', { opacity: 0, y: 10, duration: .7 }, '-=.8')
-    .to('.preloader__inner', { y: -30, opacity: 0, duration: .5, ease: 'power3.in' }, '+=.1')
-    .to('.preloader__panel--black', { yPercent: -100, duration: .95, ease: 'expo.inOut' }, '-=.15')
-    .to('.preloader__panel--red', { yPercent: -100, duration: .95, ease: 'expo.inOut' }, '-=.8')
-    .add(function () { heroTl.play(0); }, '-=.6')
+    .set('.preloader__inner', { visibility: 'visible' }, 0)
+    .from('.pl-ahm span', { yPercent: 110, duration: .6, stagger: .05 }, 0)
+    .from('.pl-garage', { opacity: 0, y: 12, duration: .6 }, .2)
+    .to('.preloader__bar span', { scaleX: 1, duration: .7, ease: 'power2.inOut' }, .1)
+    .from('.preloader__tag', { opacity: 0, y: 10, duration: .5 }, .25)
+    .to('.preloader__inner', { y: -24, opacity: 0, duration: .35, ease: 'power3.in' }, .85)
+    .to('.preloader__panel--black', { yPercent: -100, duration: .75, ease: 'expo.inOut' }, 1)
+    .to('.preloader__panel--red', { yPercent: -100, duration: .75, ease: 'expo.inOut' }, 1.1)
+    .add(function () { heroTl.play(0); }, 1.15)
     .add(endLoading);
 
-  var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
-  var started = false;
-  function startIntro() { if (started) return; started = true; plTl.play(0); }
-  Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 1500); })]).then(startIntro);
+  var seenIntro = false;
+  try {
+    seenIntro = sessionStorage.getItem('ahm-intro') === '1';
+    sessionStorage.setItem('ahm-intro', '1');
+  } catch (e) {}
+  if (seenIntro) {
+    endLoading();
+    heroTl.play(0);
+  } else {
+    var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    var started = false;
+    var startIntro = function () { if (started) return; started = true; plTl.play(0); };
+    Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 800); })]).then(startIntro);
+  }
+
+  /* Apparitions au défilement : IntersectionObserver, sans mesure synchrone de la page */
+  var revealCbs = new Map();
+  var revealIO = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var cb = revealCbs.get(en.target);
+      revealIO.unobserve(en.target);
+      revealCbs.delete(en.target);
+      if (cb) cb();
+    });
+  }, { rootMargin: '0px 0px -12% 0px' });
+  function onReveal(el, cb) { revealCbs.set(el, cb); revealIO.observe(el); }
 
   gsap.utils.toArray('[data-reveal]').forEach(function (el) {
-    gsap.from(el, {
-      y: 48, opacity: 0, duration: 1.1, ease: 'expo.out', clearProps: 'transform,opacity',
-      scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+    gsap.set(el, { y: 48, opacity: 0 });
+    onReveal(el, function () {
+      gsap.to(el, { y: 0, opacity: 1, duration: 1.1, ease: 'expo.out', clearProps: 'transform,opacity' });
     });
   });
   gsap.utils.toArray('[data-reveal-group]').forEach(function (group) {
-    gsap.from(group.children, {
-      y: 56, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: .09, clearProps: 'transform,opacity',
-      scrollTrigger: { trigger: group, start: 'top 86%', once: true }
+    var items = gsap.utils.toArray(group.children);
+    gsap.set(items, { y: 56, opacity: 0 });
+    onReveal(group, function () {
+      gsap.to(items, { y: 0, opacity: 1, duration: 1.1, ease: 'expo.out', stagger: .09, clearProps: 'transform,opacity' });
     });
   });
   gsap.utils.toArray('.h2').forEach(function (h) {
-    var parts = h.querySelectorAll(':scope > span');
+    var parts = gsap.utils.toArray(h.querySelectorAll(':scope > span'));
     if (parts.length < 2) return;
-    gsap.from(parts, {
-      yPercent: 40, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .1, clearProps: 'transform,opacity',
-      scrollTrigger: { trigger: h, start: 'top 88%', once: true }
+    gsap.set(parts, { yPercent: 40, opacity: 0 });
+    onReveal(h, function () {
+      gsap.to(parts, { yPercent: 0, opacity: 1, duration: 1.2, ease: 'expo.out', stagger: .1, clearProps: 'transform,opacity' });
     });
   });
 
@@ -2521,23 +2543,18 @@ document.addEventListener('DOMContentLoaded', function () {
     var end = parseInt(el.getAttribute('data-count'), 10);
     var obj = { v: 0 };
     el.textContent = '0';
-    ScrollTrigger.create({
-      trigger: el, start: 'top 90%', once: true,
-      onEnter: function () {
-        gsap.to(obj, { v: end, duration: 1.8, ease: 'power3.out', onUpdate: function () { el.textContent = Math.round(obj.v); } });
-      }
+    onReveal(el, function () {
+      gsap.to(obj, { v: end, duration: 1.8, ease: 'power3.out', onUpdate: function () { el.textContent = Math.round(obj.v); } });
     });
   });
 
   gsap.utils.toArray('[data-draw]').forEach(function (svg) {
     var shapes = svg.querySelectorAll('path, circle, rect');
-    gsap.fromTo(shapes, { strokeDasharray: 1, strokeDashoffset: 1 }, {
-      strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut', stagger: .08, clearProps: 'strokeDasharray,strokeDashoffset',
-      scrollTrigger: { trigger: svg, start: 'top 88%', once: true }
+    gsap.set(shapes, { strokeDasharray: 1, strokeDashoffset: 1 });
+    onReveal(svg, function () {
+      gsap.to(shapes, { strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut', stagger: .08, clearProps: 'strokeDasharray,strokeDashoffset' });
     });
   });
-
-  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
 });
 </script>
 </body>
