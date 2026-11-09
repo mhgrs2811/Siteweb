@@ -9,42 +9,41 @@ Le parcours au scroll est donc porté par les vraies photos du restaurant (la-vi
 
 **Le feu de bois.** À La Vigne, la viande cuit sur du bois qui brûle dans la cuisine depuis 1985. Tout le site enseigne et vend cette seule idée : le hero descend de la rue jusqu'à la braise, le moment interactif attise le feu, la carte s'organise autour de ce qui sort du gril et de la broche, la salle est l'endroit où l'on s'assoit près du feu, et l'appel à l'action unique est d'y prendre une table.
 
-Direction artistique en une ligne : **brasserie de braise, bois sombre et laiton, papier crème pour la carte.**
+Direction artistique en une ligne : **le feu dans la nuit pour l'arrivée, puis une brasserie en plein jour : papier ivoire, encre, un filet de laiton.**
 
-Écart assumé par rapport au skill : le fond sombre chaud avec accent laiton et une serif est dans la liste des « looks par défaut » à éviter. Ici c'est le monde réel du sujet : l'enseigne est noire avec un V doré, la salle est en bois sombre, les photos sont du feu dans la nuit. On le gagne en échantillonnant les tons dans les photos, en inventant l'élément signature (le sarment qui se dessine) et en évitant la mise en page template. La section carte casse volontairement le sombre avec le crème du vrai menu papier.
+Référence donnée par la cliente : lesaintgeorges.ch (hôtel-restaurant à Gruyères). Ce qui en fait le caractère, et ce qu'on en reprend : fond clair et beaucoup d'air, titres en serif fine de taille modérée (pas de titres géants), texte centré en colonne étroite, photos à angles droits qui alternent gauche et droite avec parfois deux photos qui se chevauchent, boutons rectangulaires en petites capitales très espacées, liens « En savoir plus → » soulignés d'un trait fin, un bandeau sable pour une section, une frise au trait avant le pied de page, un pied de page clair à colonnes titrées en serif. Ce qu'on ne copie pas : son brun, sa Lora et son Avenir, ses textes, son en-tête à deux étages. Les couleurs et les polices viennent de La Vigne : l'ivoire du menu papier, l'encre de l'enseigne, le laiton du V, Fraunces et Figtree. Décision de la cliente : l'arrivée sur le feu reste telle quelle ; l'esprit clair s'applique à tout ce qui suit.
 
 ## 2. La palette (tokens CSS)
 
-Échantillonnée dans les photos : la salle (#4C2C10, #714B2F, #AC7135), les bûches (#150B06, #361408), les lampes (#D6A572, #C8996E), l'enseigne (V doré), le menu papier (crème).
+Deux mondes, un seul site. Le feu pour le hero et le bandeau final, échantillonné dans les photos (bûches #150B06, lampes #D6A572, V doré de l'enseigne). Le papier pour tout le reste, tiré du menu imprimé de La Vigne (ivoire, titres dorés, texte noir) et de l'enseigne (noir et laiton).
 
 ```css
 :root{
+  /* le feu */
   --canvas:#171210;        /* fumée : brun-noir chaud, jamais #000 */
-  --canvas-2:#201815;      /* variante pour alterner les sections */
-  --panel:#261D18;         /* cartes et surfaces */
-  --wood:#4C2C10;          /* bois de la salle */
-  --accent:#C9A24A;        /* laiton, le V de l'enseigne : CTA, focus, rares accents */
-  --accent-hover:#DDB85E;
-  --accent-muted:rgba(201,162,74,.16);
+  --accent:#C9A24A;        /* laiton clair sur fond sombre : V, bouton du hero */
   --text-primary:#F3EBDD;  /* blanc cassé chaud */
   --text-secondary:#B9A992;
-  --paper:#F2E9D8;         /* la carte : papier crème du menu */
-  --paper-2:#E8DCC6;
-  --ink:#1E1711;           /* texte sur papier */
-  --ink-2:#5E5245;
-  --brass-deep:#7F6020;    /* laiton foncé pour petit texte sur papier (contraste 5:1) */
+  /* le papier */
+  --paper:#F6F0E4;         /* ivoire du menu, plus aéré que le crème imprimé */
+  --sand:#EADFCB;          /* le bandeau de la carte et la fiche pratique */
+  --ink:#231A12;           /* le noir chaud de l'enseigne : titres, texte, boutons */
+  --ink-2:#5C4F42;         /* texte secondaire */
+  --ink-3:#8C7E6E;         /* légendes */
+  --brass:#A67C22;         /* le V, les filets, la frise, le survol : jamais pour du petit texte */
+  --brass-deep:#7A5B1D;    /* les kickers et petits repères en capitales */
 }
 ```
 
-Contrastes calculés : texte primaire sur canvas 15:1 ; secondaire sur canvas 8:1 ; laiton sur canvas 7,5:1 ; encre sur papier 15:1 ; encre-2 sur papier 7:1 ; laiton foncé sur papier 5:1 ; bouton laiton avec texte encre 7,5:1.
+Contrastes calculés : encre sur ivoire 15:1 ; encre-2 sur ivoire 7:1 ; laiton foncé sur ivoire 5,6:1 ; laiton sur ivoire 3,4:1 (réservé aux grands signes et aux traits) ; encre sur sable 13:1 ; bouton encre avec texte ivoire 15:1 ; blanc cassé sur fumée 15:1 ; laiton clair sur fumée 7,5:1.
 
 ## 3. Le trio typographique
 
-- **Display : Fraunces** (variable, graisses 300 à 600, italique pour trois mots au plus). Serif chaleureuse, pas une Didone froide. Chargée en local (woff2, latin).
-- **Texte : Figtree** (variable, 400 / 500 / 600). Conviviale et très lisible.
-- **Labels : DM Mono 500** pour les horaires, prix, petits repères.
+- **Display : Fraunces** (variable, 300 pour le grand « La Vigne » du hero, 500 pour les titres de sections). Taille modérée sous le hero, comme la référence : 30 à 40 px pour les h2, 27 à 38 px pour les h3.
+- **Texte : Figtree** (variable, 400 / 500 / 600), 17 à 18 px, interlignage 1,65. Les kickers, boutons et liens « en savoir plus » sont en Figtree capitales, 12 à 13 px, espacement .16 à .2 em, dans l'esprit des petites capitales espacées de la référence.
+- **Repères du hero : DM Mono 500** pour les kickers et le téléphone sur le feu uniquement.
 
-Échelle fluide avec `clamp()`, ratio 1,25. Texte courant 17 à 18 px, interlignage 1,6, 60 à 72 caractères par ligne (`max-width` en `ch` sur l'élément texte lui-même).
+Échelle fluide avec `clamp()`. 60 à 72 caractères par ligne (`max-width` en `ch` sur l'élément texte lui-même). Boutons rectangulaires sans arrondi.
 
 ## 4. La carte des bandes (hero desktop)
 
@@ -145,11 +144,12 @@ Logotype · « Restaurant et brasserie méditerranéenne à Saint-Gilles, depuis
 
 ## 7. Le plan de la couche vectorielle
 
-- **Signature : le sarment.** Un trait SVG en laiton, dessiné à la main, qui descend le long de la marge gauche sous le hero et se trace avec le scroll (`stroke-dashoffset`). À chaque section, une petite feuille de vigne (SVG) s'ouvre quand le trait l'atteint. Si on l'enlève, la page perd son fil : c'est bien une signature. Caché sous 720 px ; à la place, une feuille seule devant chaque kicker.
-- **Braises.** Huit à dix points orangés minuscules qui montent lentement (transform et opacity, délais négatifs, 7 à 11 s), dans le hero, la section Le feu et la section finale. Pausés hors écran et onglet caché.
-- **Le V.** Logotype en HTML (Fraunces), le V agrandi en laiton. Favicon SVG inline : V laiton sur fumée.
-- **Environnement fixe.** Une couche fixe derrière tout : vignette radiale chaude + grain SVG, dérive de 90 s. Le défilement traverse un lieu, pas des blocs empilés.
-- **Séparateurs.** Un filet laiton très fin avec un point qui s'allume quand la section entre.
+- **Signature : le V qui se trace et la frise de vigne.** À l'arrivée, le V de l'enseigne se dessine en un trait (SVG, `stroke-dashoffset`) avant de se remplir. Avant le pied de page, une frise de vigne dessinée à la main au trait de laiton (sarment, feuilles, vrilles, deux grappes) se trace sur toute la largeur quand elle entre dans l'écran, puis les grappes apparaissent. C'est la réponse de La Vigne à la frise de village au trait de la référence.
+- **Les feuilles.** Une petite feuille de vigne (SVG) devant chaque kicker.
+- **Les filets.** Chaque section s'ouvre sur un filet laiton qui se trace de gauche à droite quand elle entre, avec un point qui respire.
+- **Braises.** Points orangés minuscules qui montent lentement (transform et opacity, délais négatifs, 7 à 11 s), dans le hero, le bloc de la braise et le bandeau final. Pausés hors écran et onglet caché.
+- **Le logotype.** « LA V IGNE » en Fraunces, le V agrandi en laiton, avec « Saint-Gilles · Depuis 1985 » en petites capitales dessous, centré dans l'en-tête comme la référence. Favicon : le V en laiton sur fumée.
+- **Environnement fixe.** Une couche fixe derrière tout : grain de papier et une vignette dorée très légère, dérive de 90 s.
 - Mouvement réduit : tout est affiché dans son état final, aucune animation.
 
 ## 8. La liste d'ingénierie

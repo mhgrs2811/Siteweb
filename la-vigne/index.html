@@ -17,7 +17,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23171210'/%3E%3Ctext x='32' y='47' font-family='Georgia,Times,serif' font-size='46' text-anchor='middle' fill='%23C9A24A'%3EV%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23171210'/%3E%3Cpath d='M12 12 L34 60 L54 12 L52 12 L33 52 L20 12 Z' fill='%23C9A24A'/%3E%3C/svg%3E">
 <link rel="preload" href="assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -27,92 +27,116 @@
 @font-face{font-family:"DM Mono";font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/dm-mono-latin-500-normal.woff2) format("woff2")}
 
 :root{
-  --canvas:#171210;--canvas-2:#201815;--panel:#261D18;--wood:#4C2C10;--wood-2:#33200F;
+  /* the fire (hero and final band) */
+  --canvas:#171210;--canvas-2:#201815;--panel:#261D18;
   --accent:#C9A24A;--accent-hover:#DDB85E;--accent-muted:rgba(201,162,74,.16);--accent-line:rgba(201,162,74,.42);
   --text-primary:#F3EBDD;--text-secondary:#B9A992;
-  --paper:#F2E9D8;--paper-2:#E8DCC6;--ink:#1E1711;--ink-2:#5E5245;--brass-deep:#7F6020;
   --ember:#E8741C;
+  /* the paper (everything below the hero) : La Vigne's menu paper, the ink of the sign, the brass of the V */
+  --paper:#F6F0E4;--sand:#EADFCB;--sand-2:#E2D4BB;
+  --ink:#231A12;--ink-2:#5C4F42;--ink-3:#8C7E6E;
+  --brass:#A67C22;--brass-deep:#7A5B1D;--brass-line:rgba(166,124,34,.38);--brass-faint:rgba(166,124,34,.16);
   --display:"Fraunces",Georgia,"Times New Roman",serif;
   --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --ease-out:cubic-bezier(.22,.8,.26,1);--ease-soft:cubic-bezier(.4,0,.2,1);
   --tshadow:0 1px 2px rgba(8,5,3,.95),0 3px 12px rgba(8,5,3,.78),0 10px 44px rgba(8,5,3,.8);
-  --rail:0px;
-  --space:clamp(4.5rem,9vw,8.5rem);
-  --measure:66ch;
+  --space:clamp(5rem,10vw,9.5rem);
+  --measure:62ch;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 html,body{overflow-x:hidden;overflow-x:clip}
-body{margin:0;background:var(--canvas);color:var(--text-primary);font-family:var(--body);font-size:clamp(1.0625rem,.98rem + .3vw,1.15rem);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;animation:pagein .9s var(--ease-out) both}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:clamp(1.0625rem,.98rem + .3vw,1.125rem);line-height:1.65;font-weight:400;-webkit-font-smoothing:antialiased;animation:pagein .9s var(--ease-out) both}
 @keyframes pagein{from{opacity:0}to{opacity:1}}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit}
-h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;letter-spacing:-.012em;margin:0;text-wrap:balance}
-h2{font-size:clamp(2rem,1.3rem + 2.6vw,3.6rem)}
-h3{font-size:clamp(1.35rem,1.1rem + .9vw,1.9rem)}
+h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.15;letter-spacing:-.005em;margin:0;text-wrap:balance;color:var(--ink)}
+h2{font-size:clamp(1.9rem,1.5rem + 1.3vw,2.5rem)}
+h3{font-size:clamp(1.4rem,1.2rem + .7vw,1.8rem)}
 p{margin:0}
-.kicker{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.6rem;margin:0 0 1.1rem}
-.kicker .leaf{width:14px;height:16px;flex:none;color:var(--accent);fill:currentColor}
-.lede{font-size:clamp(1.15rem,1.05rem + .5vw,1.4rem);line-height:1.5;color:var(--text-primary);max-width:var(--measure);text-wrap:pretty}
-.muted{color:var(--text-secondary)}
+.kicker{font-family:var(--body);font-weight:600;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-deep);display:flex;align-items:center;gap:.6rem;margin:0 0 1.1rem}
+.kicker .leaf{width:15px;height:14px;flex:none;color:var(--brass);fill:currentColor}
+.center{text-align:center}
+.center .kicker{justify-content:center}
+.lede{font-size:clamp(1.1rem,1.02rem + .4vw,1.3rem);line-height:1.55;color:var(--ink);max-width:var(--measure);text-wrap:pretty}
+.center .lede,.center .measure{margin-inline:auto}
+.muted{color:var(--ink-2)}
 .measure{max-width:var(--measure);text-wrap:pretty}
 .wrap{width:min(1240px,100% - 2rem);margin-inline:auto}
 @media (min-width:960px){.wrap{width:min(1240px,100% - 5rem)}}
-.skip{position:absolute;left:1rem;top:-3rem;background:var(--accent);color:var(--ink);padding:.6rem 1rem;border-radius:4px;z-index:100;font-weight:600;text-decoration:none}
-.skip:focus{top:1rem;outline:2px solid var(--text-primary);outline-offset:2px}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.skip{position:absolute;left:1rem;top:-3rem;background:var(--ink);color:var(--paper);padding:.6rem 1rem;z-index:100;font-weight:600;text-decoration:none}
+.skip:focus{top:1rem;outline:2px solid var(--brass);outline-offset:2px}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 
-/* ---------- Buttons ---------- */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;font-family:var(--body);font-weight:600;font-size:1rem;letter-spacing:.01em;text-decoration:none;border-radius:3px;padding:.95rem 1.5rem;line-height:1;border:1px solid transparent;cursor:pointer;transition:transform .35s var(--ease-out),background-color .35s var(--ease-out),border-color .35s var(--ease-out),color .35s var(--ease-out);text-shadow:none;min-height:3rem}
-.btn-primary{background:var(--accent);color:var(--ink);border-color:var(--accent)}
-.btn-primary:hover{background:var(--accent-hover);border-color:var(--accent-hover);transform:translateY(-2px)}
-.btn-ghost{background:rgba(23,18,16,.28);color:var(--text-primary);border-color:rgba(243,235,221,.38);backdrop-filter:blur(8px)}
-.btn-ghost:hover{border-color:var(--text-primary);transform:translateY(-2px)}
+/* ---------- Buttons and links : rectangular, small capitals, patient tracking ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;font-family:var(--body);font-weight:600;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border-radius:0;padding:1rem 1.6rem;line-height:1;border:1px solid transparent;cursor:pointer;transition:transform .35s var(--ease-out),background-color .35s var(--ease-out),border-color .35s var(--ease-out),color .35s var(--ease-out);text-shadow:none;min-height:3rem}
 .btn-ink{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.btn-ink:hover{background:#2E241C;transform:translateY(-2px)}
-.btn .ic{width:1.05em;height:1.05em;flex:none}
-@media (pointer:coarse){
-  .btn{min-height:44px}
-  .logo{padding-block:.45rem}
-}
+.btn-ink:hover{background:var(--brass);border-color:var(--brass);color:var(--ink);transform:translateY(-2px)}
+.btn-gold{background:var(--accent);color:var(--canvas);border-color:var(--accent)}
+.btn-gold:hover{background:var(--accent-hover);border-color:var(--accent-hover);transform:translateY(-2px)}
+.btn-ghost{background:rgba(23,18,16,.18);color:var(--text-primary);border-color:rgba(243,235,221,.7);backdrop-filter:blur(6px)}
+.btn-ghost:hover{background:rgba(243,235,221,.12);border-color:var(--text-primary);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-outline:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+.btn .ic{width:1.1em;height:1.1em;flex:none}
+.more{display:inline-flex;align-items:center;gap:.7rem;font-weight:600;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:.45rem 0 .4rem;border-bottom:1px solid var(--ink);transition:color .35s,border-color .35s}
+.more svg{width:1.1rem;height:1.1rem;transition:transform .4s var(--ease-out)}
+.more:hover{color:var(--brass-deep);border-color:var(--brass)}
+.more:hover svg{transform:translateX(5px)}
+@media (pointer:coarse){.btn{min-height:44px}}
 
-/* ---------- Environment layer (fixed, behind everything) ---------- */
-.env{position:fixed;inset:-12%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 30% 20%,rgba(76,44,16,.42) 0%,rgba(23,18,16,0) 60%),radial-gradient(ellipse 60% 50% at 80% 90%,rgba(201,162,74,.10) 0%,rgba(23,18,16,0) 60%),var(--canvas);animation:drift 90s ease-in-out -30s infinite alternate}
-.env::after{content:"";position:absolute;inset:0;opacity:.22;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .85 0 0 0 0 .75 0 0 0 0 .6 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+/* ---------- Fixed environment : paper grain behind the light part ---------- */
+.env{position:fixed;inset:-12%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(166,124,34,.07) 0%,rgba(246,240,228,0) 60%),var(--paper);animation:drift 90s ease-in-out -30s infinite alternate}
+.env::after{content:"";position:absolute;inset:0;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .22 0 0 0 0 .12 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:multiply}
 @keyframes drift{from{transform:translate3d(-2%,-1%,0) scale(1.02)}to{transform:translate3d(2%,1.5%,0) scale(1.06)}}
 
-/* ---------- Nav ---------- */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background-color .5s var(--ease-soft),box-shadow .5s var(--ease-soft),backdrop-filter .5s}
-.nav.solid{background:rgba(23,18,16,.82);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(201,162,74,.18)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:4.5rem}
-.logo{display:inline-flex;align-items:baseline;text-decoration:none;color:var(--text-primary);font-family:var(--display);letter-spacing:.28em;font-size:.95rem;font-weight:500;line-height:1}
-.logo .v{font-size:2.3em;color:var(--accent);letter-spacing:0;margin:0 -.02em 0 .08em;font-weight:300;transform:translateY(.12em);display:inline-block}
-.logo .igne{margin-left:.06em}
-.menu{display:flex;align-items:center;gap:clamp(1rem,2.4vw,2.2rem);list-style:none;margin:0;padding:0}
-.menu a:not(.btn){text-decoration:none;font-weight:500;font-size:.95rem;color:var(--text-primary);opacity:.86;position:relative;padding:.4rem 0}
-.menu a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:.1rem;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease-out)}
+/* ---------- Header : links left, the wordmark in the centre, Réserver on the right ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;color:var(--text-primary);transition:background-color .5s var(--ease-soft),color .5s var(--ease-soft),box-shadow .5s var(--ease-soft)}
+.nav.solid,.nav.menu-open{background:rgba(246,240,228,.97);color:var(--ink);box-shadow:0 1px 0 var(--brass-line)}
+.nav-in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;height:5.25rem}
+.nav-in > nav{display:contents}
+.brand{justify-self:center;display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit;line-height:1}
+.brand .word{font-family:var(--display);font-weight:500;font-size:1.25rem;letter-spacing:.3em;display:inline-flex;align-items:baseline;padding-left:.3em}
+.brand .word .v{font-size:1.9em;letter-spacing:0;color:var(--accent);font-weight:300;margin:0 .02em 0 .1em;transform:translateY(.1em);display:inline-block}
+.nav.solid .brand .word .v,.nav.menu-open .brand .word .v{color:var(--brass)}
+.brand .tag{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;font-weight:500;opacity:.75;margin-top:.45rem;padding-left:.3em}
+.menu{display:flex;align-items:center;gap:clamp(1rem,2.2vw,2rem);list-style:none;margin:0;padding:0;justify-self:start}
+.menu a:not(.btn){text-decoration:none;font-weight:500;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:inherit;opacity:.88;position:relative;padding:.5rem 0}
+.menu a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:.15rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease-out)}
 .menu a:not(.btn):hover{opacity:1}
 .menu a:not(.btn):hover::after{transform:scaleX(1)}
-.menu .btn{padding:.7rem 1.1rem;font-size:.92rem}
-.burger{display:none;background:none;border:1px solid rgba(243,235,221,.35);color:var(--text-primary);width:44px;height:44px;border-radius:3px;cursor:pointer;align-items:center;justify-content:center}
+.menu li.cta{display:none}
+.nav-right{justify-self:end;display:flex;align-items:center;gap:.75rem}
+.nav .btn{padding:.8rem 1.2rem;font-size:.74rem;min-height:2.6rem}
+.nav.solid .btn-gold,.nav.menu-open .btn-gold{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.nav.solid .btn-gold:hover,.nav.menu-open .btn-gold:hover{background:var(--brass);border-color:var(--brass);color:var(--ink)}
+.nav-tel{display:none;width:44px;height:44px;align-items:center;justify-content:center;color:inherit}
+.nav-tel svg{width:20px;height:20px}
+.burger{display:none;background:none;border:1px solid currentColor;color:inherit;width:44px;height:44px;border-radius:0;cursor:pointer;align-items:center;justify-content:center;opacity:.9}
 .burger svg{width:22px;height:22px}
 .burger .x{display:none}
 .burger[aria-expanded="true"] .x{display:block}
 .burger[aria-expanded="true"] .h{display:none}
-@media (max-width:860px){
+@media (max-width:900px){
+  .nav-in{height:4.5rem;grid-template-columns:44px 1fr 44px}
+  .brand .word{font-size:1.05rem}
+  .brand .tag{display:none}
+  .nav-tel{display:inline-flex;justify-self:start}
+  .nav-right .btn{display:none}
   .burger{display:inline-flex}
-  .menu{position:fixed;inset:4.5rem 0 auto 0;flex-direction:column;align-items:stretch;gap:0;background:rgba(23,18,16,.97);padding:.5rem 1rem 1.25rem;border-bottom:1px solid var(--accent-line);transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),visibility 0s .35s}
+  .menu{position:fixed;inset:4.5rem 0 auto 0;width:100%;justify-self:auto;z-index:60;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);color:var(--ink);padding:.5rem 1rem 1.25rem;border-bottom:1px solid var(--brass-line);box-shadow:0 30px 60px -30px rgba(35,26,18,.35);transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),visibility 0s .35s}
   .menu.open{opacity:1;transform:none;visibility:visible;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),visibility 0s}
-  .menu li{border-bottom:1px solid rgba(243,235,221,.08)}
+  .menu li{border-bottom:1px solid rgba(35,26,18,.1)}
   .menu li:last-child{border:0;padding-top:1rem}
-  .menu a:not(.btn){display:block;padding:1rem 0;font-size:1.1rem}
-  .menu .btn{width:100%}
+  .menu li.cta{display:block}
+  .menu a:not(.btn){display:block;padding:1.1rem 0;font-size:.95rem;letter-spacing:.14em;opacity:1}
+  .menu .btn{width:100%;background:var(--ink);color:var(--paper);border-color:var(--ink)}
 }
 
-/* ---------- Hero ---------- */
-.hero{position:relative;height:860vh;margin:0}
+/* ---------- Hero : the fire, untouched ---------- */
+.hero{position:relative;height:860vh;margin:0;color:var(--text-primary)}
 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--canvas)}
 .journey{position:absolute;inset:0}
 .ly{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:transform,opacity;transform-origin:50% 55%}
@@ -122,37 +146,34 @@ p{margin:0}
 .panel::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(23,18,16,.85) 0%,rgba(23,18,16,0) 32%)}
 .settle-dim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(23,18,16,.94) 0%,rgba(23,18,16,.86) 50%,rgba(23,18,16,.2) 100%);opacity:0;pointer-events:none}
 .scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(23,18,16,.72) 0%,rgba(23,18,16,0) 22%),radial-gradient(ellipse 120% 90% at 50% 45%,rgba(10,7,5,0) 35%,rgba(10,7,5,.66) 100%)}
-.band{position:absolute;z-index:2;max-width:min(44rem,88vw);opacity:0;pointer-events:none;text-shadow:var(--tshadow);--k:0}
-/* the per-band matte : flat at the scrim's peak across the whole text box, then a soft fall-off outside it (worst-pixel audit at 3.5:1 or better) */
+.band{position:absolute;z-index:2;max-width:min(44rem,88vw);opacity:0;pointer-events:none;text-shadow:var(--tshadow);--k:0;color:var(--text-primary)}
 .band::before{content:"";position:absolute;inset:-58% -38%;pointer-events:none;opacity:calc(.3 + .7*var(--k,1));background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(8,5,3,var(--sa,.86)) 0%,rgba(8,5,3,var(--sa,.86)) 64%,rgba(8,5,3,calc(var(--sa,.86)*.55)) 82%,rgba(8,5,3,0) 100%);z-index:-1}
-.band .kicker{color:var(--accent);text-shadow:0 1px 3px rgba(8,5,3,.9)}
+.band .kicker{color:var(--accent);font-family:var(--mono);font-weight:500;font-size:.78rem;letter-spacing:.16em;text-shadow:0 1px 3px rgba(8,5,3,.9)}
 .band .h{font-family:var(--display);font-size:clamp(2.1rem,1.4rem + 3.4vw,4.6rem);line-height:1.04;letter-spacing:-.015em;font-weight:400;margin:0;color:var(--text-primary)}
 .band .sub{margin-top:1rem;font-size:clamp(1.05rem,1rem + .45vw,1.35rem);color:var(--text-primary);opacity:.92;max-width:34rem}
 .band .w{display:inline-block;white-space:pre}
 .band .c{display:inline-block}
-.b1{right:7%;top:50%;transform:translateY(-50%);--sa:.6;max-width:min(44rem,48vw)}
+.b1{right:6%;top:50%;transform:translateY(-50%);--sa:.72;max-width:min(42rem,44vw)}
 .b1::before{inset:-40% -30%}
 .b2{left:7%;top:20%;--sa:.88;max-width:min(40rem,60vw)}
 .b3{left:7%;bottom:14%;--sa:.86;max-width:min(40rem,60vw)}
 .b4{right:6%;top:14%;--sa:.86;text-align:left;max-width:min(36rem,46vw)}
 .b5{left:7%;top:16%;--sa:.88;max-width:min(40rem,56vw)}
-.b6{left:7%;top:50%;transform:translateY(-50%);max-width:min(40rem,48vw);--sa:.5}
+.b6{left:7%;top:50%;transform:translateY(-50%);max-width:min(38rem,43vw);--sa:.6}
 .b6::before{inset:-26% -20%}
 .b6 .h{font-size:clamp(2.2rem,1.4rem + 3.2vw,4.4rem);font-weight:300}
 .b6 .sub{max-width:36rem;margin-top:1.25rem}
-.b6 .cta{display:flex;flex-wrap:wrap;gap:.8rem 1rem;margin-top:1.75rem;pointer-events:auto;align-items:center}
-.b6 .tel{font-family:var(--mono);font-size:.95rem;letter-spacing:.06em;color:var(--text-primary);text-decoration:none;border-bottom:1px solid var(--accent-line);padding-bottom:.15rem}
-.b6 .tel:hover{border-color:var(--accent)}
-/* The title card : the logotype with the drawn V */
+.b6 .cta{display:flex;flex-wrap:wrap;gap:.8rem 1.25rem;margin-top:1.75rem;pointer-events:auto;align-items:center}
+.tel{font-family:var(--mono);font-size:.95rem;letter-spacing:.06em;color:var(--text-primary);text-decoration:none;border-bottom:1px solid var(--accent-line);padding-bottom:.15rem}
+.tel:hover{border-color:var(--accent)}
 .h1 .vis{display:inline-flex;align-items:baseline;white-space:nowrap}
 .vmark{display:inline-block;height:.86em;width:auto;vertical-align:-.06em;margin:0 -.02em 0 .04em;overflow:visible}
 .vmark path{fill:var(--accent);stroke:var(--accent);stroke-width:2.2;stroke-linejoin:round;paint-order:stroke fill}
-.b1 .h1{font-size:clamp(4rem,2.4rem + 7.5vw,10rem);line-height:.92;letter-spacing:-.025em;font-weight:300;margin-top:.1em}
+.b1 .h1{font-size:clamp(4rem,2.4rem + 7.5vw,10rem);line-height:.92;letter-spacing:-.025em;font-weight:300;margin-top:.1em;color:var(--text-primary)}
 .b1 .kicker{letter-spacing:.22em}
 .b1 .line{display:block;width:min(18rem,60%);height:1px;background:linear-gradient(90deg,var(--accent),rgba(201,162,74,0));margin:1.6rem 0 1.2rem;transform-origin:left}
 .b1 .sub{font-size:clamp(1.1rem,1rem + .6vw,1.5rem);max-width:30rem}
 .bloom{position:absolute;inset:-20%;pointer-events:none;mix-blend-mode:screen;opacity:0;background:radial-gradient(ellipse 34% 42% at 36% 62%,rgba(232,116,28,.55) 0%,rgba(232,116,28,.18) 40%,rgba(232,116,28,0) 70%)}
-/* ---- The arrival (plays once, time based, then hands over to the scroll) ---- */
 @keyframes vdraw{from{stroke-dashoffset:440;fill-opacity:0}60%{fill-opacity:0}to{stroke-dashoffset:0;fill-opacity:1}}
 @keyframes slidein{from{opacity:0;transform:translateX(var(--dx,14px))}to{opacity:1;transform:none}}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -173,7 +194,6 @@ p{margin:0}
 .stage.intro .cue{animation:fadein 1.2s var(--ease-out) 3.2s backwards}
 body.intro .nav{animation:fadein 1.2s var(--ease-out) 2.6s backwards}
 .stage.intro .journey{animation:breathe 28s ease-in-out -8s infinite alternate}
-/* the same arrival, lighter, on the static hero */
 .static-hero.intro .poster{animation:ignite 2.4s var(--ease-out) .2s both}
 .static-hero.intro .kicker{animation:rise 1s var(--ease-out) .9s both}
 .static-hero.intro .h1{animation:rise 1.1s var(--ease-out) 1.05s both}
@@ -181,7 +201,6 @@ body.intro .nav{animation:fadein 1.2s var(--ease-out) 2.6s backwards}
 .static-hero.intro .sub{animation:rise 1s var(--ease-out) 1.4s both}
 .static-hero.intro .cta{animation:rise 1s var(--ease-out) 1.7s both}
 body.intro-static .nav{animation:fadein 1s var(--ease-out) 1.6s backwards}
-/* entrances, all scrubbed from --k */
 .fx-blur .pair{position:relative;display:block}
 .fx-blur .soft{position:absolute;inset:0;filter:blur(12px);opacity:calc(1 - var(--k));transform:scale(calc(1.02 - .02*var(--k)))}
 .fx-blur .sharp{opacity:var(--k)}
@@ -202,15 +221,15 @@ body.intro-static .nav{animation:fadein 1s var(--ease-out) 1.6s backwards}
 .embers i{position:absolute;bottom:-4%;width:4px;height:4px;border-radius:50%;background:var(--ember);box-shadow:0 0 8px 2px rgba(232,116,28,.55);opacity:0;left:var(--x);animation:ember var(--d,9s) linear var(--dl,0s) infinite paused;transform:translate3d(0,0,0)}
 .live .embers i,.stage .embers i{animation-play-state:running}
 @keyframes ember{0%{transform:translate3d(0,0,0) scale(.6);opacity:0}12%{opacity:.75}55%{opacity:.45}100%{transform:translate3d(var(--dx,20px),-48vh,0) scale(.2);opacity:0}}
-.static-hero{display:none;position:absolute;inset:0}
+.static-hero{display:none;position:absolute;inset:0;color:var(--text-primary)}
 .static-hero img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
 .static-hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,18,16,.35) 0%,rgba(23,18,16,.25) 35%,rgba(23,18,16,.9) 78%,rgba(23,18,16,1) 100%)}
 .static-hero .txt{position:absolute;left:1rem;right:1rem;bottom:clamp(2rem,8vh,4.5rem);text-shadow:var(--tshadow)}
-.static-hero .h1{font-size:clamp(3.4rem,14vw,6rem);line-height:.95;font-weight:300;letter-spacing:-.02em;display:flex;align-items:baseline;white-space:nowrap}
+.static-hero .kicker{color:var(--accent);font-family:var(--mono);font-weight:500;letter-spacing:.2em}
+.static-hero .h1{font-size:clamp(3.4rem,14vw,6rem);line-height:.95;font-weight:300;letter-spacing:-.02em;display:flex;align-items:baseline;white-space:nowrap;color:var(--text-primary)}
 .static-hero .sub{margin-top:1rem;max-width:30rem;font-size:1.1rem}
 .static-hero .cta{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;margin-top:1.4rem;align-items:center}
-.static-hero .tel{font-family:var(--mono);letter-spacing:.06em;text-decoration:none;color:var(--text-primary);border-bottom:1px solid var(--accent-line);padding-bottom:.15rem}
-/* The five gates: identical strings in the JS GATES array */
+/* The five gates : identical strings in the JS GATES array */
 @media (max-width:720px),(orientation:portrait) and (max-width:1024px),(orientation:portrait) and (pointer:coarse),(orientation:landscape) and (pointer:coarse) and (max-height:560px),(prefers-reduced-motion:reduce){
   .hero{height:auto}
   .stage{position:relative;height:100vh;height:100svh;min-height:34rem}
@@ -219,173 +238,178 @@ body.intro-static .nav{animation:fadein 1s var(--ease-out) 1.6s backwards}
 }
 @media (max-height:560px){.cue,.embers{display:none}}
 
-/* ---------- Below the hero ---------- */
-.below{position:relative}
-.vine{position:absolute;top:0;left:0;width:72px;height:100%;pointer-events:none;display:none;z-index:1}
-.vine svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.vine .stem{fill:none;stroke:var(--accent);stroke-width:1.4;stroke-linecap:round;opacity:.9}
-.vine .leaf{fill:var(--accent);opacity:0;transform-box:fill-box;transform-origin:0 50%;transform:scale(.2) rotate(-30deg);transition:transform 1.1s var(--ease-out),opacity .9s var(--ease-out)}
-.vine .leaf.open{opacity:.95;transform:scale(1) rotate(0deg)}
-@media (min-width:1100px){.vine{display:block}.below{--rail:72px}}
+/* ---------- Below the hero : the paper ---------- */
+.below{position:relative;background:var(--paper)}
 section{position:relative;padding:var(--space) 0}
-.below .wrap{padding-left:var(--rail)}
-.sec-head{display:grid;gap:1.25rem;margin-bottom:clamp(2.5rem,5vw,4rem)}
-.rule{height:1px;background:linear-gradient(90deg,var(--accent-line),rgba(201,162,74,0));position:relative;margin:0 0 var(--space)}
-.rule::before{content:"";position:absolute;left:0;top:-3px;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(201,162,74,.5);opacity:.4;transition:opacity .8s}
-.rv.in .rule::before{opacity:1;animation:dot 5s ease-in-out infinite}
-@keyframes dot{0%,100%{box-shadow:0 0 0 0 rgba(201,162,74,.45)}50%{box-shadow:0 0 0 7px rgba(201,162,74,0)}}
-/* reveals */
+.rule{height:1px;background:linear-gradient(90deg,var(--brass),rgba(166,124,34,.1));position:relative;margin:0 0 var(--space);transform:scaleX(0);transform-origin:left;transition:transform 1.6s var(--ease-out)}
+.rv.in .rule{transform:scaleX(1)}
+.rule::before{content:"";position:absolute;left:0;top:-3px;width:7px;height:7px;border-radius:50%;background:var(--brass)}
+.rv.in .rule::before{animation:dot 5s ease-in-out infinite}
+@keyframes dot{0%,100%{box-shadow:0 0 0 0 rgba(166,124,34,.4)}50%{box-shadow:0 0 0 7px rgba(166,124,34,0)}}
 .rv .part{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
 .rv.in .part{opacity:1;transform:none}
 .rv.in .part:nth-child(2){transition-delay:.09s}.rv.in .part:nth-child(3){transition-delay:.18s}.rv.in .part:nth-child(4){transition-delay:.27s}.rv.in .part:nth-child(5){transition-delay:.36s}.rv.in .part:nth-child(6){transition-delay:.45s}
 .rv.in.settled .part:nth-child(n){transition-delay:0s}
-.ph{position:relative;overflow:hidden;border-radius:3px;background:var(--panel)}
-.ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease-out)}
-.ph:hover img{transform:scale(1.035)}
+.ph{position:relative;overflow:hidden;background:var(--sand)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease-out)}
+.ph:hover img{transform:scale(1.03)}
+.sec-intro{max-width:46rem;margin-inline:auto}
+.sec-intro h2{font-size:clamp(2rem,1.5rem + 1.6vw,2.8rem)}
+.sec-intro .lede{margin-top:1.4rem;color:var(--ink-2)}
+
+/* alternating rows, the reference's rhythm */
+.row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:center;margin-top:var(--space)}
+.row:first-of-type{margin-top:0}
+.row .num{font-family:var(--display);font-size:1rem;color:var(--brass);letter-spacing:.1em;margin-bottom:1rem}
+.row h3{font-size:clamp(1.7rem,1.3rem + 1.1vw,2.4rem)}
+.row p.txt{margin-top:1.1rem;color:var(--ink-2);max-width:46ch}
+.row .more{margin-top:1.6rem}
+.row-txt{text-align:center;padding-inline:clamp(0rem,3vw,2.5rem)}
+.row-txt p.txt{margin-inline:auto}
+.row-ph .ph.tall{aspect-ratio:4/5;max-width:30rem;margin-inline:auto}
+.row.rev .row-txt{order:2}
+.row.rev .row-ph{order:1}
+.collage{position:relative;aspect-ratio:5/4}
+.collage .a{position:absolute;left:0;top:0;width:68%;height:72%}
+.collage .b{position:absolute;right:0;bottom:0;width:52%;height:58%;box-shadow:0 20px 60px -30px rgba(35,26,18,.45)}
+@media (max-width:860px){
+  .row{grid-template-columns:1fr;gap:1.75rem}
+  .row.rev .row-txt{order:1}.row.rev .row-ph{order:2}
+  .row-ph .ph.tall{aspect-ratio:4/3;max-width:none}
+  .collage{aspect-ratio:4/3}
+}
 
 /* Le feu */
-.feu{background:linear-gradient(180deg,var(--canvas) 0%,var(--canvas-2) 100%)}
-.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.25rem,2.6vw,2.5rem);margin-top:clamp(2.5rem,5vw,4rem)}
-.pillar .ph{aspect-ratio:4/5}
-.pillar h3{margin:1.2rem 0 .55rem;display:flex;align-items:baseline;gap:.75rem}
-.pillar h3 .n{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.1em}
-.pillar p{color:var(--text-secondary);max-width:34ch}
-@media (max-width:860px){.pillars{grid-template-columns:1fr 1fr}.pillar:last-child{grid-column:1/-1}.pillar:last-child .ph{aspect-ratio:16/10}}
-@media (max-width:560px){.pillars{grid-template-columns:1fr}.pillar .ph,.pillar:last-child .ph{aspect-ratio:4/3}}
-/* la braise : interactive moment */
+.feu .rows{margin-top:var(--space)}
+/* la braise : the one interactive moment */
 .braise{margin-top:var(--space);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(1.5rem,4vw,4rem);align-items:center;--heat:0}
-.braise .fire{position:relative;aspect-ratio:3/2;border-radius:3px;overflow:hidden;background:#0a0603}
+.braise .fire{position:relative;aspect-ratio:3/2;overflow:hidden;background:#0a0603}
 .braise .fire img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .braise .fire .hot{opacity:var(--heat);filter:brightness(1.55) saturate(1.25)}
 .braise .fire .glow{position:absolute;inset:-20%;background:radial-gradient(ellipse 55% 55% at 50% 60%,rgba(232,116,28,.55),rgba(232,116,28,0) 70%);opacity:calc(var(--heat)*.9);mix-blend-mode:screen;pointer-events:none}
-.braise .fire::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,6,3,0) 55%,rgba(10,6,3,.55) 100%);pointer-events:none}
-.hold{appearance:none;background:transparent;border:0;padding:0;color:var(--text-primary);display:flex;align-items:center;gap:1rem;cursor:pointer;font:inherit;text-align:left;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;min-height:44px}
+.braise .fire::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,6,3,0) 55%,rgba(10,6,3,.5) 100%);pointer-events:none}
+.braise .lead{color:var(--ink-2);max-width:42ch}
+.hold{appearance:none;background:transparent;border:0;padding:0;color:var(--ink);display:flex;align-items:center;gap:1.1rem;cursor:pointer;font:inherit;text-align:left;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;min-height:44px;margin-top:1.5rem}
 .hold .ring{width:64px;height:64px;flex:none;position:relative}
 .hold .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.hold .ring .bg{fill:none;stroke:rgba(201,162,74,.22);stroke-width:2}
-.hold .ring .fg{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:176;stroke-dashoffset:calc(176*(1 - var(--heat)))}
-.hold .ring i{position:absolute;inset:14px;border-radius:50%;background:radial-gradient(circle,rgba(232,116,28,calc(.25 + .7*var(--heat))),rgba(232,116,28,0) 70%);transform:scale(calc(.6 + .5*var(--heat)))}
-.hold .lbl{display:block;font-family:var(--mono);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-.hold .hint{display:block;color:var(--text-secondary);font-size:.95rem;margin-top:.3rem;max-width:34ch}
-.hold:hover .ring .bg{stroke:rgba(201,162,74,.45)}
+.hold .ring .bg{fill:none;stroke:rgba(166,124,34,.28);stroke-width:2}
+.hold .ring .fg{fill:none;stroke:var(--brass);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:176;stroke-dashoffset:calc(176*(1 - var(--heat)))}
+.hold .ring i{position:absolute;inset:14px;border-radius:50%;background:radial-gradient(circle,rgba(232,116,28,calc(.3 + .7*var(--heat))),rgba(232,116,28,0) 70%);transform:scale(calc(.6 + .5*var(--heat)))}
+.hold .lbl{display:block;font-weight:600;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-deep)}
+.hold .hint{display:block;color:var(--ink-2);font-size:.95rem;margin-top:.35rem;max-width:34ch}
+.hold:hover .ring .bg{stroke:rgba(166,124,34,.55)}
 .braise.done .hold{cursor:default}
-.lit{list-style:none;margin:1.75rem 0 0;padding:0;border-top:1px solid rgba(201,162,74,.22)}
-.lit li{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;padding:.95rem 0;border-bottom:1px solid rgba(201,162,74,.22);opacity:.5;transform:translateX(-6px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out),color .7s}
-.lit li .p{font-family:var(--mono);font-size:.92rem;letter-spacing:.04em;white-space:nowrap;color:var(--text-secondary)}
+.lit{list-style:none;margin:1.75rem 0 0;padding:0;border-top:1px solid var(--brass-line)}
+.lit li{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;padding:.95rem 0;border-bottom:1px solid var(--brass-line);opacity:.5;transform:translateX(-6px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out),color .7s}
+.lit li .p{font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap;color:var(--ink-2)}
 .lit li.on{opacity:1;transform:none}
-.lit li.on .p{color:var(--accent)}
-.braise .lead{color:var(--text-secondary);max-width:40ch}
+.lit li.on .p{color:var(--brass-deep)}
 @media (max-width:860px){.braise{grid-template-columns:1fr}}
 
-/* La carte (paper) */
-.carte{background:var(--paper);color:var(--ink)}
-.carte .kicker{color:var(--brass-deep)}
-.carte .kicker .leaf{color:var(--brass-deep)}
-.carte .rule{background:linear-gradient(90deg,rgba(127,96,32,.5),rgba(127,96,32,0))}
-.carte .rule::before{background:var(--brass-deep)}
-.carte .lede{color:var(--ink)}
-.carte-head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,4rem);align-items:end}
-.carte-head p{color:var(--ink-2);max-width:var(--measure)}
-.carte-note{font-size:.95rem;color:var(--ink-2)}
-.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3.5rem) clamp(2rem,5vw,5rem);margin-top:clamp(2.5rem,5vw,4rem)}
-.group h3{font-size:clamp(1.3rem,1.1rem + .7vw,1.7rem);margin:0 0 1rem;display:flex;align-items:baseline;gap:.8rem;color:var(--ink)}
-.group h3::after{content:"";flex:1;height:1px;background:rgba(30,23,17,.18)}
-.dish{display:flex;align-items:baseline;gap:.6rem;padding:.55rem 0;font-size:1.02rem}
+/* La carte : the sand band */
+.carte{background:var(--sand)}
+.carte .rule{display:none}
+.carte .sec-intro .lede{color:var(--ink-2)}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3.5rem) clamp(2.5rem,6vw,6rem);margin-top:clamp(3rem,6vw,4.5rem)}
+.group h3{font-size:clamp(1.3rem,1.1rem + .6vw,1.65rem);margin:0 0 1rem;display:flex;align-items:baseline;gap:.9rem;color:var(--ink)}
+.group h3::after{content:"";flex:1;height:1px;background:var(--brass-line)}
+.dish{display:flex;align-items:baseline;gap:.6rem;padding:.6rem 0;font-size:1rem}
 .dish .n{color:var(--ink)}
 .dish .d{display:block;color:var(--ink-2);font-size:.9rem;margin-top:.1rem}
-.dish .l{flex:1;border-bottom:1px dotted rgba(30,23,17,.35);transform:translateY(-.35em);min-width:1.5rem}
-.dish .p{font-family:var(--mono);font-size:.92rem;white-space:nowrap;color:var(--ink);font-variant-numeric:tabular-nums}
-.group.kids{background:var(--paper-2);padding:1.5rem;border-radius:3px}
+.dish .l{flex:1;border-bottom:1px dotted rgba(35,26,18,.38);transform:translateY(-.35em);min-width:1.5rem}
+.dish .p{font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap;color:var(--ink)}
+.group.kids{background:var(--paper);padding:1.5rem 1.75rem}
 .group.kids h3::after{display:none}
-.carte .btn-row{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center;margin-top:clamp(2rem,4vw,3rem)}
-.carte .sides{font-size:.95rem;color:var(--ink-2)}
-@media (max-width:860px){.carte-head,.menu-grid{grid-template-columns:1fr}}
+.carte-note{font-size:.92rem;color:var(--ink-2)}
+.carte .btn-row{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center;justify-content:center;margin-top:clamp(2.5rem,5vw,3.5rem)}
+.carte .sides{font-size:.92rem;color:var(--ink-2)}
+@media (max-width:860px){.menu-grid{grid-template-columns:1fr}}
 
-/* La salle (wood) */
-.salle{background:linear-gradient(180deg,var(--wood-2) 0%,#2A1A0E 50%,var(--canvas-2) 100%)}
-.salle-grid{display:grid;grid-template-columns:5fr 6fr;gap:clamp(1.5rem,4vw,4rem);align-items:start}
-.salle .tall{aspect-ratio:4/5}
-.salle .tall::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 0 rgba(201,162,74,0);pointer-events:none;animation:lampglow 7s ease-in-out -2s infinite}
-@keyframes lampglow{0%,100%{box-shadow:inset 0 -40px 90px -40px rgba(201,162,74,0)}50%{box-shadow:inset 0 -40px 90px -40px rgba(201,162,74,.28)}}
-.salle .txt{padding-top:clamp(0rem,3vw,2.5rem)}
-.salle .txt p{color:var(--text-secondary)}
-.salle .trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:clamp(2rem,4vw,3.5rem)}
-.salle .trio .ph{aspect-ratio:1}
-.salle .trio figure{margin:0}
-.salle .trio figcaption{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;color:var(--text-secondary);margin-top:.6rem}
-.salle .link{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.6rem;color:var(--text-primary);text-decoration:none;border-bottom:1px solid var(--accent-line);padding-bottom:.2rem;font-weight:500}
-.salle .link:hover{border-color:var(--accent)}
-.salle .link svg{width:1em;height:1em;transition:transform .4s var(--ease-out)}
-.salle .link:hover svg{transform:translateX(4px)}
-@media (max-width:860px){.salle-grid{grid-template-columns:1fr}.salle .tall{aspect-ratio:4/3}}
-@media (max-width:560px){.salle .trio{grid-template-columns:1fr 1fr}.salle .trio figure:last-child{grid-column:1/-1}.salle .trio figure:last-child .ph{aspect-ratio:16/10}}
+/* La salle */
+.salle .wide{display:grid;grid-template-columns:2fr 1fr;gap:1rem;margin-top:var(--space)}
+.salle .wide .ph{aspect-ratio:16/10}
+.salle .wide .ph.sq{aspect-ratio:auto}
+.salle figure{margin:0}
+.salle figcaption{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:.7rem;font-weight:500}
+@media (max-width:700px){.salle .wide{grid-template-columns:1fr}.salle .wide .ph,.salle .wide .ph.sq{aspect-ratio:16/10}}
 
 /* Les avis */
-.avis{background:var(--canvas-2)}
-.ledger{list-style:none;margin:0;padding:0;counter-reset:n;border-top:1px solid rgba(201,162,74,.22)}
-.ledger li{counter-increment:n;display:grid;grid-template-columns:5rem 1fr 2fr;gap:1.5rem;align-items:baseline;padding:1.6rem 0;border-bottom:1px solid rgba(201,162,74,.22)}
-.ledger li::before{content:"0" counter(n);font-family:var(--display);font-size:2.4rem;font-weight:300;color:var(--accent);line-height:1}
-.ledger h3{font-size:clamp(1.25rem,1.05rem + .7vw,1.7rem)}
-.ledger p{color:var(--text-secondary);max-width:var(--measure)}
-.ratings{display:flex;flex-wrap:wrap;gap:1rem 2.5rem;margin-top:2.25rem;align-items:center}
-.ratings a{display:inline-flex;align-items:baseline;gap:.7rem;text-decoration:none;color:var(--text-primary);padding:.4rem 0;border-bottom:1px solid transparent;transition:border-color .4s}
-.ratings a:hover{border-color:var(--accent-line)}
-.ratings .score{font-family:var(--display);font-size:2rem;color:var(--accent);font-weight:400}
-.ratings .score small{font-size:.9rem;color:var(--text-secondary);font-family:var(--mono);letter-spacing:.04em}
-.ratings .src{font-size:.95rem;color:var(--text-secondary)}
-.ratings .note{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--text-secondary);flex-basis:100%}
-@media (max-width:760px){.ledger li{grid-template-columns:3.2rem 1fr}.ledger li p{grid-column:2}.ledger li::before{font-size:1.8rem}}
+.avis .trois{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,4rem);margin-top:clamp(3rem,6vw,4.5rem);text-align:center}
+.avis .trois .num{font-family:var(--display);font-size:1rem;color:var(--brass);letter-spacing:.1em;margin-bottom:.8rem}
+.avis .trois h3{font-size:clamp(1.3rem,1.1rem + .6vw,1.6rem)}
+.avis .trois p{color:var(--ink-2);margin-top:.8rem;max-width:34ch;margin-inline:auto}
+.ratings{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 3rem;margin-top:clamp(2.5rem,5vw,3.5rem);align-items:baseline;padding-top:2rem;border-top:1px solid var(--brass-line)}
+.ratings a{display:inline-flex;align-items:baseline;gap:.7rem;text-decoration:none;color:var(--ink);padding:.4rem 0;border-bottom:1px solid transparent;transition:border-color .4s}
+.ratings a:hover{border-color:var(--brass)}
+.ratings .score{font-family:var(--display);font-size:2rem;color:var(--ink);font-weight:400}
+.ratings .score small{font-size:.9rem;color:var(--ink-3)}
+.ratings .src{font-size:.95rem;color:var(--ink-2)}
+.ratings .note{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);flex-basis:100%;text-align:center;font-weight:500}
+@media (max-width:760px){.avis .trois{grid-template-columns:1fr;gap:2.5rem}}
 
-/* Infos : FAQ + pratique */
-.infos{background:var(--canvas)}
-.infos-grid{display:grid;grid-template-columns:7fr 4fr;gap:clamp(2rem,5vw,5rem);align-items:start}
-.faq{border-top:1px solid rgba(201,162,74,.22)}
-.faq details{border-bottom:1px solid rgba(201,162,74,.22)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.15rem 0;font-family:var(--display);font-size:clamp(1.15rem,1rem + .6vw,1.5rem);color:var(--text-primary);min-height:44px}
+/* Infos : FAQ + practical card */
+.infos-grid{display:grid;grid-template-columns:7fr 4fr;gap:clamp(2rem,5vw,5rem);align-items:start;margin-top:clamp(2.5rem,5vw,3.5rem)}
+.faq{border-top:1px solid var(--brass-line)}
+.faq details{border-bottom:1px solid var(--brass-line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.15rem 0;font-family:var(--display);font-size:clamp(1.15rem,1rem + .5vw,1.4rem);color:var(--ink);min-height:44px}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary svg{width:20px;height:20px;flex:none;color:var(--accent);transition:transform .45s var(--ease-out)}
+.faq summary svg{width:20px;height:20px;flex:none;color:var(--brass);transition:transform .45s var(--ease-out)}
 .faq details[open] summary svg{transform:rotate(45deg)}
-.faq .a{padding:0 0 1.25rem;color:var(--text-secondary);max-width:var(--measure)}
-.faq .a a{color:var(--text-primary)}
-.practical{background:var(--panel);border:1px solid rgba(201,162,74,.18);border-radius:3px;padding:clamp(1.5rem,3vw,2.25rem);position:sticky;top:6rem}
+.faq .a{padding:0 0 1.25rem;color:var(--ink-2);max-width:var(--measure)}
+.faq .a a{color:var(--ink)}
+.practical{background:var(--sand);padding:clamp(1.5rem,3vw,2.25rem);position:sticky;top:7rem}
 .practical dl{margin:0;display:grid;gap:1.2rem}
-.practical dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
-.practical dd{margin:0;color:var(--text-primary)}
-.practical dd a{text-decoration:none;border-bottom:1px solid var(--accent-line);padding-bottom:.1rem}
-.practical dd a:hover{border-color:var(--accent)}
+.practical dt{font-weight:600;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-deep);margin-bottom:.3rem}
+.practical dd{margin:0;color:var(--ink)}
+.practical dd a{text-decoration:none;border-bottom:1px solid var(--brass-line);padding-bottom:.1rem}
+.practical dd a:hover{border-color:var(--brass)}
 .practical .pin{display:inline-flex;align-items:center;gap:.5rem}
-.practical .pin svg{width:16px;height:16px;color:var(--accent);animation:pin 6s ease-in-out -1s infinite}
+.practical .pin svg{width:16px;height:16px;color:var(--brass);animation:pin 6s ease-in-out -1s infinite}
 @keyframes pin{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 .practical .btn{margin-top:1.5rem;width:100%}
 @media (max-width:860px){.infos-grid{grid-template-columns:1fr}.practical{position:static}}
 
-/* Final CTA */
-.fin{padding:0;position:relative;min-height:70vh;display:grid;align-items:center;overflow:hidden;isolation:isolate}
+/* Final band : back to the fire */
+.fin{padding:0;position:relative;min-height:64vh;display:grid;align-items:center;overflow:hidden;isolation:isolate;color:var(--text-primary)}
 .fin .bg{position:absolute;inset:0;z-index:-2}
 .fin .bg img{width:100%;height:100%;object-fit:cover;object-position:50% 60%}
-.fin .veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(23,18,16,.92) 0%,rgba(23,18,16,.55) 50%,rgba(23,18,16,.92) 100%)}
-.fin .wrap{padding-block:var(--space);text-shadow:var(--tshadow)}
-.fin h2{font-size:clamp(2.4rem,1.6rem + 4vw,5rem);font-weight:300}
-.fin p{margin-top:1.25rem;max-width:38rem;font-size:1.15rem}
-.fin .cta{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;margin-top:2rem;align-items:center}
-.fin .tel{font-family:var(--mono);letter-spacing:.06em;text-decoration:none;border-bottom:1px solid var(--accent-line);padding-bottom:.15rem}
-.fin .tel:hover{border-color:var(--accent)}
+.fin .veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(23,18,16,.9) 0%,rgba(23,18,16,.55) 50%,rgba(23,18,16,.9) 100%)}
+.fin .wrap{padding-block:var(--space);text-shadow:var(--tshadow);text-align:center}
+.fin h2{font-size:clamp(2.4rem,1.6rem + 4vw,5rem);font-weight:300;color:var(--text-primary)}
+.fin p{margin:1.25rem auto 0;max-width:38rem;font-size:1.15rem}
+.fin .cta{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 1.5rem;margin-top:2rem;align-items:center}
+
+/* The frieze : a vine drawn in one line, drawing itself when it arrives */
+.frieze{padding:clamp(2rem,4vw,3rem) 0 0;line-height:0;overflow:hidden}
+.frieze svg{width:100%;height:auto;min-height:72px;display:block;color:var(--brass)}
+.frieze path,.frieze circle{fill:none;vector-effect:non-scaling-stroke}
+.frieze path{stroke-dasharray:1200;stroke-dashoffset:1200;transition:stroke-dashoffset 3.4s cubic-bezier(.3,0,.2,1)}
+.frieze circle{opacity:0;transition:opacity 1s var(--ease-out) 2.2s}
+.frieze.draw path{stroke-dashoffset:0}
+.frieze.draw circle{opacity:1}
 
 /* Footer */
-footer{background:#120E0C;padding:3.5rem 0 2.5rem;color:var(--text-secondary);font-size:.95rem}
-.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2rem}
-.foot h4{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 .8rem;font-weight:500}
-.foot p{margin:.2rem 0}
-.foot a{text-decoration:none;border-bottom:1px solid rgba(201,162,74,.25);padding-bottom:.05rem}
-.foot a:hover{color:var(--text-primary);border-color:var(--accent)}
-.foot .brand p{max-width:30ch;margin-top:1rem}
-.copy{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid rgba(201,162,74,.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem;font-size:.85rem}
+footer{background:var(--paper);padding:3rem 0 2.5rem;color:var(--ink-2);font-size:.95rem;border-top:1px solid var(--brass-line)}
+.foot{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem}
+.foot h4{font-family:var(--display);font-weight:500;font-size:1.15rem;color:var(--ink);margin:0 0 1rem}
+.foot p{margin:.25rem 0}
+.foot a{text-decoration:none;color:var(--ink);border-bottom:1px solid var(--brass-line);padding-bottom:.05rem}
+.foot a:hover{border-color:var(--brass)}
+.foot .brand{align-items:flex-start;color:var(--ink);width:max-content}
+.foot .brand .word .v{color:var(--brass)}
+.foot .brand .tag{display:block;opacity:.75}
+.foot .brand-p{max-width:30ch;margin-top:1.1rem}
+.copy{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--brass-faint);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem;font-size:.85rem;color:var(--ink-3)}
 @media (max-width:860px){.foot{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.foot{grid-template-columns:1fr}}
 
-/* Touch screens : inline links grow a 44px tall hit box without moving the text around them (declared last so it wins) */
+/* Touch screens : inline links grow a 44px tall hit box without moving the text (declared last so it wins) */
 @media (pointer:coarse){
-  .tel,.practical dd a,.faq .a a,.salle .link,.ratings a{display:inline-block;padding-top:.9rem;padding-bottom:.9rem;margin-top:-.9rem;margin-bottom:-.9rem}
+  .nav .btn,.menu .btn{min-height:44px}
+  .nav .brand{min-height:44px;justify-content:center}
+  .foot .brand{padding-block:.4rem}
+  .tel,.practical dd a,.faq .a a,.more,.ratings a{display:inline-block;padding-top:.9rem;padding-bottom:.9rem;margin-top:-.9rem;margin-bottom:-.9rem}
+  .more{display:inline-flex}
   .foot p{margin:.4rem 0}
   .foot a{display:inline-block;padding-top:.8rem;padding-bottom:.8rem;margin-top:-.3rem;margin-bottom:-.3rem}
 }
@@ -398,10 +422,12 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   body{animation:none}
   .rv .part{opacity:1;transform:none}
+  .rule{transform:none}
   .lit li{opacity:1;transform:none}
-  .lit li .p{color:var(--accent)}
+  .lit li .p{color:var(--brass-deep)}
   .braise{--heat:1}
-  .vine .leaf{opacity:.95;transform:none}
+  .frieze path{stroke-dashoffset:0}
+  .frieze circle{opacity:1}
   .cue{display:none}
   .env{animation:none}
 }
@@ -413,25 +439,29 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
-    <a class="logo" href="#top" aria-label="La Vigne, retour en haut de page"><span class="la">LA</span><span class="v" aria-hidden="true">V</span><span class="igne">IGNE</span></a>
-    <button class="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
-      <svg class="h" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
+    <a class="nav-tel" href="tel:+3225381207" aria-label="Appeler le restaurant au 02 538 12 07"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></a>
     <nav aria-label="Navigation principale">
       <ul class="menu" id="menu">
         <li><a href="#feu">Le feu</a></li>
         <li><a href="#carte">La carte</a></li>
         <li><a href="#salle">La salle</a></li>
         <li><a href="#infos">Infos</a></li>
-        <li><a class="btn btn-primary" href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver</a></li>
+        <li class="cta"><a class="btn btn-ink" href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver une table</a></li>
       </ul>
     </nav>
+    <a class="brand" href="#top" aria-label="La Vigne, retour en haut de page"><span class="word">LA<span class="v" aria-hidden="true">V</span>IGNE</span><span class="tag">Saint-Gilles · Depuis 1985</span></a>
+    <div class="nav-right">
+      <a class="btn btn-gold" href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver</a>
+      <button class="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
+        <svg class="h" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
 <main id="main" tabindex="-1">
-<!-- ================= HERO ================= -->
+<!-- ================= HERO : the fire ================= -->
 <section class="hero" id="top" aria-label="Présentation">
   <div class="stage">
     <div class="journey" aria-hidden="true">
@@ -449,7 +479,6 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       </div>
     </div>
 
-    <!-- Bandes du parcours (desktop) -->
     <div class="band b1 fx-intro" data-a="0" data-b="0.15">
       <p class="kicker">Saint-Gilles · Depuis 1985</p>
       <h1 class="h h1"><span class="sr">La Vigne</span><span class="vis" aria-hidden="true"><span class="la">La</span> <svg class="vmark" viewBox="0 0 100 120" aria-hidden="true"><path d="M10 8 L54 112 L94 8 L90 8 L52 96 L26 8 Z"/></svg><span class="igne">igne</span></span></h1>
@@ -476,14 +505,13 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       <p class="h">La bonne table de Saint-Gilles, depuis plus de quarante ans.</p>
       <p class="sub">Viandes irlandaises au feu de bois, moules-frites et plats grecs faits maison. Du lundi au samedi, cuisine non-stop de 12&nbsp;h à 23&nbsp;h.</p>
       <div class="cta">
-        <a class="btn btn-primary" href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver une table</a>
+        <a class="btn btn-gold" href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver une table</a>
         <a class="tel" href="tel:+3225381207">02 538 12 07</a>
       </div>
     </div>
 
     <div class="cue" aria-hidden="true"><svg viewBox="0 0 18 28" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l6 6 6-6"/><path d="M3 17l6 6 6-6" opacity=".5"/></svg><span>Faites défiler</span></div>
 
-    <!-- Hero statique : téléphones, tablettes portrait, mouvement réduit -->
     <div class="static-hero">
       <img class="poster" alt="Une pièce de bœuf grillée au feu de bois servie avec sa béarnaise, un verre de vin à la main, à La Vigne" width="1066" height="1600">
       <noscript><img src="assets/img/table-steak-1200.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></noscript>
@@ -493,7 +521,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <p class="h1" aria-hidden="true"><span class="la">La</span> <svg class="vmark" viewBox="0 0 100 120" aria-hidden="true"><path d="M10 8 L54 112 L94 8 L90 8 L52 96 L26 8 Z"/></svg><span class="igne">igne</span></p>
         <p class="sub">Grillades au feu de bois, moules-frites et cuisine grecque maison. Cuisine non-stop de 12&nbsp;h à 23&nbsp;h, du lundi au samedi.</p>
         <div class="cta">
-          <a class="btn btn-primary" href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver une table</a>
+          <a class="btn btn-gold" href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver une table</a>
           <a class="tel" href="tel:+3225381207">02 538 12 07</a>
         </div>
       </div>
@@ -502,32 +530,48 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 </section>
 
 <div class="below">
-  <div class="vine" aria-hidden="true"><svg><path class="stem" d=""/><g class="leaves"></g></svg></div>
 
   <!-- ================= LE FEU ================= -->
   <section class="feu rv" id="feu">
     <div class="wrap">
       <div class="rule"></div>
-      <div class="sec-head">
+      <div class="sec-intro center">
         <p class="kicker part"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>Le feu de bois</p>
         <h2 class="part">Tout passe par la braise.</h2>
         <p class="lede part">Ici, la viande ne cuit pas sur une plaque. Elle cuit sur du bois qui brûle, dans la cuisine, depuis 1985. C’est plus long, c’est plus de travail, et ça se goûte.</p>
       </div>
-      <div class="pillars">
-        <article class="pillar part">
-          <div class="ph"><img src="assets/img/tomahawk-feu-800.webp" srcset="assets/img/tomahawk-feu-800.webp 800w, assets/img/tomahawk-feu-1200.webp 1200w" sizes="(max-width:560px) 92vw, (max-width:860px) 45vw, 30vw" width="1080" height="1300" loading="lazy" alt="Un tomahawk de bœuf tenu à la pince au-dessus des flammes du gril"></div>
-          <h3><span class="n">01</span>La grillade</h3>
-          <p>Côte à l’os, tomahawk, entrecôte irlandaise, filet mignon. Saisis sur la braise, servis sur plaque en fonte.</p>
+      <div class="rows">
+        <article class="row part">
+          <div class="row-txt">
+            <p class="num">01</p>
+            <h3>La grillade</h3>
+            <p class="txt">Côte à l’os, tomahawk, entrecôte irlandaise, filet mignon. Saisis sur la braise, servis sur plaque en fonte.</p>
+            <a class="more" href="#carte">Voir la carte<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
+          </div>
+          <div class="row-ph"><div class="ph tall"><img src="assets/img/tomahawk-feu-800.webp" srcset="assets/img/tomahawk-feu-800.webp 800w, assets/img/tomahawk-feu-1200.webp 1200w" sizes="(max-width:860px) 92vw, 40vw" width="1080" height="1300" loading="lazy" alt="Un tomahawk de bœuf tenu à la pince au-dessus des flammes du gril"></div></div>
         </article>
-        <article class="pillar part">
-          <div class="ph"><img src="assets/img/broche-2-800.webp" srcset="assets/img/broche-2-800.webp 800w, assets/img/broche-2-1200.webp 1200w" sizes="(max-width:560px) 92vw, (max-width:860px) 45vw, 30vw" width="1600" height="1066" loading="lazy" alt="Une pièce de viande qui tourne à la broche au-dessus des flammes de la rôtisserie"></div>
-          <h3><span class="n">02</span>La broche</h3>
-          <p>Cochon de lait, coquelet, épaule d’agneau pour deux. La rôtisserie du jour tourne doucement, pendant des heures.</p>
+        <article class="row rev part">
+          <div class="row-txt">
+            <p class="num">02</p>
+            <h3>La broche</h3>
+            <p class="txt">Cochon de lait, coquelet, épaule d’agneau pour deux. La rôtisserie du jour tourne doucement, pendant des heures.</p>
+            <a class="more" href="#carte">La rôtisserie du jour<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
+          </div>
+          <div class="row-ph">
+            <div class="collage">
+              <div class="ph a"><img src="assets/img/broche-2-800.webp" srcset="assets/img/broche-2-800.webp 800w, assets/img/broche-2-1200.webp 1200w" sizes="(max-width:860px) 70vw, 34vw" width="1600" height="1066" loading="lazy" alt="Une pièce de viande qui tourne à la broche au-dessus des flammes de la rôtisserie"></div>
+              <div class="ph b"><img src="assets/img/feu-grille-800.webp" srcset="assets/img/feu-grille-800.webp 800w, assets/img/feu-grille-1200.webp 1200w" sizes="(max-width:860px) 55vw, 26vw" width="1920" height="1280" loading="lazy" alt="La braise sous la grille du feu de bois"></div>
+            </div>
+          </div>
         </article>
-        <article class="pillar part">
-          <div class="ph"><img src="assets/img/moules-800.webp" srcset="assets/img/moules-800.webp 800w, assets/img/moules-1200.webp 1200w" sizes="(max-width:560px) 92vw, (max-width:860px) 92vw, 30vw" width="1066" height="1600" loading="lazy" alt="Une casserole de moules et un cornet de frites sur la table"></div>
-          <h3><span class="n">03</span>La mer</h3>
-          <p>Moules-frites comme il faut, poulpe grillé, bar entier, gambas. La Méditerranée, côté Saint-Gilles.</p>
+        <article class="row part">
+          <div class="row-txt">
+            <p class="num">03</p>
+            <h3>La mer</h3>
+            <p class="txt">Moules-frites comme il faut, poulpe grillé, bar entier, gambas. La Méditerranée, côté Saint-Gilles.</p>
+            <a class="more" href="#carte">Moules et poissons<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
+          </div>
+          <div class="row-ph"><div class="ph tall"><img src="assets/img/moules-800.webp" srcset="assets/img/moules-800.webp 800w, assets/img/moules-1200.webp 1200w" sizes="(max-width:860px) 92vw, 40vw" width="1066" height="1600" loading="lazy" alt="Une casserole de moules et un cornet de frites sur la table"></div></div>
         </article>
       </div>
 
@@ -540,8 +584,9 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
           <div class="embers"><i style="--x:18%;--d:8s;--dl:-1s;--dx:14px"></i><i style="--x:40%;--d:10s;--dl:-5s;--dx:-12px"></i><i style="--x:63%;--d:9s;--dl:-3s;--dx:18px"></i><i style="--x:82%;--d:11s;--dl:-7s;--dx:-10px"></i></div>
         </div>
         <div>
+          <p class="kicker part"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>Avant le service</p>
           <p class="lead part">Le gril chauffe au bois toute la journée. Avant le coup de feu du soir, on remet des bûches et on attend que la braise soit prête.</p>
-          <button class="hold" type="button" aria-describedby="braise-state" style="margin-top:1.5rem">
+          <button class="hold" type="button" aria-describedby="braise-state">
             <span class="ring" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="fg" cx="32" cy="32" r="28"/></svg><i></i></span>
             <span><span class="lbl" id="hold-lbl">Maintenez pour attiser la braise</span><span class="hint" id="braise-state" aria-live="polite">Appuyez et gardez le doigt ou le clic enfoncé. Au clavier, maintenez la barre d’espace.</span></span>
           </button>
@@ -558,13 +603,10 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <!-- ================= LA CARTE ================= -->
   <section class="carte rv" id="carte">
     <div class="wrap">
-      <div class="rule"></div>
-      <div class="carte-head">
-        <div>
-          <p class="kicker part"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>La carte 2026</p>
-          <h2 class="part">Une carte de brasserie, honnête et généreuse.</h2>
-        </div>
-        <p class="part">Des entrées à partager, des grillades, des moules, du poisson, des pâtes et un menu enfants. Tous les plats sont servis avec un accompagnement au choix&#8239;: frites belges maison, riz basmati, croquettes de pommes de terre, grenailles ou écrasé de pommes de terre au feu de bois.</p>
+      <div class="sec-intro center">
+        <p class="kicker part"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>La carte 2026</p>
+        <h2 class="part">Une carte de brasserie, honnête et généreuse.</h2>
+        <p class="lede part">Des entrées à partager, des grillades, des moules, du poisson, des pâtes et un menu enfants. Tous les plats sont servis avec un accompagnement au choix&#8239;: frites belges maison, riz basmati, croquettes de pommes de terre, grenailles ou écrasé de pommes de terre au feu de bois.</p>
       </div>
       <div class="menu-grid">
         <div class="group part">
@@ -611,8 +653,8 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         </div>
       </div>
       <div class="btn-row">
-        <a class="btn btn-ink" href="assets/carte-la-vigne-2026.pdf" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 19h14"/></svg>Télécharger la carte complète (PDF)</a>
-        <span class="sides">Carte en français et en anglais, deux pages.</span>
+        <a class="btn btn-ink" href="assets/carte-la-vigne-2026.pdf" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 19h14"/></svg>Télécharger la carte complète</a>
+        <span class="sides">PDF, en français et en anglais, deux pages.</span>
       </div>
     </div>
   </section>
@@ -621,19 +663,23 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section class="salle rv" id="salle">
     <div class="wrap">
       <div class="rule"></div>
-      <div class="salle-grid">
-        <div class="ph tall part"><img src="assets/img/salle-lampes-800.webp" srcset="assets/img/salle-lampes-800.webp 800w, assets/img/salle-lampes-1200.webp 1200w, assets/img/salle-lampes-1920.webp 1920w" sizes="(max-width:860px) 92vw, 42vw" width="1920" height="2400" loading="lazy" alt="La salle de La Vigne&#8239;: tables en bois, banquettes et lampes en osier suspendues, la rue au fond"></div>
-        <div class="txt">
-          <p class="kicker part"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>La salle et la terrasse</p>
-          <h2 class="part">Une brasserie de quartier, pas un décor.</h2>
-          <p class="lede part" style="margin-top:1.25rem">Des tables en bois, des banquettes, des lampes en osier et une terrasse sur la rue Jourdan dès les beaux jours. Les habitués viennent à midi en semaine, les familles le samedi soir, et le restaurant se privatise pour vos fêtes et vos repas d’équipe.</p>
-          <a class="link part" href="mailto:nc-invest@outlook.com?subject=Privatisation%20du%20restaurant%20La%20Vigne">Privatiser le restaurant<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
+      <article class="row rev">
+        <div class="row-txt part">
+          <p class="kicker" style="justify-content:center"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>La salle et la terrasse</p>
+          <h3>Une brasserie de quartier, pas un décor.</h3>
+          <p class="txt">Des tables en bois, des banquettes, des lampes en osier et une terrasse sur la rue Jourdan dès les beaux jours. Les habitués viennent à midi en semaine, les familles le samedi soir, et le restaurant se privatise pour vos fêtes et vos repas d’équipe.</p>
+          <a class="more" href="mailto:nc-invest@outlook.com?subject=Privatisation%20du%20restaurant%20La%20Vigne">Privatiser le restaurant<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
         </div>
-      </div>
-      <div class="trio">
-        <figure class="part"><div class="ph"><img src="assets/img/lampes-800.webp" srcset="assets/img/lampes-800.webp 800w, assets/img/lampes-1200.webp 1200w" sizes="(max-width:560px) 46vw, 30vw" width="1600" height="1066" loading="lazy" alt="Les lampes en osier tressé de la salle, allumées"></div><figcaption>Les lampes de la salle</figcaption></figure>
-        <figure class="part"><div class="ph"><img src="assets/img/terrasse-800.webp" srcset="assets/img/terrasse-800.webp 800w, assets/img/terrasse-1200.webp 1200w" sizes="(max-width:560px) 46vw, 30vw" width="1600" height="1066" loading="lazy" alt="La terrasse rue Jourdan, chaises en osier devant la vitrine"></div><figcaption>La terrasse, rue Jourdan</figcaption></figure>
-        <figure class="part"><div class="ph"><img src="assets/img/equipe-800.webp" srcset="assets/img/equipe-800.webp 800w, assets/img/equipe-1200.webp 1200w" sizes="(max-width:560px) 92vw, 30vw" width="1066" height="1600" loading="lazy" alt="Deux membres de l’équipe de La Vigne devant l’enseigne du restaurant"></div><figcaption>L’équipe, devant le restaurant</figcaption></figure>
+        <div class="row-ph part">
+          <div class="collage">
+            <div class="ph a"><img src="assets/img/salle-lampes-800.webp" srcset="assets/img/salle-lampes-800.webp 800w, assets/img/salle-lampes-1200.webp 1200w" sizes="(max-width:860px) 70vw, 34vw" width="1920" height="2400" loading="lazy" alt="La salle de La Vigne&#8239;: tables en bois, banquettes et lampes en osier suspendues, la rue au fond"></div>
+            <div class="ph b"><img src="assets/img/lampes-800.webp" srcset="assets/img/lampes-800.webp 800w, assets/img/lampes-1200.webp 1200w" sizes="(max-width:860px) 55vw, 26vw" width="1600" height="1066" loading="lazy" alt="Les lampes en osier tressé de la salle, allumées"></div>
+          </div>
+        </div>
+      </article>
+      <div class="wide">
+        <figure class="part"><div class="ph"><img src="assets/img/terrasse-800.webp" srcset="assets/img/terrasse-800.webp 800w, assets/img/terrasse-1200.webp 1200w, assets/img/terrasse-1920.webp 1920w" sizes="(max-width:700px) 92vw, 60vw" width="1600" height="1066" loading="lazy" alt="La terrasse rue Jourdan, chaises en osier devant la vitrine"></div><figcaption>La terrasse, rue Jourdan</figcaption></figure>
+        <figure class="part"><div class="ph sq"><img src="assets/img/equipe-800.webp" srcset="assets/img/equipe-800.webp 800w, assets/img/equipe-1200.webp 1200w" sizes="(max-width:700px) 92vw, 30vw" width="1066" height="1600" loading="lazy" alt="Deux membres de l’équipe de La Vigne devant l’enseigne du restaurant"></div><figcaption>L’équipe, devant le restaurant</figcaption></figure>
       </div>
     </div>
   </section>
@@ -642,15 +688,15 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section class="avis rv" id="avis">
     <div class="wrap">
       <div class="rule"></div>
-      <div class="sec-head">
+      <div class="sec-intro center">
         <p class="kicker part"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>Les avis</p>
         <h2 class="part">Ce que les clients citent le plus souvent.</h2>
       </div>
-      <ol class="ledger">
-        <li class="part"><h3>La viande</h3><p>Des pièces irlandaises saisies au feu de bois. C’est le plat qui revient dans presque tous les avis.</p></li>
-        <li class="part"><h3>Le service</h3><p>Chaleureux et attentif. Une bonne adresse de quartier, où l’on vous conseille le vin sans en faire trop.</p></li>
-        <li class="part"><h3>Les moules</h3><p>Marinières, à la crème d’ail ou au curry, servies avec les frites maison. Le classique belge, bien fait.</p></li>
-      </ol>
+      <div class="trois">
+        <div class="part"><p class="num">01</p><h3>La viande</h3><p>Des pièces irlandaises saisies au feu de bois. C’est le plat qui revient dans presque tous les avis.</p></div>
+        <div class="part"><p class="num">02</p><h3>Le service</h3><p>Chaleureux et attentif. Une bonne adresse de quartier, où l’on vous conseille le vin sans en faire trop.</p></div>
+        <div class="part"><p class="num">03</p><h3>Les moules</h3><p>Marinières, à la crème d’ail ou au curry, servies avec les frites maison. Le classique belge, bien fait.</p></div>
+      </div>
       <div class="ratings part">
         <a href="https://www.google.com/maps/search/?api=1&amp;query=La+Vigne+Rue+Jourdan+6+1060+Saint-Gilles" target="_blank" rel="noopener"><span class="score">4,5<small>/5</small></span><span class="src">sur Google, environ 590 avis</span></a>
         <a href="https://www.tripadvisor.com/Restaurant_Review-g1136501-d2026646-Reviews-La_Vigne-Saint_Gilles_Brussels.html" target="_blank" rel="noopener"><span class="score">4,4<small>/5</small></span><span class="src">sur Tripadvisor, plus de 600 avis</span></a>
@@ -663,7 +709,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section class="infos rv" id="infos">
     <div class="wrap">
       <div class="rule"></div>
-      <div class="sec-head">
+      <div class="sec-intro center">
         <p class="kicker part"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>Infos pratiques</p>
         <h2 class="part">Les questions qu’on nous pose.</h2>
       </div>
@@ -684,13 +730,13 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
             <div><dt>Téléphone</dt><dd><a href="tel:+3225381207">02 538 12 07</a></dd></div>
             <div><dt>Courriel</dt><dd><a href="mailto:nc-invest@outlook.com">nc-invest@outlook.com</a></dd></div>
           </dl>
-          <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&amp;query=La+Vigne+Rue+Jourdan+6+1060+Saint-Gilles" target="_blank" rel="noopener">Itinéraire</a>
+          <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&amp;query=La+Vigne+Rue+Jourdan+6+1060+Saint-Gilles" target="_blank" rel="noopener">Itinéraire</a>
         </aside>
       </div>
     </div>
   </section>
 
-  <!-- ================= FINAL ================= -->
+  <!-- ================= FINAL : back to the fire ================= -->
   <section class="fin rv" id="reserver" aria-labelledby="fin-h">
     <div class="bg" aria-hidden="true"><img src="assets/img/feu-grille-1200.webp" srcset="assets/img/feu-grille-800.webp 800w, assets/img/feu-grille-1200.webp 1200w, assets/img/feu-grille-1920.webp 1920w" sizes="100vw" width="1920" height="1280" loading="lazy" alt=""></div>
     <div class="veil" aria-hidden="true"></div>
@@ -699,20 +745,53 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       <h2 class="part" id="fin-h">Une table près du feu&#8239;?</h2>
       <p class="part">Réservez en ligne en une minute, ou appelez-nous. Du lundi au samedi, de 12&nbsp;h à 23&nbsp;h.</p>
       <div class="cta part">
-        <a class="btn btn-primary" href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver une table</a>
+        <a class="btn btn-gold" href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver une table</a>
         <a class="tel" href="tel:+3225381207">02 538 12 07</a>
       </div>
     </div>
   </section>
+
+  <!-- The vine frieze, drawn in one line -->
+  <div class="frieze" aria-hidden="true">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+      <g>
+        <path d="M0 68 C 50 24, 110 24, 170 68 S 290 112, 350 68 S 430 24, 480 68"/>
+        <path d="M96 48 c 14 -30, 40 -32, 52 -8 c -16 10, -34 12, -52 8 z"/><path d="M96 48 c 16 -14, 30 -16, 48 -10"/>
+        <path d="M258 92 c -14 30, -40 32, -52 8 c 16 -10, 34 -12, 52 -8 z"/><path d="M258 92 c -16 14, -30 16, -48 10"/>
+        <path d="M396 46 c 14 -30, 40 -32, 52 -8 c -16 10, -34 12, -52 8 z"/><path d="M396 46 c 16 -14, 30 -16, 48 -10"/>
+        <path d="M60 54 c -4 -12, 10 -20, 14 -8 c 3 9, -8 14, -12 6"/><path d="M312 90 c 4 12, -10 20, -14 8 c -3 -9, 8 -14, 12 -6"/>
+        <path d="M196 72 v 8"/><circle cx="190" cy="86" r="5"/><circle cx="202" cy="86" r="5"/><circle cx="184" cy="96" r="5"/><circle cx="196" cy="96" r="5"/><circle cx="208" cy="96" r="5"/><circle cx="190" cy="106" r="5"/><circle cx="202" cy="106" r="5"/><circle cx="196" cy="115" r="4.5"/>
+        <path d="M440 70 v -8"/><circle cx="434" cy="56" r="5"/><circle cx="446" cy="56" r="5"/><circle cx="428" cy="46" r="5"/><circle cx="440" cy="46" r="5"/><circle cx="452" cy="46" r="5"/><circle cx="434" cy="36" r="5"/><circle cx="446" cy="36" r="5"/><circle cx="440" cy="27" r="4.5"/>
+      </g>
+      <g transform="translate(480 0)">
+        <path d="M0 68 C 50 24, 110 24, 170 68 S 290 112, 350 68 S 430 24, 480 68"/>
+        <path d="M96 48 c 14 -30, 40 -32, 52 -8 c -16 10, -34 12, -52 8 z"/><path d="M96 48 c 16 -14, 30 -16, 48 -10"/>
+        <path d="M258 92 c -14 30, -40 32, -52 8 c 16 -10, 34 -12, 52 -8 z"/><path d="M258 92 c -16 14, -30 16, -48 10"/>
+        <path d="M396 46 c 14 -30, 40 -32, 52 -8 c -16 10, -34 12, -52 8 z"/><path d="M396 46 c 16 -14, 30 -16, 48 -10"/>
+        <path d="M60 54 c -4 -12, 10 -20, 14 -8 c 3 9, -8 14, -12 6"/><path d="M312 90 c 4 12, -10 20, -14 8 c -3 -9, 8 -14, 12 -6"/>
+        <path d="M196 72 v 8"/><circle cx="190" cy="86" r="5"/><circle cx="202" cy="86" r="5"/><circle cx="184" cy="96" r="5"/><circle cx="196" cy="96" r="5"/><circle cx="208" cy="96" r="5"/><circle cx="190" cy="106" r="5"/><circle cx="202" cy="106" r="5"/><circle cx="196" cy="115" r="4.5"/>
+        <path d="M440 70 v -8"/><circle cx="434" cy="56" r="5"/><circle cx="446" cy="56" r="5"/><circle cx="428" cy="46" r="5"/><circle cx="440" cy="46" r="5"/><circle cx="452" cy="46" r="5"/><circle cx="434" cy="36" r="5"/><circle cx="446" cy="36" r="5"/><circle cx="440" cy="27" r="4.5"/>
+      </g>
+      <g transform="translate(960 0)">
+        <path d="M0 68 C 50 24, 110 24, 170 68 S 290 112, 350 68 S 430 24, 480 68"/>
+        <path d="M96 48 c 14 -30, 40 -32, 52 -8 c -16 10, -34 12, -52 8 z"/><path d="M96 48 c 16 -14, 30 -16, 48 -10"/>
+        <path d="M258 92 c -14 30, -40 32, -52 8 c 16 -10, 34 -12, 52 -8 z"/><path d="M258 92 c -16 14, -30 16, -48 10"/>
+        <path d="M396 46 c 14 -30, 40 -32, 52 -8 c -16 10, -34 12, -52 8 z"/><path d="M396 46 c 16 -14, 30 -16, 48 -10"/>
+        <path d="M60 54 c -4 -12, 10 -20, 14 -8 c 3 9, -8 14, -12 6"/><path d="M312 90 c 4 12, -10 20, -14 8 c -3 -9, 8 -14, 12 -6"/>
+        <path d="M196 72 v 8"/><circle cx="190" cy="86" r="5"/><circle cx="202" cy="86" r="5"/><circle cx="184" cy="96" r="5"/><circle cx="196" cy="96" r="5"/><circle cx="208" cy="96" r="5"/><circle cx="190" cy="106" r="5"/><circle cx="202" cy="106" r="5"/><circle cx="196" cy="115" r="4.5"/>
+        <path d="M440 70 v -8"/><circle cx="434" cy="56" r="5"/><circle cx="446" cy="56" r="5"/><circle cx="428" cy="46" r="5"/><circle cx="440" cy="46" r="5"/><circle cx="452" cy="46" r="5"/><circle cx="434" cy="36" r="5"/><circle cx="446" cy="36" r="5"/><circle cx="440" cy="27" r="4.5"/>
+      </g>
+    </svg>
+  </div>
 </div>
 </main>
 
 <footer>
   <div class="wrap">
     <div class="foot">
-      <div class="brand">
-        <a class="logo" href="#top"><span class="la">LA</span><span class="v" aria-hidden="true">V</span><span class="igne">IGNE</span></a>
-        <p>Restaurant et brasserie méditerranéenne à Saint-Gilles, depuis 1985.</p>
+      <div>
+        <a class="brand" href="#top"><span class="word">LA<span class="v" aria-hidden="true">V</span>IGNE</span><span class="tag">Saint-Gilles · Depuis 1985</span></a>
+        <p class="brand-p">Restaurant et brasserie méditerranéenne à Saint-Gilles, depuis 1985.</p>
       </div>
       <div><h4>Adresse</h4><p>Rue Jourdan 6</p><p>1060 Saint-Gilles, Bruxelles</p></div>
       <div><h4>Horaires</h4><p>Lundi à samedi</p><p>12&nbsp;h à 23&nbsp;h, cuisine non-stop</p><p>Dimanche fermé</p></div>
@@ -739,10 +818,11 @@ const RM = matchMedia('(prefers-reduced-motion: reduce)');
 const nav = document.getElementById('nav');
 const burger = document.querySelector('.burger');
 const menu = document.getElementById('menu');
-const closeMenu = () => { menu.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Ouvrir le menu'); };
+const closeMenu = () => { menu.classList.remove('open'); nav.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Ouvrir le menu'); };
 burger.addEventListener('click', () => {
   const open = !menu.classList.contains('open');
   menu.classList.toggle('open', open);
+  nav.classList.toggle('menu-open', open);
   burger.setAttribute('aria-expanded', String(open));
   burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
 });
@@ -765,7 +845,6 @@ const bands = [...stage.querySelectorAll('.band')].map(el => ({
 }));
 const LAST = bands.length - 1;
 
-// Shots: visibility window (fade in, fade out) and the slow zoom across the visible window
 const SHOTS = [
   { el: layers[0], i0: -1, i1: -0.5, o0: 0.15, o1: 0.19, s0: 1.00, s1: 1.08, x: 0,  y: 0,   dx: 0.6,  dy: -0.6 },
   { el: layers[1], i0: 0.15, i1: 0.19, o0: 0.31, o1: 0.35, s0: 1.00, s1: 1.07, x: 0,  y: 0,   dx: -1.2, dy: 0.4 },
@@ -774,7 +853,6 @@ const SHOTS = [
   { el: layers[4], i0: 0.63, i1: 0.67, o0: 1.5,  o1: 1.6,  s0: 1.04, s1: 1.09, x: 1.0, y: 0,  dx: -2.0, dy: 0 }
 ].map(s => ({ ...s, op: -1, tr: '' }));
 let panelOp = -1, dimOp = -1, cueGone = false;
-
 function fmt(n) { return Math.round(n * 1000) / 1000; }
 
 function updateScene(p) {
@@ -787,7 +865,6 @@ function updateScene(p) {
     if (Math.abs(op - s.op) > 0.003 || (op === 0 && s.op !== 0) || (op === 1 && s.op !== 1)) { s.op = op; s.el.style.opacity = fmt(op); }
     if (tr !== s.tr && op > 0) { s.tr = tr; s.el.style.transform = tr; }
   }
-  // the settle : the table photo rises into its right-hand panel, the broche dims to become the canvas on the left
   const pk = smoothstep(p, 0.81, 0.91);
   if (Math.abs(pk - panelOp) > 0.003 || (pk === 1 && panelOp !== 1) || (pk === 0 && panelOp !== 0)) {
     panelOp = pk;
@@ -801,7 +878,7 @@ function updateScene(p) {
 }
 
 let loadK = 0, loadStart = 0;
-function updateCaptions(p, now) {
+function updateCaptions(p) {
   for (let i = 0; i < bands.length; i++) {
     const b = bands[i];
     const f = Math.min(0.02, (b.b - b.a) / 3);
@@ -815,48 +892,45 @@ function updateCaptions(p, now) {
   }
 }
 
-// split headlines once, with seeded offsets so every load is identical
 function splitBands() {
   let seed = 7;
   bands.forEach(b => {
     const mode = b.el.dataset.split;
     if (!mode) return;
     const spread = b.el.dataset.spread ? +b.el.dataset.spread : 0.5;
-    const targets = [b.el.querySelector('.h')];
-    targets.forEach(t => {
-      if (!t || t.dataset.split) return;
-      t.dataset.split = '1';
-      const r = rng(seed += 101);
-      const text = t.textContent;
-      const words = text.split(/(\s+)/);
-      const totalChars = text.replace(/\s/g, '').length;
-      let ci = 0;
-      t.textContent = '';
-      words.forEach((w, wi) => {
-        if (!w) return;
-        if (/^\s+$/.test(w)) { t.appendChild(document.createTextNode(' ')); return; }
-        const ws = document.createElement('span'); ws.className = 'w';
-        if (mode === 'words') {
-          ws.style.setProperty('--th', fmt((wi / 2) / Math.max(1, (words.length - 1) / 2) * 0.45));
-          ws.textContent = w;
-        } else {
-          [...w].forEach(ch => {
-            const cs = document.createElement('span'); cs.className = 'c'; cs.textContent = ch;
-            if (mode === 'chars' && b.el.classList.contains('fx-snap')) {
-              cs.style.setProperty('--th', fmt((ci / totalChars) * spread + r() * 0.06));
-              cs.style.setProperty('--jx', `${fmt(-18 - r() * 26)}px`);
-            } else {
-              cs.style.setProperty('--th', fmt(r() * 0.55 * (spread / 0.5)));
-              cs.style.setProperty('--jx', `${fmt((r() - 0.5) * 70)}px`);
-              cs.style.setProperty('--jy', `${fmt((r() - 0.3) * 60)}px`);
-              cs.style.setProperty('--jr', `${fmt((r() - 0.5) * 40)}deg`);
-            }
-            ci++;
-            ws.appendChild(cs);
-          });
-        }
-        t.appendChild(ws);
-      });
+    const t = b.el.querySelector('.h');
+    if (!t || t.dataset.split) return;
+    t.dataset.split = '1';
+    const r = rng(seed += 101);
+    const text = t.textContent;
+    const words = text.split(/(\s+)/);
+    const totalChars = text.replace(/\s/g, '').length;
+    let ci = 0;
+    t.textContent = '';
+    words.forEach((w, wi) => {
+      if (!w) return;
+      if (/^\s+$/.test(w)) { t.appendChild(document.createTextNode(' ')); return; }
+      const ws = document.createElement('span'); ws.className = 'w';
+      if (mode === 'words') {
+        ws.style.setProperty('--th', fmt((wi / 2) / Math.max(1, (words.length - 1) / 2) * 0.45));
+        ws.textContent = w;
+      } else {
+        [...w].forEach(ch => {
+          const cs = document.createElement('span'); cs.className = 'c'; cs.textContent = ch;
+          if (b.el.classList.contains('fx-snap')) {
+            cs.style.setProperty('--th', fmt((ci / totalChars) * spread + r() * 0.06));
+            cs.style.setProperty('--jx', `${fmt(-18 - r() * 26)}px`);
+          } else {
+            cs.style.setProperty('--th', fmt(r() * 0.55 * (spread / 0.5)));
+            cs.style.setProperty('--jx', `${fmt((r() - 0.5) * 70)}px`);
+            cs.style.setProperty('--jy', `${fmt((r() - 0.3) * 60)}px`);
+            cs.style.setProperty('--jr', `${fmt((r() - 0.5) * 40)}deg`);
+          }
+          ci++;
+          ws.appendChild(cs);
+        });
+      }
+      t.appendChild(ws);
     });
   });
 }
@@ -881,7 +955,7 @@ function tick(now) {
   if (converged) { shown = target; rafId = null; lastTick = 0; }
   else rafId = requestAnimationFrame(tick);
   updateScene(shown);
-  updateCaptions(shown, now);
+  updateCaptions(shown);
   setNav(shown > 0.02 || !heroOnScreen);
 }
 function onScroll() {
@@ -901,7 +975,6 @@ function initHeroOnce() {
   panelImg.src = panelImg.dataset.src;
   layers.forEach(img => img.addEventListener('error', () => { img.style.display = 'none'; }));
   stage.classList.add('ready');
-  // the arrival : time based, once; the drawn V, the logotype, the fire igniting behind
   if (!RM.matches) { stage.classList.add('intro'); document.body.classList.add('intro'); }
   loadStart = performance.now();
 }
@@ -911,10 +984,9 @@ function enableScrub() {
   addEventListener('scroll', onScroll, { passive: true });
   bands.forEach(b => { b.op = -1; b.k = -1; });
   SHOTS.forEach(s => { s.op = -1; s.tr = ''; }); panelOp = -1; dimOp = -1;
-  unpinFinalStates();
   target = heroProgress(); shown = target;
   if (!loadStart) loadStart = performance.now();
-  updateScene(shown); updateCaptions(shown, performance.now());
+  updateScene(shown); updateCaptions(shown);
   if (rafId === null) rafId = requestAnimationFrame(tick);
 }
 function disableScrub() {
@@ -930,7 +1002,6 @@ function setPoster() {
   poster.src = 'assets/img/table-steak-1200.webp';
   if (!RM.matches && !document.body.classList.contains('intro')) { stage.querySelector('.static-hero').classList.add('intro'); document.body.classList.add('intro-static'); }
 }
-// The five gates : identical to the CSS media query list
 const GATES = [
   '(max-width: 720px)',
   '(orientation: portrait) and (max-width: 1024px)',
@@ -945,7 +1016,7 @@ function applyHeroMode() {
 }
 MQLS.forEach(m => m.addEventListener('change', applyHeroMode));
 
-/* ---------- Section reveals (observer, with a scroll check as the belt to its braces) ---------- */
+/* ---------- Section reveals ---------- */
 let pending = [...document.querySelectorAll('.rv')];
 function reveal(el) {
   if (el.classList.contains('in')) return;
@@ -965,6 +1036,10 @@ function checkReveals() {
 addEventListener('scroll', () => { if (rvRaf === null) rvRaf = requestAnimationFrame(checkReveals); }, { passive: true });
 addEventListener('load', checkReveals);
 
+// the frieze draws itself when it arrives
+const frieze = document.querySelector('.frieze');
+new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { frieze.classList.add('draw'); io.disconnect(); } }), { threshold: 0.3 }).observe(frieze);
+
 // embers run only while their section is on screen
 const liveIO = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('live', e.isIntersecting)), { threshold: 0 });
 document.querySelectorAll('.braise, .fin').forEach(el => liveIO.observe(el));
@@ -979,9 +1054,7 @@ const lit = [...braise.querySelectorAll('.lit li')];
 let heat = 0, heating = false, heatRaf = null, heatLast = 0, braiseDone = false, shownHeat = -1;
 const LIT_AT = [0.34, 0.64, 0.94];
 function paintHeat() {
-  if (Math.abs(heat - shownHeat) > 0.004 || heat === 0 || heat === 1) {
-    shownHeat = heat; braise.style.setProperty('--heat', fmt(heat));
-  }
+  if (Math.abs(heat - shownHeat) > 0.004 || heat === 0 || heat === 1) { shownHeat = heat; braise.style.setProperty('--heat', fmt(heat)); }
   lit.forEach((li, i) => li.classList.toggle('on', braiseDone || heat >= LIT_AT[i]));
 }
 function heatTick(now) {
@@ -998,7 +1071,6 @@ function finishBraise() {
   braise.classList.add('done');
   holdLbl.textContent = 'La braise est prête.';
   holdHint.textContent = 'Côte à l’os, tomahawk et filet mignon partent sur le gril.';
-  hold.setAttribute('aria-pressed', 'true');
 }
 function startHeat() { if (braiseDone || heating) return; heating = true; holdLbl.textContent = 'Ça prend…'; if (heatRaf === null) heatRaf = requestAnimationFrame(heatTick); }
 function stopHeat() { if (braiseDone || !heating) return; heating = false; holdLbl.textContent = 'Maintenez pour attiser la braise'; if (heatRaf === null) heatRaf = requestAnimationFrame(heatTick); }
@@ -1009,85 +1081,19 @@ hold.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') { 
 hold.addEventListener('blur', stopHeat);
 hold.addEventListener('contextmenu', e => e.preventDefault());
 
-/* ---------- The vine : the signature line that draws itself ---------- */
-const below = document.querySelector('.below');
-const vine = below.querySelector('.vine');
-const stem = vine.querySelector('.stem');
-const leavesG = vine.querySelector('.leaves');
-let vineLen = 0, vineH = 0, leafPos = [], vineShown = -1, vineOn = false;
-const vineMQ = matchMedia('(min-width: 1100px)');
-function buildVine() {
-  vineOn = vineMQ.matches;
-  if (!vineOn) return;
-  const H = below.offsetHeight; vineH = H;
-  const svg = vine.querySelector('svg');
-  svg.setAttribute('viewBox', `0 0 72 ${H}`);
-  svg.setAttribute('preserveAspectRatio', 'none');
-  const secs = [...below.querySelectorAll('section')];
-  const ys = secs.map(s => s.offsetTop + (s.querySelector('.kicker, h2')?.offsetTop || 120) + 10);
-  let d = `M36 0`;
-  let y = 0; let side = 1;
-  const steps = Math.max(6, Math.round(H / 420));
-  for (let i = 1; i <= steps; i++) {
-    const ny = (H / steps) * i;
-    const cx1 = 36 + side * 16, cx2 = 36 - side * 16;
-    d += ` C ${cx1} ${y + (ny - y) * 0.35}, ${cx2} ${y + (ny - y) * 0.65}, 36 ${ny}`;
-    y = ny; side = -side;
-  }
-  stem.setAttribute('d', d);
-  // the stem is stretched vertically only; use the path's own length for the dash
-  vineLen = stem.getTotalLength();
-  stem.style.strokeDasharray = vineLen;
-  leavesG.innerHTML = '';
-  leafPos = ys.map((ly, i) => {
-    const flip = i % 2 ? 1 : -1;
-    // outer group positions the leaf on the stem (SVG attribute), inner group carries the CSS open/close transform
-    const pos = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    pos.setAttribute('transform', `translate(${36 + flip * 1.5} ${ly})`);
-    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.setAttribute('class', 'leaf');
-    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    p.setAttribute('d', 'M.5 13.5C1 7 5.5 1.5 15.5.5 15 7 11 12.5 3.5 13.8c3.2-4 6-7.4 8.6-9.6C8.2 6.5 5 10 .5 13.5z');
-    p.setAttribute('transform', `translate(${flip > 0 ? 1 : -1} -21) scale(${flip * 1.5} 1.5)`);
-    g.appendChild(p);
-    pos.appendChild(g);
-    leavesG.appendChild(pos);
-    return { el: g, y: ly, open: false };
-  });
-  vineShown = -1;
-  drawVine();
-}
-function drawVine() {
-  if (!vineOn) return;
-  const top = below.getBoundingClientRect().top + scrollY;
-  const prog = RM.matches ? 1 : clamp((scrollY + innerHeight * 0.62 - top) / vineH, 0, 1);
-  if (Math.abs(prog - vineShown) > 0.002 || prog === 1) {
-    vineShown = prog;
-    stem.style.strokeDashoffset = fmt(vineLen * (1 - prog));
-    const yDrawn = prog * vineH;
-    leafPos.forEach(l => { const open = yDrawn >= l.y; if (open !== l.open) { l.open = open; l.el.classList.toggle('open', open); } });
-  }
-}
-addEventListener('scroll', drawVine, { passive: true });
-let rsT = null;
-addEventListener('resize', () => { clearTimeout(rsT); rsT = setTimeout(() => { applyHeroMode(); buildVine(); }, 160); });
-vineMQ.addEventListener('change', buildVine);
-
 /* ---------- Reduced motion, honored live in both directions ---------- */
 function pinToFinalStates() {
   document.querySelectorAll('.rv').forEach(el => el.classList.add('in', 'settled'));
+  frieze.classList.add('draw');
   if (!braiseDone) finishBraise();
-  vineShown = -1; drawVine();
 }
-function unpinFinalStates() { /* reveals already seen stay; the hold stays done; the vine recomputes from scroll */ vineShown = -1; drawVine(); }
-RM.addEventListener('change', e => { if (e.matches) { pinToFinalStates(); applyHeroMode(); } else applyHeroMode(); });
+RM.addEventListener('change', e => { if (e.matches) pinToFinalStates(); applyHeroMode(); });
+let rsT = null;
+addEventListener('resize', () => { clearTimeout(rsT); rsT = setTimeout(applyHeroMode, 160); });
 
 /* ---------- Boot ---------- */
 applyHeroMode();
 if (RM.matches) pinToFinalStates();
-addEventListener('load', () => { buildVine(); });
-buildVine();
-// test harness for the flick test (dev only, harmless in production)
 window.__flick = async function (step, count) {
   for (let i = 0; i < count; i++) {
     scrollBy(0, step);
