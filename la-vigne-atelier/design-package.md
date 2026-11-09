@@ -45,17 +45,17 @@ Contrastes calculés : encre sur ivoire 15:1 ; encre-2 sur ivoire 7:1 ; laiton f
 
 Échelle fluide avec `clamp()`. 60 à 72 caractères par ligne (`max-width` en `ch` sur l'élément texte lui-même). Boutons rectangulaires sans arrondi.
 
-## 4. Le hero : un seul écran, l'arrivée
+## 4. Le hero : le tomahawk au-dessus du feu, visible dès la première seconde
 
-Décision de la cliente : pas de défilement d'images, le « waouw » doit être là dès le chargement. Le hero est donc un seul écran plein cadre sur les bûches qui brûlent, et tout l'effet tient dans l'arrivée, puis dans la vie de l'image.
+Décisions successives de la cliente : pas de défilement d'images ; le « waouw » dès le chargement ; puis, le produit phare étant le tomahawk, il doit être visible dès le départ, animation comprise.
 
-**L'arrivée (3 secondes, jouée une fois).** Écran sombre. Le V de l'enseigne se trace tout seul en laiton (tracé SVG) puis se remplit. « La » et « igne » glissent se coller au V. Le filet doré s'étire. Dès que la photo est chargée, le feu s'allume : l'image monte depuis le noir avec un léger recul de zoom, une lueur orange apparaît et continue de respirer comme un vrai feu, des braises montent. Le kicker, la sous-ligne et les boutons arrivent l'un après l'autre, la navigation et l'invitation à défiler en dernier.
+**Composition.** Un écran coupé en deux. À droite, la vraie photo du tomahawk saisi à la pince au-dessus des flammes, en entier, jamais rognée (la photo est verticale, la moitié d'écran aussi). À gauche, le fond fumée et la carte de titre, alignée à gauche : « Saint-Gilles, depuis 1985 », le grand « La Vigne » avec le V de l'enseigne, un filet doré, la sous-ligne, le bouton « Réserver une table » et le téléphone. Le bord gauche de la photo se fond dans le fond fumée, et une lueur orange déborde de la flamme sur le panneau sombre. Sur téléphone et tablette en portrait, la photo occupe le haut de l'écran, entière, sans rien par-dessus ; les mots viennent dessous sur le fond fumée.
 
-**Ensuite.** La photo continue un très lent zoom (42 secondes aller, 42 retour) pour ne jamais être figée. Quand on commence à descendre, l'image glisse un peu moins vite que la page (parallaxe douce, transform seulement) et la carte de titre s'estompe. La navigation passe à l'ivoire une fois le hero quitté.
+**L'arrivée (3 secondes, jouée une fois).** La photo apparaît tout de suite, en une seconde, avec un léger recul de zoom : le tomahawk est là avant tout le reste. Pendant ce temps, à gauche, le V de l'enseigne se trace en laiton puis se remplit, « La » et « igne » glissent se coller au V, le filet doré s'étire, la lueur s'allume et se met à respirer, les braises montent dans le panneau sombre, puis la ligne « Saint-Gilles, depuis 1985 », la sous-ligne et les boutons arrivent l'un après l'autre. La navigation vient en dernier. Si la photo n'arrive pas, la carte joue quand même son arrivée.
 
-**Texte (verbatim).** Kicker : « Saint-Gilles · Depuis 1985 ». H1 : « La Vigne » (le V dessiné). Sous-ligne : « Brasserie méditerranéenne. Viandes irlandaises au feu de bois, moules-frites et plats grecs maison. Du lundi au samedi, cuisine non-stop de 12 h à 23 h. » CTA : « Réserver une table ». Secondaire : « 02 538 12 07 ».
+**Ensuite.** La photo continue un très lent zoom (40 secondes aller, 40 retour). Quand on descend, elle glisse un peu moins vite que la page et la carte s'estompe. La navigation passe à l'ivoire une fois le hero quitté. Mouvement réduit : rien ne bouge, tout est affiché.
 
-**Composition.** Sur ordinateur, la flamme à gauche, la carte de titre à droite, centrée verticalement, sur un voile radial. Sur téléphone, la flamme en haut, la carte en bas sur un dégradé sombre. Si la photo n'arrive pas, la carte joue quand même son arrivée sur le fond fumée. Mouvement réduit : rien ne bouge, tout est affiché.
+**Texte (verbatim).** « Saint-Gilles, depuis 1985 ». H1 : « La Vigne ». Sous-ligne : « Brasserie méditerranéenne. Le tomahawk et la côte à l’os irlandais saisis au feu de bois, les moules-frites, les plats grecs maison. Du lundi au samedi, cuisine non-stop de 12 h à 23 h. » CTA : « Réserver une table ». Secondaire : « 02 538 12 07 ». La photo du tomahawk servi à table prend la place de celle du feu dans la rangée « La grillade », pour ne pas répéter l'image du hero. L'image de partage (og) est aussi le tomahawk.
 
 | Bande | Plage (point de départ) | Photo et mouvement | Texte (verbatim) | Entrée |
 |---|---|---|---|---|
