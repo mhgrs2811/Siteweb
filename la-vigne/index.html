@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Vigne — Brasserie méditerranéenne, grillades au feu de bois · Saint-Gilles, Bruxelles</title>
+<meta name="description" content="La Vigne, brasserie méditerranéenne depuis 1985, rue Jourdan 6 à Saint-Gilles. Grillades au feu de bois, rôtisserie à la broche, moules-frites et spécialités grecques. Cuisine non-stop du lundi au samedi, 12h–23h.">
+<meta name="theme-color" content="#141210">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter+Tight:wght@400;500&display=swap">
+<!--
+  Lien de réservation Zenchef : remplacer ZENCHEF_URL ci-dessous
+  (rechercher « bookings.zenchef.com » dans ce fichier — 3 occurrences).
+-->
+<style>
+:root {
+  --noir: #141210;
+  --noir-2: #1E1A17;
+  --or: #B8955A;
+  --or-clair: #D9BC85;
+  --creme: #F2EBDD;
+  --rouge: #B3261E;
+  --gris-texte: #A69E92;
+
+  --creme-85: color-mix(in srgb, var(--creme) 85%, transparent);
+  --noir-95: color-mix(in srgb, var(--noir) 95%, transparent);
+  --noir-15: color-mix(in srgb, var(--noir) 15%, transparent);
+  --or-30: color-mix(in srgb, var(--or) 30%, transparent);
+
+  --display: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --text: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+
+  --container: 1280px;
+  --gutter: 24px;
+  --pad: 40px;
+  --nav-h: 88px;
+  --bleed: calc((100vw - min(100vw, var(--container) + 2 * var(--pad))) / 2 + var(--pad));
+
+  --ease: cubic-bezier(.22, .61, .36, 1);
+
+  /* Filets de soulignement (SVG pleins, couleurs de la palette) */
+  --line-or: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23B8955A'/%3E%3C/svg%3E");
+  --line-or-clair: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23D9BC85'/%3E%3C/svg%3E");
+}
+
+*, *::before, *::after { box-sizing: border-box; border-radius: 0; }
+html { scroll-padding-top: var(--nav-h); -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--noir);
+  color: var(--creme-85);
+  font-family: var(--text);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+img, iframe { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+::selection { background: var(--or); color: var(--noir); }
+:focus-visible { outline: 1px solid var(--or-clair); outline-offset: 4px; }
+
+.skip {
+  position: absolute; left: 16px; top: -60px; z-index: 100;
+  background: var(--or); color: var(--noir);
+  padding: 10px 16px; font-size: 12px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+}
+.skip:focus { top: 16px; }
+
+/* ───────── Grille ───────── */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + 2 * var(--pad));
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+/* ───────── Typographie ───────── */
+.label {
+  display: inline-flex; align-items: center; gap: 16px;
+  font-family: var(--text); font-weight: 500; font-size: 11px; line-height: 1.4;
+  text-transform: uppercase; letter-spacing: .28em;
+  color: var(--or);
+}
+.label::before {
+  content: ""; flex: none; width: 32px; height: 1px; background: var(--or);
+}
+.label-text {
+  font-family: var(--text); font-weight: 500; font-size: 11px; line-height: 1.4;
+  text-transform: uppercase; letter-spacing: .28em; color: var(--or);
+}
+.title {
+  font-family: var(--display); font-weight: 300;
+  font-size: 72px; line-height: 1; letter-spacing: -.01em;
+  color: var(--creme);
+}
+.title em { font-style: italic; font-weight: 300; }
+.title--xl { font-size: 80px; }
+.title--md { font-size: 64px; }
+
+/* ───────── Liens & boutons ───────── */
+.link {
+  background-image: var(--line-or);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  padding-bottom: 3px;
+  transition: background-size 300ms var(--ease), color 300ms var(--ease);
+}
+.link:hover, .link:focus-visible { background-size: 100% 1px; }
+
+.btn {
+  display: inline-block;
+  background: var(--or); color: var(--noir);
+  font-family: var(--text); font-weight: 500; font-size: 12px; line-height: 1;
+  text-transform: uppercase; letter-spacing: .2em;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: background-color 300ms var(--ease);
+  white-space: nowrap;
+}
+.btn:hover, .btn:focus-visible { background: var(--or-clair); color: var(--noir); }
+
+.btn-text {
+  display: inline-block;
+  font-family: var(--text); font-weight: 500; font-size: 12px; line-height: 1.4;
+  text-transform: uppercase; letter-spacing: .2em;
+  color: var(--creme);
+  padding-bottom: 6px;
+  background-image: var(--line-or-clair), var(--line-or);
+  background-repeat: no-repeat;
+  background-position: 0 100%, 0 100%;
+  background-size: 0% 1px, 100% 1px;
+  transition: background-size 300ms var(--ease), color 300ms var(--ease);
+}
+.btn-text:hover, .btn-text:focus-visible { background-size: 100% 1px, 100% 1px; color: var(--or-clair); }
+
+/* ───────── Logo ───────── */
+.logo {
+  display: inline-flex; align-items: baseline;
+  font-family: var(--display); font-weight: 400;
+  font-size: 18px; line-height: 1;
+  letter-spacing: .35em; text-transform: uppercase;
+  color: var(--creme);
+  white-space: nowrap;
+}
+.logo .v {
+  font-family: var(--display); font-weight: 300;
+  font-size: 2.6em; line-height: 0;
+  letter-spacing: .135em;
+  color: var(--or);
+  transform: translateY(.2em);
+  display: inline-block;
+}
+.logo--lg { font-size: 48px; }
+
+/* ───────── Filigrane V ───────── */
+.watermark {
+  position: absolute; z-index: 0;
+  font-family: var(--display); font-weight: 300;
+  font-size: 1200px; line-height: .78;
+  color: var(--or); opacity: .06;
+  pointer-events: none; user-select: none;
+}
+
+/* ───────── Médias (emplacements photo) ───────── */
+.media {
+  position: relative; overflow: hidden;
+  background: var(--noir-2);
+}
+.media img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.media.is-empty img { opacity: 0; }
+.media.is-empty::after {
+  content: "Photo — " attr(data-ph);
+  content: "Photo — " attr(data-ph) / "";
+  position: absolute; left: 20px; right: 20px; bottom: 18px;
+  font-family: var(--text); font-weight: 500; font-size: 11px; line-height: 1.5;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gris-texte);
+}
+
+/* ───────── Apparition au scroll ───────── */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 600ms ease-out, transform 600ms ease-out;
+  }
+  .js [data-reveal].is-in { opacity: 1; transform: none; }
+  .js [data-reveal-delay="1"] { transition-delay: 120ms; }
+  .js [data-reveal-delay="2"] { transition-delay: 240ms; }
+}
+
+/* ═════════ 0. NAVIGATION ═════════ */
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  height: var(--nav-h);
+  background: transparent;
+  transition: background-color 300ms var(--ease), height 300ms var(--ease);
+}
+.nav.is-scrolled { background: var(--noir-95); }
+.nav__inner {
+  height: 100%;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  column-gap: var(--gutter);
+}
+.nav__links { display: flex; gap: 40px; }
+.nav__links a {
+  font-family: var(--text); font-weight: 500; font-size: 12px; line-height: 1;
+  text-transform: uppercase; letter-spacing: .2em;
+  color: var(--creme);
+}
+.nav__right { justify-self: end; display: flex; align-items: center; gap: 24px; }
+.nav__toggle {
+  display: none;
+  background: none; border: 0; padding: 8px 0; cursor: pointer;
+  font-family: var(--text); font-weight: 500; font-size: 12px; line-height: 1;
+  text-transform: uppercase; letter-spacing: .2em; color: var(--creme);
+}
+.menu {
+  position: fixed; inset: 0; z-index: 49;
+  background: var(--noir);
+  padding: calc(var(--nav-h) + 48px) var(--pad) 48px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  visibility: hidden; opacity: 0;
+  transition: opacity 300ms var(--ease), visibility 0s linear 300ms;
+}
+.menu.is-open { visibility: visible; opacity: 1; transition: opacity 300ms var(--ease); }
+.menu ul { display: grid; gap: 8px; }
+.menu ul a {
+  font-family: var(--display); font-weight: 300; font-size: 44px; line-height: 1.15; color: var(--creme);
+}
+.menu__foot { display: grid; gap: 10px; font-size: 15px; color: var(--gris-texte); }
+
+/* ═════════ 1. HERO ═════════ */
+.hero {
+  position: relative;
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  color: var(--creme);
+}
+.hero__media { position: absolute; inset: 0; }
+.hero__media img { object-position: 70% 50%; }
+.hero__media.is-empty::after { top: calc(var(--nav-h) + 16px); bottom: auto; left: auto; right: var(--pad); max-width: 360px; text-align: right; }
+.hero__body {
+  position: relative; z-index: 1;
+  padding-bottom: 112px;
+}
+.hero__content { grid-column: 1 / span 8; }
+.hero__title {
+  margin-top: 32px;
+  font-family: var(--display); font-weight: 300;
+  font-size: 112px; line-height: .95; letter-spacing: -.01em;
+  color: var(--creme);
+}
+.hero__title em { font-style: italic; font-weight: 300; }
+.hero__lede { margin-top: 32px; max-width: 30em; color: var(--creme-85); }
+.hero__cta { margin-top: 40px; }
+.hero__aside {
+  grid-column: 10 / span 3; align-self: end; justify-self: end;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 14px;
+  font-family: var(--text); font-weight: 500; font-size: 11px; line-height: 1.4;
+  text-transform: uppercase; letter-spacing: .28em; color: var(--creme);
+}
+
+/* ═════════ 2. BANDEAU ═════════ */
+.marquee {
+  background: var(--noir-2);
+  overflow: hidden;
+  padding: 30px 0 32px;
+  border-block: 1px solid var(--or-30);
+}
+.marquee__track {
+  display: flex; width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.marquee:hover .marquee__track { animation-play-state: paused; }
+.marquee__group { display: flex; flex: none; align-items: center; }
+.marquee__group span {
+  font-family: var(--display); font-weight: 300; font-size: 32px; line-height: 1.2;
+  color: var(--or); white-space: nowrap;
+}
+.marquee__group i {
+  font-style: normal; font-size: 9px; line-height: 1; color: var(--or);
+  margin-inline: 36px; transform: translateY(-2px);
+}
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
+  .marquee { overflow-x: auto; }
+}
+
+/* ═════════ 3. LE FEU ═════════ */
+.feu {
+  position: relative; overflow: hidden;
+  background: var(--noir);
+  padding: 168px 0 200px;
+}
+.feu .watermark { left: -170px; top: -60px; }
+.feu__grid { position: relative; z-index: 1; align-items: end; }
+.feu__text { grid-column: 1 / span 5; padding-right: 24px; padding-bottom: 8px; }
+.feu__text .title { margin-top: 28px; }
+.feu__text p { margin-top: 36px; max-width: 30em; }
+.feu__list { margin-top: 56px; border-top: 1px solid var(--or); }
+.feu__list li {
+  font-family: var(--display); font-weight: 300; font-size: 28px; line-height: 1.2;
+  color: var(--creme);
+  padding: 18px 0 19px;
+  border-bottom: 1px solid var(--or);
+}
+.feu__media {
+  grid-column: 6 / -1;
+  margin-right: calc(-1 * var(--bleed));
+  aspect-ratio: 5 / 6;
+}
+
+/* ═════════ 4. LA CARTE ═════════ */
+.carte {
+  background: var(--creme);
+  color: var(--noir);
+  padding: 136px 0 120px;
+}
+.carte__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.carte__head .title { color: var(--noir); }
+.carte__cols {
+  margin-top: 80px;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--noir-15);
+}
+.carte__col { padding: 44px 40px 8px; }
+.carte__col:first-child { padding-left: 0; }
+.carte__col:last-child { padding-right: 0; }
+.carte__col + .carte__col { border-left: 1px solid var(--noir-15); }
+.carte__col h3 { margin-bottom: 28px; }
+.dish { padding: 14px 0; }
+.dish__row { display: flex; align-items: baseline; align-items: last baseline; }
+.dish__name {
+  flex: 0 1 auto;
+  font-family: var(--display); font-weight: 400; font-size: 23px; line-height: 1.2;
+  color: var(--noir);
+}
+.dish__leader {
+  flex: 1 0 24px; align-self: auto;
+  margin: 0 10px;
+  border-bottom: 2px dotted color-mix(in srgb, var(--noir) 35%, transparent);
+  transform: translateY(-4px);
+}
+.dish__price {
+  flex: none;
+  font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1.2;
+  color: var(--or); text-align: right; white-space: nowrap;
+}
+.dish__price--note { font-style: italic; font-size: 19px; }
+.dish__detail {
+  margin-top: 4px;
+  font-size: 14px; line-height: 1.45;
+  color: color-mix(in srgb, var(--noir) 62%, transparent);
+  max-width: 85%;
+}
+.carte__foot {
+  margin-top: 64px; padding-top: 36px;
+  border-top: 1px solid var(--noir-15);
+  display: flex; align-items: baseline; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+}
+.carte__foot p {
+  font-family: var(--display); font-style: italic; font-weight: 400; font-size: 22px; line-height: 1.35;
+  color: var(--noir); max-width: 40em;
+}
+.carte .btn-text { color: var(--noir); }
+.carte .btn-text:hover, .carte .btn-text:focus-visible { color: var(--noir); background-size: 100% 2px, 100% 1px; }
+
+/* ═════════ 5. RÔTISSERIE DU JOUR ═════════ */
+.roti {
+  background: var(--rouge);
+  color: var(--creme);
+  height: 320px;
+  display: flex; align-items: center;
+}
+.roti__grid { width: 100%; align-items: center; }
+.roti__head { grid-column: 1 / span 5; }
+.roti .label { color: var(--creme); }
+.roti .label::before { background: var(--creme); }
+.roti__title {
+  margin-top: 22px;
+  font-family: var(--display); font-style: italic; font-weight: 300;
+  font-size: 64px; line-height: 1; letter-spacing: -.01em; color: var(--creme);
+}
+.roti__days { grid-column: 7 / -1; }
+.roti__days div {
+  display: grid; grid-template-columns: 180px 1fr; align-items: baseline; gap: 24px;
+  padding: 13px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--creme) 35%, transparent);
+}
+.roti__days div:first-child { border-top: 1px solid color-mix(in srgb, var(--creme) 35%, transparent); }
+.roti__days dt {
+  font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: .2em; color: var(--creme);
+}
+.roti__days dd {
+  font-family: var(--display); font-weight: 400; font-size: 26px; line-height: 1.2; color: var(--creme);
+}
+
+/* ═════════ 6. LA SALLE ═════════ */
+.salle { background: var(--noir); padding-bottom: 176px; }
+.salle__hero { position: relative; height: 80vh; min-height: 520px; }
+.salle__hero .media { position: absolute; inset: 0; }
+.salle__hero .media.is-empty::after { left: auto; right: var(--pad); bottom: auto; top: 24px; text-align: right; max-width: 420px; }
+.salle__card-wrap { position: absolute; left: 0; right: 0; bottom: -72px; z-index: 2; }
+.salle__card {
+  width: min(600px, 100%);
+  background: var(--noir);
+  padding: 44px 48px 44px 0;
+}
+.salle__card .title { margin-top: 22px; }
+.salle__card p { margin-top: 24px; }
+.salle__card p span { display: block; }
+.salle__grid { margin-top: 176px; align-items: start; }
+.mason { position: relative; }
+.mason figcaption { margin-top: 18px; }
+.mason--a { grid-column: 1 / span 4; }
+.mason--a .media { aspect-ratio: 3 / 4; }
+.mason--b { grid-column: 6 / span 4; margin-top: 168px; }
+.mason--b .media { aspect-ratio: 4 / 5; }
+.mason--c { grid-column: 10 / span 3; margin-top: 56px; }
+.mason--c .media { aspect-ratio: 1 / 1; }
+
+/* ═════════ 7. GROUPES ═════════ */
+.groupes { background: var(--noir-2); padding: 152px 0 168px; }
+.groupes .media { background: var(--noir); }
+.groupes__grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: calc(var(--gutter) * 4); align-items: center; }
+.groupes__text .title { margin-top: 26px; }
+.groupes__text p { margin-top: 32px; max-width: 30em; }
+.groupes__list { margin-top: 44px; border-top: 1px solid var(--or); }
+.groupes__list li {
+  font-family: var(--display); font-weight: 300; font-size: 24px; line-height: 1.25; color: var(--creme);
+  padding: 16px 0 17px; border-bottom: 1px solid var(--or);
+}
+.groupes__text .btn-text { margin-top: 44px; }
+.groupes__photo { padding: 0 12px 12px 0; }
+.groupes__photo .media {
+  aspect-ratio: 1 / 1;
+  transform: rotate(-1.5deg);
+  box-shadow: 12px 12px 0 var(--or);
+}
+
+/* ═════════ 8. INFOS ═════════ */
+.infos { background: var(--noir); padding: 136px 0 0; }
+.infos__head .title { margin-top: 24px; }
+.infos__grid { margin-top: 72px; align-items: stretch; }
+.infos__cols {
+  grid-column: 1 / span 5;
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gutter); row-gap: 56px;
+  align-content: start;
+  padding-bottom: 120px;
+  padding-right: var(--gutter);
+}
+.info h3 {
+  font-family: var(--display); font-weight: 400; font-size: 32px; line-height: 1.1; color: var(--creme);
+  padding-bottom: 16px; margin-bottom: 18px;
+  border-bottom: 1px solid var(--or-30);
+}
+.info p, .info li { font-size: 15px; line-height: 1.6; color: var(--creme-85); }
+.info .muted { color: var(--gris-texte); }
+.info .btn { margin: 4px 0 16px; }
+.info ul { display: grid; gap: 4px; }
+.infos__map {
+  grid-column: 6 / -1;
+  margin-right: calc(-1 * var(--bleed));
+  min-height: 560px;
+  background: var(--noir-2);
+  border-left: 1px solid var(--or-30);
+  border-top: 1px solid var(--or-30);
+}
+.infos__map iframe {
+  width: 100%; height: 100%; min-height: 560px; border: 0;
+  filter: grayscale(1) invert(.9);
+}
+
+/* ═════════ 9. FOOTER ═════════ */
+.footer {
+  position: relative; overflow: hidden;
+  background: var(--noir);
+  border-top: 1px solid var(--or-30);
+  padding: 120px 0 44px;
+}
+.footer .watermark { right: -120px; top: -40px; }
+.footer__inner { position: relative; z-index: 1; }
+.footer__tag { margin-top: 36px; font-family: var(--display); font-weight: 300; font-size: 24px; line-height: 1.3; color: var(--creme); }
+.footer__nav { margin-top: 72px; display: flex; flex-wrap: wrap; gap: 16px 40px; }
+.footer__bottom {
+  margin-top: 96px; padding-top: 24px;
+  border-top: 1px solid var(--or-30);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 32px;
+  font-size: 13px; color: var(--gris-texte);
+}
+
+/* ═════════ RESPONSIVE ═════════ */
+@media (max-width: 1280px) {
+  :root { --pad: 32px; }
+  .hero__title { font-size: 96px; }
+  .title { font-size: 64px; }
+  .title--xl { font-size: 72px; }
+  .title--md { font-size: 56px; }
+  .nav__links { gap: 28px; }
+  .carte__col { padding-inline: 28px; }
+  .roti__days { grid-column: 6 / -1; }
+  .roti__days div { grid-template-columns: 160px 1fr; }
+}
+
+@media (max-width: 900px) {
+  :root { --pad: 24px; --nav-h: 72px; }
+  .nav__inner > nav { display: none; }
+  .nav__inner { grid-template-columns: 1fr auto; }
+  .nav__toggle { display: inline-block; }
+  .nav__right .btn { padding: 12px 18px; }
+
+  .hero__content { grid-column: 1 / -1; }
+  .hero__aside { grid-column: 1 / -1; justify-self: start; align-items: flex-start; flex-direction: row; gap: 32px; margin-top: 48px; }
+  .hero__body { padding-bottom: 56px; }
+  .hero__title { font-size: 80px; }
+
+  .title, .title--md { font-size: 52px; }
+  .title--xl { font-size: 64px; }
+
+  .feu { padding: 112px 0 120px; }
+  .feu .watermark { font-size: 900px; left: -140px; }
+  .feu__text { grid-column: 1 / -1; padding-right: 0; }
+  .feu__media { grid-column: 1 / -1; margin-top: 72px; margin-left: 15%; aspect-ratio: 4 / 5; }
+
+  .carte { padding: 104px 0 96px; }
+  .carte__cols { grid-template-columns: 1fr; margin-top: 56px; }
+  .carte__col, .carte__col:first-child, .carte__col:last-child { padding: 40px 0 16px; }
+  .carte__col + .carte__col { border-left: 0; border-top: 1px solid var(--noir-15); }
+
+  .roti { height: auto; padding: 72px 0; }
+  .roti__head, .roti__days { grid-column: 1 / -1; }
+  .roti__days { margin-top: 40px; }
+
+  .salle { padding-bottom: 112px; }
+  .salle__hero { height: 70vh; }
+  .salle__card { padding: 36px 32px 36px 0; }
+  .salle__grid { margin-top: 152px; row-gap: 48px; }
+  .mason--a { grid-column: 1 / span 7; }
+  .mason--b { grid-column: 6 / -1; margin-top: 0; }
+  .mason--c { grid-column: 2 / span 7; margin-top: 0; }
+
+  .groupes { padding: 112px 0; }
+  .groupes__grid { grid-template-columns: 1fr; row-gap: 72px; }
+  .groupes__photo { max-width: 520px; }
+
+  .infos { padding-top: 104px; }
+  .infos__cols { grid-column: 1 / -1; padding-bottom: 72px; }
+  .infos__map { grid-column: 1 / -1; margin-left: calc(-1 * var(--bleed)); border-left: 0; min-height: 420px; }
+  .infos__map iframe { min-height: 420px; }
+
+  .footer .watermark { font-size: 900px; right: -160px; }
+}
+
+@media (max-width: 600px) {
+  :root { --pad: 16px; }
+  body { font-size: 16px; }
+  .nav__right { gap: 18px; }
+  .nav .logo { font-size: 15px; }
+  .nav__right .btn { padding: 11px 14px; letter-spacing: .16em; }
+
+  .hero__title { font-size: 56px; margin-top: 24px; }
+  .hero__lede { margin-top: 24px; }
+  .hero__cta { margin-top: 32px; }
+  .hero__aside { gap: 24px; margin-top: 40px; }
+  .hero__media.is-empty::after { right: var(--pad); left: var(--pad); text-align: left; }
+
+  .title, .title--md { font-size: 44px; }
+  .title--xl { font-size: 56px; }
+
+  .marquee { padding: 20px 0 22px; }
+  .marquee__group span { font-size: 26px; }
+  .marquee__group i { margin-inline: 24px; }
+
+  .feu { padding: 96px 0 104px; }
+  .feu .watermark { font-size: 640px; left: -90px; top: -20px; }
+  .feu__list li { font-size: 24px; }
+  .feu__media { margin-left: 0; margin-right: calc(-1 * var(--bleed)); }
+
+  .dish__name { font-size: 21px; }
+  .dish__price { font-size: 20px; }
+  .carte__foot p { font-size: 20px; }
+
+  .roti__title { font-size: 48px; }
+  .roti__days div { grid-template-columns: 1fr; gap: 4px; }
+  .roti__days dd { font-size: 24px; }
+
+  .salle__hero { height: 64vh; min-height: 420px; }
+  .salle__card-wrap { bottom: -120px; }
+  .salle__card { padding: 28px 20px 28px 0; }
+  .salle__grid { margin-top: 184px; }
+  .mason--a { grid-column: 1 / span 10; }
+  .mason--b { grid-column: 3 / -1; }
+  .mason--c { grid-column: 1 / span 9; }
+
+  .groupes__list li { font-size: 22px; }
+
+  .infos__cols { grid-template-columns: 1fr; row-gap: 44px; }
+
+  .footer { padding-top: 96px; }
+  .footer .watermark { font-size: 640px; right: -110px; top: -10px; }
+  .logo--lg { font-size: 34px; }
+  .footer__tag { font-size: 21px; }
+  .footer__nav { gap: 14px 28px; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<!-- ═════════ 0. NAVIGATION ═════════ -->
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="#top" class="logo" aria-label="La Vigne — retour en haut de page">LA<span class="v" aria-hidden="true">V</span>IGNE</a>
+    <nav aria-label="Navigation principale">
+      <ul class="nav__links">
+        <li><a class="link" href="#carte">La carte</a></li>
+        <li><a class="link" href="#le-feu">Le feu</a></li>
+        <li><a class="link" href="#salle">La salle</a></li>
+        <li><a class="link" href="#groupes">Groupes</a></li>
+        <li><a class="link" href="#infos">Infos</a></li>
+      </ul>
+    </nav>
+    <div class="nav__right">
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+      <a class="btn" href="https://bookings.zenchef.com/results?rid=ZENCHEF_ID" target="_blank" rel="noopener">Réserver</a>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <ul>
+    <li><a href="#carte">La carte</a></li>
+    <li><a href="#le-feu">Le feu</a></li>
+    <li><a href="#salle">La salle</a></li>
+    <li><a href="#groupes">Groupes</a></li>
+    <li><a href="#infos">Infos</a></li>
+  </ul>
+  <div class="menu__foot">
+    <span class="label-text">Lundi–Samedi · 12h–23h</span>
+    <a href="tel:+3225381207">02 538 12 07</a>
+    <span>Rue Jourdan 6, 1060 Saint-Gilles</span>
+  </div>
+</div>
+
+<main id="contenu">
+
+  <!-- ═════════ 1. HERO ═════════ -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="media hero__media" data-ratio="16:9">
+      <img src="" alt="Tomahawk de bœuf sur le grill au feu de bois, flammes" width="1920" height="1080" fetchpriority="high">
+    </div>
+    <div class="container hero__body">
+      <div class="grid">
+        <div class="hero__content" data-reveal>
+          <p class="label">Brasserie · Rôtisserie · Saint&#8209;Gilles · depuis&nbsp;1985</p>
+          <h1 class="hero__title" id="hero-title">Grillades au<br><em>feu de bois.</em></h1>
+          <p class="hero__lede">Brasserie méditerranéenne au cœur du quartier Louise. Cuisine non&#8209;stop de 12h à 23h.</p>
+          <div class="hero__cta">
+            <a class="btn" href="https://bookings.zenchef.com/results?rid=ZENCHEF_ID" target="_blank" rel="noopener">Réserver une table</a>
+          </div>
+        </div>
+        <div class="hero__aside" data-reveal data-reveal-delay="2">
+          <a class="link" href="#le-feu">↓ Découvrir</a>
+          <a class="link" href="tel:+3225381207">02 538 12 07</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 2. BANDEAU DÉFILANT ═════════ -->
+  <div class="marquee">
+    <div class="marquee__track">
+      <p class="marquee__group">
+        <span>Grillades au feu de bois</span><i aria-hidden="true">◆</i>
+        <span>Rôtisserie</span><i aria-hidden="true">◆</i>
+        <span>Moules-frites</span><i aria-hidden="true">◆</i>
+        <span>Spécialités grecques</span><i aria-hidden="true">◆</i>
+        <span>Depuis 1985</span><i aria-hidden="true">◆</i>
+        <span>Quartier Louise</span><i aria-hidden="true">◆</i>
+      </p>
+      <p class="marquee__group" aria-hidden="true">
+        <span>Grillades au feu de bois</span><i>◆</i>
+        <span>Rôtisserie</span><i>◆</i>
+        <span>Moules-frites</span><i>◆</i>
+        <span>Spécialités grecques</span><i>◆</i>
+        <span>Depuis 1985</span><i>◆</i>
+        <span>Quartier Louise</span><i>◆</i>
+      </p>
+    </div>
+  </div>
+
+  <!-- ═════════ 3. LE FEU ═════════ -->
+  <section class="feu" id="le-feu" aria-labelledby="feu-title">
+    <span class="watermark" aria-hidden="true">V</span>
+    <div class="container">
+      <div class="grid feu__grid">
+        <div class="feu__text" data-reveal>
+          <p class="label">Le feu</p>
+          <h2 class="title title--xl" id="feu-title">Quarante ans de braises.</h2>
+          <p>Le bœuf est saisi sur la braise du feu de bois ; les volailles et le cochon de lait tournent à la broche, visibles depuis la salle. À côté des grillades, la carte garde ses classiques belges, les moules-frites en tête, et ses plats grecs : moussaka, gyros, soutzoukakia. La cuisine ne s'arrête pas entre midi et 23h.</p>
+          <ul class="feu__list">
+            <li>Bœuf irlandais maturé</li>
+            <li>Broche au feu de bois</li>
+            <li>Moules de Zélande en saison</li>
+          </ul>
+        </div>
+        <figure class="media feu__media" data-reveal data-reveal-delay="1">
+          <img src="" alt="Rôtissoire à la broche devant le feu de bois, volailles en train de dorer" width="1000" height="1200" loading="lazy">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 4. LA CARTE ═════════ -->
+  <section class="carte" id="carte" aria-labelledby="carte-title">
+    <div class="container">
+      <header class="carte__head" data-reveal>
+        <h2 class="title title--xl" id="carte-title">La carte</h2>
+        <p class="label">Extrait — carte complète au restaurant</p>
+      </header>
+
+      <div class="carte__cols">
+        <div class="carte__col" data-reveal>
+          <h3 class="label">Grillades &amp; rôtisserie</h3>
+          <ul>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Côte à l'os irlandaise</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">85,00 €</span></div>
+              <p class="dish__detail">+/- 1,2 kg, pour 2 personnes</p>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Tomahawk de bœuf irlandais</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">85,00 €</span></div>
+              <p class="dish__detail">+/- 1 kg, pour 2 personnes</p>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Entrecôte irlandaise</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">35,90 €</span></div>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Le plat signature</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">24,90 €</span></div>
+              <p class="dish__detail">Filet mignon de bœuf, frites, salade</p>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Coquelet rôti</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">23,90 €</span></div>
+              <p class="dish__detail">Sauce champignons</p>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Cochon de lait à la broche</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">32,90 €</span></div>
+              <p class="dish__detail">Gratin dauphinois</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="carte__col" data-reveal data-reveal-delay="1">
+          <h3 class="label">Moules &amp; mer</h3>
+          <ul>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Moules marinières</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price dish__price--note">selon arrivage</span></div>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Moules au vin blanc</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price dish__price--note">selon arrivage</span></div>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Moules provençale</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price dish__price--note">selon arrivage</span></div>
+            </li>
+            <li class="dish">
+              <!-- Prix à compléter -->
+              <div class="dish__row"><span class="dish__name">Bar grillé</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price" aria-label="Prix au restaurant">—</span></div>
+            </li>
+            <li class="dish">
+              <!-- Prix à compléter -->
+              <div class="dish__row"><span class="dish__name">Saumon grillé</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price" aria-label="Prix au restaurant">—</span></div>
+              <p class="dish__detail">Sauce béarnaise</p>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Scampis</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">19,90 €</span></div>
+              <p class="dish__detail">Beurre à l'ail</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="carte__col" data-reveal data-reveal-delay="2">
+          <h3 class="label">Côté Grèce</h3>
+          <ul>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Tzatziki</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">9,90 €</span></div>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Feuilles de vigne farcies</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">9,00 €</span></div>
+              <p class="dish__detail">Au riz</p>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Gyros de poulet ou porc</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">21,90 €</span></div>
+              <p class="dish__detail">Pita, tzatziki</p>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Soutzoukakia maison</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">21,00 €</span></div>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Moussaka maison</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">21,90 €</span></div>
+            </li>
+            <li class="dish">
+              <div class="dish__row"><span class="dish__name">Salade grecque</span><span class="dish__leader" aria-hidden="true"></span><span class="dish__price">16,50 €</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="carte__foot" data-reveal>
+        <p>Tous nos plats sont accompagnés au choix de frites belges maison, riz basmati, croquettes ou pommes de terre grenailles.</p>
+        <a class="btn-text" href="carte-la-vigne.pdf" target="_blank" rel="noopener">Voir la carte complète (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 5. RÔTISSERIE DU JOUR ═════════ -->
+  <section class="roti" aria-labelledby="roti-title">
+    <div class="container">
+      <div class="grid roti__grid">
+        <div class="roti__head" data-reveal>
+          <p class="label">Chaque jour</p>
+          <h2 class="roti__title" id="roti-title">La rôtisserie du jour</h2>
+        </div>
+        <dl class="roti__days" data-reveal data-reveal-delay="1">
+          <div><dt>Lundi–Mercredi</dt><dd>Coquelet fermier</dd></div>
+          <div><dt>Jeudi–Vendredi</dt><dd>Épaule d'agneau à la menthe (2 pers.)</dd></div>
+          <div><dt>Samedi</dt><dd>Cochon de lait</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 6. LA SALLE ═════════ -->
+  <section class="salle" id="salle" aria-labelledby="salle-title">
+    <div class="salle__hero">
+      <div class="media" data-ratio="21:9">
+        <img src="" alt="Salle de La Vigne : banquettes rouges, bois sombre, laiton et suspensions dorées" width="2100" height="900" loading="lazy">
+      </div>
+      <div class="salle__card-wrap">
+        <div class="container">
+          <div class="salle__card" data-reveal>
+            <p class="label">La salle</p>
+            <h2 class="title title--md" id="salle-title">Rue Jourdan,<br>depuis 1985.</h2>
+            <p><span>80 couverts.</span><span>Banquettes rouges, laiton, et la broche visible depuis la salle.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="grid salle__grid">
+        <figure class="mason mason--a" data-reveal>
+          <div class="media">
+            <img src="" alt="Façade de La Vigne rue Jourdan, store rouge" width="900" height="1200" loading="lazy">
+          </div>
+          <figcaption class="label">La façade, rue Jourdan</figcaption>
+        </figure>
+        <figure class="mason mason--b" data-reveal data-reveal-delay="1">
+          <div class="media">
+            <img src="" alt="Moules-frites en cocotte, frites dans un cornet métallique" width="960" height="1200" loading="lazy">
+          </div>
+          <figcaption class="label">Moules-frites, en cocotte</figcaption>
+        </figure>
+        <figure class="mason mason--c" data-reveal data-reveal-delay="2">
+          <div class="media">
+            <img src="" alt="Côte à l'os de bœuf tranchée sur une planche en bois" width="1000" height="1000" loading="lazy">
+          </div>
+          <figcaption class="label">Côte à l'os, tranchée</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 7. GROUPES & PRIVATISATION ═════════ -->
+  <section class="groupes" id="groupes" aria-labelledby="groupes-title">
+    <div class="container groupes__grid">
+      <div class="groupes__text" data-reveal>
+        <p class="label">Groupes &amp; événements</p>
+        <h2 class="title title--md" id="groupes-title">Jusqu'à 80 convives.</h2>
+        <p>Anniversaires, soirées d'entreprise, menus de fin d'année. Le restaurant peut aussi être privatisé entièrement le soir, sur demande.</p>
+        <ul class="groupes__list">
+          <li>Menus groupes à partir de 15 personnes</li>
+          <li>Privatisation du restaurant</li>
+          <li>Menus de Noël &amp; Nouvel An</li>
+        </ul>
+        <a class="btn-text" href="tel:+3225381207">Appeler le 02 538 12 07</a>
+      </div>
+      <figure class="groupes__photo" data-reveal data-reveal-delay="1">
+        <div class="media">
+          <img src="" alt="Les deux patrons de La Vigne devant la façade du restaurant" width="1200" height="1200" loading="lazy">
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═════════ 8. INFOS PRATIQUES ═════════ -->
+  <section class="infos" id="infos" aria-labelledby="infos-title">
+    <div class="container">
+      <header class="infos__head" data-reveal>
+        <p class="label">Infos pratiques</p>
+        <h2 class="title title--md" id="infos-title">Nous trouver.</h2>
+      </header>
+      <div class="grid infos__grid">
+        <div class="infos__cols">
+          <div class="info" data-reveal>
+            <h3>Adresse</h3>
+            <p>Rue Jourdan 6<br>1060 Saint-Gilles</p>
+            <p class="muted">Métro Louise, lignes 2 &amp; 6</p>
+          </div>
+          <div class="info" data-reveal data-reveal-delay="1">
+            <h3>Horaires</h3>
+            <p>Lundi–Samedi 12h–23h<br>Cuisine non-stop</p>
+            <p class="muted">Dimanche fermé</p>
+          </div>
+          <div class="info" data-reveal>
+            <h3>Réservation</h3>
+            <a class="btn" href="https://bookings.zenchef.com/results?rid=ZENCHEF_ID" target="_blank" rel="noopener">Réserver en ligne</a>
+            <p class="muted">Plus de 15 personnes :<br><a class="link" href="tel:+3225381207">02 538 12 07</a></p>
+          </div>
+          <div class="info" data-reveal data-reveal-delay="1">
+            <h3>Contact</h3>
+            <ul>
+              <li><a class="link" href="tel:+3225381207">02 538 12 07</a></li>
+              <li><a class="link" href="mailto:nc-invest@outlook.com">nc-invest@outlook.com</a></li>
+              <li><a class="link" href="https://www.instagram.com/lavignebxl/" target="_blank" rel="noopener">@lavignebxl</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="infos__map">
+          <iframe
+            title="Plan d'accès : La Vigne, rue Jourdan 6, 1060 Saint-Gilles"
+            src="https://www.google.com/maps?q=Rue+Jourdan+6,+1060+Saint-Gilles,+Bruxelles&amp;z=16&amp;output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═════════ 9. FOOTER ═════════ -->
+<footer class="footer">
+  <span class="watermark" aria-hidden="true">V</span>
+  <div class="container footer__inner">
+    <a href="#top" class="logo logo--lg" aria-label="La Vigne — retour en haut de page">LA<span class="v" aria-hidden="true">V</span>IGNE</a>
+    <p class="footer__tag">Brasserie méditerranéenne · Grillades au feu de bois · Depuis 1985</p>
+    <nav class="footer__nav" aria-label="Navigation de pied de page">
+      <a class="label-text link" href="#carte">La carte</a>
+      <a class="label-text link" href="#le-feu">Le feu</a>
+      <a class="label-text link" href="#salle">La salle</a>
+      <a class="label-text link" href="#groupes">Groupes</a>
+      <a class="label-text link" href="#infos">Infos</a>
+      <a class="label-text link" href="https://www.instagram.com/lavignebxl/" target="_blank" rel="noopener">Instagram — @lavignebxl</a>
+    </nav>
+    <div class="footer__bottom">
+      <span>© La Vigne 2026 — Rue Jourdan 6, 1060 Bruxelles</span>
+      <span>Lundi–Samedi 12h–23h · Dimanche fermé</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  root.classList.add('js');
+
+  /* Emplacements photo : signale les images sans source */
+  document.querySelectorAll('.media img').forEach(function (img) {
+    var src = img.getAttribute('src');
+    if (!src) {
+      img.parentElement.classList.add('is-empty');
+      img.parentElement.setAttribute('data-ph', img.alt);
+    }
+  });
+
+  /* Navigation : fond au scroll */
+  var nav = document.getElementById('nav');
+  var onScroll = function () { nav.classList.toggle('is-scrolled', window.scrollY > 40); };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* Menu mobile */
+  var toggle = document.querySelector('.nav__toggle');
+  var menu = document.getElementById('menu');
+  var setMenu = function (open) {
+    menu.classList.toggle('is-open', open);
+    menu.setAttribute('aria-hidden', String(!open));
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? 'Fermer' : 'Menu';
+    nav.classList.toggle('is-scrolled', open || window.scrollY > 40);
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  toggle.addEventListener('click', function () { setMenu(!menu.classList.contains('is-open')); });
+  menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.classList.contains('is-open')) { setMenu(false); toggle.focus(); } });
+  window.matchMedia('(min-width: 901px)').addEventListener('change', function (e) { if (e.matches) setMenu(false); });
+
+  /* Apparition au scroll — une seule fois */
+  var items = document.querySelectorAll('[data-reveal]');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('is-in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
