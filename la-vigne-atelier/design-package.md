@@ -45,7 +45,25 @@ Contrastes calculés : encre sur ivoire 15:1 ; encre-2 sur ivoire 7:1 ; laiton f
 
 Échelle fluide avec `clamp()`. 60 à 72 caractères par ligne (`max-width` en `ch` sur l'élément texte lui-même). Boutons rectangulaires sans arrondi.
 
-## 4. Le hero : le tomahawk au-dessus du feu, visible dès la première seconde
+## 4. L'arrivée : le rideau de fumée et le V qui s'ouvre (d'après palazzosogni.com)
+
+Référence donnée par la cliente : l'arrivée de palazzosogni.com. Ce qu'elle fait, image par image : un fond calme et coloré qui bouge à peine, le monogramme qui apparaît au centre, un reflet de lumière qui le traverse, puis le monogramme devient une fenêtre sur la photo de l'hôtel et s'ouvre jusqu'à remplir l'écran, la navigation arrive en dernier. Ce qu'on en reprend, traduit pour La Vigne :
+
+1. Un rideau fumée (le noir chaud de l'enseigne) avec trois nappes de lumière qui dérivent très lentement, laiton et braise.
+2. L'enseigne apparaît au centre : LA, le grand V doré, IGNE, puis « Depuis 1985 ». Un reflet de lumière traverse les lettres.
+3. Le V doré se dissout et laisse voir, à travers sa forme, la photo du tomahawk au-dessus des flammes (une découpe SVG, la même photo et le même cadrage que le hero dessous).
+4. La fenêtre s'ouvre : le V grandit en une seconde jusqu'à seize fois sa taille, les lettres s'effacent, le rideau se fond, et la photo plein cadre est là. Rien ne saute : la photo de la fenêtre et celle du hero sont au pixel près la même.
+5. La navigation, puis les mots du coin bas droit, puis l'invitation à défiler.
+
+Trois secondes et demie. Jouée une fois par visite : revenir à l'accueil dans la même session donne un simple fondu d'une seconde. Mouvement réduit : pas de rideau du tout. Le rideau est posé dans le HTML avant tout script, donc rien ne clignote avant lui.
+
+## 4 bis. Le hero : le tomahawk au-dessus du feu, plein cadre
+
+Règle posée par la cliente : l'image d'abord, en plein cadre, et le texte se range dans ses parties vides. La photo du tomahawk occupe tout l'écran (cadrée au centre sur ordinateur, calée à droite sur téléphone pour garder la viande). Les mots prennent le coin bas droit, sous la pince, au-dessus de la grille sombre : LA V IGNE comme sur la façade, « Depuis 1985 », une phrase, le bouton Réserver et le téléphone, alignés à droite. Un voile local les porte ; la flamme et la viande restent claires. Sur téléphone, les mots sont en bas à gauche sur un dégradé. La photo continue un zoom très lent et glisse en parallaxe douce quand on descend.
+
+Sous le hero, trois photos plein cadre rythment la page comme des respirations, chacune avec une phrase posée dans sa partie sombre : les bûches (« Au fond de la cuisine, du vrai bois brûle. »), les lampes en osier (« On entre. Le bois, l'osier, la lumière chaude. »), la terrasse (« Depuis 1985, à la même adresse. »). Elles glissent un peu moins vite que la page. Le bandeau final est la broche.
+
+## Ancienne version du hero (remplacée)
 
 Décisions successives de la cliente : pas de défilement d'images ; le « waouw » dès le chargement ; puis, le produit phare étant le tomahawk, il doit être visible dès le départ, animation comprise.
 
