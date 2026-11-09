@@ -48,17 +48,20 @@ Contrastes calculés : texte primaire sur canvas 15:1 ; secondaire sur canvas 8:
 
 ## 4. La carte des bandes (hero desktop)
 
-Le hero fait 460vh. Le « film » est une suite de cinq vraies photos pilotées par le scroll : fondu croisé + lent zoom (transform et opacity seulement, lissés, réversibles). Descendre = entrer : trottoir, salle, feu, broche, table.
+Le hero fait 860vh. Le « film » est une suite de six vraies photos pilotées par le scroll : fondu croisé + lent zoom (transform et opacity seulement, lissés, réversibles). On ouvre sur le feu, l'idée de la maison, puis on fait le chemin : trottoir, salle, feu de cuisine, broche, table.
+
+**L'arrivée (demandée par la cliente : « waouw, ce site a dû coûter cher »).** Une séquence jouée une seule fois au chargement, 3 secondes, puis le scroll prend la main : écran sombre, le V de l'enseigne se trace tout seul en laiton (tracé SVG), « La » et « igne » glissent se coller au V, le filet doré s'étire, puis les bûches s'allument derrière (la photo monte en opacité avec un léger recul de zoom et une lueur orange qui respire ensuite comme un feu), le kicker et la sous-ligne montent, la navigation et l'invitation à défiler apparaissent en dernier. Sur téléphone, la même arrivée en plus léger sur le hero statique. Mouvement réduit : rien ne bouge, tout est affiché.
 
 | Bande | Plage (point de départ) | Photo et mouvement | Texte (verbatim) | Entrée |
 |---|---|---|---|---|
-| 1 | 0,00 à 0,17 | `terrasse` : chaises en osier, vitrine. Zoom lent 1,00 → 1,06 | Kicker : « Rue Jourdan 6, Saint-Gilles » / Titre : « Depuis 1985, à la même adresse. » | Flou vers net (on arrive, la mise au point se fait) |
-| 2 | 0,20 à 0,38 | `salle` : la salle en bois, bar au fond. Zoom 1,02 → 1,08 | « On entre. Le bois, l'osier, la lumière chaude. » | Approche depuis la profondeur (on avance dans la salle) |
-| 3 | 0,41 à 0,59 | `feu-buches` : les bûches qui brûlent. Zoom 1,00 → 1,10 | « Au fond de la cuisine, du vrai bois brûle. » / Sous-ligne : « Pas de pierres de lave. Pas de plaque. De la braise. » | Dispersion (les lettres se rassemblent comme des braises) |
-| 4 | 0,62 à 0,78 | `broche` : la rôtisserie sur les flammes bleues. Léger panoramique latéral | « La broche tourne de midi à 23 h. » / Sous-ligne : « Cochon de lait, coquelet, épaule d'agneau. Cuisine non-stop. » | Glissement aligné (les mots glissent comme la broche tourne) |
-| 5 (settle) | 0,82 à 1,00 | `table-steak` : la photo verticale arrive dans un panneau à droite, la broche s'assombrit à gauche et devient le fond du texte | Kicker : « Brasserie méditerranéenne · Grillades au feu de bois » / H1 : « La Vigne » / Sous-ligne : « Viandes irlandaises grillées au feu de bois, moules-frites et plats grecs faits maison. Du lundi au samedi, cuisine non-stop de 12 h à 23 h. » / CTA : « Réserver une table » / Secondaire : « 02 538 12 07 » | Montée mot à mot puis arrivée en trois temps (titre, sous-ligne, boutons) |
+| 1 (carte de titre) | 0,00 à 0,15 | `feu-buches` : les bûches qui brûlent, flamme à gauche, texte à droite. Zoom 1,00 → 1,08 | Kicker : « Saint-Gilles · Depuis 1985 » / H1 : « La Vigne » (le V dessiné) / Sous-ligne : « Brasserie méditerranéenne. Grillades au feu de bois. » | La séquence d'arrivée ci-dessus |
+| 2 | 0,17 à 0,31 | `terrasse` : chaises en osier, vitrine. Zoom lent 1,00 → 1,07 | Kicker : « Rue Jourdan 6, Saint-Gilles » / Titre : « Depuis 1985, à la même adresse. » | Flou vers net (on arrive, la mise au point se fait) |
+| 3 | 0,33 à 0,47 | `salle` : la salle en bois, bar au fond. Zoom 1,02 → 1,09 | « On entre. Le bois, l'osier, la lumière chaude. » | Approche depuis la profondeur (on avance dans la salle) |
+| 4 | 0,49 à 0,63 | `feu-grille` : la braise sous la grille. Zoom 1,00 → 1,11 | « Au fond de la cuisine, du vrai bois brûle. » / Sous-ligne : « Pas de pierres de lave. Pas de plaque. De la braise. » | Dispersion (les lettres se rassemblent comme des braises) |
+| 5 | 0,65 à 0,79 | `broche` : la rôtisserie sur les flammes bleues. Léger panoramique latéral | « La broche tourne de midi à 23 h. » / Sous-ligne : « Cochon de lait, coquelet, épaule d'agneau. Cuisine non-stop. » | Glissement aligné (les mots glissent comme la broche tourne) |
+| 6 (settle) | 0,83 à 1,00 | `table-steak` : la photo verticale arrive dans un panneau à droite, la broche s'assombrit à gauche et devient le fond du texte | Kicker : « Brasserie méditerranéenne · Grillades au feu de bois » / Titre : « La bonne table de Saint-Gilles, depuis plus de quarante ans. » / Sous-ligne : « Viandes irlandaises au feu de bois, moules-frites et plats grecs faits maison. Du lundi au samedi, cuisine non-stop de 12 h à 23 h. » / CTA : « Réserver une table » / Secondaire : « 02 538 12 07 » | Montée mot à mot puis arrivée en trois temps (titre, sous-ligne, boutons) |
 
-Les plages sont des points de départ, validés ensuite par le test des coups de molette (120, 240, 360 px).
+Les plages sont des points de départ, validées par le test des coups de molette (120, 240, 360 px) : chaque bande tient 6 coups de 120 px, aucune n'est sautée à 360 px. Voiles par bande mesurés au pire pixel : 6,6:1 à 13:1.
 
 ## 5. Le bloc hero statique (téléphones, tablettes portrait, mouvement réduit)
 
