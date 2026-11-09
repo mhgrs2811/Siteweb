@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La Vigne · Grillades au feu de bois à Saint-Gilles, depuis 1985</title>
+<title>La Vigne, grillades au feu de bois à Saint-Gilles depuis 1985</title>
 <meta name="description" content="La Vigne, brasserie méditerranéenne à Saint-Gilles (Bruxelles) depuis 1985 : viandes irlandaises grillées au feu de bois, rôtisserie, moules-frites et plats grecs maison. Cuisine non-stop de 12 h à 23 h, du lundi au samedi. Réservez une table.">
 <meta name="theme-color" content="#171210">
 <!-- DEPLOY STEP : remplacer og:url et og:image par l'adresse définitive du site -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_BE">
 <meta property="og:site_name" content="La Vigne">
-<meta property="og:title" content="La Vigne · Grillades au feu de bois à Saint-Gilles, depuis 1985">
+<meta property="og:title" content="La Vigne, grillades au feu de bois à Saint-Gilles depuis 1985">
 <meta property="og:description" content="Viandes irlandaises grillées au feu de bois, rôtisserie du jour, moules-frites et plats grecs maison. Rue Jourdan 6, Saint-Gilles. Cuisine non-stop de 12 h à 23 h.">
 <meta property="og:url" content="https://la-vigne.be/">
 <meta property="og:image" content="https://la-vigne.be/assets/og.jpg">
@@ -24,7 +24,6 @@
 @font-face{font-family:"Fraunces";font-style:normal;font-weight:100 900;font-display:swap;src:url(assets/fonts/fraunces-latin-wght-normal.woff2) format("woff2-variations")}
 @font-face{font-family:"Fraunces";font-style:italic;font-weight:100 900;font-display:swap;src:url(assets/fonts/fraunces-latin-wght-italic.woff2) format("woff2-variations")}
 @font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(assets/fonts/figtree-latin-wght-normal.woff2) format("woff2-variations")}
-@font-face{font-family:"DM Mono";font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/dm-mono-latin-500-normal.woff2) format("woff2")}
 
 :root{
   /* the fire (hero and final band) */
@@ -38,7 +37,6 @@
   --brass:#A67C22;--brass-deep:#7A5B1D;--brass-line:rgba(166,124,34,.38);--brass-faint:rgba(166,124,34,.16);
   --display:"Fraunces",Georgia,"Times New Roman",serif;
   --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --ease-out:cubic-bezier(.22,.8,.26,1);--ease-soft:cubic-bezier(.4,0,.2,1);
   --tshadow:0 1px 2px rgba(8,5,3,.95),0 3px 12px rgba(8,5,3,.78),0 10px 44px rgba(8,5,3,.8);
   --space:clamp(5rem,10vw,9.5rem);
@@ -55,10 +53,8 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.15;letter-s
 h2{font-size:clamp(1.9rem,1.5rem + 1.3vw,2.5rem)}
 h3{font-size:clamp(1.4rem,1.2rem + .7vw,1.8rem)}
 p{margin:0}
-.kicker{font-family:var(--body);font-weight:600;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-deep);display:flex;align-items:center;gap:.6rem;margin:0 0 1.1rem}
-.kicker .leaf{width:15px;height:14px;flex:none;color:var(--brass);fill:currentColor}
 .center{text-align:center}
-.center .kicker{justify-content:center}
+.center-p{margin-inline:auto;text-align:center;margin-top:1.6rem}
 .lede{font-size:clamp(1.1rem,1.02rem + .4vw,1.3rem);line-height:1.55;color:var(--ink);max-width:var(--measure);text-wrap:pretty}
 .center .lede,.center .measure{margin-inline:auto}
 .muted{color:var(--ink-2)}
@@ -81,16 +77,13 @@ p{margin:0}
 .btn-outline{background:transparent;color:var(--ink);border-color:var(--ink)}
 .btn-outline:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
 .btn .ic{width:1.1em;height:1.1em;flex:none}
-.more{display:inline-flex;align-items:center;gap:.7rem;font-weight:600;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:.45rem 0 .4rem;border-bottom:1px solid var(--ink);transition:color .35s,border-color .35s}
-.more svg{width:1.1rem;height:1.1rem;transition:transform .4s var(--ease-out)}
+.more{display:inline-block;font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:.45rem 0 .35rem;border-bottom:1px solid var(--ink);transition:color .35s,border-color .35s}
 .more:hover{color:var(--brass-deep);border-color:var(--brass)}
-.more:hover svg{transform:translateX(5px)}
 @media (pointer:coarse){.btn{min-height:44px}}
 
-/* ---------- Fixed environment : paper grain behind the light part ---------- */
-.env{position:fixed;inset:-12%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(166,124,34,.07) 0%,rgba(246,240,228,0) 60%),var(--paper);animation:drift 90s ease-in-out -30s infinite alternate}
+/* ---------- Fixed environment : paper grain behind the light ---------- */
+.env{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(166,124,34,.07) 0%,rgba(246,240,228,0) 60%),var(--paper)}
 .env::after{content:"";position:absolute;inset:0;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .22 0 0 0 0 .12 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:multiply}
-@keyframes drift{from{transform:translate3d(-2%,-1%,0) scale(1.02)}to{transform:translate3d(2%,1.5%,0) scale(1.06)}}
 
 /* ---------- Header : links left, the wordmark in the centre, Réserver on the right ---------- */
 .nav{position:fixed;top:0;left:0;right:0;z-index:50;color:var(--text-primary);transition:background-color .5s var(--ease-soft),color .5s var(--ease-soft),box-shadow .5s var(--ease-soft)}
@@ -101,9 +94,8 @@ p{margin:0}
 .brand .word{font-family:var(--display);font-weight:500;font-size:1.25rem;letter-spacing:.3em;display:inline-flex;align-items:baseline;padding-left:.3em}
 .brand .word .v{font-size:1.9em;letter-spacing:0;color:var(--accent);font-weight:300;margin:0 .02em 0 .1em;transform:translateY(.1em);display:inline-block}
 .nav.solid .brand .word .v,.nav.menu-open .brand .word .v{color:var(--brass)}
-.brand .tag{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;font-weight:500;opacity:.75;margin-top:.45rem;padding-left:.3em}
 .menu{display:flex;align-items:center;gap:clamp(1rem,2.2vw,2rem);list-style:none;margin:0;padding:0;justify-self:start}
-.menu a:not(.btn){text-decoration:none;font-weight:500;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:inherit;opacity:.88;position:relative;padding:.5rem 0}
+.menu a:not(.btn){text-decoration:none;font-weight:500;font-size:.95rem;color:inherit;opacity:.9;position:relative;padding:.5rem 0}
 .menu a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:.15rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease-out)}
 .menu a:not(.btn):hover{opacity:1}
 .menu a:not(.btn):hover::after{transform:scaleX(1)}
@@ -122,7 +114,6 @@ p{margin:0}
 @media (max-width:900px){
   .nav-in{height:4.5rem;grid-template-columns:44px 1fr 44px}
   .brand .word{font-size:1.05rem}
-  .brand .tag{display:none}
   .nav-tel{display:inline-flex;justify-self:start}
   .nav-right .btn{display:none}
   .burger{display:inline-flex}
@@ -131,7 +122,7 @@ p{margin:0}
   .menu li{border-bottom:1px solid rgba(35,26,18,.1)}
   .menu li:last-child{border:0;padding-top:1rem}
   .menu li.cta{display:block}
-  .menu a:not(.btn){display:block;padding:1.1rem 0;font-size:.95rem;letter-spacing:.14em;opacity:1}
+  .menu a:not(.btn){display:block;padding:1.1rem 0;font-size:1.1rem;opacity:1}
   .menu .btn{width:100%;background:var(--ink);color:var(--paper);border-color:var(--ink)}
 }
 
@@ -146,7 +137,7 @@ p{margin:0}
 .bloom{position:absolute;inset:-20%;pointer-events:none;mix-blend-mode:screen;opacity:0;background:radial-gradient(ellipse 34% 42% at 36% 62%,rgba(232,116,28,.55) 0%,rgba(232,116,28,.18) 40%,rgba(232,116,28,0) 70%)}
 .card{position:absolute;right:6%;top:50%;transform:translateY(-50%);max-width:min(42rem,44vw);z-index:2;text-shadow:var(--tshadow);--sa:.72;will-change:transform,opacity}
 .card::before{content:"";position:absolute;inset:-40% -30%;pointer-events:none;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(8,5,3,var(--sa)) 0%,rgba(8,5,3,var(--sa)) 64%,rgba(8,5,3,calc(var(--sa)*.55)) 82%,rgba(8,5,3,0) 100%);z-index:-1}
-.card .kicker{color:var(--accent);font-family:var(--mono);font-weight:500;font-size:.78rem;letter-spacing:.22em;text-shadow:0 1px 3px rgba(8,5,3,.9)}
+.card .where{color:var(--accent);font-weight:500;font-size:1rem;letter-spacing:.01em;margin:0 0 .4rem;text-shadow:0 1px 3px rgba(8,5,3,.9)}
 .card .h1{font-size:clamp(4rem,2.4rem + 7.5vw,10rem);line-height:.92;letter-spacing:-.025em;font-weight:300;margin-top:.1em;color:var(--text-primary)}
 .h1 .vis{display:inline-flex;align-items:baseline;white-space:nowrap}
 .vmark{display:inline-block;height:.86em;width:auto;vertical-align:-.06em;margin:0 -.02em 0 .04em;overflow:visible}
@@ -154,15 +145,15 @@ p{margin:0}
 .card .line{display:block;width:min(18rem,60%);height:1px;background:linear-gradient(90deg,var(--accent),rgba(201,162,74,0));margin:1.6rem 0 1.2rem;transform-origin:left}
 .card .sub{font-size:clamp(1.05rem,1rem + .5vw,1.35rem);max-width:32rem;color:var(--text-primary);opacity:.94}
 .card .cta{display:flex;flex-wrap:wrap;gap:.8rem 1.25rem;margin-top:1.75rem;align-items:center}
-.tel{font-family:var(--mono);font-size:.95rem;letter-spacing:.06em;color:var(--text-primary);text-decoration:none;border-bottom:1px solid var(--accent-line);padding-bottom:.15rem}
+.tel{font-weight:500;font-size:1rem;font-variant-numeric:tabular-nums;color:var(--text-primary);text-decoration:none;border-bottom:1px solid var(--accent-line);padding-bottom:.15rem}
 .tel:hover{border-color:var(--accent)}
-.cue{position:absolute;left:50%;bottom:2.2rem;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--text-secondary);font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;pointer-events:none;transition:opacity .6s}
+.cue{position:absolute;left:50%;bottom:2.2rem;transform:translateX(-50%);display:flex;color:var(--text-secondary);pointer-events:none;transition:opacity .6s}
 .cue svg{width:18px;height:28px;animation:cue 2.6s var(--ease-soft) -1s infinite}
 .cue.gone{opacity:0}
 @keyframes cue{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(8px);opacity:1}}
 .embers{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .embers i{position:absolute;bottom:-4%;width:4px;height:4px;border-radius:50%;background:var(--ember);box-shadow:0 0 8px 2px rgba(232,116,28,.55);opacity:0;left:var(--x);animation:ember var(--d,9s) linear var(--dl,0s) infinite paused;transform:translate3d(0,0,0)}
-.live .embers i{animation-play-state:running}
+.live .embers i,.braise.hot .embers i{animation-play-state:running}
 @keyframes ember{0%{transform:translate3d(0,0,0) scale(.6);opacity:0}12%{opacity:.75}55%{opacity:.45}100%{transform:translate3d(var(--dx,20px),-48vh,0) scale(.2);opacity:0}}
 /* the arrival : plays once, time based */
 @keyframes vdraw{from{stroke-dashoffset:440;fill-opacity:0}60%{fill-opacity:0}to{stroke-dashoffset:0;fill-opacity:1}}
@@ -177,7 +168,7 @@ p{margin:0}
 .stage.intro .card .vmark path{stroke-dasharray:440;animation:vdraw 1.6s cubic-bezier(.65,0,.25,1) .35s both}
 .stage.intro .card .la{animation:slidein 1s var(--ease-out) 1.15s both;--dx:18px}
 .stage.intro .card .igne{animation:slidein 1s var(--ease-out) 1.25s both;--dx:-18px}
-.stage.intro .card .kicker{animation:rise 1s var(--ease-out) 1.75s both}
+.stage.intro .card .where{animation:rise 1s var(--ease-out) 1.75s both}
 .stage.intro .card .line{animation:growx 1.2s var(--ease-out) 1.6s both}
 .stage.intro .card .sub{animation:rise 1s var(--ease-out) 2s both}
 .stage.intro .card .cta{animation:rise 1s var(--ease-out) 2.3s both}
@@ -202,18 +193,8 @@ body.intro .nav{animation:fadein 1.2s var(--ease-out) 2.6s backwards}
 /* ---------- Below the hero : the paper ---------- */
 .below{position:relative;background:var(--paper)}
 section{position:relative;padding:var(--space) 0}
-.rule{height:1px;background:linear-gradient(90deg,var(--brass),rgba(166,124,34,.1));position:relative;margin:0 0 var(--space);transform:scaleX(0);transform-origin:left;transition:transform 1.6s var(--ease-out)}
-.rv.in .rule{transform:scaleX(1)}
-.rule::before{content:"";position:absolute;left:0;top:-3px;width:7px;height:7px;border-radius:50%;background:var(--brass)}
-.rv.in .rule::before{animation:dot 5s ease-in-out infinite}
-@keyframes dot{0%,100%{box-shadow:0 0 0 0 rgba(166,124,34,.4)}50%{box-shadow:0 0 0 7px rgba(166,124,34,0)}}
-.rv .part{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
-.rv.in .part{opacity:1;transform:none}
-.rv.in .part:nth-child(2){transition-delay:.09s}.rv.in .part:nth-child(3){transition-delay:.18s}.rv.in .part:nth-child(4){transition-delay:.27s}.rv.in .part:nth-child(5){transition-delay:.36s}.rv.in .part:nth-child(6){transition-delay:.45s}
-.rv.in.settled .part:nth-child(n){transition-delay:0s}
 .ph{position:relative;overflow:hidden;background:var(--sand)}
-.ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease-out)}
-.ph:hover img{transform:scale(1.03)}
+.ph img{width:100%;height:100%;object-fit:cover}
 .sec-intro{max-width:46rem;margin-inline:auto}
 .sec-intro h2{font-size:clamp(2rem,1.5rem + 1.6vw,2.8rem)}
 .sec-intro .lede{margin-top:1.4rem;color:var(--ink-2)}
@@ -221,7 +202,6 @@ section{position:relative;padding:var(--space) 0}
 /* alternating rows, the reference's rhythm */
 .row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:center;margin-top:var(--space)}
 .row:first-of-type{margin-top:0}
-.row .num{font-family:var(--display);font-size:1rem;color:var(--brass);letter-spacing:.1em;margin-bottom:1rem}
 .row h3{font-size:clamp(1.7rem,1.3rem + 1.1vw,2.4rem)}
 .row p.txt{margin-top:1.1rem;color:var(--ink-2);max-width:46ch}
 .row .more{margin-top:1.6rem}
@@ -256,7 +236,7 @@ section{position:relative;padding:var(--space) 0}
 .hold .ring .bg{fill:none;stroke:rgba(166,124,34,.28);stroke-width:2}
 .hold .ring .fg{fill:none;stroke:var(--brass);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:176;stroke-dashoffset:calc(176*(1 - var(--heat)))}
 .hold .ring i{position:absolute;inset:14px;border-radius:50%;background:radial-gradient(circle,rgba(232,116,28,calc(.3 + .7*var(--heat))),rgba(232,116,28,0) 70%);transform:scale(calc(.6 + .5*var(--heat)))}
-.hold .lbl{display:block;font-weight:600;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-deep)}
+.hold .lbl{display:block;font-family:var(--display);font-weight:500;font-size:1.15rem;color:var(--ink)}
 .hold .hint{display:block;color:var(--ink-2);font-size:.95rem;margin-top:.35rem;max-width:34ch}
 .hold:hover .ring .bg{stroke:rgba(166,124,34,.55)}
 .braise.done .hold{cursor:default}
@@ -291,22 +271,17 @@ section{position:relative;padding:var(--space) 0}
 .salle .wide .ph{aspect-ratio:16/10}
 .salle .wide .ph.sq{aspect-ratio:auto}
 .salle figure{margin:0}
-.salle figcaption{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:.7rem;font-weight:500}
+.salle figcaption{font-size:.92rem;color:var(--ink-3);margin-top:.7rem}
 @media (max-width:700px){.salle .wide{grid-template-columns:1fr}.salle .wide .ph,.salle .wide .ph.sq{aspect-ratio:16/10}}
 
 /* Les avis */
-.avis .trois{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,4rem);margin-top:clamp(3rem,6vw,4.5rem);text-align:center}
-.avis .trois .num{font-family:var(--display);font-size:1rem;color:var(--brass);letter-spacing:.1em;margin-bottom:.8rem}
-.avis .trois h3{font-size:clamp(1.3rem,1.1rem + .6vw,1.6rem)}
-.avis .trois p{color:var(--ink-2);margin-top:.8rem;max-width:34ch;margin-inline:auto}
 .ratings{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 3rem;margin-top:clamp(2.5rem,5vw,3.5rem);align-items:baseline;padding-top:2rem;border-top:1px solid var(--brass-line)}
 .ratings a{display:inline-flex;align-items:baseline;gap:.7rem;text-decoration:none;color:var(--ink);padding:.4rem 0;border-bottom:1px solid transparent;transition:border-color .4s}
 .ratings a:hover{border-color:var(--brass)}
 .ratings .score{font-family:var(--display);font-size:2rem;color:var(--ink);font-weight:400}
 .ratings .score small{font-size:.9rem;color:var(--ink-3)}
 .ratings .src{font-size:.95rem;color:var(--ink-2)}
-.ratings .note{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);flex-basis:100%;text-align:center;font-weight:500}
-@media (max-width:760px){.avis .trois{grid-template-columns:1fr;gap:2.5rem}}
+.ratings .note{font-size:.88rem;color:var(--ink-3);flex-basis:100%;text-align:center}
 
 /* Infos : FAQ + practical card */
 .infos-grid{display:grid;grid-template-columns:7fr 4fr;gap:clamp(2rem,5vw,5rem);align-items:start;margin-top:clamp(2.5rem,5vw,3.5rem)}
@@ -320,7 +295,7 @@ section{position:relative;padding:var(--space) 0}
 .faq .a a{color:var(--ink)}
 .practical{background:var(--sand);padding:clamp(1.5rem,3vw,2.25rem);position:sticky;top:7rem}
 .practical dl{margin:0;display:grid;gap:1.2rem}
-.practical dt{font-weight:600;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-deep);margin-bottom:.3rem}
+.practical dt{font-family:var(--display);font-weight:500;font-size:1.05rem;color:var(--ink);margin-bottom:.25rem}
 .practical dd{margin:0;color:var(--ink)}
 .practical dd a{text-decoration:none;border-bottom:1px solid var(--brass-line);padding-bottom:.1rem}
 .practical dd a:hover{border-color:var(--brass)}
@@ -344,10 +319,6 @@ section{position:relative;padding:var(--space) 0}
 .frieze{padding:clamp(2rem,4vw,3rem) 0 0;line-height:0;overflow:hidden}
 .frieze svg{width:100%;height:auto;min-height:72px;display:block;color:var(--brass)}
 .frieze path,.frieze circle{fill:none;vector-effect:non-scaling-stroke}
-.frieze path{stroke-dasharray:1200;stroke-dashoffset:1200;transition:stroke-dashoffset 3.4s cubic-bezier(.3,0,.2,1)}
-.frieze circle{opacity:0;transition:opacity 1s var(--ease-out) 2.2s}
-.frieze.draw path{stroke-dashoffset:0}
-.frieze.draw circle{opacity:1}
 
 /* Footer */
 footer{background:var(--paper);padding:3rem 0 2.5rem;color:var(--ink-2);font-size:.95rem;border-top:1px solid var(--brass-line)}
@@ -358,7 +329,7 @@ footer{background:var(--paper);padding:3rem 0 2.5rem;color:var(--ink-2);font-siz
 .foot a:hover{border-color:var(--brass)}
 .foot .brand{align-items:flex-start;color:var(--ink);width:max-content}
 .foot .brand .word .v{color:var(--brass)}
-.foot .brand .tag{display:block;opacity:.75}
+.foot .brand .tag{display:block;font-family:var(--body);font-size:.9rem;color:var(--ink-2);margin-top:.5rem;letter-spacing:0}
 .foot .brand-p{max-width:30ch;margin-top:1.1rem}
 .copy{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--brass-faint);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem;font-size:.85rem;color:var(--ink-3)}
 @media (max-width:860px){.foot{grid-template-columns:1fr 1fr}}
@@ -382,13 +353,9 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   body{animation:none}
-  .rv .part{opacity:1;transform:none}
-  .rule{transform:none}
   .lit li{opacity:1;transform:none}
   .lit li .p{color:var(--brass-deep)}
   .braise{--heat:1}
-  .frieze path{stroke-dashoffset:0}
-  .frieze circle{opacity:1}
   .cue{display:none}
   .env{animation:none}
 }
@@ -410,7 +377,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <li class="cta"><a class="btn btn-ink" href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver une table</a></li>
       </ul>
     </nav>
-    <a class="brand" href="#top" aria-label="La Vigne, retour en haut de page"><span class="word">LA<span class="v" aria-hidden="true">V</span>IGNE</span><span class="tag">Saint-Gilles · Depuis 1985</span></a>
+    <a class="brand" href="#top" aria-label="La Vigne, retour en haut de page"><span class="word">LA<span class="v" aria-hidden="true">V</span>IGNE</span></a>
     <div class="nav-right">
       <a class="btn btn-gold" href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver</a>
       <button class="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
@@ -436,7 +403,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       <i style="--x:12%;--d:9s;--dl:-2s;--dx:18px"></i><i style="--x:22%;--d:11s;--dl:-6s;--dx:-14px"></i><i style="--x:37%;--d:8.5s;--dl:-1s;--dx:22px"></i><i style="--x:48%;--d:10s;--dl:-4s;--dx:-10px"></i><i style="--x:58%;--d:12s;--dl:-8s;--dx:16px"></i><i style="--x:66%;--d:9.5s;--dl:-3s;--dx:-20px"></i><i style="--x:77%;--d:10.5s;--dl:-7s;--dx:12px"></i><i style="--x:88%;--d:8s;--dl:-5s;--dx:-16px"></i>
     </div>
     <div class="card">
-      <p class="kicker">Saint-Gilles · Depuis 1985</p>
+      <p class="where">Saint-Gilles, depuis 1985</p>
       <h1 class="h1"><span class="sr">La Vigne</span><span class="vis" aria-hidden="true"><span class="la">La</span> <svg class="vmark" viewBox="0 0 100 120" aria-hidden="true"><path d="M10 8 L54 112 L94 8 L90 8 L52 96 L26 8 Z"/></svg><span class="igne">igne</span></span></h1>
       <span class="line" aria-hidden="true"></span>
       <p class="sub">Brasserie méditerranéenne. Viandes irlandaises au feu de bois, moules-frites et plats grecs maison. Du lundi au samedi, cuisine non-stop de 12&nbsp;h à 23&nbsp;h.</p>
@@ -445,37 +412,33 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <a class="tel" href="tel:+3225381207">02 538 12 07</a>
       </div>
     </div>
-    <div class="cue" aria-hidden="true"><svg viewBox="0 0 18 28" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l6 6 6-6"/><path d="M3 17l6 6 6-6" opacity=".5"/></svg><span>Faites défiler</span></div>
+    <div class="cue" aria-hidden="true"><svg viewBox="0 0 18 28" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l6 6 6-6"/><path d="M3 17l6 6 6-6" opacity=".5"/></svg></div>
   </div>
 </section>
 
 <div class="below">
 
   <!-- ================= LE FEU ================= -->
-  <section class="feu rv" id="feu">
+  <section class="feu" id="feu">
     <div class="wrap">
-      <div class="rule"></div>
       <div class="sec-intro center">
-        <p class="kicker part"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>Le feu de bois</p>
-        <h2 class="part">Tout passe par la braise.</h2>
-        <p class="lede part">Ici, la viande ne cuit pas sur une plaque. Elle cuit sur du bois qui brûle, dans la cuisine, depuis 1985. C’est plus long, c’est plus de travail, et ça se goûte.</p>
+        <h2>Tout passe par la braise.</h2>
+        <p class="lede">Ici, la viande ne cuit pas sur une plaque. Elle cuit sur du bois qui brûle, dans la cuisine, depuis 1985. C’est plus long, c’est plus de travail, et ça se goûte.</p>
       </div>
       <div class="rows">
-        <article class="row part">
+        <article class="row">
           <div class="row-txt">
-            <p class="num">01</p>
             <h3>La grillade</h3>
             <p class="txt">Côte à l’os, tomahawk, entrecôte irlandaise, filet mignon. Saisis sur la braise, servis sur plaque en fonte.</p>
-            <a class="more" href="#carte">Voir la carte<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
+            <a class="more" href="#carte">Voir la carte</a>
           </div>
           <div class="row-ph"><div class="ph tall"><img src="assets/img/tomahawk-feu-800.webp" srcset="assets/img/tomahawk-feu-800.webp 800w, assets/img/tomahawk-feu-1200.webp 1200w" sizes="(max-width:860px) 92vw, 40vw" width="1080" height="1300" loading="lazy" alt="Un tomahawk de bœuf tenu à la pince au-dessus des flammes du gril"></div></div>
         </article>
-        <article class="row rev part">
+        <article class="row rev">
           <div class="row-txt">
-            <p class="num">02</p>
             <h3>La broche</h3>
             <p class="txt">Cochon de lait, coquelet, épaule d’agneau pour deux. La rôtisserie du jour tourne doucement, pendant des heures.</p>
-            <a class="more" href="#carte">La rôtisserie du jour<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
+            <a class="more" href="#carte">La rôtisserie du jour</a>
           </div>
           <div class="row-ph">
             <div class="collage">
@@ -484,12 +447,11 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
             </div>
           </div>
         </article>
-        <article class="row part">
+        <article class="row">
           <div class="row-txt">
-            <p class="num">03</p>
             <h3>La mer</h3>
             <p class="txt">Moules-frites comme il faut, poulpe grillé, bar entier, gambas. La Méditerranée, côté Saint-Gilles.</p>
-            <a class="more" href="#carte">Moules et poissons<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
+            <a class="more" href="#carte">Moules et poissons</a>
           </div>
           <div class="row-ph"><div class="ph tall"><img src="assets/img/moules-800.webp" srcset="assets/img/moules-800.webp 800w, assets/img/moules-1200.webp 1200w" sizes="(max-width:860px) 92vw, 40vw" width="1066" height="1600" loading="lazy" alt="Une casserole de moules et un cornet de frites sur la table"></div></div>
         </article>
@@ -504,8 +466,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
           <div class="embers"><i style="--x:18%;--d:8s;--dl:-1s;--dx:14px"></i><i style="--x:40%;--d:10s;--dl:-5s;--dx:-12px"></i><i style="--x:63%;--d:9s;--dl:-3s;--dx:18px"></i><i style="--x:82%;--d:11s;--dl:-7s;--dx:-10px"></i></div>
         </div>
         <div>
-          <p class="kicker part"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>Avant le service</p>
-          <p class="lead part">Le gril chauffe au bois toute la journée. Avant le coup de feu du soir, on remet des bûches et on attend que la braise soit prête.</p>
+          <p class="lead">Le gril chauffe au bois toute la journée. Avant le coup de feu du soir, on remet des bûches et on attend que la braise soit prête.</p>
           <button class="hold" type="button" aria-describedby="braise-state">
             <span class="ring" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="fg" cx="32" cy="32" r="28"/></svg><i></i></span>
             <span><span class="lbl" id="hold-lbl">Maintenez pour attiser la braise</span><span class="hint" id="braise-state" aria-live="polite">Appuyez et gardez le doigt ou le clic enfoncé. Au clavier, maintenez la barre d’espace.</span></span>
@@ -521,15 +482,14 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   </section>
 
   <!-- ================= LA CARTE ================= -->
-  <section class="carte rv" id="carte">
+  <section class="carte" id="carte">
     <div class="wrap">
       <div class="sec-intro center">
-        <p class="kicker part"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>La carte 2026</p>
-        <h2 class="part">Une carte de brasserie, honnête et généreuse.</h2>
-        <p class="lede part">Des entrées à partager, des grillades, des moules, du poisson, des pâtes et un menu enfants. Tous les plats sont servis avec un accompagnement au choix&#8239;: frites belges maison, riz basmati, croquettes de pommes de terre, grenailles ou écrasé de pommes de terre au feu de bois.</p>
+        <h2>Une carte de brasserie, honnête et généreuse.</h2>
+        <p class="lede">Des entrées à partager, des grillades, des moules, du poisson, des pâtes et un menu enfants. Tous les plats sont servis avec un accompagnement au choix&#8239;: frites belges maison, riz basmati, croquettes de pommes de terre, grenailles ou écrasé de pommes de terre au feu de bois.</p>
       </div>
       <div class="menu-grid">
-        <div class="group part">
+        <div class="group">
           <h3>Pour commencer</h3>
           <div class="dish"><span class="n">Planche de charcuterie du Chef</span><span class="l"></span><span class="p">14,90&nbsp;€</span></div>
           <div class="dish"><span class="n">Croquettes aux crevettes grises</span><span class="l"></span><span class="p">19,90&nbsp;€</span></div>
@@ -538,7 +498,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
           <div class="dish"><span class="n">Poulpe grillé</span><span class="l"></span><span class="p">23,90&nbsp;€</span></div>
           <div class="dish"><span class="n">Tzatziki maison</span><span class="l"></span><span class="p">9,90&nbsp;€</span></div>
         </div>
-        <div class="group part">
+        <div class="group">
           <h3>Du feu et de la broche</h3>
           <div class="dish"><span class="n">Le plat signature, filet mignon de bœuf, frites et salade</span><span class="l"></span><span class="p">26,90&nbsp;€</span></div>
           <div class="dish"><span class="n">Entrecôte irlandaise</span><span class="l"></span><span class="p">35,90&nbsp;€</span></div>
@@ -548,7 +508,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
           <div class="dish"><span class="n">Cochon de lait à la broche, gratin dauphinois, béarnaise à la menthe</span><span class="l"></span><span class="p">32,90&nbsp;€</span></div>
           <div class="dish"><span class="n">Épaule d’agneau, jus de viande, gratin dauphinois, pour deux</span><span class="l"></span><span class="p">59,90&nbsp;€</span></div>
         </div>
-        <div class="group part">
+        <div class="group">
           <h3>Moules et mer</h3>
           <div class="dish"><span class="n">Moules marinières</span><span class="l"></span><span class="p">28,90&nbsp;€</span></div>
           <div class="dish"><span class="n">Moules crème à l’ail</span><span class="l"></span><span class="p">29,90&nbsp;€</span></div>
@@ -556,7 +516,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
           <div class="dish"><span class="n">Sole meunière</span><span class="l"></span><span class="p">37,90&nbsp;€</span></div>
           <div class="dish"><span class="n">Fish &amp; chips, sauce tartare</span><span class="l"></span><span class="p">25,90&nbsp;€</span></div>
         </div>
-        <div class="group part">
+        <div class="group">
           <h3>Grèce et pâtes</h3>
           <div class="dish"><span class="n">Moussaka maison</span><span class="l"></span><span class="p">21,90&nbsp;€</span></div>
           <div class="dish"><span class="n">Soutzoukakia maison</span><span class="l"></span><span class="p">21,00&nbsp;€</span></div>
@@ -564,11 +524,11 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
           <div class="dish"><span class="n">Pasticcio</span><span class="l"></span><span class="p">17,90&nbsp;€</span></div>
           <div class="dish"><span class="n">Salade grecque</span><span class="l"></span><span class="p">17,90&nbsp;€</span></div>
         </div>
-        <div class="group kids part">
+        <div class="group kids">
           <h3>Les enfants, jusqu’à 12&nbsp;ans</h3>
           <div class="dish"><span class="n">Spaghetti bolognaise, brochettes ou boulettes sauce tomate<span class="d">Avec une boule de glace</span></span><span class="l"></span><span class="p">14,50&nbsp;€</span></div>
         </div>
-        <div class="group part">
+        <div class="group">
           <p class="carte-note">Sauces au choix en supplément, 4,50&nbsp;€. Prix de la carte 2026, susceptibles d’évoluer.</p>
         </div>
       </div>
@@ -580,17 +540,15 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   </section>
 
   <!-- ================= LA SALLE ================= -->
-  <section class="salle rv" id="salle">
+  <section class="salle" id="salle">
     <div class="wrap">
-      <div class="rule"></div>
       <article class="row rev">
-        <div class="row-txt part">
-          <p class="kicker" style="justify-content:center"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>La salle et la terrasse</p>
+        <div class="row-txt">
           <h3>Une brasserie de quartier, pas un décor.</h3>
           <p class="txt">Des tables en bois, des banquettes, des lampes en osier et une terrasse sur la rue Jourdan dès les beaux jours. Les habitués viennent à midi en semaine, les familles le samedi soir, et le restaurant se privatise pour vos fêtes et vos repas d’équipe.</p>
-          <a class="more" href="mailto:nc-invest@outlook.com?subject=Privatisation%20du%20restaurant%20La%20Vigne">Privatiser le restaurant<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>
+          <a class="more" href="mailto:nc-invest@outlook.com?subject=Privatisation%20du%20restaurant%20La%20Vigne">Privatiser le restaurant</a>
         </div>
-        <div class="row-ph part">
+        <div class="row-ph">
           <div class="collage">
             <div class="ph a"><img src="assets/img/salle-lampes-800.webp" srcset="assets/img/salle-lampes-800.webp 800w, assets/img/salle-lampes-1200.webp 1200w" sizes="(max-width:860px) 70vw, 34vw" width="1920" height="2400" loading="lazy" alt="La salle de La Vigne&#8239;: tables en bois, banquettes et lampes en osier suspendues, la rue au fond"></div>
             <div class="ph b"><img src="assets/img/lampes-800.webp" srcset="assets/img/lampes-800.webp 800w, assets/img/lampes-1200.webp 1200w" sizes="(max-width:860px) 55vw, 26vw" width="1600" height="1066" loading="lazy" alt="Les lampes en osier tressé de la salle, allumées"></div>
@@ -598,26 +556,20 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         </div>
       </article>
       <div class="wide">
-        <figure class="part"><div class="ph"><img src="assets/img/terrasse-800.webp" srcset="assets/img/terrasse-800.webp 800w, assets/img/terrasse-1200.webp 1200w, assets/img/terrasse-1920.webp 1920w" sizes="(max-width:700px) 92vw, 60vw" width="1600" height="1066" loading="lazy" alt="La terrasse rue Jourdan, chaises en osier devant la vitrine"></div><figcaption>La terrasse, rue Jourdan</figcaption></figure>
-        <figure class="part"><div class="ph sq"><img src="assets/img/equipe-800.webp" srcset="assets/img/equipe-800.webp 800w, assets/img/equipe-1200.webp 1200w" sizes="(max-width:700px) 92vw, 30vw" width="1066" height="1600" loading="lazy" alt="Deux membres de l’équipe de La Vigne devant l’enseigne du restaurant"></div><figcaption>L’équipe, devant le restaurant</figcaption></figure>
+        <figure><div class="ph"><img src="assets/img/terrasse-800.webp" srcset="assets/img/terrasse-800.webp 800w, assets/img/terrasse-1200.webp 1200w, assets/img/terrasse-1920.webp 1920w" sizes="(max-width:700px) 92vw, 60vw" width="1600" height="1066" loading="lazy" alt="La terrasse rue Jourdan, chaises en osier devant la vitrine"></div><figcaption>La terrasse, rue Jourdan</figcaption></figure>
+        <figure><div class="ph sq"><img src="assets/img/equipe-800.webp" srcset="assets/img/equipe-800.webp 800w, assets/img/equipe-1200.webp 1200w" sizes="(max-width:700px) 92vw, 30vw" width="1066" height="1600" loading="lazy" alt="Deux membres de l’équipe de La Vigne devant l’enseigne du restaurant"></div><figcaption>L’équipe, devant le restaurant</figcaption></figure>
       </div>
     </div>
   </section>
 
   <!-- ================= LES AVIS ================= -->
-  <section class="avis rv" id="avis">
+  <section class="avis" id="avis">
     <div class="wrap">
-      <div class="rule"></div>
       <div class="sec-intro center">
-        <p class="kicker part"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>Les avis</p>
-        <h2 class="part">Ce que les clients citent le plus souvent.</h2>
+        <h2>Ce que les clients citent le plus souvent.</h2>
       </div>
-      <div class="trois">
-        <div class="part"><p class="num">01</p><h3>La viande</h3><p>Des pièces irlandaises saisies au feu de bois. C’est le plat qui revient dans presque tous les avis.</p></div>
-        <div class="part"><p class="num">02</p><h3>Le service</h3><p>Chaleureux et attentif. Une bonne adresse de quartier, où l’on vous conseille le vin sans en faire trop.</p></div>
-        <div class="part"><p class="num">03</p><h3>Les moules</h3><p>Marinières, à la crème d’ail ou au curry, servies avec les frites maison. Le classique belge, bien fait.</p></div>
-      </div>
-      <div class="ratings part">
+      <p class="lede center-p">La viande, saisie au feu de bois et servie sur plaque en fonte. Le service, chaleureux et attentif. Les moules, marinières ou à la crème d’ail, avec les frites maison.</p>
+      <div class="ratings">
         <a href="https://www.google.com/maps/search/?api=1&amp;query=La+Vigne+Rue+Jourdan+6+1060+Saint-Gilles" target="_blank" rel="noopener"><span class="score">4,5<small>/5</small></span><span class="src">sur Google, environ 590 avis</span></a>
         <a href="https://www.tripadvisor.com/Restaurant_Review-g1136501-d2026646-Reviews-La_Vigne-Saint_Gilles_Brussels.html" target="_blank" rel="noopener"><span class="score">4,4<small>/5</small></span><span class="src">sur Tripadvisor, plus de 600 avis</span></a>
         <span class="note">Notes relevées en novembre 2026</span>
@@ -626,15 +578,13 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   </section>
 
   <!-- ================= INFOS ================= -->
-  <section class="infos rv" id="infos">
+  <section class="infos" id="infos">
     <div class="wrap">
-      <div class="rule"></div>
       <div class="sec-intro center">
-        <p class="kicker part"><svg class="leaf" viewBox="0 0 16 14.5" aria-hidden="true"><use href="#leafshape"/></svg>Infos pratiques</p>
-        <h2 class="part">Les questions qu’on nous pose.</h2>
+        <h2>Les questions qu’on nous pose.</h2>
       </div>
       <div class="infos-grid">
-        <div class="faq part">
+        <div class="faq">
           <details><summary>Faut-il réserver&#8239;?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><p class="a">Le soir et le week-end, c’est plus sûr. En ligne avec le bouton <a href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver</a>, ou par téléphone au <a href="tel:+3225381207">02 538 12 07</a>.</p></details>
           <details><summary>Peut-on manger l’après-midi&#8239;?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><p class="a">Oui. La cuisine est ouverte non-stop de 12&nbsp;h à 23&nbsp;h, du lundi au samedi. Le dimanche, c’est fermé.</p></details>
           <details><summary>Y a-t-il un menu pour les enfants&#8239;?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><p class="a">Oui, jusqu’à 12&nbsp;ans&#8239;: spaghetti bolognaise, brochettes ou boulettes, avec une boule de glace, pour 14,50&nbsp;€.</p></details>
@@ -643,7 +593,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
           <details><summary>Faites-vous de l’emporter&#8239;?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><p class="a">Oui. Une participation de 1&nbsp;€ est demandée pour l’emballage.</p></details>
           <details><summary>Comment venir&#8239;?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><p class="a">Rue Jourdan 6, à Saint-Gilles, à deux pas de l’avenue Louise et du rond-point Stéphanie. Métro Louise, trams 92 et 93, arrêt Stéphanie.</p></details>
         </div>
-        <aside class="practical part" aria-label="Coordonnées et horaires">
+        <aside class="practical" aria-label="Coordonnées et horaires">
           <dl>
             <div><dt>Adresse</dt><dd><span class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Rue Jourdan 6, 1060 Saint-Gilles</span></dd></div>
             <div><dt>Horaires</dt><dd>Lundi à samedi, 12&nbsp;h à 23&nbsp;h, cuisine non-stop.<br>Dimanche fermé.</dd></div>
@@ -657,14 +607,13 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   </section>
 
   <!-- ================= FINAL : back to the fire ================= -->
-  <section class="fin rv" id="reserver" aria-labelledby="fin-h">
+  <section class="fin" id="reserver" aria-labelledby="fin-h">
     <div class="bg" aria-hidden="true"><img src="assets/img/feu-grille-1200.webp" srcset="assets/img/feu-grille-800.webp 800w, assets/img/feu-grille-1200.webp 1200w, assets/img/feu-grille-1920.webp 1920w" sizes="100vw" width="1920" height="1280" loading="lazy" alt=""></div>
     <div class="veil" aria-hidden="true"></div>
-    <div class="embers" aria-hidden="true"><i style="--x:10%;--d:10s;--dl:-2s;--dx:14px"></i><i style="--x:30%;--d:9s;--dl:-6s;--dx:-12px"></i><i style="--x:52%;--d:11s;--dl:-4s;--dx:18px"></i><i style="--x:71%;--d:8.5s;--dl:-1s;--dx:-10px"></i><i style="--x:90%;--d:10.5s;--dl:-7s;--dx:12px"></i></div>
     <div class="wrap">
-      <h2 class="part" id="fin-h">Une table près du feu&#8239;?</h2>
-      <p class="part">Réservez en ligne en une minute, ou appelez-nous. Du lundi au samedi, de 12&nbsp;h à 23&nbsp;h.</p>
-      <div class="cta part">
+      <h2 id="fin-h">Une table près du feu&#8239;?</h2>
+      <p>Réservez en ligne en une minute, ou appelez-nous. Du lundi au samedi, de 12&nbsp;h à 23&nbsp;h.</p>
+      <div class="cta">
         <a class="btn btn-gold" href="https://bookings.zenchef.com/results?rid=368570&amp;pid=1001" target="_blank" rel="noopener">Réserver une table</a>
         <a class="tel" href="tel:+3225381207">02 538 12 07</a>
       </div>
@@ -710,7 +659,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <div class="wrap">
     <div class="foot">
       <div>
-        <a class="brand" href="#top"><span class="word">LA<span class="v" aria-hidden="true">V</span>IGNE</span><span class="tag">Saint-Gilles · Depuis 1985</span></a>
+        <a class="brand" href="#top"><span class="word">LA<span class="v" aria-hidden="true">V</span>IGNE</span><span class="tag">Saint-Gilles, depuis 1985</span></a>
         <p class="brand-p">Restaurant et brasserie méditerranéenne à Saint-Gilles, depuis 1985.</p>
       </div>
       <div><h4>Adresse</h4><p>Rue Jourdan 6</p><p>1060 Saint-Gilles, Bruxelles</p></div>
@@ -724,7 +673,6 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   </div>
 </footer>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><path id="leafshape" d="M.5 13.5C1 7 5.5 1.5 15.5.5 15 7 11 12.5 3.5 13.8c3.2-4 6-7.4 8.6-9.6C8.2 6.5 5 10 .5 13.5z"/></defs></svg>
 
 <script>
 (() => {
@@ -777,29 +725,6 @@ function onScroll() { if (heroRaf === null && !RM.matches) heroRaf = requestAnim
 addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
-/* ---------- Section reveals ---------- */
-let pending = [...document.querySelectorAll('.rv')];
-function reveal(el) {
-  if (el.classList.contains('in')) return;
-  el.classList.add('in');
-  setTimeout(() => el.classList.add('settled'), 1400);
-  pending = pending.filter(p => p !== el);
-}
-const revealIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { reveal(e.target); revealIO.unobserve(e.target); } }), { threshold: 0, rootMargin: '0px 0px -6% 0px' });
-pending.forEach(el => revealIO.observe(el));
-let rvRaf = null;
-function checkReveals() {
-  rvRaf = null;
-  if (!pending.length) return;
-  const limit = innerHeight * 0.94;
-  pending.slice().forEach(el => { if (el.getBoundingClientRect().top < limit) reveal(el); });
-}
-addEventListener('scroll', () => { if (rvRaf === null) rvRaf = requestAnimationFrame(checkReveals); }, { passive: true });
-addEventListener('load', checkReveals);
-
-const frieze = document.querySelector('.frieze');
-new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { frieze.classList.add('draw'); io.disconnect(); } }), { threshold: 0.3 }).observe(frieze);
-
 const liveIO = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('live', e.isIntersecting)), { threshold: 0 });
 document.querySelectorAll('.stage, .braise, .fin').forEach(el => liveIO.observe(el));
 document.addEventListener('visibilitychange', () => document.body.classList.toggle('paused', document.hidden));
@@ -824,7 +749,7 @@ function heatTick(now) {
   paintHeat();
   if (heat >= 1 && heating) { finishBraise(); heatRaf = null; heatLast = 0; return; }
   if ((heating && heat < 1) || (!heating && heat > 0)) heatRaf = requestAnimationFrame(heatTick);
-  else { heatRaf = null; heatLast = 0; }
+  else { heatRaf = null; heatLast = 0; if (!braiseDone) braise.classList.remove('hot'); }
 }
 function finishBraise() {
   braiseDone = true; heat = 1; paintHeat();
@@ -832,7 +757,7 @@ function finishBraise() {
   holdLbl.textContent = 'La braise est prête.';
   holdHint.textContent = 'Côte à l’os, tomahawk et filet mignon partent sur le gril.';
 }
-function startHeat() { if (braiseDone || heating) return; heating = true; holdLbl.textContent = 'Ça prend…'; if (heatRaf === null) heatRaf = requestAnimationFrame(heatTick); }
+function startHeat() { if (braiseDone || heating) return; heating = true; braise.classList.add('hot'); holdLbl.textContent = 'Ça prend…'; if (heatRaf === null) heatRaf = requestAnimationFrame(heatTick); }
 function stopHeat() { if (braiseDone || !heating) return; heating = false; holdLbl.textContent = 'Maintenez pour attiser la braise'; if (heatRaf === null) heatRaf = requestAnimationFrame(heatTick); }
 hold.addEventListener('pointerdown', e => { if (e.button !== undefined && e.button !== 0) return; hold.setPointerCapture?.(e.pointerId); startHeat(); });
 ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(ev => hold.addEventListener(ev, stopHeat));
@@ -843,8 +768,6 @@ hold.addEventListener('contextmenu', e => e.preventDefault());
 
 /* ---------- Reduced motion, honored live ---------- */
 function pinToFinalStates() {
-  document.querySelectorAll('.rv').forEach(el => el.classList.add('in', 'settled'));
-  frieze.classList.add('draw');
   if (!braiseDone) finishBraise();
   firePar.style.transform = ''; card.style.transform = ''; card.style.opacity = '';
   stage.classList.remove('intro'); document.body.classList.remove('intro');

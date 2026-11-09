@@ -172,6 +172,21 @@ Le standard de `scrub-pipeline.md`, adapté à des photos à la place d'une vid�
 - Sémantique : skip link, `nav`, `main`, `footer`, un seul h1, `aria-hidden` sur les décors, focus visible en laiton, cibles 44 px sur écrans tactiles. Title, meta description, theme-color, Open Graph avec `<!-- DEPLOY STEP -->`, favicon SVG inline, `lang="fr"`.
 - Polices locales, `font-display: swap`, préchargement des deux woff2 principaux.
 
+## 8 bis. La passe « frontend-design » (à la demande de la cliente)
+
+Relecture du site comme directeur de création, contre la liste des tics de page générée. Ce qui a été retiré, et pourquoi :
+
+- Les étiquettes en capitales espacées au-dessus de chaque titre (« LE FEU DE BOIS », « LA CARTE 2026 »…) : du chrome de gabarit, le titre dit déjà tout.
+- Les chaînes à points médians (« Saint-Gilles · Depuis 1985 ») : remplacées par des phrases (« Saint-Gilles, depuis 1985 »).
+- La police mono pour les petits repères : supprimée. Deux familles seulement, Fraunces et Figtree, nettement distinctes.
+- Les numéros 01 / 02 / 03 devant la grillade, la broche et la mer, et devant les trois constats des avis : ce ne sont pas des étapes, la numérotation mentait. Les avis deviennent une seule phrase posée.
+- Les flèches collées aux liens, les filets qui se dessinent avec un point qui pulse, le fondu-glissé de chaque section, le zoom au survol de chaque photo, la dérive du grain de fond, la frise qui se trace, les braises du bandeau final : du mouvement sans raison. Il reste exactement un moment orchestré, l'arrivée sur le feu, et un mouvement qui répond au geste, la braise que l'on attise (ses braises ne montent que pendant la pression).
+- Les liens du menu passent en minuscules (comme la référence). Les boutons gardent leurs petites capitales espacées, c'est la référence choisie par la cliente.
+
+Ce qui est gardé en connaissance de cause : le V doré dans « La Vigne » (c'est l'enseigne réelle, pas un mot mis en couleur), l'ivoire et la serif (le papier du menu et la référence), le bandeau sable de la carte (il isole la carte comme la référence isole ses offres), les pointillés qui relient plat et prix (la structure porte une information), les accordéons de la FAQ (le mouvement montre ce qui s'ouvre).
+
+Plan de tokens, inchangé : ivoire #F6F0E4, sable #EADFCB, encre #231A12, laiton #A67C22 (foncé #7A5B1D pour le texte), fumée #171210. Alignement : texte centré en colonne étroite pour les introductions et les rangées, aligné à gauche dans la carte, la FAQ et le pied de page.
+
 ## 9. La ligne de porte
 
 Chaque ligne de texte ci-dessus est livrée telle quelle. La page construite doit passer la porte de la phase 9 avant d'être montrée : zéro tiret cadratin, zéro mot bateau (leverage, seamless, empower, unlock, robust, actionable, data-driven, solutions), et la relecture des tics d'IA (« ce n'est pas X, c'est Y », fausses plages, attributions vagues, conclusions grandiloquentes, testament, landscape, delve, elevate). Les dispositifs voulus ici (« Pas de pierres de lave. Pas de plaque. De la braise. ») sont de l'artisanat et restent.
