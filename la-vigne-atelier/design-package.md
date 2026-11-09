@@ -39,7 +39,8 @@ Contrastes calculés : encre sur ivoire 15:1 ; encre-2 sur ivoire 7:1 ; laiton f
 
 ## 3. Le trio typographique
 
-- **Display : Fraunces** (variable, 300 pour le grand « La Vigne » du hero, 500 pour les titres de sections). Taille modérée sous le hero, comme la référence : 30 à 40 px pour les h2, 27 à 38 px pour les h3.
+- **Display : Bodoni Moda** (variable, axes graisse et taille optique, romain et italique). Un vrai Didone : il répond au V du logo, qui est lui-même un V de Didone à forts contrastes. Italique 400 pour la phrase du hero, romain 400 pour les titres de sections. Taille modérée sous le hero, comme la référence : 30 à 40 px pour les h2, 27 à 38 px pour les h3. L'axe de taille optique épaissit les déliés aux petites tailles et les affine en grand.
+- Fraunces a été écartée à la troisième passe : c'est devenue la serif par défaut des sites générés, et la cliente a demandé d'éviter toute police « à effet générique ».
 - **Texte : Figtree** (variable, 400 / 500 / 600), 17 à 18 px, interlignage 1,65. Les kickers, boutons et liens « en savoir plus » sont en Figtree capitales, 12 à 13 px, espacement .16 à .2 em, dans l'esprit des petites capitales espacées de la référence.
 - **Repères du hero : DM Mono 500** pour les kickers et le téléphone sur le feu uniquement.
 
@@ -59,7 +60,9 @@ Trois secondes et demie. Jouée à chaque arrivée sur la page, comme un rideau 
 
 ## 4 bis. Le hero : le tomahawk au-dessus du feu, plein cadre
 
-Règle posée par la cliente : l'image d'abord, en plein cadre, et le texte se range dans ses parties vides. La photo du tomahawk occupe tout l'écran (cadrée au centre sur ordinateur, calée à droite sur téléphone pour garder la viande). Les mots prennent le coin bas droit, sous la pince, au-dessus de la grille sombre : LA V IGNE comme sur la façade, « Depuis 1985 », une phrase, le bouton Réserver et le téléphone, alignés à droite. Un voile local les porte ; la flamme et la viande restent claires. Sur téléphone, les mots sont en bas à gauche sur un dégradé. La photo continue un zoom très lent et glisse en parallaxe douce quand on descend.
+Règle posée par la cliente : l'image d'abord, en plein cadre, et le texte se range dans ses parties vides.
+
+**Ce qui est écrit sur le hero (troisième passe).** Le logo ne s'y répète plus, il vit dans l'en-tête. À sa place, une phrase en Bodoni Moda italique qui dit la maison : « Brasserie méditerranéenne / à Saint-Gilles, depuis 1985. » (le h1 commence par « La Vigne, » en lecture d'écran). Dessous, une seule ligne pratique en Figtree : « Rue Jourdan 6, grillades au feu de bois. Cuisine non-stop de 12 h à 23 h, du lundi au samedi. » Puis le bouton or « Réserver une table » et le téléphone. Plus de « Depuis 1985 » en capitales espacées au-dessus : l'année est dans la phrase. Les infos pratiques restent dans le bloc plutôt que dans une barre au pied de l'écran : une barre ajouterait un élément de chrome et des séparateurs, le bloc reste un seul geste. La photo du tomahawk occupe tout l'écran (cadrée au centre sur ordinateur, calée à droite sur téléphone pour garder la viande). Les mots prennent le coin bas droit, sous la pince, au-dessus de la grille sombre : LA V IGNE comme sur la façade, « Depuis 1985 », une phrase, le bouton Réserver et le téléphone, alignés à droite. Un voile local les porte ; la flamme et la viande restent claires. Sur téléphone, les mots sont en bas à gauche sur un dégradé. La photo continue un zoom très lent et glisse en parallaxe douce quand on descend.
 
 Sous le hero, trois photos plein cadre rythment la page comme des respirations, chacune avec une phrase posée dans sa partie sombre : les bûches (« Au fond de la cuisine, du vrai bois brûle. »), les lampes en osier (« On entre. Le bois, l'osier, la lumière chaude. »), la terrasse (« Depuis 1985, à la même adresse. »). Elles glissent un peu moins vite que la page. Le bandeau final est la broche.
 
@@ -176,7 +179,7 @@ Règle posée par la cliente : ne pas toucher au logo, reprendre celui du site a
 - **Les feuilles.** Une petite feuille de vigne (SVG) devant chaque kicker.
 - **Les filets.** Chaque section s'ouvre sur un filet laiton qui se trace de gauche à droite quand elle entre, avec un point qui respire.
 - **Braises.** Points orangés minuscules qui montent lentement (transform et opacity, délais négatifs, 7 à 11 s), dans le hero, le bloc de la braise et le bandeau final. Pausés hors écran et onglet caché.
-- **Le logotype.** « LA V IGNE » en Fraunces, le V agrandi en laiton, avec « Saint-Gilles · Depuis 1985 » en petites capitales dessous, centré dans l'en-tête comme la référence. Favicon : le V en laiton sur fumée.
+- **Le logotype.** (Ancienne version) « LA V IGNE » en Fraunces, le V agrandi en laiton, avec « Saint-Gilles · Depuis 1985 » en petites capitales dessous, centré dans l'en-tête comme la référence. Favicon : le V en laiton sur fumée.
 - **Environnement fixe.** Une couche fixe derrière tout : grain de papier et une vignette dorée très légère, dérive de 90 s.
 - Mouvement réduit : tout est affiché dans son état final, aucune animation.
 
