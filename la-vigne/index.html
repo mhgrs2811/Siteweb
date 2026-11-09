@@ -45,8 +45,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 html,body{overflow-x:hidden;overflow-x:clip}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:clamp(1.0625rem,.98rem + .3vw,1.125rem);line-height:1.65;font-weight:400;-webkit-font-smoothing:antialiased;animation:pagein .9s var(--ease-out) both}
-@keyframes pagein{from{opacity:0}to{opacity:1}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:clamp(1.0625rem,.98rem + .3vw,1.125rem);line-height:1.65;font-weight:400;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit}
 h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.15;letter-spacing:-.005em;margin:0;text-wrap:balance;color:var(--ink)}
@@ -401,7 +400,6 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 /* Reduced motion : everything in its final state */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  body{animation:none}
   .lit li{opacity:1;transform:none}
   .lit li .p{color:var(--brass-deep)}
   .braise{--heat:1}
