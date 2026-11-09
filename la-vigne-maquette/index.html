@@ -4,620 +4,554 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La Vigne — Brasserie méditerranéenne, grillades au feu de bois · Saint-Gilles, Bruxelles</title>
-<meta name="description" content="La Vigne, depuis 1985. Brasserie méditerranéenne, grillades au feu de bois et rôtisserie. Cuisine gréco-belge non-stop du lundi au samedi, 12h–23h. Rue Jourdan 6, 1060 Saint-Gilles.">
+<meta name="description" content="La Vigne, depuis 1985. Brasserie méditerranéenne, grillades au feu de bois et rôtisserie. Cuisine non-stop du lundi au samedi, de 12h à 23h. Rue Jourdan 6, 1060 Saint-Gilles.">
 <link rel="icon" href="assets/favicon.webp" type="image/webp">
 <link rel="preload" href="assets/p01.jpg" as="image">
 <style>
-@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2")}
-@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:500;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-500-italic.woff2) format("woff2")}
-@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-600-normal.woff2) format("woff2")}
-@font-face{font-family:"Jost";font-style:normal;font-weight:300;font-display:swap;src:url(assets/fonts/jost-latin-300-normal.woff2) format("woff2")}
-@font-face{font-family:"Jost";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/jost-latin-400-normal.woff2) format("woff2")}
-@font-face{font-family:"Jost";font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/jost-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:300;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-300-normal.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:300;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-300-italic.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:400;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:"Inter Tight";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/inter-tight-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter Tight";font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/inter-tight-latin-500-normal.woff2) format("woff2")}
 
 :root{
-  --coal:#14110e;
-  --coal-2:#1d1915;
-  --coal-3:#2a241e;
-  --gold:#d9a528;
-  --gold-soft:#e7c26a;
-  --ember:#c4552b;
-  --cream:#f3ece0;
-  --cream-2:#e9e0d0;
-  --ink:#1c1813;
-  --ink-soft:#5b5248;
-  --line-dark:rgba(243,236,224,.14);
-  --line-light:rgba(28,24,19,.14);
-  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
-  --sans:"Jost","Avenir Next","Segoe UI",Helvetica,Arial,sans-serif;
-  --gutter:clamp(20px,5vw,72px);
-  --max:1320px;
+  --noir:#141210;
+  --noir-2:#1E1A17;
+  --or:#B8955A;
+  --or-clair:#D9BC85;
+  --creme:#F2EBDD;
+  --rouge:#B3261E;
+  --gris-texte:#A69E92;
+
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Inter Tight",Arial,sans-serif;
+  --container:1280px;
+  --pad:40px;
+  --gap:24px;
+  --bleed:max(var(--pad),calc((100vw - var(--container)) / 2));
 }
-*,*::before,*::after{box-sizing:border-box}
+
+*,*::before,*::after{box-sizing:border-box;border-radius:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--coal);color:var(--cream);font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:var(--noir);color:rgb(242 235 221 / .85);font-family:var(--sans);font-weight:400;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
 img{display:block;max-width:100%;height:auto}
-a{color:inherit}
-h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.02;margin:0;letter-spacing:-.01em}
-p{margin:0}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
-.eyebrow{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:14px}
-.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
-em.g{font-style:italic;color:var(--gold)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,p,ul,figure{margin:0}
+ul{padding:0;list-style:none}
+h1,h2,h3{font-family:var(--serif);font-weight:300;color:var(--creme);letter-spacing:-.01em}
 
-/* Buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:17px 30px;font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border:1px solid transparent;transition:background .25s,color .25s,border-color .25s,transform .25s;white-space:nowrap}
-.btn svg{width:16px;height:16px;flex:none}
-.btn-gold{background:var(--gold);color:var(--coal)}
-.btn-gold:hover{background:var(--gold-soft)}
-.btn-line{border-color:rgba(243,236,224,.38);color:var(--cream)}
-.btn-line:hover{border-color:var(--gold);color:var(--gold)}
-.btn-ink{background:var(--ink);color:var(--cream)}
-.btn-ink:hover{background:var(--coal-3)}
-.btn-line-ink{border-color:rgba(28,24,19,.35);color:var(--ink)}
-.btn-line-ink:hover{border-color:var(--ink);background:var(--ink);color:var(--cream)}
-.link-arrow{display:inline-flex;align-items:center;gap:10px;font-weight:500;font-size:13px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:6px}
-.link-arrow:hover{color:var(--gold)}
+.container{width:100%;max-width:calc(var(--container) + 2 * var(--pad));margin:0 auto;padding:0 var(--pad)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap)}
 
-/* Header */
-.hdr{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .35s,box-shadow .35s,padding .35s;padding:22px 0}
-.hdr.solid{background:rgba(20,17,14,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 1px 0 var(--line-dark);padding:12px 0}
-.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:none}
-.hdr .logo img{width:150px;height:auto}
-.nav{display:flex;align-items:center;gap:34px}
-.nav a{text-decoration:none;font-size:12.5px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:rgba(243,236,224,.82);transition:color .2s}
-.nav a:hover{color:var(--gold)}
-.hdr-cta{display:flex;align-items:center;gap:22px}
-.hdr-tel{text-decoration:none;font-size:14px;letter-spacing:.08em;color:var(--cream);display:inline-flex;align-items:center;gap:9px}
-.hdr-tel svg{width:15px;height:15px;color:var(--gold)}
-.hdr .btn{padding:13px 22px;font-size:12px}
-.burger{display:none;background:none;border:1px solid var(--line-dark);width:46px;height:46px;color:var(--cream);cursor:pointer;align-items:center;justify-content:center}
-.burger span{display:block;width:18px;height:1px;background:currentColor;position:relative}
-.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:1px;background:currentColor;transition:transform .3s}
-.burger span::before{top:-6px}.burger span::after{top:6px}
-.menu-open .burger span{background:transparent}
-.menu-open .burger span::before{transform:translateY(6px) rotate(45deg)}
-.menu-open .burger span::after{transform:translateY(-6px) rotate(-45deg)}
-.mnav{position:fixed;inset:0;z-index:40;background:var(--coal);padding:110px var(--gutter) 40px;display:flex;flex-direction:column;gap:6px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
-.menu-open .mnav{opacity:1;visibility:visible}
-.mnav a.m{font-family:var(--serif);font-size:40px;text-decoration:none;padding:6px 0;border-bottom:1px solid var(--line-dark)}
-.mnav .btn{margin-top:28px}
-.mnav .mtel{margin-top:14px}
+/* Label + filet */
+.label{display:inline-flex;align-items:center;gap:14px;font-family:var(--sans);font-weight:500;font-size:11px;line-height:1.4;letter-spacing:.28em;text-transform:uppercase;color:var(--or)}
+.label::before{content:"";flex:none;width:32px;height:1px;background:currentColor}
 
-/* Hero */
-.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:100vh;min-height:100svh;background:var(--coal)}
-.hero-txt{display:flex;flex-direction:column;justify-content:center;padding:140px var(--gutter) 70px;padding-left:max(var(--gutter),calc((100vw - var(--max))/2 + var(--gutter)));position:relative}
-.hero h1{font-size:clamp(52px,6.4vw,104px);margin:30px 0 28px}
-.hero h1 em{font-style:italic;color:var(--gold)}
-.hero-lede{font-size:18px;max-width:30em;color:rgba(243,236,224,.78)}
-.hero-tag{font-family:var(--sans);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(243,236,224,.55);margin-top:28px;line-height:2}
-.hero-tag b{color:var(--gold);font-weight:400;padding:0 8px}
-.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:42px}
-.hero-meta{display:flex;flex-wrap:wrap;gap:12px 34px;margin-top:56px;padding-top:28px;border-top:1px solid var(--line-dark);font-size:14px;color:rgba(243,236,224,.7)}
-.hero-meta strong{display:block;font-weight:500;color:var(--cream);font-size:12px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:2px}
-.status{display:inline-flex;align-items:center;gap:9px}
-.status i{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(217,165,40,.18)}
-.status.closed i{background:#8a8076;box-shadow:0 0 0 4px rgba(138,128,118,.18)}
-.hero-img{position:relative;overflow:hidden;min-height:520px}
-.hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:45% 55%;transform:scale(1.04);animation:heroIn 2.2s cubic-bezier(.2,.7,.2,1) forwards}
-.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--coal) 0,rgba(20,17,14,0) 22%),linear-gradient(0deg,rgba(20,17,14,.55) 0,rgba(20,17,14,0) 30%)}
-.hero-stamp{position:absolute;right:clamp(20px,3vw,44px);bottom:clamp(20px,3vw,40px);z-index:2;text-align:right;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(243,236,224,.8)}
-.hero-stamp span{display:block;font-family:var(--serif);font-style:italic;font-size:44px;letter-spacing:0;text-transform:none;color:var(--gold);line-height:1}
-@keyframes heroIn{to{transform:scale(1)}}
+/* Titre de section */
+.h-sec{font-size:72px;line-height:1;margin-top:28px}
 
-/* Strip */
-.strip{background:var(--gold);color:var(--coal);overflow:hidden;white-space:nowrap;padding:16px 0;font-weight:500;font-size:13px;letter-spacing:.3em;text-transform:uppercase}
-.strip-track{display:inline-flex;gap:48px;animation:marquee 38s linear infinite;padding-left:48px}
-.strip-track span{display:inline-flex;align-items:center;gap:48px}
-.strip-track span::after{content:"";width:6px;height:6px;background:var(--coal);transform:rotate(45deg)}
-@keyframes marquee{to{transform:translateX(-50%)}}
+/* Lien souligné or (dessin gauche → droite) */
+.ul{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Crect width='8' height='8' fill='%23B8955A'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:0 100%;background-size:0 1px;transition:background-size .3s ease-out,color .3s ease-out;padding-bottom:3px}
+.ul:hover,.ul:focus-visible{background-size:100% 1px}
+.link-or{display:inline-block;font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--creme);padding-bottom:6px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Crect width='8' height='8' fill='%23D9BC85'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Crect width='8' height='8' fill='%23B8955A'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:0 100%,0 100%;background-size:0 1px,100% 1px;transition:background-size .3s ease-out,color .3s ease-out}
+.link-or:hover,.link-or:focus-visible{color:var(--or-clair);background-size:100% 1px,100% 1px}
 
-/* Section commons */
-section{position:relative}
-.sec{padding:clamp(88px,11vw,160px) 0}
-.sec-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr);gap:40px 80px;align-items:end;margin-bottom:clamp(48px,6vw,84px)}
-.sec-head h2{font-size:clamp(42px,5vw,76px);margin-top:22px}
-.sec-head p{color:rgba(243,236,224,.72);max-width:32em}
+/* Bouton principal */
+.btn{display:inline-block;background:var(--or);color:var(--noir);font-family:var(--sans);font-weight:500;font-size:12px;line-height:1.2;letter-spacing:.2em;text-transform:uppercase;padding:14px 28px;border-radius:2px;transition:background-color .3s ease-out;white-space:nowrap}
+.btn:hover,.btn:focus-visible{background:var(--or-clair);color:var(--noir)}
 
-/* Feu */
-.feu{background:var(--coal)}
-.feu-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,40px);align-items:start}
-.feu-card{position:relative}
-.feu-card figure{margin:0;overflow:hidden;position:relative}
-.feu-card img{width:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
-.feu-card:hover img{transform:scale(1.03)}
-.feu-card.a img{aspect-ratio:16/11}
-.feu-card.b{margin-top:clamp(40px,7vw,110px)}
-.feu-card.b img{aspect-ratio:4/5;object-position:50% 45%}
-.feu-card .num{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--gold)}
-.feu-card h3{font-size:clamp(30px,2.8vw,42px);margin:10px 0 14px}
-.feu-card .txt{padding-top:28px;max-width:34em}
-.feu-card .txt p{color:rgba(243,236,224,.72)}
+/* Filigrane V */
+.filigrane{position:absolute;font-family:var(--serif);font-weight:400;font-size:1200px;line-height:.8;color:var(--or);opacity:.06;pointer-events:none;user-select:none;z-index:0}
 
-/* Carte (cream) */
-.carte{background:var(--cream);color:var(--ink)}
-.carte .eyebrow{color:#a77a12}
-.carte .sec-head p{color:var(--ink-soft)}
-.dishes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.8vw,26px)}
-.dish{text-decoration:none;color:inherit;display:block}
-.dish figure{margin:0;overflow:hidden;background:var(--cream-2)}
-.dish img{width:100%;aspect-ratio:3/4;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
-.dish:hover img{transform:scale(1.04)}
-.dish:nth-child(even){margin-top:56px}
-.dish .cat{display:block;margin-top:20px;font-size:11.5px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:#a77a12}
-.dish h3{font-size:30px;margin-top:8px}
-.dish p{font-size:15px;color:var(--ink-soft);margin-top:8px}
-.carte-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px;margin-top:clamp(56px,7vw,96px);padding-top:36px;border-top:1px solid var(--line-light)}
-.carte-foot p{font-family:var(--serif);font-size:clamp(24px,2.4vw,32px);line-height:1.25;max-width:24em}
-.carte-foot .acts{display:flex;flex-wrap:wrap;gap:14px}
+/* ============ 0. NAVIGATION ============ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background-color .4s ease-out}
+.nav.is-solid{background:rgb(20 18 16 / .95)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;height:88px;transition:height .4s ease-out}
+.nav.is-solid .nav__in{height:72px}
+.nav__logo{position:relative;display:block}
+.nav__logo img{width:150px;height:auto;transition:opacity .4s ease-out}
+.nav__logo .logo-dark{position:absolute;inset:0}
+.nav__logo .logo-light{opacity:0}
+.nav.is-solid .nav__logo .logo-light{opacity:1}
+.nav.is-solid .nav__logo .logo-dark{opacity:0}
+.nav:not(.is-solid) .nav__links a,.nav:not(.is-solid) .nav__menu{color:var(--noir)}
+.nav__links{display:flex;gap:40px}
+.nav__links a{font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--creme);transition:color .4s ease-out}
+.nav__menu{display:none;background:none;border:0;padding:8px 0;font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--creme);cursor:pointer}
+.nav__right{display:flex;align-items:center;gap:28px}
+.mobnav{position:fixed;inset:0;z-index:40;background:var(--noir);display:flex;flex-direction:column;justify-content:center;padding:96px var(--pad) 48px;gap:4px;opacity:0;visibility:hidden;transition:opacity .3s ease-out,visibility 0s .3s}
+.menu-open .mobnav{opacity:1;visibility:visible;transition:opacity .3s ease-out,visibility 0s}
+.mobnav a{font-family:var(--serif);font-weight:300;font-size:44px;line-height:1.2;color:var(--creme);padding:8px 0;border-bottom:1px solid rgb(184 149 90 / .3)}
 
-/* Maison */
-.maison{background:var(--cream);color:var(--ink);padding-top:0}
-.maison-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(40px,7vw,110px);align-items:center}
-.maison-photos{position:relative;padding-bottom:90px;padding-right:60px}
-.maison-photos .main{margin:0}
-.maison-photos .main img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%}
-.maison-photos .side{position:absolute;right:0;bottom:0;width:44%;margin:0;border:10px solid var(--cream)}
-.maison-photos .side img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:30% 30%}
-.maison-photos figcaption{max-width:52%;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-top:14px}
-.maison .logo-ink{width:190px;margin-bottom:38px}
-.maison h2{font-size:clamp(42px,4.8vw,72px);margin:22px 0 28px}
-.maison .eyebrow{color:#a77a12}
-.maison-txt p{color:var(--ink-soft);max-width:33em}
-.maison-txt p+p{margin-top:18px}
-.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:48px;border-top:1px solid var(--line-light)}
-.facts div{padding:24px 20px 0 0}
-.facts div+div{padding-left:20px;border-left:1px solid var(--line-light)}
-.facts b{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(36px,3.4vw,50px);line-height:1;color:var(--ink)}
-.facts span{display:block;margin-top:10px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);line-height:1.5}
+/* ============ 1. HERO ============ */
+.hero{position:relative;height:100vh;height:100svh;min-height:680px;overflow:hidden;background:var(--noir-2)}
+.hero__img{position:absolute;top:0;left:0;width:112%;max-width:none;height:100%;object-fit:cover;object-position:0 50%}
+.hero__plate{position:absolute;left:0;bottom:0;z-index:2;background:var(--noir);padding:56px 64px 64px var(--bleed);max-width:calc(var(--bleed) + 700px)}
+.hero h1{font-size:112px;line-height:.95;font-weight:300;margin:28px 0 32px}
+.hero h1 em{font-style:italic}
+.hero__lede{max-width:30em;margin-bottom:36px}
+.hero__aside{position:absolute;right:var(--bleed);bottom:40px;z-index:2;display:flex;gap:32px;background:var(--noir);padding:14px 20px}
+.hero__aside a{font-weight:500;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--creme)}
 
-/* Groupes */
-.groupes{background:var(--coal);overflow:hidden}
-.groupes-bg{position:absolute;inset:0}
-.groupes-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;opacity:.42}
-.groupes-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,17,14,.97) 0,rgba(20,17,14,.86) 48%,rgba(20,17,14,.35) 100%)}
-.groupes .wrap{position:relative;z-index:1}
-.groupes-inner{max-width:640px}
-.badge{display:inline-block;margin-bottom:26px;padding:8px 14px;border:1px solid rgba(217,165,40,.6);color:var(--gold);font-size:11.5px;font-weight:500;letter-spacing:.24em;text-transform:uppercase}
-.groupes h2{font-size:clamp(46px,5.4vw,84px);margin:22px 0 26px}
-.groupes .lede{color:rgba(243,236,224,.78);font-size:18px;max-width:30em}
-.offer{list-style:none;padding:0;margin:40px 0 0;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line-dark)}
-.offer li{padding:24px 24px 24px 0;border-bottom:1px solid var(--line-dark)}
-.offer li:nth-child(even){padding-left:24px;border-left:1px solid var(--line-dark)}
-.offer b{display:block;font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.1;color:var(--cream)}
-.offer span{display:block;margin-top:6px;font-size:14px;color:rgba(243,236,224,.62)}
-.groupes .acts{display:flex;flex-wrap:wrap;gap:14px;margin-top:44px}
+/* ============ 2. MARQUEE ============ */
+.marquee{background:var(--noir-2);overflow:hidden;padding:30px 0;border-top:1px solid rgb(184 149 90 / .25);border-bottom:1px solid rgb(184 149 90 / .25)}
+.marquee__track{display:flex;width:max-content;animation:defile 40s linear infinite}
+.marquee:hover .marquee__track{animation-play-state:paused}
+.marquee__group{display:flex;align-items:center;flex:none}
+.marquee__group span{font-family:var(--serif);font-weight:300;font-size:32px;line-height:1.2;color:var(--or);white-space:nowrap}
+.marquee__group i{font-style:normal;font-size:10px;color:var(--or);margin:0 34px;transform:translateY(-2px)}
+@keyframes defile{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* Infos */
-.infos{background:var(--coal-2)}
-.infos-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,100px);align-items:stretch}
-.infos-photo{margin:0;position:relative;overflow:hidden;min-height:520px}
-.infos-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
-.infos h2{font-size:clamp(42px,4.6vw,70px);margin:22px 0 48px}
-.info-blocks{display:grid;grid-template-columns:1fr 1fr;gap:44px 48px}
-.ib h3{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-.ib p,.ib address{font-style:normal;color:rgba(243,236,224,.82);font-size:16.5px}
-.ib a{text-decoration:none}
-.ib a:hover{color:var(--gold)}
-.ib .big{font-family:var(--serif);font-size:30px;line-height:1.15;color:var(--cream);display:block}
-.hours{width:100%;border-collapse:collapse;font-size:15.5px}
-.hours td{padding:9px 0;border-bottom:1px solid var(--line-dark);color:rgba(243,236,224,.78)}
-.hours td:last-child{text-align:right}
-.hours tr.today td{color:var(--gold);font-weight:500}
-.hours tr.off td:last-child{color:rgba(243,236,224,.45)}
-.infos .acts{display:flex;flex-wrap:wrap;gap:14px;margin-top:52px}
+/* ============ 3. LE FEU ============ */
+.feu{position:relative;overflow:hidden;padding:168px 0 176px;background:var(--noir)}
+.feu .filigrane{left:-120px;top:-150px}
+.feu .grid{position:relative;z-index:1;align-items:center}
+.feu__txt{grid-column:1 / span 5}
+.feu__txt p{margin-top:32px;max-width:28em}
+.feu__list{margin-top:48px;border-top:1px solid var(--or)}
+.feu__list li{font-family:var(--serif);font-weight:300;font-size:28px;line-height:1.2;color:var(--creme);padding:18px 0;border-bottom:1px solid var(--or)}
+.feu__img{grid-column:6 / span 7;margin-right:calc(-1 * var(--bleed))}
+.feu__img img{width:100%;aspect-ratio:3 / 2;object-fit:cover}
 
-/* Insta */
-.insta{background:var(--coal);padding:clamp(70px,8vw,110px) 0;border-top:1px solid var(--line-dark)}
-.insta .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:30px}
-.insta a.handle{font-family:var(--serif);font-style:italic;font-size:clamp(46px,7vw,110px);line-height:1;text-decoration:none;color:var(--cream);transition:color .25s}
-.insta a.handle:hover{color:var(--gold)}
-.insta p{color:rgba(243,236,224,.65);max-width:22em}
+/* ============ 4. LA CARTE ============ */
+.carte{background:var(--creme);color:var(--noir);padding:136px 0 120px}
+.carte__head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:80px}
+.carte h2{font-size:80px;line-height:1;color:var(--noir)}
+.carte__cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.carte__col{padding:0 40px}
+.carte__col:first-child{padding-left:0}
+.carte__col:last-child{padding-right:0}
+.carte__col + .carte__col{border-left:1px solid rgb(20 18 16 / .15)}
+.carte__lab{margin-bottom:28px}
+.plat{display:grid;grid-template-columns:auto 1fr auto;align-items:end;column-gap:10px;padding:13px 0}
+.plat__nom{font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.2;color:var(--noir)}
+.plat__nom small{display:block;font-family:var(--sans);font-size:13px;letter-spacing:.02em;color:rgb(20 18 16 / .6);margin-top:3px}
+.plat__dots{border-bottom:1px dotted rgb(20 18 16 / .45);transform:translateY(-6px);min-width:24px}
+.plat__prix{font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.2;color:var(--or);text-align:right;white-space:nowrap}
+.plat__prix.sa{white-space:nowrap}
+.carte__note{font-family:var(--serif);font-style:italic;font-weight:400;font-size:24px;line-height:1.35;color:var(--noir);margin-top:72px;padding-top:32px;border-top:1px solid rgb(20 18 16 / .15);max-width:40em}
+.carte .link-or{color:var(--noir);margin-top:32px}
+.carte .link-or:hover{color:var(--noir)}
 
-/* Footer */
-.ftr{background:#0e0c0a;padding:72px 0 56px;font-size:15px;color:rgba(243,236,224,.62)}
-.ftr-grid{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:40px}
-.ftr img{width:150px}
-.ftr h4{margin:0 0 14px;font-weight:500;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
-.ftr a{text-decoration:none}
-.ftr a:hover{color:var(--gold)}
-.ftr ul{list-style:none;margin:0;padding:0}
-.ftr li+li{margin-top:6px}
-.ftr-base{margin-top:56px;padding-top:24px;border-top:1px solid var(--line-dark);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(243,236,224,.4)}
+/* ============ 5. RÔTISSERIE DU JOUR ============ */
+.rotis{background:var(--rouge);color:var(--creme);height:320px;display:flex;align-items:center}
+.rotis .grid{align-items:center;width:100%}
+.rotis__l{grid-column:1 / span 5}
+.rotis .label{color:var(--creme)}
+.rotis h2{font-size:64px;line-height:1;font-style:italic;margin-top:22px}
+.rotis__r{grid-column:7 / span 6}
+.rotis__r li{display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid rgb(242 235 221 / .35);color:var(--creme)}
+.rotis__r li:first-child{border-top:1px solid rgb(242 235 221 / .35)}
+.rotis__r b{font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;padding-top:6px;white-space:nowrap}
+.rotis__r span{font-family:var(--serif);font-size:26px;line-height:1.2;text-align:right}
 
-/* Sticky mobile bar */
-.mbar{display:none}
+/* ============ 6. LA SALLE ============ */
+.salle{padding:0 0 152px;background:var(--noir)}
+.salle__hero{position:relative;height:80vh;min-height:520px;background:var(--noir-2)}
+.salle__hero img{width:100%;height:100%;object-fit:cover;object-position:50% 46%}
+.salle__box{position:absolute;left:var(--bleed);bottom:0;background:var(--noir);padding:48px 56px 52px;max-width:640px}
+.salle__box h2{font-size:64px;line-height:1;margin:24px 0 20px}
+.masonry{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);margin-top:120px;align-items:start}
+.masonry figure:nth-child(1){grid-column:1 / span 4}
+.masonry figure:nth-child(2){grid-column:5 / span 4;margin-top:96px}
+.masonry figure:nth-child(3){grid-column:9 / span 4;margin-top:24px}
+.masonry img{width:100%;object-fit:cover;background:var(--noir-2)}
+.masonry figure:nth-child(1) img{aspect-ratio:3 / 4}
+.masonry figure:nth-child(2) img{aspect-ratio:4 / 5}
+.masonry figure:nth-child(3) img{aspect-ratio:1 / 1}
+.masonry figcaption{margin-top:18px}
 
-/* Reveal */
-.js .rv{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+/* ============ 7. GROUPES ============ */
+.groupes{background:var(--noir-2);padding:136px 0 144px}
+.groupes .grid{align-items:center}
+.groupes__txt{grid-column:1 / span 6;padding-right:48px}
+.groupes__txt p{margin-top:28px;max-width:30em}
+.groupes__list{margin:40px 0 44px;border-top:1px solid var(--or)}
+.groupes__list li{font-family:var(--serif);font-weight:300;font-size:24px;line-height:1.25;color:var(--creme);padding:16px 0;border-bottom:1px solid var(--or)}
+.groupes__photo{grid-column:7 / span 6;padding:0 24px 24px 24px}
+.groupes__photo img{width:100%;aspect-ratio:1 / 1;object-fit:cover;object-position:50% 22%;transform:rotate(-1.5deg);box-shadow:12px 12px 0 var(--or)}
+
+/* ============ 8. INFOS ============ */
+.infos{background:var(--noir);padding:120px 0 0;overflow:hidden}
+.infos .grid{align-items:stretch}
+.infos__blocks{grid-column:1 / span 5;display:grid;grid-template-columns:1fr 1fr;gap:56px 32px;padding:16px 0 120px;align-content:start}
+.infos__blocks h3{font-size:32px;line-height:1.1;margin-bottom:16px}
+.infos__blocks p{font-size:15px;line-height:1.65}
+.infos__blocks .btn{margin:4px 0 14px}
+.infos__blocks a.ul{color:var(--creme)}
+.infos__map{grid-column:6 / span 7;margin-right:calc(-1 * var(--bleed));min-height:560px;background:var(--noir-2)}
+.infos__map iframe{display:block;width:100%;height:100%;min-height:560px;border:0;filter:grayscale(1) invert(.9)}
+
+/* ============ 9. FOOTER ============ */
+.footer{position:relative;overflow:hidden;background:var(--noir);padding:120px 0 48px;border-top:1px solid rgb(184 149 90 / .25)}
+.footer .filigrane{right:-90px;top:-170px}
+.footer .container{position:relative;z-index:1}
+.footer__logo{display:inline-block}
+.footer__logo img{width:370px;height:auto}
+.footer__line{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--creme);margin-top:28px}
+.footer__nav{display:flex;flex-wrap:wrap;gap:16px 36px;margin-top:64px}
+.footer__nav a{font-weight:500;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--or)}
+.footer__base{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;margin-top:72px;padding-top:24px;border-top:1px solid rgb(184 149 90 / .25);font-size:13px;color:var(--gris-texte)}
+.footer__base a{color:var(--creme)}
+
+/* ============ Apparition ============ */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out}
 .js .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
-  .js .rv{opacity:1;transform:none;transition:none}
-  .strip-track,.hero-img img{animation:none}
   html{scroll-behavior:auto}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .marquee__track{animation:none}
+  .ul,.link-or,.btn,.nav{transition:none}
 }
 
-/* Responsive */
-@media (max-width:1180px){
-  .nav{gap:24px}
-  .hdr-tel span{display:none}
+/* ============ 1280 ============ */
+@media (max-width:1280px){
+  .h-sec{font-size:64px}
+  .hero h1{font-size:96px}
+  .carte__col{padding:0 28px}
+  .rotis h2{font-size:56px}
 }
-@media (max-width:1020px){
-  .nav,.hdr-tel{display:none}
-  .burger{display:inline-flex}
-  .hero{grid-template-columns:1fr;min-height:0}
-  .hero-img{order:-1;height:62vh;min-height:420px}
-  .hero-img::after{background:linear-gradient(0deg,var(--coal) 0,rgba(20,17,14,0) 45%),linear-gradient(180deg,rgba(20,17,14,.7) 0,rgba(20,17,14,0) 30%)}
-  .hero-txt{padding:10px var(--gutter) 72px;margin-top:-90px;z-index:2}
-  .hero-stamp{bottom:auto;top:100px}
-  .sec-head{grid-template-columns:1fr}
-  .feu-grid{grid-template-columns:1fr}
-  .feu-card.b{margin-top:30px}
-  .feu-card.b img{aspect-ratio:16/11}
-  .dishes{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .maison-grid{grid-template-columns:1fr}
-  .maison-photos{max-width:620px}
-  .infos-grid{grid-template-columns:1fr}
-  .infos-photo{min-height:380px}
-  .ftr-grid{grid-template-columns:1fr 1fr}
+/* ============ 900 ============ */
+@media (max-width:900px){
+  :root{--pad:28px}
+  .nav__links{display:none}
+  .nav__menu{display:inline-block}
+  .nav__in{height:72px}
+  .nav__logo img{width:124px}
+  .hero{min-height:640px}
+  .hero__img{width:100%;object-position:44% 50%}
+  .hero__plate{right:0;max-width:none;padding:40px var(--pad) 96px}
+  .hero h1{font-size:76px}
+  .hero__aside{right:var(--pad);bottom:24px;padding:0;gap:28px}
+  .h-sec{font-size:56px}
+  .feu{padding:120px 0 128px}
+  .feu__txt,.feu__img{grid-column:1 / -1}
+  .feu__img{margin:64px calc(-1 * var(--pad)) 0 0}
+  .carte__cols{grid-template-columns:1fr}
+  .carte__col,.carte__col:first-child,.carte__col:last-child{padding:0}
+  .carte__col + .carte__col{border-left:0;border-top:1px solid rgb(20 18 16 / .15);margin-top:48px;padding-top:48px}
+  .carte h2{font-size:64px}
+  .rotis{height:auto;padding:64px 0}
+  .rotis__l,.rotis__r{grid-column:1 / -1}
+  .rotis__r{margin-top:36px}
+  .salle__hero{height:70vh}
+  .salle__box{left:var(--pad);right:var(--pad);bottom:-1px;max-width:none;padding:36px 32px 40px}
+  .salle__box h2{font-size:44px}
+  .masonry{margin-top:80px;row-gap:48px}
+  .masonry figure:nth-child(1){grid-column:1 / span 7}
+  .masonry figure:nth-child(2){grid-column:6 / span 7;margin-top:0}
+  .masonry figure:nth-child(3){grid-column:2 / span 8;margin-top:0}
+  .groupes{padding:112px 0}
+  .groupes__txt,.groupes__photo{grid-column:1 / -1;padding-right:0}
+  .groupes__photo{margin-top:56px;max-width:560px}
+  .infos__blocks{grid-column:1 / -1;padding-bottom:72px}
+  .infos__map{grid-column:1 / -1;margin:0 calc(-1 * var(--pad))}
+  .footer{padding-top:96px}
 }
-@media (max-width:640px){
+/* ============ 600 ============ */
+@media (max-width:600px){
+  :root{--pad:20px}
   body{font-size:16px}
-  .hdr{padding:14px 0}
-  .hdr .logo img{width:120px}
-  .hdr-cta .btn{display:none}
-  .hero-img{height:56vh;min-height:360px}
-  .hero h1{font-size:50px;margin:22px 0 20px}
-  .hero-lede{font-size:16.5px}
-  .hero-actions .btn{flex:1 1 100%}
-  .hero-meta{gap:18px 28px;margin-top:40px}
-  .hero-stamp span{font-size:34px}
-  .dishes{gap:28px 14px}
-  .dish:nth-child(even){margin-top:36px}
-  .dish h3{font-size:24px}
-  .dish p{font-size:14px}
-  .carte-foot .acts,.groupes .acts,.infos .acts{width:100%}
-  .carte-foot .btn,.groupes .btn,.infos .btn{flex:1 1 100%}
-  .maison-photos{padding-right:34px;padding-bottom:70px}
-  .facts{grid-template-columns:1fr}
-  .facts div,.facts div+div{padding:20px 0;border-left:0;border-bottom:1px solid var(--line-light)}
-  .offer{grid-template-columns:1fr}
-  .offer li,.offer li:nth-child(even){padding:20px 0;border-left:0}
-  .info-blocks{grid-template-columns:1fr;gap:36px}
-  .ftr-grid{grid-template-columns:1fr}
-  .hero-stamp{display:none}
-  .eyebrow{letter-spacing:.24em}
-  .ftr{padding-bottom:120px}
-  .mbar{display:grid;grid-template-columns:1fr 1.4fr;position:fixed;left:0;right:0;bottom:0;z-index:45;transform:translateY(110%);visibility:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),visibility 0s .35s;background:rgba(20,17,14,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line-dark);padding:10px 12px calc(10px + env(safe-area-inset-bottom));gap:10px}
-  .mbar .btn{padding:15px 10px;font-size:12px}
-  .mbar.on{transform:none;visibility:visible;transition:transform .35s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  .nav .btn{padding:12px 18px;font-size:11px;letter-spacing:.18em}
+  .nav__right{gap:20px}
+  .hero{min-height:600px}
+  .hero__plate{padding:32px var(--pad) 84px}
+  .hero h1{font-size:56px;margin:22px 0 22px}
+  .hero__lede{margin-bottom:28px;font-size:16px}
+  .h-sec{font-size:48px}
+  .feu__list li{font-size:24px}
+  .carte{padding:104px 0 96px}
+  .carte h2{font-size:56px}
+  .carte__head{margin-bottom:56px}
+  .plat__nom,.plat__prix{font-size:20px}
+  .carte__note{font-size:21px}
+  .rotis h2{font-size:48px}
+  .rotis__r li{flex-direction:column;gap:2px}
+  .rotis__r span{text-align:left;font-size:24px}
+  .salle__hero{height:62vh;min-height:420px}
+  .salle__box{left:0;right:0;padding:32px var(--pad) 36px}
+  .salle__box h2{font-size:38px}
+  .masonry figure:nth-child(1){grid-column:1 / span 9}
+  .masonry figure:nth-child(2){grid-column:4 / span 9}
+  .masonry figure:nth-child(3){grid-column:1 / span 10}
+  .groupes__photo{padding:0 16px 16px 4px}
+  .infos__blocks{grid-template-columns:1fr;gap:44px}
+  .infos__map,.infos__map iframe{min-height:420px}
+  .footer__logo img{width:260px}
+  .footer__line{font-size:22px}
 }
 </style>
 </head>
 <body>
 
-<header class="hdr" id="top">
-  <div class="wrap">
-    <a class="logo" href="#accueil" aria-label="La Vigne — accueil"><img src="assets/logo-white.webp" alt="La Vigne" width="250" height="81"></a>
-    <nav class="nav" aria-label="Navigation principale">
-      <a href="#feu">Le feu</a>
-      <a href="#carte">La carte</a>
-      <a href="#maison">La maison</a>
-      <a href="#groupes">Groupes</a>
-      <a href="#infos">Infos</a>
+<!-- 0. NAVIGATION -->
+<header class="nav" id="nav">
+  <div class="container nav__in">
+    <a class="nav__logo" href="#accueil" aria-label="La Vigne — retour en haut de page"><img class="logo-light" src="assets/logo-white.webp" alt="La Vigne" width="250" height="81"><img class="logo-dark" src="assets/logo-black.webp" alt="" width="250" height="81"></a>
+    <nav class="nav__links" aria-label="Navigation principale">
+      <a class="ul" href="#carte">La carte</a>
+      <a class="ul" href="#feu">Le feu</a>
+      <a class="ul" href="#salle">La salle</a>
+      <a class="ul" href="#groupes">Groupes</a>
+      <a class="ul" href="#infos">Infos</a>
     </nav>
-    <div class="hdr-cta">
-      <a class="hdr-tel" href="tel:+3225381207"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span>02 538 12 07</span></a>
-      <a class="btn btn-gold" href="https://bookings.zenchef.com/results?rid=368570&pid=1001" target="_blank" rel="noopener">Réserver</a>
-      <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mnav"><span></span></button>
+    <div class="nav__right">
+      <button class="nav__menu" type="button" aria-expanded="false" aria-controls="mobnav">Menu</button>
+      <a class="btn" href="https://bookings.zenchef.com/results?rid=368570&pid=1001" target="_blank" rel="noopener">Réserver</a>
     </div>
   </div>
 </header>
 
-<nav class="mnav" id="mnav" aria-label="Menu mobile">
-  <a class="m" href="#feu">Le feu</a>
-  <a class="m" href="#carte">La carte</a>
-  <a class="m" href="#maison">La maison</a>
-  <a class="m" href="#groupes">Groupes &amp; privatisation</a>
-  <a class="m" href="#infos">Infos pratiques</a>
-  <a class="btn btn-gold" href="https://bookings.zenchef.com/results?rid=368570&pid=1001" target="_blank" rel="noopener">Réserver une table</a>
-  <a class="btn btn-line mtel" href="tel:+3225381207">Appeler le 02 538 12 07</a>
+<nav class="mobnav" id="mobnav" aria-label="Navigation mobile">
+  <a href="#carte">La carte</a>
+  <a href="#feu">Le feu</a>
+  <a href="#salle">La salle</a>
+  <a href="#groupes">Groupes</a>
+  <a href="#infos">Infos</a>
 </nav>
 
 <main>
 
+<!-- 1. HERO -->
 <section class="hero" id="accueil">
-  <div class="hero-txt">
-    <span class="eyebrow">Saint-Gilles · Bruxelles · depuis 1985</span>
-    <h1>La braise,<br>la broche,<br><em>la Méditerranée.</em></h1>
-    <p class="hero-lede">Viandes irlandaises grillées au feu de bois, rôtisserie à la broche, moules-frites et spécialités grecques&nbsp;: une cuisine gréco-belge servie sans interruption, à deux pas de l’avenue Louise.</p>
-    <p class="hero-tag">Brasserie méditerranéenne<b>–</b>Grillades au feu de bois<b>–</b>Rôtisserie</p>
-    <div class="hero-actions">
-      <a class="btn btn-gold" href="https://bookings.zenchef.com/results?rid=368570&pid=1001" target="_blank" rel="noopener">Réserver une table
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="btn btn-line" href="https://la-vigne.be/la-carte/" target="_blank" rel="noopener">Voir la carte</a>
-    </div>
-    <div class="hero-meta">
-      <div><strong>Lundi – samedi</strong><span class="status" id="status"><i></i><span id="status-txt">12h – 23h · cuisine non-stop</span></span></div>
-      <div><strong>Rue Jourdan 6</strong>1060 Saint-Gilles · Métro Louise</div>
-    </div>
+  <img class="hero__img" src="assets/p01.jpg" alt="Tomahawk de bœuf irlandais saisi à la pince sur le grill au feu de bois, flammes" width="1080" height="1300" fetchpriority="high">
+  <div class="hero__plate">
+    <p class="label">Brasserie · Rôtisserie · Saint‑Gilles · depuis&nbsp;1985</p>
+    <h1>Grillades au<br><em>feu de bois.</em></h1>
+    <p class="hero__lede">Brasserie méditerranéenne au cœur du quartier Louise. Cuisine non-stop de 12h à 23h.</p>
+    <a class="btn" href="https://bookings.zenchef.com/results?rid=368570&pid=1001" target="_blank" rel="noopener">Réserver une table</a>
   </div>
-  <div class="hero-img">
-    <img src="assets/p01.jpg" alt="Tomahawk saisi à la pince sur le grill, au-dessus des flammes du feu de bois" width="1080" height="1300" fetchpriority="high">
-    <div class="hero-stamp"><span>Since 1985</span>Grill au feu de bois</div>
+  <div class="hero__aside">
+    <a class="ul" href="#feu">↓ Découvrir</a>
+    <a class="ul" href="tel:+3225381207">02 538 12 07</a>
   </div>
 </section>
 
-<div class="strip" aria-hidden="true">
-  <div class="strip-track">
-    <span>Grillades au feu de bois</span><span>Rôtisserie à la broche</span><span>Moules-frites</span><span>Classiques belges</span><span>Spécialités grecques</span><span>Cuisine non-stop 12h–23h</span>
-    <span>Grillades au feu de bois</span><span>Rôtisserie à la broche</span><span>Moules-frites</span><span>Classiques belges</span><span>Spécialités grecques</span><span>Cuisine non-stop 12h–23h</span>
+<!-- 2. BANDEAU DÉFILANT -->
+<div class="marquee" aria-label="Grillades au feu de bois, rôtisserie, moules-frites, spécialités grecques, depuis 1985, quartier Louise">
+  <div class="marquee__track" aria-hidden="true">
+    <div class="marquee__group"><span>Grillades au feu de bois</span><i>◆</i><span>Rôtisserie</span><i>◆</i><span>Moules-frites</span><i>◆</i><span>Spécialités grecques</span><i>◆</i><span>Depuis 1985</span><i>◆</i><span>Quartier Louise</span><i>◆</i></div>
+    <div class="marquee__group"><span>Grillades au feu de bois</span><i>◆</i><span>Rôtisserie</span><i>◆</i><span>Moules-frites</span><i>◆</i><span>Spécialités grecques</span><i>◆</i><span>Depuis 1985</span><i>◆</i><span>Quartier Louise</span><i>◆</i></div>
   </div>
 </div>
 
-<section class="sec feu" id="feu">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="rv">
-        <span class="eyebrow">Le grill &amp; la broche</span>
-        <h2>Deux feux,<br><em class="g">une seule cuisine.</em></h2>
-      </div>
-      <p class="rv">Au cœur de La Vigne, deux postes de cuisson&nbsp;: le grill alimenté au feu de bois, où l’on saisit les viandes irlandaises, et la rôtissoire, où les pièces tournent lentement à la broche devant la flamme.</p>
-    </div>
-    <div class="feu-grid">
-      <article class="feu-card a rv">
-        <figure><img src="assets/p04.jpeg" alt="Côte à l’os tranchée sur planche, servie avec frites et sauce" width="1066" height="1600" loading="lazy" style="object-position:50% 58%"></figure>
-        <div class="txt">
-          <span class="num">01 — Le grill</span>
-          <h3>Viandes irlandaises au feu de bois</h3>
-          <p>Côte à l’os, tomahawk, belles pièces de bœuf irlandais&nbsp;: saisies sur la braise, tranchées sur planche et servies avec leurs frites et leur sauce.</p>
-        </div>
-      </article>
-      <article class="feu-card b rv">
-        <figure><img src="assets/p02.jpeg" alt="Viandes à la broche dorant sur la rôtissoire" width="2560" height="1706" loading="lazy"></figure>
-        <div class="txt">
-          <span class="num">02 — La rôtisserie</span>
-          <h3>À la broche, devant la flamme</h3>
-          <p>Les viandes tournent sur la rôtissoire jusqu’à ce que la peau soit dorée et le cœur fondant. La spécialité de la maison.</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="sec carte" id="carte">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="rv">
-        <span class="eyebrow">La carte</span>
-        <h2>De Bruxelles<br><em class="g">à la mer Égée.</em></h2>
-      </div>
-      <p class="rv">Une cuisine gréco-belge, généreuse et sans détour&nbsp;: les grands classiques de la brasserie bruxelloise côte à côte avec les spécialités grecques, servis du déjeuner au dîner, sans interruption.</p>
-    </div>
-    <div class="dishes">
-      <a class="dish rv" href="https://la-vigne.be/la-carte/" target="_blank" rel="noopener">
-        <figure><img src="assets/p03.jpeg" alt="Moules en cocotte et frites en cornet métallique" width="1066" height="1600" loading="lazy"></figure>
-        <span class="cat">La Belgique</span>
-        <h3>Moules-frites</h3>
-        <p>En cocotte, frites en cornet, sauce à part.</p>
-      </a>
-      <a class="dish rv" href="https://la-vigne.be/la-carte/" target="_blank" rel="noopener">
-        <figure><img src="assets/p05.jpeg" alt="Steak servi à table avec sa sauce et un verre de vin rouge" width="1066" height="1600" loading="lazy"></figure>
-        <span class="cat">La brasserie</span>
-        <h3>Classiques belges</h3>
-        <p>Le steak, sa sauce, et un verre de vin.</p>
-      </a>
-      <a class="dish rv" href="https://la-vigne.be/la-carte/" target="_blank" rel="noopener">
-        <figure><img src="assets/p06.jpeg" alt="Calamars frits, salade et citron" width="1066" height="1600" loading="lazy"></figure>
-        <span class="cat">La Grèce</span>
-        <h3>Spécialités grecques</h3>
-        <p>Calamars frits, salade, citron.</p>
-      </a>
-      <a class="dish rv" href="https://la-vigne.be/la-carte/" target="_blank" rel="noopener">
-        <figure><img src="assets/p07.jpeg" alt="Poisson grillé servi avec ses légumes" width="1066" height="1600" loading="lazy"></figure>
-        <span class="cat">La Méditerranée</span>
-        <h3>Poissons grillés</h3>
-        <p>Passés sur la braise, avec leurs légumes.</p>
-      </a>
-    </div>
-    <div class="carte-foot rv">
-      <p>Toute la carte, des grillades aux desserts, est à consulter en ligne.</p>
-      <div class="acts">
-        <a class="btn btn-ink" href="https://la-vigne.be/la-carte/" target="_blank" rel="noopener">La carte complète</a>
-        <a class="btn btn-line-ink" href="https://bookings.zenchef.com/results?rid=368570&pid=1001" target="_blank" rel="noopener">Réserver</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec maison" id="maison">
-  <div class="wrap maison-grid">
-    <div class="maison-photos rv">
-      <figure class="main">
-        <img src="assets/p10.jpeg" alt="Les deux patrons de La Vigne devant la façade du restaurant" width="1066" height="1600" loading="lazy">
-        <figcaption>Les patrons, devant la maison</figcaption>
-      </figure>
-      <figure class="side"><img src="assets/p08.jpeg" alt="Enseigne noire « La Vigne since 1985 » sur la façade" width="1066" height="1600" loading="lazy"></figure>
-    </div>
-    <div class="maison-txt rv">
-      <img class="logo-ink" src="assets/logo-black.webp" alt="La Vigne" width="250" height="81" loading="lazy">
-      <span class="eyebrow">La maison</span>
-      <h2>Une adresse<br>de quartier<br><em class="g">depuis 1985.</em></h2>
-      <p>Rue Jourdan, entre le rond-point Stéphanie et le métro Louise, La Vigne nourrit Saint-Gilles depuis plus de quarante ans. Les habitués du quartier, les bureaux de l’avenue Louise et les tablées du soir s’y retrouvent autour du même feu.</p>
-      <p>Le parti pris n’a pas changé&nbsp;: une brasserie qui cuisine au bois, à la broche, et qui mêle sans complexe la Belgique et la Grèce dans l’assiette.</p>
-      <div class="facts">
-        <div><b>1985</b><span>Année d’ouverture</span></div>
-        <div><b>12h–23h</b><span>Cuisine non-stop, du lundi au samedi</span></div>
-        <div><b>80</b><span>Personnes en privatisation</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec groupes" id="groupes">
-  <div class="groupes-bg"><img src="assets/p11.jpg" alt="" width="1600" height="2000" loading="lazy"></div>
-  <div class="wrap">
-    <div class="groupes-inner rv">
-      <span class="badge">Fêtes de fin d’année</span><br>
-      <span class="eyebrow">Groupes &amp; privatisation</span>
-      <h2>La Vigne,<br><em class="g">rien que pour vous.</em></h2>
-      <p class="lede">Soirée d’entreprise, anniversaire, repas de fin d’année&nbsp;: la salle se privatise entièrement et accueille jusqu’à 80 convives autour du grill et de la rôtisserie.</p>
-      <ul class="offer">
-        <li><b>Jusqu’à 80 personnes</b><span>Privatisation complète du restaurant</span></li>
-        <li><b>Soirées d’entreprise</b><span>Dîners d’équipe, clients, séminaires</span></li>
-        <li><b>Noël &amp; Nouvel An</b><span>Menus de fêtes pour les groupes</span></li>
-        <li><b>Plus de 15 personnes</b><span>Réservation par téléphone uniquement</span></li>
+<!-- 3. LE FEU -->
+<section class="feu" id="feu">
+  <span class="filigrane" aria-hidden="true">V</span>
+  <div class="container grid">
+    <div class="feu__txt rv">
+      <p class="label">Le feu</p>
+      <h2 class="h-sec">Quarante ans de braises.</h2>
+      <p>Les viandes cuisent sur la braise du feu de bois, et la broche tourne devant la flamme du déjeuner au dîner. On y saisit le bœuf irlandais, on y dore les volailles et le cochon de lait. Autour, une carte gréco-belge&nbsp;: moules-frites, classiques de brasserie et plats grecs faits maison.</p>
+      <ul class="feu__list">
+        <li>Bœuf irlandais maturé</li>
+        <li>Broche au feu de bois</li>
+        <li>Moules de Zélande en saison</li>
       </ul>
-      <div class="acts">
-        <a class="btn btn-gold" href="tel:+3225381207">Appeler le 02 538 12 07</a>
-        <a class="btn btn-line" href="mailto:nc-invest@outlook.com?subject=Demande%20de%20privatisation%20%E2%80%94%20La%20Vigne">Écrire une demande</a>
+    </div>
+    <figure class="feu__img rv">
+      <img src="assets/p02.jpeg" alt="Viandes à la broche qui dorent sur la rôtissoire, au-dessus des flammes" width="2560" height="1706" loading="lazy">
+    </figure>
+  </div>
+</section>
+
+<!-- 4. LA CARTE -->
+<section class="carte" id="carte">
+  <div class="container">
+    <div class="carte__head rv">
+      <h2>La carte</h2>
+      <p class="label">Extrait — carte complète au restaurant</p>
+    </div>
+    <div class="carte__cols">
+      <div class="carte__col rv">
+        <p class="label carte__lab" role="heading" aria-level="3">Grillades &amp; rôtisserie</p>
+        <ul>
+          <li class="plat"><span class="plat__nom">Côte à l’os irlandaise<small>+/- 1,2 kg, 2 pers.</small></span><span class="plat__dots"></span><span class="plat__prix">85,00 €</span></li>
+          <li class="plat"><span class="plat__nom">Tomahawk de bœuf irlandais<small>+/- 1 kg, 2 pers.</small></span><span class="plat__dots"></span><span class="plat__prix">85,00 €</span></li>
+          <li class="plat"><span class="plat__nom">Entrecôte irlandaise</span><span class="plat__dots"></span><span class="plat__prix">35,90 €</span></li>
+          <li class="plat"><span class="plat__nom">Le plat signature&nbsp;: filet mignon de bœuf, frites, salade</span><span class="plat__dots"></span><span class="plat__prix">24,90 €</span></li>
+          <li class="plat"><span class="plat__nom">Coquelet rôti, sauce champignons</span><span class="plat__dots"></span><span class="plat__prix">23,90 €</span></li>
+          <li class="plat"><span class="plat__nom">Cochon de lait à la broche, gratin dauphinois</span><span class="plat__dots"></span><span class="plat__prix">32,90 €</span></li>
+        </ul>
       </div>
+      <div class="carte__col rv">
+        <p class="label carte__lab" role="heading" aria-level="3">Moules &amp; mer</p>
+        <ul>
+          <li class="plat"><span class="plat__nom">Moules marinières</span><span class="plat__dots"></span><span class="plat__prix sa">selon arrivage</span></li>
+          <li class="plat"><span class="plat__nom">Moules au vin blanc</span><span class="plat__dots"></span><span class="plat__prix sa">selon arrivage</span></li>
+          <li class="plat"><span class="plat__nom">Moules provençale</span><span class="plat__dots"></span><span class="plat__prix sa">selon arrivage</span></li>
+          <li class="plat"><span class="plat__nom">Bar grillé</span><span class="plat__dots"></span><span class="plat__prix">33,90 €</span></li>
+          <li class="plat"><span class="plat__nom">Saumon grillé, béarnaise</span><span class="plat__dots"></span><span class="plat__prix">25,90 €</span></li>
+          <li class="plat"><span class="plat__nom">Scampis beurre à l’ail</span><span class="plat__dots"></span><span class="plat__prix">19,90 €</span></li>
+        </ul>
+      </div>
+      <div class="carte__col rv">
+        <p class="label carte__lab" role="heading" aria-level="3">Côté Grèce</p>
+        <ul>
+          <li class="plat"><span class="plat__nom">Tzatziki</span><span class="plat__dots"></span><span class="plat__prix">9,90 €</span></li>
+          <li class="plat"><span class="plat__nom">Feuilles de vigne farcies au riz</span><span class="plat__dots"></span><span class="plat__prix">9,00 €</span></li>
+          <li class="plat"><span class="plat__nom">Gyros de poulet ou porc, pita, tzatziki</span><span class="plat__dots"></span><span class="plat__prix">21,90 €</span></li>
+          <li class="plat"><span class="plat__nom">Soutzoukakia maison</span><span class="plat__dots"></span><span class="plat__prix">21,00 €</span></li>
+          <li class="plat"><span class="plat__nom">Moussaka maison</span><span class="plat__dots"></span><span class="plat__prix">21,90 €</span></li>
+          <li class="plat"><span class="plat__nom">Salade grecque</span><span class="plat__dots"></span><span class="plat__prix">16,50 €</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="carte__note rv">Tous nos plats sont accompagnés au choix de frites belges maison, riz basmati, croquettes ou pommes de terre grenailles.</p>
+    <a class="link-or rv" href="https://la-vigne.be/la-carte/" target="_blank" rel="noopener">Voir la carte complète (PDF)</a>
+  </div>
+</section>
+
+<!-- 5. RÔTISSERIE DU JOUR -->
+<section class="rotis" aria-labelledby="rotis-titre">
+  <div class="container grid">
+    <div class="rotis__l rv">
+      <p class="label">Chaque jour</p>
+      <h2 id="rotis-titre">La rôtisserie du jour</h2>
+    </div>
+    <ul class="rotis__r rv">
+      <li><b>Lundi–Mercredi</b><span>Coquelet fermier</span></li>
+      <li><b>Jeudi–Vendredi</b><span>Épaule d’agneau à la menthe (2 pers.)</span></li>
+      <li><b>Samedi</b><span>Cochon de lait</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 6. LA SALLE -->
+<section class="salle" id="salle">
+  <div class="salle__hero">
+    <img src="assets/p11.jpg" alt="La salle de La Vigne : tables en bois dressées, suspensions dorées en osier, miroir rond au fond" width="1600" height="2000" loading="lazy">
+    <div class="salle__box rv">
+      <p class="label">La salle</p>
+      <h2>Rue Jourdan, depuis 1985.</h2>
+      <p>80 couverts.<br>Banquettes rouges, laiton, et la broche visible depuis la salle.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="masonry">
+      <figure class="rv">
+        <img src="assets/p09.webp" alt="Façade de l’immeuble de La Vigne, rue Jourdan, avec ses deux enseignes noires au V doré" width="836" height="1024" loading="lazy">
+        <figcaption class="label">La façade, rue Jourdan&nbsp;6</figcaption>
+      </figure>
+      <figure class="rv">
+        <img src="assets/p03.jpeg" alt="Moules en cocotte et frites belges en cornet métallique, verre de vin blanc" width="1066" height="1600" loading="lazy">
+        <figcaption class="label">Moules-frites</figcaption>
+      </figure>
+      <figure class="rv">
+        <img src="assets/p04.jpeg" alt="Côte à l’os irlandaise tranchée sur planche, frites et sauce" width="1066" height="1600" loading="lazy" style="object-position:50% 62%">
+        <figcaption class="label">Côte à l’os irlandaise</figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<section class="sec infos" id="infos">
-  <div class="wrap infos-grid">
-    <figure class="infos-photo rv"><img src="assets/p09.webp" alt="Façade de l’immeuble de La Vigne, rue Jourdan, avec ses deux enseignes" width="836" height="1024" loading="lazy"></figure>
-    <div class="rv">
-      <span class="eyebrow">Infos pratiques</span>
-      <h2>Rue Jourdan 6,<br><em class="g">Saint-Gilles.</em></h2>
-      <div class="info-blocks">
-        <div class="ib">
-          <h3>Adresse</h3>
-          <address>Rue Jourdan 6<br>1060 Saint-Gilles, Bruxelles<br>Quartier Louise · rond-point Stéphanie</address>
-          <p style="margin-top:14px"><a class="link-arrow" href="https://www.google.com/maps/search/?api=1&amp;query=La+Vigne+Rue+Jourdan+6+1060+Saint-Gilles+Bruxelles" target="_blank" rel="noopener">Itinéraire</a></p>
-        </div>
-        <div class="ib">
-          <h3>Horaires</h3>
-          <table class="hours" id="hours">
-            <tbody>
-              <tr data-d="1"><td>Lundi</td><td>12h – 23h</td></tr>
-              <tr data-d="2"><td>Mardi</td><td>12h – 23h</td></tr>
-              <tr data-d="3"><td>Mercredi</td><td>12h – 23h</td></tr>
-              <tr data-d="4"><td>Jeudi</td><td>12h – 23h</td></tr>
-              <tr data-d="5"><td>Vendredi</td><td>12h – 23h</td></tr>
-              <tr data-d="6"><td>Samedi</td><td>12h – 23h</td></tr>
-              <tr data-d="0" class="off"><td>Dimanche</td><td>Fermé</td></tr>
-            </tbody>
-          </table>
-          <p style="margin-top:12px;font-size:14px;color:rgba(243,236,224,.6)">Cuisine ouverte non-stop.</p>
-        </div>
-        <div class="ib">
-          <h3>Accès</h3>
-          <p>Métro <strong style="font-weight:500;color:var(--cream)">Louise</strong>, lignes 2 &amp; 6<br>À quelques pas de l’avenue Louise et du rond-point Stéphanie.</p>
-        </div>
-        <div class="ib">
-          <h3>Contact</h3>
-          <p><a class="big" href="tel:+3225381207">02 538 12 07</a></p>
-          <p style="margin-top:6px"><a href="mailto:nc-invest@outlook.com">nc-invest@outlook.com</a></p>
-        </div>
-      </div>
-      <div class="acts">
-        <a class="btn btn-gold" href="https://bookings.zenchef.com/results?rid=368570&pid=1001" target="_blank" rel="noopener">Réserver en ligne</a>
-        <a class="btn btn-line" href="tel:+3225381207">Groupes de +15 : appeler</a>
-      </div>
+<!-- 7. GROUPES & PRIVATISATION -->
+<section class="groupes" id="groupes">
+  <div class="container grid">
+    <div class="groupes__txt rv">
+      <p class="label">Groupes &amp; événements</p>
+      <h2 class="h-sec">Jusqu’à 80 convives.</h2>
+      <p>Anniversaires, soirées d’entreprise, menus de fin d’année&nbsp;: La Vigne reçoit les groupes autour du grill et de la broche, et se privatise entièrement le soir, sur demande.</p>
+      <ul class="groupes__list">
+        <li>Menus groupes à partir de 15 personnes</li>
+        <li>Privatisation du restaurant</li>
+        <li>Menus de Noël &amp; Nouvel An</li>
+      </ul>
+      <a class="link-or" href="tel:+3225381207">Appeler le 02 538 12 07</a>
     </div>
+    <figure class="groupes__photo rv">
+      <img src="assets/p10.jpeg" alt="Les deux patrons de La Vigne, côte à côte devant la façade du restaurant" width="1066" height="1600" loading="lazy">
+    </figure>
   </div>
 </section>
 
-<section class="insta" aria-label="Instagram">
-  <div class="wrap">
-    <div>
-      <span class="eyebrow">Sur Instagram</span>
-      <div style="margin-top:20px"><a class="handle" href="https://www.instagram.com/lavignebxl/" target="_blank" rel="noopener">@lavignebxl</a></div>
+<!-- 8. INFOS PRATIQUES -->
+<section class="infos" id="infos" aria-label="Infos pratiques">
+  <div class="container grid">
+    <div class="infos__blocks">
+      <div class="rv">
+        <h3>Adresse</h3>
+        <p>Rue Jourdan 6,<br>1060 Saint-Gilles</p>
+        <p>Métro Louise, lignes 2 &amp; 6</p>
+      </div>
+      <div class="rv">
+        <h3>Horaires</h3>
+        <p>Lundi–Samedi 12h–23h, cuisine non-stop.</p>
+        <p>Dimanche fermé.</p>
+      </div>
+      <div class="rv">
+        <h3>Réservation</h3>
+        <a class="btn" href="https://bookings.zenchef.com/results?rid=368570&pid=1001" target="_blank" rel="noopener">Réserver en ligne</a>
+        <p>Plus de 15 personnes&nbsp;: <a class="ul" href="tel:+3225381207">02 538 12 07</a></p>
+      </div>
+      <div class="rv">
+        <h3>Contact</h3>
+        <p><a class="ul" href="tel:+3225381207">02 538 12 07</a></p>
+        <p><a class="ul" href="mailto:nc-invest@outlook.com">nc-invest@outlook.com</a></p>
+        <p><a class="ul" href="https://www.instagram.com/lavignebxl/" target="_blank" rel="noopener">@lavignebxl</a></p>
+      </div>
     </div>
-    <p>Le grill, la broche et la salle au quotidien. Suivez La Vigne pour ne rien manquer des menus de fêtes.</p>
+    <div class="infos__map">
+      <iframe title="Plan d’accès — La Vigne, Rue Jourdan 6, 1060 Saint-Gilles" src="https://maps.google.com/maps?q=La%20Vigne%2C%20Rue%20Jourdan%206%2C%201060%20Saint-Gilles%2C%20Bruxelles&amp;z=16&amp;hl=fr&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
   </div>
 </section>
 
 </main>
 
-<footer class="ftr">
-  <div class="wrap">
-    <div class="ftr-grid">
-      <div>
-        <img src="assets/logo-white.webp" alt="La Vigne" width="250" height="81" loading="lazy">
-        <p style="margin-top:20px;max-width:22em">Brasserie méditerranéenne – Grillades au feu de bois – Rôtisserie. Depuis 1985.</p>
-      </div>
-      <div>
-        <h4>Adresse</h4>
-        <p>Rue Jourdan 6<br>1060 Saint-Gilles<br>Métro Louise (2 &amp; 6)</p>
-      </div>
-      <div>
-        <h4>Horaires</h4>
-        <p>Lundi – samedi<br>12h – 23h, non-stop<br>Dimanche fermé</p>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:+3225381207">02 538 12 07</a></li>
-          <li><a href="mailto:nc-invest@outlook.com">nc-invest@outlook.com</a></li>
-          <li><a href="https://www.instagram.com/lavignebxl/" target="_blank" rel="noopener">Instagram @lavignebxl</a></li>
-          <li><a href="https://bookings.zenchef.com/results?rid=368570&pid=1001" target="_blank" rel="noopener">Réserver en ligne</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="ftr-base">
-      <span>La Vigne · Bruxelles · depuis 1985</span>
-      <span>Cuisine gréco-belge</span>
+<!-- 9. FOOTER -->
+<footer class="footer">
+  <span class="filigrane" aria-hidden="true">V</span>
+  <div class="container">
+    <a class="footer__logo" href="#accueil" aria-label="La Vigne — retour en haut de page"><img src="assets/logo-white.webp" alt="La Vigne" width="250" height="81" loading="lazy"></a>
+    <p class="footer__line">Brasserie méditerranéenne · Grillades au feu de bois · Depuis 1985</p>
+    <nav class="footer__nav" aria-label="Navigation de pied de page">
+      <a class="ul" href="#carte">La carte</a>
+      <a class="ul" href="#feu">Le feu</a>
+      <a class="ul" href="#salle">La salle</a>
+      <a class="ul" href="#groupes">Groupes</a>
+      <a class="ul" href="#infos">Infos</a>
+      <a class="ul" href="https://bookings.zenchef.com/results?rid=368570&pid=1001" target="_blank" rel="noopener">Réserver</a>
+    </nav>
+    <div class="footer__base">
+      <span>© La Vigne 2026 — Rue Jourdan 6, 1060 Bruxelles</span>
+      <a class="ul" href="https://www.instagram.com/lavignebxl/" target="_blank" rel="noopener">Instagram — @lavignebxl</a>
     </div>
   </div>
 </footer>
 
-<div class="mbar">
-  <a class="btn btn-line" href="tel:+3225381207">Appeler</a>
-  <a class="btn btn-gold" href="https://bookings.zenchef.com/results?rid=368570&pid=1001" target="_blank" rel="noopener">Réserver</a>
-</div>
-
 <script>
-(function(){
-  var d=document, root=d.documentElement;
-  root.classList.add('js');
+(function () {
+  var d = document;
+  d.documentElement.classList.add('js');
 
-  // Header solid on scroll
-  var hdr=d.querySelector('.hdr');
-  var mbar=d.querySelector('.mbar'), hero=d.querySelector('.hero');
-  function onScroll(){
-    hdr.classList.toggle('solid', window.scrollY>40);
-    mbar.classList.toggle('on', window.scrollY > hero.offsetHeight*0.8);
+  var nav = d.getElementById('nav');
+  function onScroll() { nav.classList.toggle('is-solid', window.scrollY > 24 || d.body.classList.contains('menu-open')); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  var btn = d.querySelector('.nav__menu');
+  function setMenu(open) {
+    d.body.classList.toggle('menu-open', open);
+    btn.setAttribute('aria-expanded', open);
+    btn.textContent = open ? 'Fermer' : 'Menu';
+    onScroll();
   }
-  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+  btn.addEventListener('click', function () { setMenu(!d.body.classList.contains('menu-open')); });
+  d.querySelectorAll('.mobnav a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
 
-  // Mobile menu
-  var burger=d.querySelector('.burger');
-  burger.addEventListener('click', function(){
-    var open=d.body.classList.toggle('menu-open');
-    burger.setAttribute('aria-expanded', open);
-    burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
-  });
-  d.querySelectorAll('.mnav a').forEach(function(a){
-    a.addEventListener('click', function(){ d.body.classList.remove('menu-open'); burger.setAttribute('aria-expanded', false); });
-  });
-
-  // Open / closed status, Brussels time
-  try{
-    var parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Brussels',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
-    var get=function(t){ return (parts.find(function(p){return p.type===t;})||{}).value; };
-    var day=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(get('weekday'));
-    var mins=parseInt(get('hour'),10)%24*60+parseInt(get('minute'),10);
-    var open=day>=1 && day<=6 && mins>=720 && mins<1380;
-    var st=d.getElementById('status'), tx=d.getElementById('status-txt');
-    if(open){ tx.textContent='Ouvert maintenant · jusqu’à 23h'; }
-    else{
-      st.classList.add('closed');
-      var next = (day>=1 && day<=6 && mins<720) ? 'aujourd’hui à 12h' : (day===6 || day===0 ? 'lundi à 12h' : 'demain à 12h');
-      tx.textContent='Fermé · réouverture '+next;
-    }
-    var row=d.querySelector('#hours tr[data-d="'+day+'"]'); if(row) row.classList.add('today');
-  }catch(e){}
-
-  // Reveal on scroll
-  var els=d.querySelectorAll('.rv');
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{rootMargin:'0px 0px -8% 0px',threshold:.08});
-    els.forEach(function(el){ io.observe(el); });
-  } else { els.forEach(function(el){ el.classList.add('in'); }); }
+  var items = d.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    items.forEach(function (el) { io.observe(el); });
+  } else {
+    items.forEach(function (el) { el.classList.add('in'); });
+  }
 })();
 </script>
 </body>
