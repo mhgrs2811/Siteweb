@@ -166,6 +166,10 @@ Un bouton à maintenir enfoncé. Pendant la pression, la photo `feu-grille` s'em
 ### Pied de page
 Logotype · « Restaurant et brasserie méditerranéenne à Saint-Gilles, depuis 1985. » · Adresse, téléphone, courriel, horaires · Instagram « @lavignebxl » · « Photos © La Vigne » · « Réservations en ligne par Zenchef ». Pas de mention de marque fictive : la marque est réelle. Les mentions légales (numéro d'entreprise) restent à fournir par la cliente.
 
+## 6 bis. Le logo : l'officiel, jamais redessiné
+
+Règle posée par la cliente : ne pas toucher au logo, reprendre celui du site avec sa vraie typographie. Le logo officiel est « LA » et « IGNE » en capitales fines et espacées d'une linéale géométrique, avec le grand V doré (#D9A528) dans une didone, qui descend sous la ligne des lettres. Les fichiers disponibles sont des images basse définition (250 px sur le site, 471 px dans le menu PDF) : trop floues pour un grand hero. Le logo du PDF a donc été vectorisé par tracé de contours, sans aucun redessin, en deux formes : les lettres et le V. Il est défini une fois dans la page (symbole SVG) et réutilisé partout : en-tête (lettres ivoire sur le feu, encre sur le papier, V toujours doré), pied de page, carte du hero, rideau d'arrivée, et le favicon est le V lui-même. La fenêtre de l'arrivée s'ouvre dans le vrai V du logo. L'or du site est aligné sur celui du logo : #D9A528.
+
 ## 7. Le plan de la couche vectorielle
 
 - **Signature : le V qui se trace et la frise de vigne.** À l'arrivée, le V de l'enseigne se dessine en un trait (SVG, `stroke-dashoffset`) avant de se remplir. Avant le pied de page, une frise de vigne dessinée à la main au trait de laiton (sarment, feuilles, vrilles, deux grappes) se trace sur toute la largeur quand elle entre dans l'écran, puis les grappes apparaissent. C'est la réponse de La Vigne à la frise de village au trait de la référence.
