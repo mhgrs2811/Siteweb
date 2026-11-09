@@ -45,11 +45,17 @@ Contrastes calculés : encre sur ivoire 15:1 ; encre-2 sur ivoire 7:1 ; laiton f
 
 Échelle fluide avec `clamp()`. 60 à 72 caractères par ligne (`max-width` en `ch` sur l'élément texte lui-même). Boutons rectangulaires sans arrondi.
 
-## 4. La carte des bandes (hero desktop)
+## 4. Le hero : un seul écran, l'arrivée
 
-Le hero fait 860vh. Le « film » est une suite de six vraies photos pilotées par le scroll : fondu croisé + lent zoom (transform et opacity seulement, lissés, réversibles). On ouvre sur le feu, l'idée de la maison, puis on fait le chemin : trottoir, salle, feu de cuisine, broche, table.
+Décision de la cliente : pas de défilement d'images, le « waouw » doit être là dès le chargement. Le hero est donc un seul écran plein cadre sur les bûches qui brûlent, et tout l'effet tient dans l'arrivée, puis dans la vie de l'image.
 
-**L'arrivée (demandée par la cliente : « waouw, ce site a dû coûter cher »).** Une séquence jouée une seule fois au chargement, 3 secondes, puis le scroll prend la main : écran sombre, le V de l'enseigne se trace tout seul en laiton (tracé SVG), « La » et « igne » glissent se coller au V, le filet doré s'étire, puis les bûches s'allument derrière (la photo monte en opacité avec un léger recul de zoom et une lueur orange qui respire ensuite comme un feu), le kicker et la sous-ligne montent, la navigation et l'invitation à défiler apparaissent en dernier. Sur téléphone, la même arrivée en plus léger sur le hero statique. Mouvement réduit : rien ne bouge, tout est affiché.
+**L'arrivée (3 secondes, jouée une fois).** Écran sombre. Le V de l'enseigne se trace tout seul en laiton (tracé SVG) puis se remplit. « La » et « igne » glissent se coller au V. Le filet doré s'étire. Dès que la photo est chargée, le feu s'allume : l'image monte depuis le noir avec un léger recul de zoom, une lueur orange apparaît et continue de respirer comme un vrai feu, des braises montent. Le kicker, la sous-ligne et les boutons arrivent l'un après l'autre, la navigation et l'invitation à défiler en dernier.
+
+**Ensuite.** La photo continue un très lent zoom (42 secondes aller, 42 retour) pour ne jamais être figée. Quand on commence à descendre, l'image glisse un peu moins vite que la page (parallaxe douce, transform seulement) et la carte de titre s'estompe. La navigation passe à l'ivoire une fois le hero quitté.
+
+**Texte (verbatim).** Kicker : « Saint-Gilles · Depuis 1985 ». H1 : « La Vigne » (le V dessiné). Sous-ligne : « Brasserie méditerranéenne. Viandes irlandaises au feu de bois, moules-frites et plats grecs maison. Du lundi au samedi, cuisine non-stop de 12 h à 23 h. » CTA : « Réserver une table ». Secondaire : « 02 538 12 07 ».
+
+**Composition.** Sur ordinateur, la flamme à gauche, la carte de titre à droite, centrée verticalement, sur un voile radial. Sur téléphone, la flamme en haut, la carte en bas sur un dégradé sombre. Si la photo n'arrive pas, la carte joue quand même son arrivée sur le fond fumée. Mouvement réduit : rien ne bouge, tout est affiché.
 
 | Bande | Plage (point de départ) | Photo et mouvement | Texte (verbatim) | Entrée |
 |---|---|---|---|---|
