@@ -55,7 +55,7 @@ Référence donnée par la cliente : l'arrivée de palazzosogni.com. Ce qu'elle 
 4. La fenêtre s'ouvre : le V grandit en une seconde jusqu'à seize fois sa taille, les lettres s'effacent, le rideau se fond, et la photo plein cadre est là. Rien ne saute : la photo de la fenêtre et celle du hero sont au pixel près la même.
 5. La navigation, puis les mots du coin bas droit, puis l'invitation à défiler.
 
-Trois secondes et demie. Jouée une fois par visite : revenir à l'accueil dans la même session donne un simple fondu d'une seconde. Mouvement réduit : pas de rideau du tout. Le rideau est posé dans le HTML avant tout script, donc rien ne clignote avant lui.
+Trois secondes et demie. Jouée à chaque arrivée sur la page, comme un rideau de scène ; seul un lien profond vers une section (#carte, #reserver) passe directement à la section avec un simple fondu d'une seconde. Mouvement réduit : pas de rideau du tout. Le rideau est posé dans le HTML avant tout script, donc rien ne clignote avant lui.
 
 ## 4 bis. Le hero : le tomahawk au-dessus du feu, plein cadre
 

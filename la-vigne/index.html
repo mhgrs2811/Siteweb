@@ -800,8 +800,10 @@ const vimg = document.getElementById('vimg');
 const amarkSvg = arrive.querySelector('.amark .logo-svg');
 const VBOX = { x: 103.8, y: 1.8, w: 152.8, h: 153.0 };   // the V inside the 471 x 157 logo
 const PORTRAIT = matchMedia('(max-width: 720px), (orientation: portrait) and (max-width: 1024px)');
-let seen = false;
-try { seen = sessionStorage.getItem('lv-arrived') === '1'; } catch (e) {}
+// The curtain plays on every arrival at the top of the page. Only a deep link to a section
+// (#carte, #reserver, ...) skips it and goes straight there with the short fade.
+let deepLink = false;
+try { deepLink = location.hash.length > 1 && document.querySelector(location.hash) !== null; } catch (e) {}
 function fitWindow() {
   const W = innerWidth, H = Math.round(innerHeight * 1.06);
   const svg = arrive.querySelector('.vwin');
@@ -835,11 +837,10 @@ function playArrival() {
       }
     })(t0);
   }, 2350);
-  try { sessionStorage.setItem('lv-arrived', '1'); } catch (e) {}
 }
 if (!RM.matches) {
   stage.classList.add('intro'); document.body.classList.add('intro');
-  if (seen) { arrive.remove(); document.body.classList.add('quick'); } else playArrival();
+  if (deepLink) { arrive.remove(); document.body.classList.add('quick'); } else playArrival();
 } else arrive.remove();
 
 let heroRaf = null, lastPy = -1, lastOp = -1, cueGone = false;
