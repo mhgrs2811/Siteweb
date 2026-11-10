@@ -4,16 +4,16 @@
 /* Jetons                                                              */
 /* ------------------------------------------------------------------ */
 :root {
-  --night: #111214;
-  --sand: #ECEEF1;
-  --lin: #F8F9FA;
-  --ink: #17181A;
-  --ink-2: #5F646C;
-  --sand-on-night: #AEB3BA;
-  --taupe: #8A9099;
-  --light: #F2F4F6;
+  --night: #1A1715;
+  --sand: #EFEBE6;
+  --lin: #FBF9F6;
+  --ink: #211D1A;
+  --ink-2: #6E6660;
+  --sand-on-night: #B8AEA5;
+  --taupe: #A39389;
+  --light: #FFF8F1;
   --accent: #2a4beb;
-  --accent-ink: #F8F9FA;
+  --accent-ink: #FBF9F6;
   /* Accent utilisé pour du texte. */
   --accent-text: var(--accent);
 
@@ -21,7 +21,7 @@
   --bg: var(--sand);
   --fg: var(--ink);
   --fg-2: var(--ink-2);
-  --rule: rgba(23, 24, 26, 0.14);
+  --rule: rgba(33, 29, 26, 0.14);
 
   --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
   --font-text: var(--font-onest), "Onest", system-ui, sans-serif;
@@ -257,12 +257,12 @@ html.has-cursor * {
   padding: 5px;
   list-style: none;
   color: var(--fg);
-  background: color-mix(in srgb, var(--fg) 9%, transparent);
-  border: 1px solid color-mix(in srgb, var(--fg) 14%, transparent);
+  background: rgba(255, 252, 248, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 999px;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 12px 32px -16px rgba(17, 18, 20, 0.45);
+    0 12px 32px -16px rgba(26, 23, 21, 0.45);
   -webkit-backdrop-filter: blur(14px) saturate(1.3);
   backdrop-filter: blur(14px) saturate(1.3);
   transition:
@@ -316,7 +316,7 @@ html.has-cursor * {
     inset 0 -8px 12px -8px rgba(42, 75, 235, 0.35),
     inset 0 6px 10px -8px rgba(255, 255, 255, 0.9),
     0 10px 26px -10px rgba(42, 75, 235, 0.5),
-    0 1px 2px rgba(17, 18, 20, 0.18);
+    0 1px 2px rgba(26, 23, 21, 0.18);
   -webkit-backdrop-filter: blur(8px) saturate(1.6) brightness(1.08);
   backdrop-filter: blur(8px) saturate(1.6) brightness(1.08);
   transition:
@@ -356,7 +356,7 @@ html.has-cursor * {
   background: #2f52f5;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -6px 10px -8px rgba(17, 18, 20, 0.5),
+    inset 0 -6px 10px -8px rgba(26, 23, 21, 0.5),
     0 10px 26px -10px rgba(42, 75, 235, 0.75);
 }
 .nav__link--cta:focus-visible {
@@ -400,7 +400,9 @@ html.has-cursor * {
   min-height: 640px;
   overflow: hidden;
   color: var(--fg);
-  background: radial-gradient(ellipse at 50% 30%, #f3f4f6 0%, var(--sand) 60%, #e6e8eb 100%);
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 34%, rgba(255, 250, 244, 0.95) 0%, rgba(255, 250, 244, 0) 70%),
+    linear-gradient(180deg, #e6dfd8 0%, #ede7e1 42%, #f7f3ef 72%, #faf7f3 100%);
 }
 /* Trame de grille, à peine visible, qui s'efface vers les bords */
 .hero::before {
@@ -408,8 +410,8 @@ html.has-cursor * {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(90deg, rgba(23, 24, 26, 0.07) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(23, 24, 26, 0.07) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(33, 29, 26, 0.06) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(33, 29, 26, 0.06) 1px, transparent 1px);
   background-size: 72px 72px;
   background-position: center top;
   -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 78%);
@@ -467,28 +469,56 @@ html.has-cursor * {
 .hero__orb {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle at 36% 30%, #fbfbfc 0%, #e9ebee 45%, #cfd4da 100%);
-  box-shadow: 0 40px 60px -30px rgba(23, 24, 26, 0.35);
+  background: radial-gradient(circle at 34% 28%, #f8e3d4 0%, #e9c6b0 40%, #cfa088 78%, #b98a72 100%);
+  box-shadow:
+    inset -18px -22px 40px rgba(120, 78, 56, 0.18),
+    0 50px 70px -30px rgba(120, 78, 56, 0.45);
 }
 .hero__orb--l {
-  left: -3%;
-  bottom: -16%;
-  width: clamp(160px, 18vw, 280px);
+  left: -9%;
+  bottom: -28%;
+  width: clamp(220px, 24vw, 360px);
   aspect-ratio: 1;
 }
 .hero__orb--r {
-  right: 6%;
-  bottom: 8%;
-  width: clamp(56px, 6vw, 96px);
+  right: 4.5%;
+  bottom: 1.5%;
+  width: clamp(70px, 7.5vw, 120px);
   aspect-ratio: 1;
+}
+/* Anneau cuivré, derrière la petite sphère */
+.hero__ring {
+  position: absolute;
+  right: 1.5%;
+  bottom: -7%;
+  width: clamp(150px, 15vw, 240px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f1d8bf, #b98a63 45%, #e9c9a8 70%, #a97b57);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+  opacity: 0.9;
+}
+/* Galet de pierre, posé au sol à droite */
+.hero__stone {
+  position: absolute;
+  right: 10%;
+  bottom: -1%;
+  width: clamp(120px, 12vw, 200px);
+  height: clamp(44px, 4.4vw, 72px);
+  border-radius: 48% 52% 50% 50% / 60% 60% 40% 40%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5), transparent 50%),
+    linear-gradient(180deg, #e8e0d7, #cbbfb3);
+  box-shadow: 0 30px 40px -24px rgba(120, 78, 56, 0.4);
 }
 .hero__floor {
   position: absolute;
-  left: 18%;
-  right: 18%;
-  bottom: 6%;
-  height: 10%;
-  background: radial-gradient(ellipse at 50% 50%, rgba(23, 24, 26, 0.12), rgba(23, 24, 26, 0) 70%);
+  left: 12%;
+  right: 12%;
+  bottom: 4%;
+  height: 12%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(120, 78, 56, 0.16), rgba(120, 78, 56, 0) 70%);
 }
 
 /* La carte en verre */
@@ -502,19 +532,19 @@ html.has-cursor * {
   padding: clamp(30px, 3vw, 48px) clamp(28px, 3.4vw, 56px);
   text-align: center;
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.42);
-  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: rgba(255, 252, 248, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.4),
-    0 90px 120px -70px rgba(23, 24, 26, 0.35),
-    0 2px 6px rgba(23, 24, 26, 0.04);
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.5),
+    0 90px 120px -70px rgba(120, 78, 56, 0.35),
+    0 2px 6px rgba(33, 29, 26, 0.04);
   -webkit-backdrop-filter: blur(18px) saturate(1.25);
   backdrop-filter: blur(18px) saturate(1.25);
 }
 @supports not (backdrop-filter: blur(1px)) {
   .hero__card {
-    background: rgba(255, 255, 255, 0.86);
+    background: rgba(255, 252, 248, 0.9);
   }
 }
 .hero__h1 {
@@ -567,7 +597,7 @@ html.has-cursor * {
   position: absolute;
   z-index: 5;
   left: var(--gutter);
-  bottom: 40px;
+  bottom: 64px;
   width: min(30vw, 34ch);
   pointer-events: none;
 }
@@ -785,6 +815,7 @@ html.has-cursor * {
   --bp-labels: 1;
   --bp-dim: 1;
   --bp-gone: 0;
+  --bp-filet: 1;
   --wire: var(--taupe);
   /* Le trait du croquis : encre adoucie, sur fond clair comme sur la plaque. */
   --wf-color: color-mix(in srgb, var(--ink) 62%, var(--sand));
@@ -856,12 +887,35 @@ html.has-cursor * {
   opacity: 0;
 }
 .bp__pen-dot {
-  fill: var(--accent);
+  fill: #e9c9a8;
   stroke: none;
 }
 .bp__pen-halo {
-  fill: rgba(42, 75, 235, 0.16);
+  fill: rgba(196, 146, 104, 0.22);
   stroke: none;
+}
+.bp__filet {
+  opacity: var(--bp-filet);
+}
+.bp__filet-shadow {
+  stroke: rgba(120, 78, 56, 0.18);
+  stroke-width: 18;
+  stroke-dasharray: 1;
+  stroke-linecap: round;
+}
+.bp__filet-line {
+  stroke-width: 9;
+  stroke-dasharray: 1;
+  stroke-linecap: round;
+}
+.bp--phone .bp__filet-shadow {
+  stroke-width: 22;
+}
+.bp--phone .bp__filet-line {
+  stroke-width: 11;
+}
+.bp.is-drawn .bp__filet path {
+  stroke-dasharray: none;
 }
 .stage__space {
   position: absolute;
@@ -885,8 +939,8 @@ html.has-cursor * {
 }
 .slab--phone {
   right: 9%;
-  top: 30%;
-  width: 14.5%;
+  top: 24%;
+  width: 14%;
   aspect-ratio: 9 / 18.5;
   --r: 9cqw;
 }
@@ -896,7 +950,7 @@ html.has-cursor * {
   top: 2%;
   width: 90%;
   height: 92%;
-  background: radial-gradient(ellipse at 50% 44%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.2) 42%, rgba(255, 255, 255, 0) 66%);
+  background: radial-gradient(ellipse at 50% 44%, rgba(255, 250, 244, 0.8), rgba(255, 250, 244, 0.25) 42%, rgba(255, 250, 244, 0) 66%);
   pointer-events: none;
 }
 .slab__body,
@@ -912,11 +966,11 @@ html.has-cursor * {
   overflow: hidden;
   transform: translateZ(0);
   box-shadow:
-    0 0 0 1px rgba(23, 24, 26, 0.06),
-    0 50px 90px -40px rgba(23, 24, 26, 0.4);
+    0 0 0 1px rgba(255, 255, 255, 0.7),
+    0 50px 90px -40px rgba(120, 78, 56, 0.4);
 }
 .slab__depth {
-  background: #DDE0E4;
+  background: #E4DCD4;
   opacity: var(--face-a);
   transform: translateZ(-10px);
 }
@@ -924,7 +978,7 @@ html.has-cursor * {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(112deg, rgba(242, 244, 246, 0.55) 0%, rgba(242, 244, 246, 0) 38%, rgba(23, 24, 26, 0.08) 100%);
+  background: linear-gradient(112deg, rgba(255, 248, 241, 0.55) 0%, rgba(255, 248, 241, 0) 38%, rgba(33, 29, 26, 0.08) 100%);
   opacity: var(--shade);
   mix-blend-mode: soft-light;
 }
@@ -974,7 +1028,7 @@ html.has-cursor * {
   position: absolute;
   inset: 0;
   color: var(--ink);
-  --line: rgba(23, 24, 26, 0.16);
+  --line: rgba(33, 29, 26, 0.16);
   --m: 5cqw;
   padding: 0 var(--m);
   font-family: var(--font-text);
@@ -1110,8 +1164,8 @@ html.has-cursor * {
   right: var(--m);
   top: 17%;
   height: 60%;
-  border: 1px solid rgba(23, 24, 26, calc(0.3 * var(--frame-a)));
-  background: repeating-linear-gradient(135deg, transparent 0 0.8cqw, rgba(23, 24, 26, calc(0.12 * var(--frame-a) * (1 - var(--photo-t)))) 0.8cqw calc(0.8cqw + 1px));
+  border: 1px solid rgba(33, 29, 26, calc(0.3 * var(--frame-a)));
+  background: repeating-linear-gradient(135deg, transparent 0 0.8cqw, rgba(33, 29, 26, calc(0.12 * var(--frame-a) * (1 - var(--photo-t)))) 0.8cqw calc(0.8cqw + 1px));
 }
 .demo--phone .demo__photo {
   left: var(--m);
@@ -1124,7 +1178,7 @@ html.has-cursor * {
   inset: 0;
   background:
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/></svg>"),
-    linear-gradient(180deg, var(--taupe), #C9CED4);
+    linear-gradient(180deg, var(--taupe), #D8CFC6);
   clip-path: inset(0 0 calc((1 - var(--photo-t)) * 100%) 0);
 }
 .demo__photo-img span {
@@ -1132,7 +1186,7 @@ html.has-cursor * {
   left: 1.4cqw;
   bottom: 1.2cqw;
   padding-top: 0.6cqw;
-  border-top: 1px solid rgba(248, 249, 250, 0.6);
+  border-top: 1px solid rgba(251, 249, 246, 0.6);
   font-family: var(--font-display);
   font-size: 0.75cqw;
   font-weight: 500;
@@ -1157,7 +1211,7 @@ html.has-cursor * {
   font-weight: 500;
   font-size: 1.05cqw;
   letter-spacing: 0.01em;
-  border-color: rgba(23, 24, 26, var(--t-cta));
+  border-color: rgba(33, 29, 26, var(--t-cta));
 }
 .demo__cta .wf__in {
   position: absolute;
@@ -1791,7 +1845,7 @@ html.has-cursor * {
   fill: none;
 }
 .stepper__btn:hover:not(:disabled) {
-  background: rgba(23, 24, 26, 0.06);
+  background: rgba(33, 29, 26, 0.06);
 }
 .stepper__btn:disabled {
   opacity: 0.3;
@@ -1815,13 +1869,13 @@ html.has-cursor * {
   /* La feuille garde ses couleurs quel que soit l'état nuit/jour de la page. */
   --fg: var(--ink);
   --fg-2: var(--ink-2);
-  --rule: rgba(23, 24, 26, 0.14);
+  --rule: rgba(33, 29, 26, 0.14);
   position: relative;
   padding: 32px 32px 28px;
   background: var(--lin);
   color: var(--ink);
   border: 1px solid var(--rule);
-  box-shadow: 0 40px 80px -48px rgba(23, 24, 26, 0.35);
+  box-shadow: 0 40px 80px -48px rgba(33, 29, 26, 0.35);
 }
 .sheet::before {
   content: "";
@@ -2045,11 +2099,11 @@ main {
 .work__frame {
   --fg: var(--ink);
   --fg-2: var(--ink-2);
-  --rule: rgba(23, 24, 26, 0.14);
+  --rule: rgba(33, 29, 26, 0.14);
   background: var(--lin);
   color: var(--ink);
   border: 1px solid var(--rule);
-  box-shadow: 0 40px 80px -48px rgba(23, 24, 26, 0.35);
+  box-shadow: 0 40px 80px -48px rgba(33, 29, 26, 0.35);
 }
 .work__bar {
   display: flex;
@@ -2081,7 +2135,7 @@ main {
   padding: 24px;
   background:
     linear-gradient(90deg, var(--rule) 1px, transparent 1px) 0 0 / calc(100% / 12) 100%,
-    repeating-linear-gradient(135deg, transparent 0 14px, rgba(23, 24, 26, 0.04) 14px 15px);
+    repeating-linear-gradient(135deg, transparent 0 14px, rgba(33, 29, 26, 0.04) 14px 15px);
 }
 .work__frame img {
   display: block;
@@ -2407,7 +2461,7 @@ main {
 .ps {
   --fg: var(--ink);
   --fg-2: var(--ink-2);
-  --rule: rgba(23, 24, 26, 0.14);
+  --rule: rgba(33, 29, 26, 0.14);
   position: relative;
   width: 100%;
   padding: 28px 30px 30px;
@@ -2416,7 +2470,7 @@ main {
   border: 1px solid var(--rule);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.8) inset,
-    0 50px 90px -50px rgba(23, 24, 26, 0.45);
+    0 50px 90px -50px rgba(33, 29, 26, 0.45);
   font-size: 15px;
   transform-style: preserve-3d;
 }
@@ -2434,7 +2488,7 @@ main {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(112deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 40%, rgba(23, 24, 26, 0.05) 100%);
+  background: linear-gradient(112deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 40%, rgba(33, 29, 26, 0.05) 100%);
   mix-blend-mode: soft-light;
 }
 .ps.is-in {
@@ -2498,7 +2552,7 @@ main {
   color: var(--ink-2);
 }
 .mini {
-  --line: rgba(23, 24, 26, 0.16);
+  --line: rgba(33, 29, 26, 0.16);
   position: relative;
   padding: 16px 18px 18px;
   border: 1px solid var(--rule);
@@ -2547,7 +2601,7 @@ main {
   margin-top: 14px;
   padding: 8px;
   border: 1px solid var(--line);
-  background: repeating-linear-gradient(135deg, transparent 0 7px, rgba(23, 24, 26, 0.12) 7px 8px);
+  background: repeating-linear-gradient(135deg, transparent 0 7px, rgba(33, 29, 26, 0.12) 7px 8px);
 }
 .mini__photo span {
   font-family: var(--font-display);
@@ -2634,7 +2688,7 @@ main {
 }
 .chat__msg--them {
   justify-self: start;
-  background: rgba(23, 24, 26, 0.06);
+  background: rgba(33, 29, 26, 0.06);
   border-bottom-left-radius: 4px;
 }
 .chat__msg--us {
@@ -3090,7 +3144,7 @@ a.direct:hover .direct__arrow {
   --bg: var(--sand);
   --fg: var(--ink);
   --fg-2: var(--ink-2);
-  --rule: rgba(23, 24, 26, 0.14);
+  --rule: rgba(33, 29, 26, 0.14);
   background: var(--sand);
   color: var(--ink);
   min-height: 100svh;

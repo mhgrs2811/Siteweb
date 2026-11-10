@@ -48,6 +48,10 @@ const LAYOUT: Record<Variant, { w: number; h: number; r: number; fs: number; dim
   },
 };
 
+/** Courbe de la baguette cuivrée, du bas gauche au haut droit de la plaque. */
+const filetPath = (w: number, h: number) =>
+  `M${-0.04 * w} ${0.82 * h}C${0.28 * w} ${0.8 * h} ${0.5 * w} ${0.4 * h} ${1.04 * w} ${0.16 * h}`;
+
 const roundedRectPath = (w: number, h: number, r: number) =>
   `M${r} 0H${w - r}A${r} ${r} 0 0 1 ${w} ${r}V${h - r}A${r} ${r} 0 0 1 ${w - r} ${h}H${r}A${r} ${r} 0 0 1 0 ${h - r}V${r}A${r} ${r} 0 0 1 ${r} 0Z`;
 
@@ -61,6 +65,12 @@ export default function Blueprint({ variant }: { variant: Variant }) {
         <pattern id={dotsId} width="40" height="40" patternUnits="userSpaceOnUse">
           <circle cx="20" cy="20" r="1.6" fill="currentColor" />
         </pattern>
+        <linearGradient id={`bp-copper-${variant}`} x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stopColor="#b98a63" />
+          <stop offset="0.45" stopColor="#f0d6bd" />
+          <stop offset="0.6" stopColor="#d9b08a" />
+          <stop offset="1" stopColor="#a97b57" />
+        </linearGradient>
       </defs>
 
       {/* Trame de points, comme un papier technique */}
@@ -100,6 +110,12 @@ export default function Blueprint({ variant }: { variant: Variant }) {
         <text x={L.blocks[0].x} y={L.foot + L.fs + 18}>
           pied de page
         </text>
+      </g>
+
+      {/* Baguette cuivrée, posée sur la plaque, qui s'efface quand la page prend vie */}
+      <g className="bp__filet">
+        <path className="bp__filet-shadow" d={filetPath(L.w, L.h)} pathLength={1} />
+        <path className="bp__filet-line" d={filetPath(L.w, L.h)} pathLength={1} style={{ stroke: `url(#bp-copper-${variant})` }} />
       </g>
 
       {/* Contour : chemin que suit la pointe lumineuse */}

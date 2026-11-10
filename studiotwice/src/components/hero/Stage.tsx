@@ -170,6 +170,7 @@ export default function Stage({ progress, intro }: Props) {
         set("--bp-labels", 1 - ss(0.22, 0.34, p));
         set("--bp-dim", 1 - ss(0.46, 0.62, p));
         set("--bp-gone", ss(0.3, 0.46, p));
+        set("--bp-filet", 1 - ss(0.5, 0.7, p));
         el.querySelectorAll(".bp").forEach((n) => n.classList.toggle("is-done", p > 0.66));
         set("--t-nav", ss(0.3, 0.4, p));
         set("--t-title", ss(0.34, 0.47, p));

@@ -85,6 +85,7 @@ export default function Hero() {
           .fromTo(".hero__card", { opacity: 0, y: 28, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 1.1 }, 0.2)
           .fromTo(".bp__outline", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.05, ease: "power1.inOut" }, 0.05)
           .fromTo(".bp__line", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, stagger: 0.03 }, 0.35)
+          .fromTo(".bp__filet path", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }, 0.3)
           .fromTo(".bp__labels text", { opacity: 0 }, { opacity: 1, duration: 0.5, stagger: 0.04 }, 0.95)
           .to(".hero__top", { opacity: 1, duration: 0.8 }, 0.25)
           .to(".hero__h1 .w__in", { y: 0, duration: 1.0, stagger: 0.03 }, 0.4)
@@ -187,9 +188,11 @@ export default function Hero() {
 
       {/* Volumes doux posés au sol, derrière la scène. */}
       <div className="hero__volumes" aria-hidden="true">
-        <i className="hero__orb hero__orb--l" />
-        <i className="hero__orb hero__orb--r" />
         <i className="hero__floor" />
+        <i className="hero__orb hero__orb--l" />
+        <i className="hero__ring" />
+        <i className="hero__stone" />
+        <i className="hero__orb hero__orb--r" />
       </div>
 
       {/* Le filet bleu traverse tout le hero, derrière la carte. */}

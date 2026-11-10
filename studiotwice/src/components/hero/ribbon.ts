@@ -43,7 +43,8 @@ export function drawRibbon(
   const a = pts[0];
   const b = pts[pts.length - 1];
   const alphaMul = 1;
-  const color = "42,75,235";
+  // Cuivre clair, comme la baguette métallique qui court sur les plaques de la photo.
+  const color = "196,146,104";
 
   ctx.save();
   ctx.lineCap = "round";
@@ -52,10 +53,10 @@ export function drawRibbon(
   // Halo obtenu par superposition de traits de largeur décroissante : aucun flou, donc peu coûteux.
   const k = compact ? 0.6 : 1;
   const passes: Array<[number, number]> = [
-    [28 * k, 0.03],
-    [12 * k, 0.07],
-    [5 * k, 0.16],
-    [1.6, 0.85],
+    [26 * k, 0.05],
+    [11 * k, 0.1],
+    [4.5 * k, 0.22],
+    [1.8, 0.9],
   ];
   ctx.shadowBlur = 0;
   for (const [lw, alpha] of passes) {
