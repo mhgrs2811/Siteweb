@@ -86,7 +86,7 @@ html.is-day {
 .hero__h1,
 .hero__sub,
 .hero__caption,
-.hero__word,
+.hero__step-name,
 .hero__counter,
 .wordmark {
   transition: color var(--dur-m) var(--ease);
@@ -620,13 +620,6 @@ html:not(.is-day) .nav__link:focus-visible {
   fill: rgba(255, 255, 255, 0.18);
   stroke: none;
 }
-.stage__ribbon {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
 .stage__space {
   position: absolute;
   inset: 0;
@@ -999,37 +992,34 @@ html:not(.is-day) .nav__link:focus-visible {
   }
 }
 
+.hero__ribbon {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
 .hero__step {
   position: absolute;
   z-index: 3;
   left: var(--gutter);
-  right: var(--gutter);
-  bottom: 0;
+  bottom: 44px;
+  max-width: 36ch;
   pointer-events: none;
 }
+.hero__step-name {
+  margin: 0 0 8px;
+  font-size: clamp(20px, 1.7vw, 26px);
+  font-stretch: 112%;
+  letter-spacing: -0.02em;
+}
 .hero__caption {
-  margin: 0 0 1.4vw;
-  max-width: 42ch;
+  margin: 0;
   font-size: 15px;
   line-height: 1.5;
   color: var(--fg-2);
-}
-.hero__word {
-  position: relative;
-  height: 0.82em;
-  overflow: hidden;
-  font-size: clamp(88px, 13.5vw, 212px);
-  line-height: 1;
-  margin-bottom: -0.1em;
-}
-.hero__word-text {
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: block;
-  white-space: nowrap;
-  line-height: 1;
-  transform: translateY(-0.06em);
 }
 
 /* Séquence : des mots, un trait qui avance */
@@ -1129,12 +1119,12 @@ html:not(.is-day) .nav__link:focus-visible {
 .hero--boot .hero__cta,
 .hero--boot .hero__stage,
 .hero--boot .hero__caption,
+.hero--boot .hero__step-name,
 .hero--boot .hero__seq,
 .hero--boot .hero__hint {
   opacity: 0;
 }
-.hero--boot .hero__h1 .w__in,
-.hero--boot .hero__word-text {
+.hero--boot .hero__h1 .w__in {
   transform: translateY(110%);
 }
 
@@ -1202,17 +1192,12 @@ html:not(.is-day) .nav__link:focus-visible {
   .hero__step {
     position: relative;
     inset: auto;
-    padding: 20px var(--gutter) 0;
+    max-width: none;
+    padding: 24px var(--gutter) 0;
   }
   .hero__caption {
-    max-width: 32ch;
+    max-width: 34ch;
     font-size: 15px;
-    margin-bottom: 12px;
-  }
-  .hero__word {
-    font-size: clamp(56px, 16.5vw, 110px);
-    height: 0.88em;
-    margin-bottom: 0;
   }
 }
 
@@ -2088,7 +2073,7 @@ main {
   height: 100%;
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 var(--gutter) 16vh;
+  padding: 0 var(--gutter) 6vh;
   display: grid;
   grid-template-columns: 5fr 7fr;
   gap: var(--gutter);
@@ -2164,35 +2149,13 @@ main {
 .proc__sheet {
   position: absolute;
   left: 8%;
-  top: 4%;
+  top: 16%;
   width: 78%;
   transform-style: preserve-3d;
   will-change: transform, opacity;
 }
 .proc__sheet-m {
   display: none;
-}
-.proc__word {
-  position: absolute;
-  z-index: 1;
-  left: var(--gutter);
-  right: var(--gutter);
-  bottom: 0;
-  height: 0.82em;
-  overflow: hidden;
-  font-size: clamp(72px, 10.5vw, 170px);
-  line-height: 1;
-  margin-bottom: -0.08em;
-  pointer-events: none;
-}
-.proc__word-text {
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: block;
-  white-space: nowrap;
-  line-height: 1;
-  transform: translateY(-0.06em);
 }
 
 /* Les feuilles */
@@ -2452,8 +2415,7 @@ main {
   .proc__glow,
   .proc__idx,
   .proc__seq,
-  .proc__table,
-  .proc__word {
+  .proc__table {
     display: none;
   }
   .proc__inner {

@@ -92,12 +92,13 @@ function Slab({ variant }: { variant: "desk" | "phone" }) {
  */
 export default function Stage({ progress, intro }: Props) {
   const root = useRef<HTMLDivElement>(null);
-  const ribbon = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const el = root.current;
-    const rc = ribbon.current;
-    if (!el || !rc) return;
+    if (!el) return;
+    // Le canvas du ruban est posé par le hero, sur toute sa largeur.
+    const rc = el.closest(".hero")?.querySelector<HTMLCanvasElement>(".hero__ribbon") ?? null;
+    if (!rc) return;
     const desk = el.querySelector<HTMLElement>('[data-slab="desk"]');
     const phone = el.querySelector<HTMLElement>('[data-slab="phone"]');
     if (!desk || !phone) return;
@@ -113,18 +114,18 @@ export default function Stage({ progress, intro }: Props) {
     let lastP = -1;
     let frame = 0;
 
+    const host = rc.parentElement ?? el;
     const resize = () => {
       if (!rctx) return;
-      const w = el.clientWidth;
-      const h = el.clientHeight;
-      const dpr = 1;
-      rc.width = Math.round(w * dpr);
-      rc.height = Math.round(h * dpr);
-      rctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const w = host.clientWidth;
+      const h = host.clientHeight;
+      rc.width = Math.round(w);
+      rc.height = Math.round(h);
+      rctx.setTransform(1, 0, 0, 1, 0, 0);
     };
     resize();
     const ro = new ResizeObserver(resize);
-    ro.observe(el);
+    ro.observe(host);
 
     const onMove = (e: PointerEvent) => {
       mouse.tx = (e.clientX / window.innerWidth) * 2 - 1;
@@ -201,7 +202,7 @@ export default function Stage({ progress, intro }: Props) {
 
       // Le ruban ondule lentement : une image sur deux suffit quand la progression ne bouge pas.
       frame++;
-      if (rctx && (pChanged || frame % 2 === 0)) drawRibbon(rctx, el.clientWidth, el.clientHeight, p, t, day, compact);
+      if (rctx && (pChanged || frame % 2 === 0)) drawRibbon(rctx, rc.width, rc.height, p, t, day, compact);
     };
     loop();
 
@@ -217,7 +218,6 @@ export default function Stage({ progress, intro }: Props) {
   return (
     <div className="stage" ref={root} aria-hidden="true">
       <div className="stage__glow" />
-      <canvas className="stage__ribbon" ref={ribbon} />
       <div className="stage__space">
         <Slab variant="desk" />
         <Slab variant="phone" />

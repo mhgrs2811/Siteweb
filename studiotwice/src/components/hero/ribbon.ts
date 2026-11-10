@@ -25,14 +25,16 @@ export function drawRibbon(
   compact = false,
 ) {
   ctx.clearRect(0, 0, w, h);
+  // La courbe traverse tout le hero : elle entre hors écran en bas à gauche, passe derrière
+  // les plaques et ressort hors écran en haut à droite. Jamais de bord visible.
   const wob = Math.sin(t * 0.35) * 0.02 * h;
-  const p0 = { x: -0.2 * w, y: (compact ? 0.95 : 0.86) * h + wob };
-  const p1 = { x: 0.28 * w, y: 1.08 * h - wob };
-  const p2 = { x: 0.5 * w, y: (compact ? -0.05 : 0.02) * h + wob };
-  const p3 = { x: 1.2 * w, y: 0.34 * h };
+  const p0 = compact ? { x: -0.3 * w, y: 1.06 * h + wob } : { x: -0.05 * w, y: 1.15 * h + wob };
+  const p1 = compact ? { x: 0.35 * w, y: 1.0 * h - wob } : { x: 0.42 * w, y: 1.0 * h - wob };
+  const p2 = compact ? { x: 0.7 * w, y: 0.42 * h + wob } : { x: 0.68 * w, y: 0.0 * h + wob };
+  const p3 = compact ? { x: 1.3 * w, y: 0.6 * h } : { x: 1.12 * w, y: 0.2 * h };
 
-  const head = Math.min(1, 0.3 + p * 0.82);
-  const tail = Math.max(0, head - 0.8);
+  const head = Math.min(1, 0.4 + p * 0.72);
+  const tail = Math.max(0, head - 0.82);
   const steps = 90;
   const pts: Pt[] = [];
   for (let i = 0; i <= steps; i++) {

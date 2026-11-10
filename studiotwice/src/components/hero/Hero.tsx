@@ -18,7 +18,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
  */
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
-  const wordBox = useRef<HTMLDivElement>(null);
+  const stepName = useRef<HTMLParagraphElement>(null);
   const caption = useRef<HTMLParagraphElement>(null);
   const counter = useRef<HTMLElement>(null);
   const stageEl = useRef<HTMLDivElement>(null);
@@ -30,10 +30,10 @@ export default function Hero() {
 
   useEffect(() => {
     const el = root.current;
-    const wb = wordBox.current;
+    const name = stepName.current;
     const cap = caption.current;
     const cnt = counter.current;
-    if (!el || !wb || !cap || !cnt) return;
+    if (!el || !name || !cap || !cnt) return;
     const gsap = setupGsap();
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const desktop = window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
@@ -61,26 +61,15 @@ export default function Hero() {
       current = i;
       cnt.textContent = pad(i + 1);
       seqList.current?.querySelectorAll("li").forEach((li, k) => li.classList.toggle("is-on", k === i));
-      const all = wb.querySelectorAll<HTMLElement>(".hero__word-text");
-      all.forEach((n, k) => {
-        if (k < all.length - 1) n.remove();
-      });
-      const old = all[all.length - 1] ?? null;
-      const next = document.createElement("span");
-      next.className = "hero__word-text";
-      next.textContent = steps[i].word;
-      wb.appendChild(next);
+      // Le nom de l'étape et sa légende changent ensemble, d'un glissement court.
       swapping?.kill();
       swapping = gsap.timeline();
-      swapping.fromTo(next, { yPercent: 108 * dir }, { yPercent: 0, duration: reduce ? 0 : 0.85, ease: "studio" }, 0);
-      if (old) {
-        swapping.to(old, { yPercent: -108 * dir, duration: reduce ? 0 : 0.85, ease: "studio", onComplete: () => old.remove() }, 0);
-      }
-      swapping.to(cap, { opacity: 0, y: -6, duration: reduce ? 0 : 0.22, ease: "power2.in" }, 0);
+      swapping.to([name, cap], { opacity: 0, y: -6 * dir, duration: reduce ? 0 : 0.22, ease: "power2.in", stagger: 0.03 }, 0);
       swapping.add(() => {
+        name.textContent = steps[i].word;
         cap.textContent = steps[i].text;
       });
-      swapping.fromTo(cap, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: reduce ? 0 : 0.5, ease: "studio" });
+      swapping.fromTo([name, cap], { opacity: 0, y: 8 * dir }, { opacity: 1, y: 0, duration: reduce ? 0 : 0.5, ease: "studio", stagger: 0.05 });
     };
 
     const apply = (p: number) => {
@@ -115,7 +104,7 @@ export default function Hero() {
           .to(".hero__sub", { opacity: 1, duration: 0.8 }, 0.85)
           .to(".hero__cta", { opacity: 1, duration: 0.8 }, 1.0)
           .to(".hero__seq", { opacity: 1, duration: 0.8 }, 1.1)
-          .to(".hero__word-text", { y: 0, duration: 1.1 }, 0.75)
+          .to(".hero__step-name", { opacity: 1, duration: 0.8 }, 1.05)
           .to(".hero__caption", { opacity: 1, duration: 0.8 }, 1.15)
           .to(".hero__hint", { opacity: 1, duration: 0.8 }, 1.6);
         tl.add(() => el.querySelectorAll(".bp").forEach((n) => n.classList.add("is-drawn")), 1.75);
@@ -129,8 +118,8 @@ export default function Hero() {
         }
       } else {
         intro.current = 1;
-        gsap.set([".hero__top", ".hero__sub", ".hero__cta", ".hero__stage", ".hero__caption", ".hero__seq"], { opacity: 1 });
-        gsap.set([".hero__h1 .w__in", ".hero__word-text"], { y: 0 });
+        gsap.set([".hero__top", ".hero__sub", ".hero__cta", ".hero__stage", ".hero__caption", ".hero__step-name", ".hero__seq"], { opacity: 1 });
+        gsap.set(".hero__h1 .w__in", { y: 0 });
         gsap.set(".bp__pen", { opacity: 0 });
         el.querySelectorAll(".bp").forEach((n) => n.classList.add("is-drawn"));
       }
@@ -246,17 +235,20 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Le ruban de lumière traverse tout le hero, derrière la scène. */}
+      <canvas className="hero__ribbon" aria-hidden="true" />
+
       <div className="hero__stage" ref={stageEl}>
         <Stage progress={progress} intro={intro} />
       </div>
 
-      <div className="hero__step">
+      <div className="hero__step" aria-live="polite" aria-atomic="true">
+        <p ref={stepName} className="hero__step-name t-display">
+          {heroCopy.steps[0].word}
+        </p>
         <p ref={caption} className="hero__caption">
           {heroCopy.steps[0].text}
         </p>
-        <div ref={wordBox} className="hero__word t-display" aria-live="polite" aria-atomic="true">
-          <span className="hero__word-text">{heroCopy.steps[0].word}</span>
-        </div>
       </div>
 
       <p ref={hint} className="hero__hint t-caption" aria-hidden="true">

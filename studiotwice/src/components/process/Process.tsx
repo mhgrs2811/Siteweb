@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import SectionHead from "@/components/SectionHead";
 import { process as c } from "@/content/sections";
 import { setupGsap } from "@/lib/gsap";
-import { swapWord } from "@/lib/word";
 import { sheetFor } from "./Sheets";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -47,8 +46,7 @@ export default function Process() {
 
     const stage = el.querySelector<HTMLElement>(".proc__stage");
     const space = el.querySelector<HTMLElement>(".proc__space");
-    const wordBox = el.querySelector<HTMLElement>(".proc__word");
-    if (!stage || !space || !wordBox) return;
+    if (!stage || !space) return;
     const steps = Array.from(el.querySelectorAll<HTMLElement>(".proc__step"));
     const sheets = Array.from(el.querySelectorAll<HTMLElement>(".proc__sheet"));
     const glow = el.querySelector<HTMLElement>(".proc__glow");
@@ -104,9 +102,7 @@ export default function Process() {
             const i = Math.min(n - 1, Math.floor(st.progress * n));
             if (idx) idx.textContent = pad(i + 1);
             if (i !== current) {
-              const dir = i > current ? 1 : -1;
               current = i;
-              swapWord(wordBox, "proc__word-text", c.steps[i].word, dir, gsap);
               labels.forEach((l, k) => l.classList.toggle("is-on", k === i));
               reveal(i);
             }
@@ -192,9 +188,6 @@ export default function Process() {
               ))}
             </div>
           </div>
-        </div>
-        <div className="proc__word t-display" aria-hidden="true">
-          <span className="proc__word-text">{c.steps[0].word}</span>
         </div>
       </div>
     </section>
