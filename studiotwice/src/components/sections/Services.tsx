@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 import Arrow from "@/components/Arrow";
 import { services as c } from "@/content/sections";
 import { formatEuro, setSelection } from "@/lib/estimate";
-import type { SiteId } from "@/content/pricing";
+import { pricing, type SiteId } from "@/content/pricing";
 import { getLenis } from "@/lib/lenis";
 
 /** Section 03 : trois résultats, trois formules. Chaque rangée a sa propre composition. */
@@ -39,8 +39,14 @@ export default function Services() {
               </ul>
             </div>
             <div className="svc__price">
-              <span className="svc__from">à partir de</span>
-              <span className="svc__amount">{formatEuro(it.from)}</span>
+              {pricing.showPrices ? (
+                <>
+                  <span className="svc__from">à partir de</span>
+                  <span className="svc__amount">{formatEuro(it.from)}</span>
+                </>
+              ) : (
+                <span className="svc__amount svc__amount--quote">{pricing.quoteLabel}</span>
+              )}
               <span className="svc__delay">
                 {it.delay[0] === it.delay[1] ? `${it.delay[0]} semaine` : `${it.delay[0]} à ${it.delay[1]} semaines`}
               </span>

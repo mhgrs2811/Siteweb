@@ -2,11 +2,17 @@
  * Textes du hero et de la séquence de construction.
  * Tout ce qui est affiché dans la première section vient d'ici.
  */
+import { pricing } from "./pricing";
+
+const onepage = pricing.sites[0];
+
 export const heroCopy = {
   statement:
     "Nous construisons le site de votre commerce, du croquis à la mise en ligne.",
-  sub: "Restaurants, garages, salons, artisans, en Belgique francophone. Un site une page à partir de 890 € HTVA, en ligne en une semaine.",
-  cta: { label: "Voir les tarifs", href: "#tarifs" },
+  sub: pricing.showPrices
+    ? `Restaurants, garages, salons, artisans, en Belgique francophone. Un site une page à partir de ${onepage.from} € ${pricing.vat}, en ligne en une semaine.`
+    : "Restaurants, garages, salons, artisans, en Belgique francophone. Un site une page en ligne en une semaine, un devis clair avant de commencer.",
+  cta: pricing.showPrices ? { label: "Voir les tarifs", href: "#tarifs" } : { label: "Composer votre site", href: "#tarifs" },
   steps: [
     {
       word: "Croquis",

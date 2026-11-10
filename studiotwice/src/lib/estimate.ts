@@ -112,14 +112,19 @@ export function computeEstimate(sel: Selection): Estimate {
   const monthly = sel.hosting ? pricing.hosting.monthly : 0;
   const delay: [number, number] = [min, max];
 
-  const summary = [
-    ...lines.map((l) => `${l.label}${l.note ? ` (${l.note})` : ""} : ${l.included ? "comprise" : formatEuro(l.amount)}`),
-    `Total estimé : ${formatEuro(total)} ${pricing.vat}`,
-    monthly ? `${pricing.hosting.name} : ${formatEuro(monthly)} par mois` : null,
-    `Délai indicatif : ${delayLabel(delay)}`,
-  ]
-    .filter(Boolean)
-    .join("\n");
+  const summaryLines = pricing.showPrices
+    ? [
+        ...lines.map((l) => `${l.label}${l.note ? ` (${l.note})` : ""} : ${l.included ? "comprise" : formatEuro(l.amount)}`),
+        `Total estimé : ${formatEuro(total)} ${pricing.vat}`,
+        monthly ? `${pricing.hosting.name} : ${formatEuro(monthly)} par mois` : null,
+        `Délai indicatif : ${delayLabel(delay)}`,
+      ]
+    : [
+        ...lines.map((l) => `${l.label}${l.note ? ` (${l.note})` : ""}${l.included ? " : comprise" : ""}`),
+        monthly ? pricing.hosting.name : null,
+        `Délai indicatif : ${delayLabel(delay)}`,
+      ];
+  const summary = summaryLines.filter(Boolean).join("\n");
 
   return { total, lines, monthly, delayWeeks: delay, delayLabel: delayLabel(delay), summary };
 }

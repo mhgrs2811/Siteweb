@@ -58,6 +58,7 @@ function Stepper({
 export default function Configurator() {
   const sel = useSelection();
   const est = computeEstimate(sel);
+  const show = pricing.showPrices;
   const site = siteById(sel.site);
   const totalEl = useRef<HTMLSpanElement>(null);
   const shown = useRef(est.total);
@@ -65,7 +66,7 @@ export default function Configurator() {
 
   useEffect(() => {
     const el = totalEl.current;
-    if (!el) return;
+    if (!el || !pricing.showPrices) return;
     const gsap = setupGsap();
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const proxy = { v: shown.current };
@@ -111,12 +112,13 @@ export default function Configurator() {
       <div className="section__head">
         <span className="section__num t-caption">04</span>
         <h2 id="tarifs-title" className="t-display section__title">
-          Tarifs
+          {show ? "Tarifs" : "Votre projet"}
         </h2>
       </div>
       <p className="section__lead">
-        Choisissez ce qu’il vous faut, le prix et le délai se mettent à jour. Vous repartez avec une
-        estimation claire, le devis définitif vient après un échange.
+        {show
+          ? "Choisissez ce qu’il vous faut, le prix et le délai se mettent à jour. Vous repartez avec une estimation claire, le devis définitif vient après un échange."
+          : "Choisissez ce qu’il vous faut, le délai se met à jour. Vos choix partent avec votre message et nous revenons vers vous avec un devis."}
       </p>
 
       <div className="conf__grid">
@@ -144,8 +146,12 @@ export default function Configurator() {
                       <span className="site-row__detail">{s.detail}</span>
                     </span>
                     <span className="site-row__price">
-                      <span className="site-row__from">à partir de</span>
-                      <span className="site-row__amount">{formatEuro(s.from)}</span>
+                      {show && (
+                        <>
+                          <span className="site-row__from">à partir de</span>
+                          <span className="site-row__amount">{formatEuro(s.from)}</span>
+                        </>
+                      )}
                       <span className="site-row__delay">{`${s.delayWeeks[0] === s.delayWeeks[1] ? s.delayWeeks[0] : `${s.delayWeeks[0]} à ${s.delayWeeks[1]}`} sem.`}</span>
                     </span>
                     <span className="site-row__mark" aria-hidden="true" />
@@ -163,7 +169,7 @@ export default function Configurator() {
                 <div className="opt-row__body">
                   <span className="opt-row__name">{sel.pages} pages</span>
                   <span className="opt-row__note">
-                    {site.pagesIncluded} comprises, puis {formatEuro(pricing.extraPage)} par page
+                    {show ? `${site.pagesIncluded} comprises, puis ${formatEuro(pricing.extraPage)} par page` : `${site.pagesIncluded} comprises`}
                   </span>
                 </div>
                 <Stepper
@@ -210,9 +216,9 @@ export default function Configurator() {
                     >
                       <span className="opt-row__body">
                         <span className="opt-row__name">{o.name}</span>
-                        <span className="opt-row__note">{o.note}</span>
+                        <span className="opt-row__note">{show ? o.note : ("noteQuote" in o ? o.noteQuote : o.note)}</span>
                       </span>
-                      <span className="opt-row__price">{priceLabel}</span>
+                      {(show || included) && <span className="opt-row__price">{priceLabel}</span>}
                       <span className="switch" aria-hidden="true">
                         <i />
                       </span>
@@ -251,7 +257,7 @@ export default function Configurator() {
                   <span className="opt-row__name">{pricing.hosting.name}</span>
                   <span className="opt-row__note">{pricing.hosting.note}</span>
                 </span>
-                <span className="opt-row__price">{formatEuro(pricing.hosting.monthly)} / mois</span>
+                {show && <span className="opt-row__price">{formatEuro(pricing.hosting.monthly)} / mois</span>}
                 <span className="switch" aria-hidden="true">
                   <i />
                 </span>
@@ -263,11 +269,15 @@ export default function Configurator() {
         {/* Estimation */}
         <aside className="conf__sheet" aria-live="polite" aria-label="Votre estimation">
           <div className="sheet">
-            <p className="sheet__caption t-caption">Votre estimation</p>
-            <p className="sheet__total t-display">
-              <span ref={totalEl}>{formatEuro(est.total)}</span>
-              <span className="sheet__vat">{pricing.vat}</span>
-            </p>
+            <p className="sheet__caption t-caption">{show ? "Votre estimation" : "Votre projet"}</p>
+            {show ? (
+              <p className="sheet__total t-display">
+                <span ref={totalEl}>{formatEuro(est.total)}</span>
+                <span className="sheet__vat">{pricing.vat}</span>
+              </p>
+            ) : (
+              <p className="sheet__total sheet__total--quote t-display">{pricing.quoteLabel}</p>
+            )}
             <p className="sheet__delay">
               En ligne en <b>{est.delayLabel}</b>
             </p>
@@ -278,7 +288,7 @@ export default function Configurator() {
                     {l.label}
                     {l.note && <small>{l.note}</small>}
                   </span>
-                  <span className="sheet__line-amount">{l.included ? "comprise" : formatEuro(l.amount)}</span>
+                  {(show || l.included) && <span className="sheet__line-amount">{l.included ? "comprise" : formatEuro(l.amount)}</span>}
                 </li>
               ))}
               {est.monthly > 0 && (
@@ -287,14 +297,14 @@ export default function Configurator() {
                     {pricing.hosting.name}
                     <small>après la mise en ligne</small>
                   </span>
-                  <span className="sheet__line-amount">{formatEuro(est.monthly)} / mois</span>
+                  {show && <span className="sheet__line-amount">{formatEuro(est.monthly)} / mois</span>}
                 </li>
               )}
             </ul>
-            <p className="sheet__small">{pricing.disclaimer}</p>
+            <p className="sheet__small">{show ? pricing.disclaimer : pricing.quoteDisclaimer}</p>
             <Magnetic strength={0.2}>
               <a className="btn btn--accent sheet__cta" href="#contact" onClick={goContact} data-cursor>
-                Demander ce devis
+                {show ? "Demander ce devis" : "Demander un devis"}
                 <Arrow />
               </a>
             </Magnetic>

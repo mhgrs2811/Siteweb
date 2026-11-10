@@ -1,4 +1,6 @@
 import { heroCopy } from "@/content/hero";
+import { pricing } from "@/content/pricing";
+import { formatEuro } from "@/lib/estimate";
 
 const d = heroCopy.demo;
 
@@ -23,8 +25,8 @@ export function SheetVisite() {
         ))}
       </dl>
       <p className="ps__total">
-        <span>Estimation</span>
-        <b>1 890 € HTVA</b>
+        <span>{pricing.showPrices ? "Estimation" : "Devis"}</span>
+        <b>{pricing.showPrices ? `${formatEuro(pricing.sites[1].from)} ${pricing.vat}` : "envoyé après la visite"}</b>
       </p>
     </div>
   );

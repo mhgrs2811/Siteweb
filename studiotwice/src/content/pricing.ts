@@ -9,6 +9,17 @@
  * Les délais sont en semaines : [minimum, maximum].
  */
 export const pricing = {
+  /**
+   * Afficher les prix sur le site ?
+   * true  : montants visibles partout, configurateur avec estimation chiffrée.
+   * false : aucun montant ; le configurateur devient une demande de devis
+   *         (les choix sont conservés et envoyés dans le formulaire).
+   */
+  showPrices: true,
+  /** Texte affiché à la place d'un montant quand les prix sont masqués. */
+  quoteLabel: "Sur devis",
+  quoteDisclaimer: "Devis gratuit après un échange, sur place ou par téléphone.",
+
   /** Mention affichée à côté de chaque montant. */
   vat: "HTVA",
 
@@ -68,6 +79,8 @@ export const pricing = {
     copy: {
       name: "Rédaction des textes",
       note: "350 € jusqu’à 5 pages, puis 70 € par page",
+      /** Note affichée quand les prix sont masqués. */
+      noteQuote: "Vos textes, écrits avec vous, page par page",
       base: 350,
       basePages: 5,
       perExtraPage: 70,
@@ -76,6 +89,7 @@ export const pricing = {
     photo: {
       name: "Shooting photo",
       note: "390 € la demi-journée, chez vous",
+      noteQuote: "Une demi-journée chez vous, photos prêtes pour le site",
       perHalfDay: 390,
       maxHalfDays: 3,
       delayWeeks: 0,
@@ -83,6 +97,7 @@ export const pricing = {
     language: {
       name: "Deuxième langue",
       note: "+30 % du prix du site, minimum 300 €",
+      noteQuote: "Votre site dans une deuxième langue",
       percent: 30,
       minimum: 300,
       delayWeeks: 1,

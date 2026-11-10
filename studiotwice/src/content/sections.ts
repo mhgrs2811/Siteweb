@@ -74,7 +74,7 @@ export const services = {
       delay: site("custom").delayWeeks,
     },
   ],
-  cta: "Estimer ce site",
+  cta: pricing.showPrices ? "Estimer ce site" : "Demander un devis",
 };
 
 export const process = {
@@ -145,7 +145,9 @@ export const faq = {
     },
     {
       q: "Puis-je modifier mon site après la livraison ?",
-      a: `Oui. Les petites modifications, horaires, photos, carte, prix, sont comprises dans l’entretien à ${pricing.hosting.monthly} € par mois : vous nous écrivez, on s’en occupe. Pour une nouvelle page, comptez ${pricing.extraPage} €. Pour une nouvelle fonction, on fait un petit devis.`,
+      a: pricing.showPrices
+        ? `Oui. Les petites modifications, horaires, photos, carte, prix, sont comprises dans l’entretien à ${pricing.hosting.monthly} € par mois : vous nous écrivez, on s’en occupe. Pour une nouvelle page, comptez ${pricing.extraPage} €. Pour une nouvelle fonction, on fait un petit devis.`
+        : "Oui. Les petites modifications, horaires, photos, carte, prix, sont comprises dans l’entretien mensuel : vous nous écrivez, on s’en occupe. Pour une nouvelle page ou une nouvelle fonction, on fait un petit devis.",
     },
     {
       q: "Comment se passe le paiement ?",
@@ -165,8 +167,8 @@ export const contact = {
     reach: "Téléphone ou e-mail",
     message: "Votre message",
     messagePlaceholder: "Ce que vous vendez, où, et ce que vous attendez du site.",
-    summary: "Votre estimation",
-    summaryHint: "Récapitulatif du configurateur, vous pouvez le modifier.",
+    summary: pricing.showPrices ? "Votre estimation" : "Votre projet",
+    summaryHint: "Récapitulatif de vos choix, vous pouvez le modifier.",
     submit: "Envoyer",
     sending: "Envoi en cours",
   },

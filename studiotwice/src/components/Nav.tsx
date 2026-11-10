@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { getLenis } from "@/lib/lenis";
+import { pricing } from "@/content/pricing";
 
 const items = [
   { label: "Réalisations", href: "#realisations" },
@@ -41,7 +42,7 @@ export default function Nav() {
         ))}
         <li>
           <a className="nav__link nav__link--cta" href="#tarifs" onClick={go}>
-            Tarifs
+            {pricing.showPrices ? "Tarifs" : "Devis"}
           </a>
         </li>
       </ul>

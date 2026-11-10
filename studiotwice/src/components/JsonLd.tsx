@@ -12,17 +12,21 @@ export default function JsonLd() {
     url: site.url,
     image: `${site.url}/og.png`,
     areaServed: site.area,
-    priceRange: `${pricing.sites[0].from} € - ${pricing.sites[2].from} €`,
     knowsLanguage: ["fr-BE"],
     makesOffer: pricing.sites.map((s) => ({
       "@type": "Offer",
       name: s.name,
       description: s.promise,
-      price: s.from,
-      priceCurrency: "EUR",
-      priceSpecification: { "@type": "PriceSpecification", price: s.from, priceCurrency: "EUR", valueAddedTaxIncluded: false },
+      ...(pricing.showPrices
+        ? {
+            price: s.from,
+            priceCurrency: "EUR",
+            priceSpecification: { "@type": "PriceSpecification", price: s.from, priceCurrency: "EUR", valueAddedTaxIncluded: false },
+          }
+        : {}),
     })),
   };
+  if (pricing.showPrices) business.priceRange = `${pricing.sites[0].from} € - ${pricing.sites[2].from} €`;
   // TODO: ces champs s'affichent dès qu'ils sont renseignés dans src/content/site.ts
   if (site.phone) business.telephone = site.phone;
   if (site.email) business.email = site.email;

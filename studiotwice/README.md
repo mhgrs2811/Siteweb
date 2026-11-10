@@ -43,6 +43,7 @@ npx vercel --prod
 | Quoi | Fichier |
 |---|---|
 | Tarifs, options, délais, abonnement | `src/content/pricing.ts` |
+| Afficher ou masquer tous les prix | `showPrices` en tête de `src/content/pricing.ts` (`false` : le site passe en « sur devis », le configurateur garde les choix sans montants) |
 | Coordonnées, BCE, zone desservie, domaine | `src/content/site.ts` |
 | Textes des sections, FAQ, formulaire | `src/content/sections.ts` |
 | Textes du hero et de la page d’exemple | `src/content/hero.ts` |

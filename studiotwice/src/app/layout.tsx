@@ -8,7 +8,8 @@ import { site } from "@/content/site";
 import { pricing } from "@/content/pricing";
 import "./globals.css";
 
-const description = `Nous construisons le site de votre commerce, du croquis à la mise en ligne. Restaurants, garages, salons, artisans, en Belgique francophone. Site une page à partir de ${pricing.sites[0].from} € HTVA.`;
+const price = pricing.showPrices ? ` Site une page à partir de ${pricing.sites[0].from} € HTVA.` : "";
+const description = `Nous construisons le site de votre commerce, du croquis à la mise en ligne. Restaurants, garages, salons, artisans, en Belgique francophone.${price}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     locale: site.locale.replace("-", "_"),
     siteName: site.name,
     title: `${site.name}, sites web pour commerces locaux`,
-    description: `Le site de votre commerce, du croquis à la mise en ligne. À partir de ${pricing.sites[0].from} € HTVA.`,
+    description: `Le site de votre commerce, du croquis à la mise en ligne.${price}`,
     images: [{ url: "/og.png", width: 1200, height: 630, alt: `${site.name}, le site de votre commerce se construit sous vos yeux` }],
   },
   twitter: { card: "summary_large_image" },
