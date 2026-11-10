@@ -13,6 +13,7 @@ export const heroCopy = {
     ? `Restaurants, garages, salons, artisans, en Belgique francophone. Un site une page à partir de ${onepage.from} € ${pricing.vat}, en ligne en une semaine.`
     : "Restaurants, garages, salons, artisans, en Belgique francophone. Un site une page en ligne en une semaine, un devis clair avant de commencer.",
   cta: pricing.showPrices ? { label: "Voir les tarifs", href: "#tarifs" } : { label: "Composer votre site", href: "#tarifs" },
+  hint: "Défilez pour construire",
   steps: [
     {
       word: "Croquis",

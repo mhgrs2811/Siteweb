@@ -1,6 +1,7 @@
 import Image from "next/image";
 import SectionHead from "@/components/SectionHead";
 import Arrow from "@/components/Arrow";
+import Parallax from "@/components/Parallax";
 import { realisations as c } from "@/content/sections";
 
 /** Section 02. Vide tant qu'aucun projet réel n'est fourni : on le dit, sans faux visuel. */
@@ -12,17 +13,19 @@ export default function Realisations() {
 
       {projects.length === 0 ? (
         <div className="work__empty">
-          <div className="work__frame" aria-hidden="true">
-            <div className="work__bar">
-              <i />
-              <i />
-              <i />
-              <span>votre-commerce.be</span>
+          <Parallax speed={0.06}>
+            <div className="work__frame" aria-hidden="true">
+              <div className="work__bar">
+                <i />
+                <i />
+                <i />
+                <span>votre-commerce.be</span>
+              </div>
+              <div className="work__screen">
+                <span className="t-caption">Emplacement : capture de la première réalisation</span>
+              </div>
             </div>
-            <div className="work__screen">
-              <span className="t-caption">Emplacement : capture de la première réalisation</span>
-            </div>
-          </div>
+          </Parallax>
           <div className="work__text">
             <p className="work__title t-display">{c.emptyTitle}</p>
             <p className="work__p">{c.emptyText}</p>

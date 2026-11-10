@@ -51,11 +51,12 @@ export function drawRibbon(
   // Halo obtenu par superposition de traits de largeur décroissante : aucun flou, donc peu coûteux.
   const k = compact ? 0.6 : 1;
   const passes: Array<[number, number]> = [
-    [120 * k, 0.025],
-    [80 * k, 0.04],
-    [48 * k, 0.07],
-    [24 * k, 0.12],
-    [10 * k, 0.26],
+    [140 * k, 0.014],
+    [104 * k, 0.022],
+    [72 * k, 0.034],
+    [46 * k, 0.055],
+    [26 * k, 0.09],
+    [12 * k, 0.2],
     [2.2, 0.9],
   ];
   ctx.shadowBlur = 0;

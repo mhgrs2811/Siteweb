@@ -4,9 +4,13 @@ import { useEffect, useRef } from "react";
 import { heroCopy } from "@/content/hero";
 import { dayFromProgress, lerp, smoothstep as ss } from "@/lib/tokens";
 import { drawRibbon } from "./ribbon";
+import Blueprint from "./Blueprint";
 
 interface Props {
+  /** Progression de la construction, 0 à 1, pilotée par le défilement. */
   progress: React.RefObject<number>;
+  /** Arrivée : 0 au chargement, 1 quand les plaques sont en place. */
+  intro: React.RefObject<number>;
 }
 
 const d = heroCopy.demo;
@@ -75,20 +79,18 @@ function Slab({ variant }: { variant: "desk" | "phone" }) {
         <i className="slab__line slab__line--r" />
         <i className="slab__line slab__line--t" />
         <i className="slab__line slab__line--b" />
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <line x1="0" y1="0" x2="100" y2="100" vectorEffect="non-scaling-stroke" />
-          <line x1="100" y1="0" x2="0" y2="100" vectorEffect="non-scaling-stroke" />
-        </svg>
       </div>
+      <Blueprint variant={variant} />
     </div>
   );
 }
 
 /**
  * Scène du hero : deux plaques (ordinateur, téléphone) qui se construisent au défilement,
- * un ruban de lumière derrière. Tout est piloté par des variables CSS mises à jour chaque image.
+ * une lumière douce et un ruban derrière. Les transformations sont écrites chaque image,
+ * les variables CSS seulement quand la progression change.
  */
-export default function Stage({ progress }: Props) {
+export default function Stage({ progress, intro }: Props) {
   const root = useRef<HTMLDivElement>(null);
   const ribbon = useRef<HTMLCanvasElement>(null);
 
@@ -109,12 +111,13 @@ export default function Stage({ progress }: Props) {
     const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
     const t0 = performance.now();
     let lastP = -1;
+    let frame = 0;
 
     const resize = () => {
       if (!rctx) return;
       const w = el.clientWidth;
       const h = el.clientHeight;
-      const dpr = Math.min(window.devicePixelRatio, 1.25);
+      const dpr = 1;
       rc.width = Math.round(w * dpr);
       rc.height = Math.round(h * dpr);
       rctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -136,6 +139,7 @@ export default function Stage({ progress }: Props) {
     io.observe(el);
 
     const set = (name: string, v: number) => el.style.setProperty(name, v.toFixed(4));
+    const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 
     const loop = () => {
       if (!alive) return;
@@ -144,7 +148,8 @@ export default function Stage({ progress }: Props) {
         return;
       }
       raf = requestAnimationFrame(loop);
-      const p = Math.min(1, Math.max(0, progress.current ?? 0));
+      const p = clamp01(progress.current ?? 0);
+      const it = clamp01(intro.current ?? 1);
       const t = (performance.now() - t0) / 1000;
       const e = ss(0, 1, p);
       const day = dayFromProgress(p);
@@ -152,35 +157,51 @@ export default function Stage({ progress }: Props) {
       mouse.y = lerp(mouse.y, mouse.ty, 0.045);
       const idle = reduce ? 0 : Math.sin(t * 0.45) * 0.8;
 
-      if (Math.abs(p - lastP) > 0.0005) {
+      const pChanged = Math.abs(p - lastP) > 0.0005;
+      if (pChanged) {
         lastP = p;
-      set("--face-a", ss(0.08, 0.3, p));
-      set("--grid-a", ss(0.12, 0.3, p) * (1 - 0.72 * ss(0.36, 0.52, p)) * (1 - ss(0.7, 0.86, p)));
-      set("--dash-a", ss(0.16, 0.3, p) * (1 - ss(0.34, 0.48, p)));
-      set("--wire-a", lerp(0.95, 0.22, ss(0.3, 0.62, p)) * (1 - day * 0.5));
-      set("--sketch-a", 0.55 * (1 - ss(0.16, 0.36, p)));
-      set("--t-nav", ss(0.3, 0.4, p));
-      set("--t-title", ss(0.34, 0.47, p));
-      set("--t-para", ss(0.42, 0.54, p));
-      set("--t-cta", ss(0.46, 0.56, p));
-      set("--t-foot", ss(0.5, 0.6, p));
-      set("--frame-a", ss(0.34, 0.46, p));
-      set("--photo-t", ss(0.55, 0.72, p));
-      set("--color-t", ss(0.76, 0.88, p));
-      set("--online-t", ss(0.92, 1, p));
-      set("--day", day);
-      set("--shade", 1 - e * 0.55);
+        set("--face-a", ss(0.08, 0.3, p));
+        set("--grid-a", ss(0.12, 0.3, p) * (1 - 0.72 * ss(0.36, 0.52, p)) * (1 - ss(0.7, 0.86, p)));
+        set("--wire-a", lerp(0.5, 0.22, ss(0.3, 0.62, p)) * (1 - day * 0.5));
+        set("--sketch-a", 0.55 * (1 - ss(0.16, 0.36, p)));
+        // La feuille de croquis s'efface à mesure que la vraie page arrive.
+        set("--bp-dots", 1 - ss(0.1, 0.28, p));
+        set("--bp-blocks", 1 - ss(0.28, 0.44, p));
+        set("--bp-labels", 1 - ss(0.22, 0.34, p));
+        set("--bp-dim", 1 - ss(0.46, 0.62, p));
+        set("--bp-gone", ss(0.3, 0.46, p));
+        el.querySelectorAll(".bp").forEach((n) => n.classList.toggle("is-done", p > 0.66));
+        set("--t-nav", ss(0.3, 0.4, p));
+        set("--t-title", ss(0.34, 0.47, p));
+        set("--t-para", ss(0.42, 0.54, p));
+        set("--t-cta", ss(0.46, 0.56, p));
+        set("--t-foot", ss(0.5, 0.6, p));
+        set("--frame-a", ss(0.34, 0.46, p));
+        set("--photo-t", ss(0.55, 0.72, p));
+        set("--color-t", ss(0.76, 0.88, p));
+        set("--online-t", ss(0.92, 1, p));
+        set("--day", day);
+        set("--shade", 1 - e * 0.55);
       }
 
+      // Trois poses : arrivée (loin, de biais), croquis (p = 0), page finie (p = 1).
       const tilt = compact ? 0.4 : 1;
-      const rxD = lerp(15, 2.5, e) + mouse.y * 2.5 * tilt + idle * 0.6;
-      const ryD = lerp(-34, -9, e) + mouse.x * 4 * tilt;
-      const rxP = lerp(7, 0, e) + mouse.y * 2 * tilt - idle * 0.5;
-      const ryP = lerp(compact ? -18 : 30, compact ? -5 : 11, e) + mouse.x * 3.5 * tilt;
-      desk.style.transform = `translate3d(${lerp(2, 0, e)}%, ${lerp(2, 0, e) + idle * 0.4}%, ${lerp(-120, 0, e)}px) rotateX(${rxD}deg) rotateY(${ryD}deg)`;
-      phone.style.transform = `translate3d(${lerp(14, 0, e)}%, ${lerp(10, 0, e) - idle * 0.5}%, ${lerp(20, 140, e)}px) rotateX(${rxP}deg) rotateY(${ryP}deg)`;
+      const rxD = lerp(24, lerp(15, 2.5, e), it) + mouse.y * 2.5 * tilt + idle * 0.6;
+      const ryD = lerp(-62, lerp(-34, -9, e), it) + mouse.x * 4 * tilt;
+      const tzD = lerp(-320, lerp(-120, 0, e), it);
+      const txD = lerp(9, lerp(2, 0, e), it);
+      const tyD = lerp(4, lerp(2, 0, e), it) + idle * 0.4;
+      const rxP = lerp(compact ? 18 : 12, lerp(7, 0, e), it) + mouse.y * 2 * tilt - idle * 0.5;
+      const ryP = lerp(compact ? -22 : 52, lerp(compact ? -12 : 30, compact ? -4 : 11, e), it) + mouse.x * 3.5 * tilt;
+      const tzP = lerp(compact ? -160 : -120, lerp(20, compact ? 40 : 140, e), it);
+      const txP = lerp(compact ? 0 : 26, lerp(compact ? 0 : 14, 0, e), it);
+      const tyP = lerp(compact ? 10 : 18, lerp(compact ? 4 : 10, 0, e), it) - idle * 0.5;
+      desk.style.transform = `translate3d(${txD}%, ${tyD}%, ${tzD}px) rotateX(${rxD}deg) rotateY(${ryD}deg)`;
+      phone.style.transform = `translate3d(${txP}%, ${tyP}%, ${tzP}px) rotateX(${rxP}deg) rotateY(${ryP}deg)`;
 
-      if (rctx) drawRibbon(rctx, el.clientWidth, el.clientHeight, p, t, day, compact);
+      // Le ruban ondule lentement : une image sur deux suffit quand la progression ne bouge pas.
+      frame++;
+      if (rctx && (pChanged || frame % 2 === 0)) drawRibbon(rctx, el.clientWidth, el.clientHeight, p, t, day, compact);
     };
     loop();
 
@@ -191,10 +212,11 @@ export default function Stage({ progress }: Props) {
       io.disconnect();
       if (fine) window.removeEventListener("pointermove", onMove);
     };
-  }, [progress]);
+  }, [progress, intro]);
 
   return (
     <div className="stage" ref={root} aria-hidden="true">
+      <div className="stage__glow" />
       <canvas className="stage__ribbon" ref={ribbon} />
       <div className="stage__space">
         <Slab variant="desk" />

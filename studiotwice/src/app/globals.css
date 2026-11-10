@@ -479,12 +479,14 @@ html:not(.is-day) .nav__link:focus-visible {
   position: absolute;
   z-index: 4;
   left: var(--gutter);
-  top: 23vh;
-  width: min(42vw, 620px);
+  top: 21vh;
+  width: min(44vw, 660px);
 }
 .hero__h1 {
   margin: 0;
-  font-size: clamp(26px, 2.75vw, 42px);
+  font-size: clamp(28px, 3.2vw, 46px);
+  font-stretch: 112%;
+  letter-spacing: -0.03em;
 }
 .hero__h1 .w {
   display: inline-block;
@@ -511,9 +513,9 @@ html:not(.is-day) .nav__link:focus-visible {
   position: absolute;
   z-index: 2;
   top: 0;
-  right: -4vw;
+  right: 2vw;
   bottom: 0;
-  width: 62vw;
+  width: 60vw;
 }
 /* ---- Scène : plaques en 3D CSS -------------------------------------- */
 .stage {
@@ -535,7 +537,88 @@ html:not(.is-day) .nav__link:focus-visible {
   --online-t: 0;
   --day: 0;
   --shade: 1;
+  --bp-dots: 1;
+  --bp-blocks: 1;
+  --bp-labels: 1;
+  --bp-dim: 1;
+  --bp-gone: 0;
   --wire: color-mix(in srgb, var(--light) calc((1 - var(--day)) * 100%), var(--taupe));
+  /* Le trait du croquis est clair sur la nuit, puis encre dès que la plaque s'opacifie. */
+  --wf-color: color-mix(in srgb, var(--ink) calc(var(--face-a) * 100%), var(--light));
+}
+
+/* ---- Feuille de croquis (SVG) -------------------------------------- */
+.bp {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  color: var(--wf-color);
+  transform: translateZ(3px);
+  pointer-events: none;
+}
+.bp line,
+.bp rect,
+.bp path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.2;
+}
+.bp--phone line,
+.bp--phone rect,
+.bp--phone path {
+  stroke-width: 4.2;
+}
+/* Une fois le croquis effacé, on le retire du rendu. */
+.bp.is-done {
+  display: none;
+}
+/* Une fois tracés, les traits redeviennent pleins : plus de pointillé à calculer. */
+.bp.is-drawn .bp__line,
+.bp.is-drawn .bp__outline {
+  stroke-dasharray: none;
+}
+.bp__line,
+.bp__outline {
+  stroke-dasharray: 1;
+}
+.bp__line--soft {
+  opacity: 0.5;
+}
+.bp__dots {
+  stroke: none;
+  opacity: calc(var(--bp-dots) * 0.55);
+}
+.bp__blocks {
+  opacity: var(--bp-blocks);
+}
+.bp__labels {
+  opacity: var(--bp-labels);
+}
+.bp__dim {
+  opacity: var(--bp-dim);
+}
+.bp text {
+  fill: currentColor;
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.bp__outline {
+  opacity: calc(0.9 - var(--face-a) * 0.9);
+}
+.bp__pen {
+  opacity: 0;
+}
+.bp__pen-dot {
+  fill: #fff;
+  stroke: none;
+}
+.bp__pen-halo {
+  fill: rgba(255, 255, 255, 0.18);
+  stroke: none;
 }
 .stage__ribbon {
   position: absolute;
@@ -558,18 +641,28 @@ html:not(.is-day) .nav__link:focus-visible {
   container-type: inline-size;
 }
 .slab--desk {
-  left: 5%;
-  top: 17%;
-  width: 74%;
+  left: 3%;
+  top: 15%;
+  width: 70%;
   aspect-ratio: 16 / 10;
   --r: 1.6cqw;
 }
 .slab--phone {
-  right: 1%;
-  top: 40%;
-  width: 21.5%;
+  right: 3%;
+  top: 38%;
+  width: 21%;
   aspect-ratio: 9 / 18.5;
   --r: 9cqw;
+}
+.stage__glow {
+  position: absolute;
+  left: 10%;
+  top: 2%;
+  width: 90%;
+  height: 92%;
+  background: radial-gradient(ellipse at 52% 44%, rgba(242, 244, 246, 0.11), rgba(242, 244, 246, 0.03) 42%, rgba(242, 244, 246, 0) 66%);
+  opacity: calc(1 - var(--day));
+  pointer-events: none;
 }
 .slab__body,
 .slab__depth,
@@ -611,15 +704,6 @@ html:not(.is-day) .nav__link:focus-visible {
   opacity: var(--sketch-a);
   color: var(--wire);
   transform: translateZ(2px);
-}
-.slab__sketch svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  stroke: currentColor;
-  stroke-width: 1;
 }
 .slab__line {
   position: absolute;
@@ -667,7 +751,7 @@ html:not(.is-day) .nav__link:focus-visible {
 .demo__grid {
   position: absolute;
   inset: 0 var(--m);
-  opacity: calc(var(--grid-a) * 0.5);
+  opacity: calc(var(--grid-a) * var(--bp-gone) * 0.5);
   background:
     linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / calc(100% / 12) 100%,
     linear-gradient(90deg, transparent calc(100% - 1px), var(--line) calc(100% - 1px)) 0 0 / calc(100% / 12) 100%;
@@ -681,12 +765,7 @@ html:not(.is-day) .nav__link:focus-visible {
   position: relative;
 }
 .wf::before {
-  content: "";
-  position: absolute;
-  inset: -0.35em -0.5em;
-  border: 1px dashed rgba(23, 24, 26, 0.55);
-  opacity: var(--dash-a);
-  pointer-events: none;
+  content: none;
 }
 .wf__in {
   display: block;
@@ -953,12 +1032,105 @@ html:not(.is-day) .nav__link:focus-visible {
   transform: translateY(-0.06em);
 }
 
+/* Séquence de construction : six mots, un trait qui avance */
+.hero__seq {
+  margin-top: 44px;
+  max-width: 560px;
+}
+.hero__seq-track {
+  position: relative;
+  display: block;
+  height: 1px;
+  background: var(--rule);
+}
+.hero__seq-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-text);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.hero__seq-list {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-display);
+  font-stretch: 85%;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+.hero__seq-list li {
+  opacity: 0.55;
+  transition:
+    opacity var(--dur-m) var(--ease),
+    color var(--dur-m) var(--ease);
+}
+.hero__seq-list li.is-on {
+  opacity: 1;
+  color: var(--fg);
+}
+@media (max-height: 820px) {
+  .hero__seq {
+    display: none;
+  }
+}
+
+/* Invitation à défiler */
+.hero__hint {
+  position: absolute;
+  z-index: 3;
+  right: var(--gutter);
+  bottom: 30px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--fg-2);
+  transition: opacity var(--dur-m) var(--ease);
+}
+.hero__hint.is-hidden {
+  opacity: 0 !important;
+}
+.hero__hint-line {
+  display: block;
+  width: 56px;
+  height: 1px;
+  background: currentColor;
+  transform-origin: left;
+  animation: hint-line 2.6s var(--ease) infinite;
+}
+@keyframes hint-line {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  70% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
 /* État avant l'ouverture : masqué par JS seulement (voir Hero.tsx) */
 .hero--boot .hero__top,
 .hero--boot .hero__sub,
 .hero--boot .hero__cta,
 .hero--boot .hero__stage,
-.hero--boot .hero__caption {
+.hero--boot .hero__caption,
+.hero--boot .hero__seq,
+.hero--boot .hero__hint {
   opacity: 0;
 }
 .hero--boot .hero__h1 .w__in,
@@ -967,7 +1139,10 @@ html:not(.is-day) .nav__link:focus-visible {
 }
 
 @media (max-width: 1023px) {
-  /* Mobile : composition en colonne, rien d'épinglé, la plaque dépasse à droite. */
+  .bp--phone .bp__dim {
+    display: none;
+  }
+  /* Mobile : composition en colonne, rien d'épinglé, la plaque centrée. */
   .hero {
     height: auto;
     min-height: 100svh;
@@ -985,7 +1160,11 @@ html:not(.is-day) .nav__link:focus-visible {
     padding: 48px var(--gutter) 0;
   }
   .hero__h1 {
-    font-size: clamp(24px, 6.6vw, 40px);
+    font-size: clamp(26px, 7vw, 42px);
+  }
+  .hero__seq,
+  .hero__hint {
+    display: none;
   }
   .hero__sub {
     margin-top: 18px;
@@ -1000,7 +1179,7 @@ html:not(.is-day) .nav__link:focus-visible {
     width: auto;
     height: 58svh;
     min-height: 420px;
-    margin: 28px -6vw 0 14vw;
+    margin: 40px 0 0;
   }
   .slab--desk {
     display: none;
@@ -1008,10 +1187,14 @@ html:not(.is-day) .nav__link:focus-visible {
   .slab--phone {
     left: 0;
     right: 0;
-    top: 2%;
-    height: 96%;
+    top: 6%;
+    height: 90%;
     width: auto;
     margin-inline: auto;
+  }
+  .stage__glow {
+    left: 0;
+    width: 100%;
   }
   .stage__space {
     perspective-origin: 50% 40%;
