@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "export:preview": "node scripts/export-preview.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.1",

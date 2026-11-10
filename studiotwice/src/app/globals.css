@@ -248,6 +248,7 @@ html.has-cursor * {
   transform: translateX(-50%);
   z-index: 50;
 }
+/* Verre : la pilule laisse passer la page floutée et suit ses couleurs, nuit comme jour. */
 .nav__pill {
   display: flex;
   align-items: center;
@@ -255,10 +256,24 @@ html.has-cursor * {
   margin: 0;
   padding: 5px;
   list-style: none;
-  background: var(--ink);
-  color: var(--lin);
+  color: var(--fg);
+  background: color-mix(in srgb, var(--fg) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--fg) 14%, transparent);
   border-radius: 999px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 12px 32px -16px rgba(21, 18, 15, 0.45);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  transition:
+    background var(--dur-l) var(--ease),
+    color var(--dur-l) var(--ease),
+    border-color var(--dur-l) var(--ease);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .nav__pill {
+    background: color-mix(in srgb, var(--bg) 88%, var(--fg));
+  }
 }
 .nav__link {
   display: inline-flex;
@@ -271,14 +286,14 @@ html.has-cursor * {
   font-weight: 500;
   font-size: 14px;
   letter-spacing: 0.005em;
-  color: rgba(247, 242, 234, 0.78);
+  color: color-mix(in srgb, var(--fg) 80%, transparent);
   transition:
     color var(--dur-s) var(--ease),
     background var(--dur-s) var(--ease);
 }
 .nav__link:hover {
-  color: var(--lin);
-  background: rgba(247, 242, 234, 0.08);
+  color: var(--fg);
+  background: color-mix(in srgb, var(--fg) 10%, transparent);
 }
 .nav__link--cta {
   color: var(--accent-ink);
