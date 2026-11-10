@@ -475,12 +475,13 @@ html:not(.is-day) .nav__link:focus-visible {
   transform: translateY(-4px);
 }
 
+/* Deux colonnes qui ne se recouvrent jamais : le texte s'arrête à 44 vw, la scène commence à 47 vw. */
 .hero__statement {
   position: absolute;
   z-index: 4;
   left: var(--gutter);
   top: 21vh;
-  width: min(44vw, 660px);
+  width: min(calc(44vw - var(--gutter)), 640px);
 }
 .hero__h1 {
   margin: 0;
@@ -513,9 +514,9 @@ html:not(.is-day) .nav__link:focus-visible {
   position: absolute;
   z-index: 2;
   top: 0;
+  left: 47vw;
   right: 2vw;
   bottom: 0;
-  width: 60vw;
 }
 /* ---- Scène : plaques en 3D CSS -------------------------------------- */
 .stage {
@@ -1006,7 +1007,7 @@ html:not(.is-day) .nav__link:focus-visible {
   z-index: 3;
   left: var(--gutter);
   bottom: 44px;
-  max-width: 36ch;
+  width: min(calc(44vw - var(--gutter)), 36ch);
   pointer-events: none;
 }
 .hero__step-name {
