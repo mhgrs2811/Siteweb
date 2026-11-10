@@ -5,6 +5,8 @@ import { pricing, type OptionId, type SiteId } from "@/content/pricing";
 import { computeEstimate, formatEuro, setSelection, siteById, useSelection } from "@/lib/estimate";
 import { setupGsap } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
+import Arrow from "@/components/Arrow";
+import Magnetic from "@/components/Magnetic";
 
 const optionOrder: OptionId[] = ["copy", "photo", "language", "logo", "googleBusiness"];
 
@@ -290,12 +292,12 @@ export default function Configurator() {
               )}
             </ul>
             <p className="sheet__small">{pricing.disclaimer}</p>
-            <a className="btn btn--accent sheet__cta" href="#contact" onClick={goContact} data-cursor>
-              Demander ce devis
-              <svg className="btn__arrow" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M2 12 12 2M4 2h8v8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
+            <Magnetic strength={0.2}>
+              <a className="btn btn--accent sheet__cta" href="#contact" onClick={goContact} data-cursor>
+                Demander ce devis
+                <Arrow />
+              </a>
+            </Magnetic>
           </div>
         </aside>
       </div>

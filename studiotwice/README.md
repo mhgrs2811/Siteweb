@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# StudioTwice, site du studio
 
-## Getting Started
+Site vitrine de StudioTwice : création de sites web pour commerces locaux et indépendants en Belgique francophone.
+Next.js (App Router), TypeScript, Tailwind v4, GSAP + ScrollTrigger, Lenis, Resend. Déploiement prévu sur Vercel.
 
-First, run the development server:
+## Lancer en local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le site tourne sur http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Vérifier avant de déployer
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+npm run start
+```
 
-## Learn More
+## Déployer sur Vercel
 
-To learn more about Next.js, take a look at the following resources:
+1. Importer le dépôt dans Vercel, dossier racine `studiotwice`.
+2. Dans *Settings → Environment Variables*, ajouter les trois variables de `.env.example` :
+   `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`.
+   Sans elles, le formulaire affiche un message et invite à passer par WhatsApp ou le téléphone.
+3. Déployer. Chaque `git push` sur la branche principale redéploie.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Ou en ligne de commande :
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npx vercel
+```
 
-## Deploy on Vercel
+```bash
+npx vercel --prod
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Modifier les contenus sans toucher au code
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Quoi | Fichier |
+|---|---|
+| Tarifs, options, délais, abonnement | `src/content/pricing.ts` |
+| Coordonnées, BCE, zone desservie, domaine | `src/content/site.ts` |
+| Textes des sections, FAQ, formulaire | `src/content/sections.ts` |
+| Textes du hero et de la page d’exemple | `src/content/hero.ts` |
+| Réalisations | tableau `projects` dans `src/content/sections.ts`, captures dans `public/realisations/` |
+| Couleurs et courbes | `src/app/globals.css` (variables en tête) et `src/lib/tokens.ts` |
+
+Les polices sont auto-hébergées dans `src/fonts` (Archivo variable, Onest variable, licence SIL OFL).
+
+## Version néerlandaise, plus tard
+
+Dupliquer `src/content/sections.ts`, `hero.ts` et `pricing.ts` en `*.nl.ts`, créer une route `src/app/nl/page.tsx`
+qui importe ces fichiers, et activer le lien « Nederlands » dans `src/components/Footer.tsx`.
+
+## À compléter (TODO)
+
+Chaque emplacement est signalé par un commentaire `TODO` dans le code.
+
+- `src/content/site.ts` : domaine définitif, téléphone, WhatsApp, e-mail, numéro BCE, adresse, horaires.
+- `src/content/sections.ts` : réalisations réelles (`projects`), prénoms du duo (`about.people[].name`),
+  modalités de paiement et renouvellement du nom de domaine dans la FAQ.
+- `.env` : clés Resend (voir `.env.example`).
+- `public/og.png` : régénérer l’image de partage si le titre change (voir ci-dessous).
+
+## Image de partage
+
+`public/og.png` (1200 × 630) est rendue depuis une page HTML statique avec les polices du site.
+Pour la refaire, ouvrir une page avec le même titre et la capturer à 1200 × 630, ou demander au studio.

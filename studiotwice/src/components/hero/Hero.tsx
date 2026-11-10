@@ -6,6 +6,8 @@ import { heroCopy } from "@/content/hero";
 import { COLORS, dayFromProgress, smoothstep, stepFromProgress } from "@/lib/tokens";
 import { setupGsap, ScrollTrigger } from "@/lib/gsap";
 import Stage from "./Stage";
+import Magnetic from "@/components/Magnetic";
+import Arrow from "@/components/Arrow";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -44,6 +46,7 @@ export default function Hero() {
         fg: mix(COLORS.lin, COLORS.ink)(sw),
         fg2: mix(COLORS.sandOnNight, COLORS.ink2)(sw),
         rule: mix("rgba(247,242,234,0.18)", "rgba(27,24,22,0.14)")(sw),
+        accentText: mix("#9db0ff", COLORS.accent)(sw),
       };
     };
 
@@ -53,6 +56,7 @@ export default function Hero() {
       docEl.style.setProperty("--fg", c.fg);
       docEl.style.setProperty("--fg-2", c.fg2);
       docEl.style.setProperty("--rule", c.rule);
+      docEl.style.setProperty("--accent-text", c.accentText);
     };
 
     const setStep = (i: number) => {
@@ -193,12 +197,12 @@ export default function Hero() {
         </h1>
         <p className="hero__sub">{heroCopy.sub}</p>
         <div className="hero__cta">
-          <a className="btn" href={heroCopy.cta.href} data-cursor>
-            {heroCopy.cta.label}
-            <svg className="btn__arrow" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M2 12 12 2M4 2h8v8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
+          <Magnetic>
+            <a className="btn" href={heroCopy.cta.href} data-cursor>
+              {heroCopy.cta.label}
+              <Arrow />
+            </a>
+          </Magnetic>
         </div>
       </div>
 

@@ -4,24 +4,31 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Grain from "@/components/Grain";
 import Cursor from "@/components/Cursor";
 import Nav from "@/components/Nav";
+import { site } from "@/content/site";
+import { pricing } from "@/content/pricing";
 import "./globals.css";
 
-// TODO: remplacer par le domaine définitif dès qu'il est connu.
-const SITE_URL = "https://studiotwice.example";
+const description = `Nous construisons le site de votre commerce, du croquis à la mise en ligne. Restaurants, garages, salons, artisans, en Belgique francophone. Site une page à partir de ${pricing.sites[0].from} € HTVA.`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: "StudioTwice, sites web pour commerces locaux en Belgique francophone",
-  description:
-    "Nous construisons le site de votre commerce, du croquis à la mise en ligne. Restaurants, garages, salons, artisans. Site une page à partir de 890 € HTVA.",
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${site.name}, sites web pour commerces locaux en Belgique francophone`,
+    template: `%s | ${site.name}`,
+  },
+  description,
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    locale: "fr_BE",
-    siteName: "StudioTwice",
-    title: "StudioTwice, sites web pour commerces locaux",
-    description:
-      "Le site de votre commerce, du croquis à la mise en ligne. À partir de 890 € HTVA.",
+    locale: site.locale.replace("-", "_"),
+    siteName: site.name,
+    title: `${site.name}, sites web pour commerces locaux`,
+    description: `Le site de votre commerce, du croquis à la mise en ligne. À partir de ${pricing.sites[0].from} € HTVA.`,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${site.name}, le site de votre commerce se construit sous vos yeux` }],
   },
+  twitter: { card: "summary_large_image" },
+  icons: { icon: "/icon.svg", apple: "/apple-icon.png" },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
@@ -30,14 +37,17 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr-BE" className={`${archivo.variable} ${onest.variable}`}>
+    <html lang={site.locale} className={`${archivo.variable} ${onest.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Marque la présence de JavaScript avant le premier rendu : les textes masqués ne clignotent pas. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body>
+        <a className="skip" href="#haut">
+          Aller au contenu
+        </a>
         <SmoothScroll />
         {children}
         <Nav />

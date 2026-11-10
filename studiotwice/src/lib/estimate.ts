@@ -103,7 +103,7 @@ export function computeEstimate(sel: Selection): Estimate {
     max += o.logo.delayWeeks;
   }
   if (site.googleBusinessIncluded) {
-    lines.push({ id: "googleBusiness", label: o.googleBusiness.name, note: "comprise", amount: 0, included: true });
+    lines.push({ id: "googleBusiness", label: o.googleBusiness.name, note: "dans votre formule", amount: 0, included: true });
   } else if (sel.options.googleBusiness) {
     lines.push({ id: "googleBusiness", label: o.googleBusiness.name, amount: o.googleBusiness.price });
   }
