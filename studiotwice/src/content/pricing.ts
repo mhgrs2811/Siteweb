@@ -22,6 +22,10 @@ export const pricing = {
 
   /** Mention affichée à côté de chaque montant. */
   vat: "HTVA",
+  /** Taux de TVA appliqué quand le visiteur bascule l'affichage en TVAC. */
+  vatRate: 21,
+  /** Étiquette posée sur la formule que nous conseillons (ou "" pour aucune). */
+  recommendedBadge: "Notre conseil",
 
   /** Les trois formules. L'ordre est celui de l'affichage. */
   sites: [
@@ -33,6 +37,14 @@ export const pricing = {
       detail:
         "Une seule page, claire : qui vous êtes, ce que vous faites, vos horaires, votre adresse, un bouton pour appeler. Idéal pour démarrer.",
       from: 890,
+      /** Ce que le commerçant obtient, en quatre ou cinq lignes courtes, pour la carte. */
+      includes: [
+        "Une page pensée pour le téléphone",
+        "Bouton d’appel et itinéraire",
+        "Vos horaires, votre adresse, vos photos",
+        "Trouvable sur Google",
+      ],
+      recommended: false,
       pagesIncluded: 1,
       /** Peut-on ajouter des pages à cette formule ? */
       extraPages: false,
@@ -48,6 +60,14 @@ export const pricing = {
       detail:
         "Cinq à sept pages : accueil, services ou carte, photos, à propos, contact. Fiche Google Business comprise.",
       from: 1890,
+      includes: [
+        "Cinq à sept pages",
+        "Galerie de vos réalisations",
+        "Formulaire de demande ou de réservation",
+        "Fiche Google Business créée avec vous",
+        "Tout le site une page",
+      ],
+      recommended: true,
       pagesIncluded: 7,
       extraPages: true,
       pagesMin: 5,
@@ -62,6 +82,14 @@ export const pricing = {
       detail:
         "Réservation de table, commande à emporter, prise de rendez-vous, boutique en ligne. Nous construisons ce dont votre commerce a besoin.",
       from: 3500,
+      includes: [
+        "Réservation ou prise de rendez-vous",
+        "Commande à emporter ou boutique en ligne",
+        "Paiement en ligne sécurisé",
+        "Un tableau de bord simple",
+        "Tout le site vitrine",
+      ],
+      recommended: false,
       pagesIncluded: 7,
       extraPages: true,
       pagesMin: 5,
