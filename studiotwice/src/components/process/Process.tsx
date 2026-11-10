@@ -39,7 +39,7 @@ export default function Process() {
             }
           }
         },
-        { threshold: 0.3 },
+        { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
       );
       el.querySelectorAll(".proc__step, .proc__sheet-m .ps").forEach((t) => io.observe(t));
       return () => io.disconnect();
@@ -57,6 +57,16 @@ export default function Process() {
     const labels = Array.from(el.querySelectorAll<HTMLElement>(".proc__seq .seq__list li"));
     let current = 0;
     let removeMove: (() => void) | null = null;
+
+    // Le contenu d'une feuille se remplit de lui-même, dès que son étape est en place.
+    const reveal = (i: number) => {
+      sheets.forEach((sh, k) => {
+        gsap.killTweensOf(sh, "--s");
+        if (k < i) gsap.set(sh, { "--s": 1 });
+        if (k > i) gsap.set(sh, { "--s": 0 });
+      });
+      gsap.fromTo(sheets[i], { "--s": 0 }, { "--s": 1, duration: 2.2, ease: "power1.inOut", delay: 0.45, overwrite: "auto" });
+    };
 
     // Trois poses : à venir (loin, à droite), active (face à nous), faite (repoussée sur la table).
     const poseNext = { x: "58%", y: "16%", z: -340, rotationY: -32, rotationX: 10, rotationZ: 4, autoAlpha: 0, scale: 0.96 };
@@ -87,7 +97,9 @@ export default function Process() {
           pin: true,
           scrub: 0.8,
           anticipatePin: 1,
-          invalidateOnRefresh: true,
+          onEnter: () => reveal(current),
+          onEnterBack: () => reveal(current),
+          onLeaveBack: () => sheets.forEach((sh) => gsap.set(sh, { "--s": 0 })),
           onUpdate: (st) => {
             const i = Math.min(n - 1, Math.floor(st.progress * n));
             if (idx) idx.textContent = pad(i + 1);
@@ -96,21 +108,22 @@ export default function Process() {
               current = i;
               swapWord(wordBox, "proc__word-text", c.steps[i].word, dir, gsap);
               labels.forEach((l, k) => l.classList.toggle("is-on", k === i));
+              reveal(i);
             }
           },
         },
       });
       if (fill) tl.fromTo(fill, { scaleX: 0 }, { scaleX: 1, ease: "none", duration: n }, 0);
-      tl.to(sheets[0], { "--s": 1, duration: 0.6, ease: "none" }, 0.3);
       for (let i = 1; i < n; i++) {
         const at = i;
         for (let k = 0; k < i; k++) tl.to(sheets[k], poseDone(i - 1 - k), at);
         tl.to(sheets[i], poseActive, at);
         tl.to(steps[i - 1], { autoAlpha: 0, y: -18, duration: 0.3 }, at);
         tl.to(steps[i], { autoAlpha: 1, y: 0, duration: 0.5 }, at + 0.25);
-        tl.to(sheets[i], { "--s": 1, duration: 0.6, ease: "none" }, at + 0.35);
         if (glow) tl.to(glow, { xPercent: -8 * i, yPercent: 6 * i, duration: 0.7 }, at);
       }
+      // La fin de la dernière étape garde un temps de lecture : la frise va jusqu'au bout.
+      tl.to({}, { duration: 0.001 }, n);
 
       // La table s'incline légèrement vers le pointeur.
       if (window.matchMedia("(pointer: fine)").matches) {
