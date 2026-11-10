@@ -14,14 +14,14 @@
   --light: #F2F4F6;
   --accent: #2a4beb;
   --accent-ink: #F8F9FA;
-  /* Accent utilisé pour du texte : plus clair tant que la page est dans la nuit. */
-  --accent-text: #9db0ff;
+  /* Accent utilisé pour du texte. */
+  --accent-text: var(--accent);
 
-  /* Variables animées par la séquence (nuit -> jour) */
-  --bg: var(--night);
-  --fg: var(--lin);
-  --fg-2: var(--sand-on-night);
-  --rule: rgba(248, 249, 250, 0.18);
+  /* Couleurs de la page : plein jour partout */
+  --bg: var(--sand);
+  --fg: var(--ink);
+  --fg-2: var(--ink-2);
+  --rule: rgba(23, 24, 26, 0.14);
 
   --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
   --font-text: var(--font-onest), "Onest", system-ui, sans-serif;
@@ -47,7 +47,7 @@
 /* Base                                                                */
 /* ------------------------------------------------------------------ */
 html {
-  background: var(--night);
+  background: var(--sand);
   color: var(--fg);
   font-family: var(--font-text);
   font-size: 16px;
@@ -59,37 +59,10 @@ html {
 
 body {
   min-height: 100%;
-  background: transparent;
+  background: var(--sand);
   color: var(--fg);
   margin: 0;
   overflow-x: clip;
-}
-
-/* La nuit devient jour : une couche fixe dont seule l'opacité change (compositeur seulement). */
-.daylayer {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: var(--sand);
-  opacity: 0;
-  pointer-events: none;
-  will-change: opacity;
-}
-/* Les couleurs de texte basculent une fois, au milieu du fondu. */
-html.is-day {
-  --bg: var(--sand);
-  --fg: var(--ink);
-  --fg-2: var(--ink-2);
-  --rule: rgba(23, 24, 26, 0.14);
-  --accent-text: var(--accent);
-}
-.hero__h1,
-.hero__sub,
-.hero__caption,
-.hero__step-name,
-.hero__counter,
-.wordmark {
-  transition: color var(--dur-m) var(--ease);
 }
 
 html.lenis,
@@ -361,12 +334,6 @@ html.has-cursor * {
 .nav__link:focus-visible {
   color: var(--fg);
 }
-/* De nuit, le texte survolé passe au blanc pur avec un fin halo, comme une gravure dans le verre. */
-html:not(.is-day) .nav__link:hover,
-html:not(.is-day) .nav__link:focus-visible {
-  color: #fff;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
-}
 .nav__link:focus-visible {
   outline: none;
 }
@@ -430,9 +397,24 @@ html:not(.is-day) .nav__link:focus-visible {
 .hero {
   position: relative;
   height: 100svh;
-  min-height: 620px;
+  min-height: 640px;
   overflow: hidden;
   color: var(--fg);
+  background: radial-gradient(ellipse at 50% 30%, #f3f4f6 0%, var(--sand) 60%, #e6e8eb 100%);
+}
+/* Trame de grille, à peine visible, qui s'efface vers les bords */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(23, 24, 26, 0.07) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(23, 24, 26, 0.07) 1px, transparent 1px);
+  background-size: 72px 72px;
+  background-position: center top;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 78%);
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 78%);
+  pointer-events: none;
 }
 
 .hero__top {
@@ -440,7 +422,7 @@ html:not(.is-day) .nav__link:focus-visible {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 5;
+  z-index: 6;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -475,19 +457,72 @@ html:not(.is-day) .nav__link:focus-visible {
   transform: translateY(-4px);
 }
 
-/* Deux colonnes qui ne se recouvrent jamais : le texte s'arrête à 44 vw, la scène commence à 47 vw. */
-.hero__statement {
+/* Volumes doux posés au sol */
+.hero__volumes {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero__orb {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 30%, #fbfbfc 0%, #e9ebee 45%, #cfd4da 100%);
+  box-shadow: 0 40px 60px -30px rgba(23, 24, 26, 0.35);
+}
+.hero__orb--l {
+  left: -3%;
+  bottom: -16%;
+  width: clamp(160px, 18vw, 280px);
+  aspect-ratio: 1;
+}
+.hero__orb--r {
+  right: 6%;
+  bottom: 8%;
+  width: clamp(56px, 6vw, 96px);
+  aspect-ratio: 1;
+}
+.hero__floor {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: 6%;
+  height: 10%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(23, 24, 26, 0.12), rgba(23, 24, 26, 0) 70%);
+}
+
+/* La carte en verre */
+.hero__card {
   position: absolute;
   z-index: 4;
-  left: var(--gutter);
-  top: 21vh;
-  width: min(calc(44vw - var(--gutter)), 640px);
+  left: 50%;
+  top: 48%;
+  translate: -50% -50%;
+  width: min(44vw, 640px);
+  padding: clamp(30px, 3vw, 48px) clamp(28px, 3.4vw, 56px);
+  text-align: center;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.4),
+    0 90px 120px -70px rgba(23, 24, 26, 0.35),
+    0 2px 6px rgba(23, 24, 26, 0.04);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  backdrop-filter: blur(18px) saturate(1.25);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .hero__card {
+    background: rgba(255, 255, 255, 0.86);
+  }
 }
 .hero__h1 {
   margin: 0;
-  font-size: clamp(28px, 3.2vw, 46px);
+  font-size: clamp(26px, 2.85vw, 42px);
   font-stretch: 112%;
   letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 .hero__h1 .w {
   display: inline-block;
@@ -500,24 +535,232 @@ html:not(.is-day) .nav__link:focus-visible {
   display: inline-block;
 }
 .hero__sub {
-  margin: 28px 0 0;
-  max-width: 42ch;
-  font-size: 17px;
+  margin: 20px auto 0;
+  max-width: 40ch;
+  font-size: 16px;
   line-height: 1.55;
   color: var(--fg-2);
 }
 .hero__cta {
-  margin-top: 32px;
+  margin-top: 26px;
 }
 
+/* La scène couvre tout le hero, derrière la carte */
 .hero__stage {
   position: absolute;
   z-index: 2;
-  top: 0;
-  left: 47vw;
-  right: 2vw;
-  bottom: 0;
+  inset: 0;
 }
+
+.hero__ribbon {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Nom et légende de l'étape, en bas à gauche */
+.hero__step {
+  position: absolute;
+  z-index: 5;
+  left: var(--gutter);
+  bottom: 40px;
+  width: min(30vw, 34ch);
+  pointer-events: none;
+}
+.hero__step-name {
+  margin: 0 0 6px;
+  font-size: clamp(18px, 1.4vw, 22px);
+  font-stretch: 112%;
+  letter-spacing: -0.02em;
+}
+.hero__caption {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--fg-2);
+}
+
+/* Séquence : six mots, un trait qui avance, sous la carte */
+.hero__seq {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  width: min(560px, 40vw);
+}
+.seq__track {
+  position: relative;
+  display: block;
+  height: 1px;
+  background: var(--rule);
+}
+.seq__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-text);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.seq__list {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-display);
+  font-stretch: 85%;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+.seq__list li {
+  opacity: 0.55;
+  transition:
+    opacity var(--dur-m) var(--ease),
+    color var(--dur-m) var(--ease);
+}
+.seq__list li.is-on {
+  opacity: 1;
+  color: var(--fg);
+}
+
+/* Invitation à défiler */
+.hero__hint {
+  position: absolute;
+  z-index: 5;
+  right: var(--gutter);
+  bottom: 44px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--fg-2);
+  transition: opacity var(--dur-m) var(--ease);
+}
+.hero__hint.is-hidden {
+  opacity: 0 !important;
+}
+.hero__hint-line {
+  display: block;
+  width: 56px;
+  height: 1px;
+  background: currentColor;
+  transform-origin: left;
+  animation: hint-line 2.6s var(--ease) infinite;
+}
+@keyframes hint-line {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  70% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+/* État avant l'ouverture : masqué par JS seulement (voir Hero.tsx) */
+.hero--boot .hero__top,
+.hero--boot .hero__card,
+.hero--boot .hero__volumes,
+.hero--boot .hero__sub,
+.hero--boot .hero__cta,
+.hero--boot .hero__stage,
+.hero--boot .hero__caption,
+.hero--boot .hero__step-name,
+.hero--boot .hero__seq,
+.hero--boot .hero__hint {
+  opacity: 0;
+}
+.hero--boot .hero__h1 .w__in {
+  transform: translateY(110%);
+}
+
+@media (max-width: 1023px) {
+  .bp--phone .bp__dim {
+    display: none;
+  }
+  /* Mobile : composition en colonne, rien d'épinglé, la plaque centrée. */
+  .hero {
+    height: auto;
+    min-height: 100svh;
+    padding-bottom: 112px;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero::before {
+    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 70%);
+    mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 70%);
+  }
+  .hero__top {
+    position: static;
+    padding: 22px var(--gutter) 0;
+  }
+  .hero__card {
+    position: relative;
+    order: 1;
+    left: auto;
+    top: auto;
+    translate: none;
+    width: auto;
+    margin: 36px var(--gutter) 0;
+    padding: 28px 22px 30px;
+    border-radius: 18px;
+  }
+  .hero__h1 {
+    font-size: clamp(26px, 7vw, 42px);
+  }
+  .hero__sub {
+    margin-top: 16px;
+    font-size: 15px;
+  }
+  .hero__cta {
+    margin-top: 22px;
+  }
+  .hero__volumes {
+    display: none;
+  }
+  .hero__stage {
+    position: relative;
+    order: 2;
+    inset: auto;
+    width: auto;
+    height: 58svh;
+    min-height: 420px;
+    margin: 32px 0 0;
+  }
+  .hero__step {
+    position: relative;
+    order: 3;
+    inset: auto;
+    width: auto;
+    padding: 24px var(--gutter) 0;
+  }
+  .hero__caption {
+    max-width: 34ch;
+    font-size: 15px;
+  }
+  .hero__seq,
+  .hero__hint {
+    display: none;
+  }
+}
+
 /* ---- Scène : plaques en 3D CSS -------------------------------------- */
 .stage {
   position: absolute;
@@ -536,16 +779,15 @@ html:not(.is-day) .nav__link:focus-visible {
   --photo-t: 0;
   --color-t: 0;
   --online-t: 0;
-  --day: 0;
   --shade: 1;
   --bp-dots: 1;
   --bp-blocks: 1;
   --bp-labels: 1;
   --bp-dim: 1;
   --bp-gone: 0;
-  --wire: color-mix(in srgb, var(--light) calc((1 - var(--day)) * 100%), var(--taupe));
-  /* Le trait du croquis est clair sur la nuit, puis encre dès que la plaque s'opacifie. */
-  --wf-color: color-mix(in srgb, var(--ink) calc(var(--face-a) * 100%), var(--light));
+  --wire: var(--taupe);
+  /* Le trait du croquis : encre adoucie, sur fond clair comme sur la plaque. */
+  --wf-color: color-mix(in srgb, var(--ink) 62%, var(--sand));
 }
 
 /* ---- Feuille de croquis (SVG) -------------------------------------- */
@@ -614,18 +856,18 @@ html:not(.is-day) .nav__link:focus-visible {
   opacity: 0;
 }
 .bp__pen-dot {
-  fill: #fff;
+  fill: var(--accent);
   stroke: none;
 }
 .bp__pen-halo {
-  fill: rgba(255, 255, 255, 0.18);
+  fill: rgba(42, 75, 235, 0.16);
   stroke: none;
 }
 .stage__space {
   position: absolute;
   inset: 0;
-  perspective: 1500px;
-  perspective-origin: 58% 48%;
+  perspective: 1600px;
+  perspective-origin: 50% 46%;
   transform-style: preserve-3d;
 }
 .slab {
@@ -635,16 +877,16 @@ html:not(.is-day) .nav__link:focus-visible {
   container-type: inline-size;
 }
 .slab--desk {
-  left: 3%;
-  top: 15%;
-  width: 70%;
+  left: 6%;
+  top: 17%;
+  width: 46%;
   aspect-ratio: 16 / 10;
   --r: 1.6cqw;
 }
 .slab--phone {
-  right: 3%;
-  top: 38%;
-  width: 21%;
+  right: 9%;
+  top: 30%;
+  width: 14.5%;
   aspect-ratio: 9 / 18.5;
   --r: 9cqw;
 }
@@ -654,8 +896,7 @@ html:not(.is-day) .nav__link:focus-visible {
   top: 2%;
   width: 90%;
   height: 92%;
-  background: radial-gradient(ellipse at 52% 44%, rgba(242, 244, 246, 0.11), rgba(242, 244, 246, 0.03) 42%, rgba(242, 244, 246, 0) 66%);
-  opacity: calc(1 - var(--day));
+  background: radial-gradient(ellipse at 50% 44%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.2) 42%, rgba(255, 255, 255, 0) 66%);
   pointer-events: none;
 }
 .slab__body,
@@ -672,7 +913,7 @@ html:not(.is-day) .nav__link:focus-visible {
   transform: translateZ(0);
   box-shadow:
     0 0 0 1px rgba(23, 24, 26, 0.06),
-    0 30px 80px -30px rgba(17, 18, 20, calc(0.35 * var(--day)));
+    0 50px 90px -40px rgba(23, 24, 26, 0.4);
 }
 .slab__depth {
   background: #DDE0E4;
@@ -1182,6 +1423,9 @@ html:not(.is-day) .nav__link:focus-visible {
     height: 90%;
     width: auto;
     margin-inline: auto;
+  }
+  .slab--desk {
+    display: none;
   }
   .stage__glow {
     left: 0;

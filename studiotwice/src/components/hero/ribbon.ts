@@ -1,6 +1,6 @@
 /**
- * Ruban de lumière : le trait qui « dessine » la page au passage.
- * Dessiné en 2D derrière la scène, très peu coûteux.
+ * Le filet bleu : un trait fin qui traverse le hero derrière la carte et les plaques,
+ * et s'allonge au fil de la construction. Dessiné en 2D, très peu coûteux.
  */
 interface Pt {
   x: number;
@@ -21,7 +21,6 @@ export function drawRibbon(
   h: number,
   p: number,
   t: number,
-  dayT: number,
   compact = false,
 ) {
   ctx.clearRect(0, 0, w, h);
@@ -43,23 +42,20 @@ export function drawRibbon(
   }
   const a = pts[0];
   const b = pts[pts.length - 1];
-  const alphaMul = 1 - 0.78 * dayT;
-  const color = dayT < 0.5 ? "242,244,246" : "255,255,255";
+  const alphaMul = 1;
+  const color = "42,75,235";
 
   ctx.save();
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
-  ctx.globalCompositeOperation = dayT < 0.5 ? "lighter" : "source-over";
+  ctx.globalCompositeOperation = "source-over";
   // Halo obtenu par superposition de traits de largeur décroissante : aucun flou, donc peu coûteux.
   const k = compact ? 0.6 : 1;
   const passes: Array<[number, number]> = [
-    [140 * k, 0.014],
-    [104 * k, 0.022],
-    [72 * k, 0.034],
-    [46 * k, 0.055],
-    [26 * k, 0.09],
-    [12 * k, 0.2],
-    [2.2, 0.9],
+    [28 * k, 0.03],
+    [12 * k, 0.07],
+    [5 * k, 0.16],
+    [1.6, 0.85],
   ];
   ctx.shadowBlur = 0;
   for (const [lw, alpha] of passes) {
@@ -77,7 +73,7 @@ export function drawRibbon(
   // Pointe lumineuse
   ctx.fillStyle = `rgba(${color},${0.95 * alphaMul})`;
   ctx.beginPath();
-  ctx.arc(b.x, b.y, 2.5, 0, Math.PI * 2);
+  ctx.arc(b.x, b.y, 2.2, 0, Math.PI * 2);
   ctx.fill();
   ctx.restore();
 }

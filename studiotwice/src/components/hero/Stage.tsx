@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { heroCopy } from "@/content/hero";
-import { dayFromProgress, lerp, smoothstep as ss } from "@/lib/tokens";
+import { lerp, smoothstep as ss } from "@/lib/tokens";
 import { drawRibbon } from "./ribbon";
 import Blueprint from "./Blueprint";
 
@@ -153,7 +153,6 @@ export default function Stage({ progress, intro }: Props) {
       const it = clamp01(intro.current ?? 1);
       const t = (performance.now() - t0) / 1000;
       const e = ss(0, 1, p);
-      const day = dayFromProgress(p);
       mouse.x = lerp(mouse.x, mouse.tx, 0.045);
       mouse.y = lerp(mouse.y, mouse.ty, 0.045);
       const idle = reduce ? 0 : Math.sin(t * 0.45) * 0.8;
@@ -163,7 +162,7 @@ export default function Stage({ progress, intro }: Props) {
         lastP = p;
         set("--face-a", ss(0.08, 0.3, p));
         set("--grid-a", ss(0.12, 0.3, p) * (1 - 0.72 * ss(0.36, 0.52, p)) * (1 - ss(0.7, 0.86, p)));
-        set("--wire-a", lerp(0.5, 0.22, ss(0.3, 0.62, p)) * (1 - day * 0.5));
+        set("--wire-a", lerp(0.5, 0.18, ss(0.3, 0.62, p)));
         set("--sketch-a", 0.55 * (1 - ss(0.16, 0.36, p)));
         // La feuille de croquis s'efface à mesure que la vraie page arrive.
         set("--bp-dots", 1 - ss(0.1, 0.28, p));
@@ -181,28 +180,29 @@ export default function Stage({ progress, intro }: Props) {
         set("--photo-t", ss(0.55, 0.72, p));
         set("--color-t", ss(0.76, 0.88, p));
         set("--online-t", ss(0.92, 1, p));
-        set("--day", day);
         set("--shade", 1 - e * 0.55);
       }
 
       // Trois poses : arrivée (loin, de biais), croquis (p = 0), page finie (p = 1).
+      // Les plaques flottent de part et d'autre de la carte : l'ordinateur à gauche, un peu
+      // derrière le verre, le téléphone à droite, devant.
       const tilt = compact ? 0.4 : 1;
-      const rxD = lerp(24, lerp(15, 2.5, e), it) + mouse.y * 2.5 * tilt + idle * 0.6;
-      const ryD = lerp(-62, lerp(-34, -9, e), it) + mouse.x * 4 * tilt;
-      const tzD = lerp(-320, lerp(-120, 0, e), it);
-      const txD = lerp(9, lerp(2, 0, e), it);
-      const tyD = lerp(4, lerp(2, 0, e), it) + idle * 0.4;
-      const rxP = lerp(compact ? 18 : 12, lerp(7, 0, e), it) + mouse.y * 2 * tilt - idle * 0.5;
-      const ryP = lerp(compact ? -22 : 52, lerp(compact ? -12 : 30, compact ? -4 : 11, e), it) + mouse.x * 3.5 * tilt;
-      const tzP = lerp(compact ? -160 : -120, lerp(20, compact ? 40 : 140, e), it);
-      const txP = lerp(compact ? 0 : 26, lerp(compact ? 0 : 14, 0, e), it);
-      const tyP = lerp(compact ? 10 : 18, lerp(compact ? 4 : 10, 0, e), it) - idle * 0.5;
+      const rxD = lerp(18, lerp(9, 5, e), it) + mouse.y * 2.5 * tilt + idle * 0.6;
+      const ryD = lerp(48, lerp(26, 16, e), it) + mouse.x * 4 * tilt;
+      const tzD = lerp(-360, lerp(-140, -60, e), it);
+      const txD = lerp(-14, lerp(-4, -6, e), it);
+      const tyD = lerp(10, lerp(4, 0, e), it) + idle * 0.5;
+      const rxP = lerp(compact ? 18 : 10, lerp(6, 3, e), it) + mouse.y * 2 * tilt - idle * 0.5;
+      const ryP = lerp(compact ? -22 : -44, lerp(compact ? -12 : -24, compact ? -4 : -14, e), it) + mouse.x * 3.5 * tilt;
+      const tzP = lerp(compact ? -160 : -200, lerp(40, compact ? 40 : 120, e), it);
+      const txP = lerp(compact ? 0 : 22, lerp(compact ? 0 : 8, 0, e), it);
+      const tyP = lerp(compact ? 10 : 16, lerp(compact ? 4 : 6, 0, e), it) - idle * 0.6;
       desk.style.transform = `translate3d(${txD}%, ${tyD}%, ${tzD}px) rotateX(${rxD}deg) rotateY(${ryD}deg)`;
       phone.style.transform = `translate3d(${txP}%, ${tyP}%, ${tzP}px) rotateX(${rxP}deg) rotateY(${ryP}deg)`;
 
       // Le ruban ondule lentement : une image sur deux suffit quand la progression ne bouge pas.
       frame++;
-      if (rctx && (pChanged || frame % 2 === 0)) drawRibbon(rctx, rc.width, rc.height, p, t, day, compact);
+      if (rctx && (pChanged || frame % 2 === 0)) drawRibbon(rctx, rc.width, rc.height, p, t, compact);
     };
     loop();
 
