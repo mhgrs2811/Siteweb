@@ -58,6 +58,11 @@ diagnostic relatif (CSS bloquant, pas de cache, serveur lent) ne change pas.
   la barre du haut et le pied de page, bandeau cookies entièrement en anglais (« We are
   using cookies to give you the best experience… »), « Reservation » sans accent dans le
   menu.
+- **La carte Google est cassée.** À la place du plan, sous les horaires, le visiteur lit en
+  texte brut : « Google Maps Platform rejected your request. The provided API key is
+  invalid. » La clé Google Maps du site n'est plus valide (clé révoquée, facturation non
+  activée ou restriction de domaine). Le même cadre est utilisé sur la page Contact.
+  Constaté par la cliente dans son navigateur le 10 novembre 2026.
 - **Pied de page daté** : « © La Vigne 2022, powered by Panglos ». Le lien vers l'agence
   est en http:// (non sécurisé) et n'est pas distinguable du texte (contraste 1,36:1).
 - **Un « 0 » au-dessus du menu** (compteur de panier d'une boutique inexistante) qui ne
@@ -198,9 +203,9 @@ diagnostic relatif (CSS bloquant, pas de cache, serveur lent) ne change pas.
 - Le noyau WordPress est maintenu à jour automatiquement.
 
 ## 10. Limites de cet audit
-- Les cadres Zenchef, Google Maps et les scripts TableBooker sont bloqués par le réseau de
+- Les cadres Zenchef et les scripts TableBooker sont bloqués par le réseau de
   l'environnement de test : leur fonctionnement n'a pas pu être vérifié, et ils ne sont pas
-  comptés comme des défauts.
+  comptés comme des défauts. La carte Google, elle, est bien en panne (vu par la cliente).
 - Les redirections http:// vers https:// et www. vers sans www. n'ont pas pu être testées.
 - Les temps de chargement passent par un proxy : ils sont indicatifs, légèrement
   pessimistes.
