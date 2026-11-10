@@ -7,6 +7,7 @@ import { setupGsap } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
 import Arrow from "@/components/Arrow";
 import Magnetic from "@/components/Magnetic";
+import PlanSketch from "./PlanSketch";
 
 const optionOrder: OptionId[] = ["copy", "photo", "language", "logo", "googleBusiness"];
 
@@ -39,14 +40,6 @@ function Stepper({
         </svg>
       </button>
     </div>
-  );
-}
-
-function Check() {
-  return (
-    <svg className="card__check" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-      <path d="M2.5 7.5 5.5 10.5 11.5 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }
 
@@ -116,23 +109,26 @@ export default function Configurator() {
 
   return (
     <section id="tarifs" className="section conf" aria-labelledby="tarifs-title">
-      <div className="conf__head">
-        <p className="t-caption conf__cap">Tarifs</p>
-        <h2 id="tarifs-title" className="t-display conf__title">
+      <div className="section__head">
+        <span className="section__num t-caption">04</span>
+        <h2 id="tarifs-title" className="t-display section__title">
           {show ? "Un site clair, à un prix clair." : "Trois formules, un devis clair."}
         </h2>
-        <p className="conf__lead">
+      </div>
+      <div className="conf__intro">
+        <p className="section__lead conf__lead">
           {show
             ? "Trois formules, un prix de départ pour chacune, et un panneau pour affiner selon votre commerce. Le devis définitif vient après un échange."
             : "Choisissez la formule qui vous ressemble, affinez vos options, et nous revenons vers vous avec un devis."}
         </p>
         {show && (
           <div className="vat" role="group" aria-label="Affichage des prix">
+            <span className="t-caption vat__cap">Prix affichés</span>
             <button type="button" className={`vat__btn${!ttc ? " is-on" : ""}`} aria-pressed={!ttc} onClick={() => setTtc(false)}>
-              Hors TVA
+              hors TVA
             </button>
             <button type="button" className={`vat__btn${ttc ? " is-on" : ""}`} aria-pressed={ttc} onClick={() => setTtc(true)}>
-              TVA comprise ({pricing.vatRate} %)
+              TVA comprise
             </button>
           </div>
         )}
@@ -145,7 +141,29 @@ export default function Configurator() {
           const rec = s.recommended && pricing.recommendedBadge;
           return (
             <li key={s.id} className={`card${s.recommended ? " card--rec" : ""}${on ? " is-on" : ""}`}>
-              {rec && <span className="card__badge t-caption">{pricing.recommendedBadge}</span>}
+              <div className="card__sketch">
+                {rec && (
+                  <svg className="card__filet" viewBox="0 0 320 190" preserveAspectRatio="none" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="card-copper" x1="0" y1="1" x2="1" y2="0">
+                        <stop offset="0" stopColor="#b98a63" />
+                        <stop offset="0.45" stopColor="#f0d6bd" />
+                        <stop offset="0.6" stopColor="#d9b08a" />
+                        <stop offset="1" stopColor="#a97b57" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M-12 168C70 160 150 90 332 6" fill="none" stroke="rgba(120,78,56,0.14)" strokeWidth="7" strokeLinecap="round" />
+                    <path d="M-12 168C70 160 150 90 332 6" fill="none" stroke="url(#card-copper)" strokeWidth="2.6" strokeLinecap="round" />
+                  </svg>
+                )}
+                <PlanSketch plan={s.id} />
+                {rec && (
+                  <span className="card__note t-caption">
+                    <i />
+                    {pricing.recommendedBadge}
+                  </span>
+                )}
+              </div>
               <h3 className="card__name t-display">{s.name}</h3>
               <p className="card__promise">{s.promise}</p>
               <p className="card__price">
@@ -176,10 +194,7 @@ export default function Configurator() {
               <p className="card__inc t-caption">Ce que vous obtenez</p>
               <ul className="card__list">
                 {s.includes.map((it) => (
-                  <li key={it}>
-                    <Check />
-                    {it}
-                  </li>
+                  <li key={it}>{it}</li>
                 ))}
               </ul>
             </li>
@@ -189,8 +204,10 @@ export default function Configurator() {
 
       {/* Pour ceux qui hésitent */}
       <aside className="hesit">
-        <p className="hesit__title t-display">Pas sûr de la formule qu’il vous faut ?</p>
-        <p className="hesit__text">On passe vous voir, on regarde votre commerce ensemble, et le devis est gratuit.</p>
+        <div className="hesit__body">
+          <p className="hesit__title t-display">Pas sûr de la formule qu’il vous faut ?</p>
+          <p className="hesit__text">On passe vous voir, on regarde votre commerce ensemble, et le devis est gratuit.</p>
+        </div>
         <Magnetic strength={0.2}>
           <a
             className="btn"
