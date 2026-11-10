@@ -303,6 +303,8 @@ html.has-cursor * {
   }
 }
 .nav__link {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   min-height: 44px;
@@ -315,21 +317,84 @@ html.has-cursor * {
   letter-spacing: 0.005em;
   color: color-mix(in srgb, var(--fg) 80%, transparent);
   transition:
-    color var(--dur-s) var(--ease),
-    background var(--dur-s) var(--ease);
+    color var(--dur-m) var(--ease),
+    text-shadow var(--dur-m) var(--ease);
 }
-.nav__link:hover {
+/* Au survol : une capsule de verre épais, liseré spéculaire en haut, épaisseur bleutée en bas, lueur douce. */
+.nav__link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 999px;
+  opacity: 0;
+  transform: scale(0.9);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.62) 0%,
+    rgba(255, 255, 255, 0.18) 42%,
+    rgba(255, 255, 255, 0.1) 60%,
+    rgba(255, 255, 255, 0.34) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -8px 12px -8px rgba(42, 75, 235, 0.35),
+    inset 0 6px 10px -8px rgba(255, 255, 255, 0.9),
+    0 10px 26px -10px rgba(42, 75, 235, 0.5),
+    0 1px 2px rgba(17, 18, 20, 0.18);
+  -webkit-backdrop-filter: blur(8px) saturate(1.6) brightness(1.08);
+  backdrop-filter: blur(8px) saturate(1.6) brightness(1.08);
+  transition:
+    opacity var(--dur-m) var(--ease),
+    transform var(--dur-l) var(--ease);
+  pointer-events: none;
+}
+.nav__link:hover::before,
+.nav__link:focus-visible::before,
+.nav__link:active::before {
+  opacity: 1;
+  transform: scale(1);
+}
+.nav__link:hover,
+.nav__link:focus-visible {
   color: var(--fg);
-  background: color-mix(in srgb, var(--fg) 10%, transparent);
+}
+/* De nuit, le texte survolé passe au blanc pur avec un fin halo, comme une gravure dans le verre. */
+html:not(.is-day) .nav__link:hover,
+html:not(.is-day) .nav__link:focus-visible {
+  color: #fff;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+}
+.nav__link:focus-visible {
+  outline: none;
 }
 .nav__link--cta {
   color: var(--accent-ink);
   background: var(--accent);
   padding: 0 20px;
 }
-.nav__link--cta:hover {
+.nav__link--cta {
+  transition:
+    background var(--dur-m) var(--ease),
+    box-shadow var(--dur-m) var(--ease);
+}
+.nav__link--cta::before {
+  display: none;
+}
+.nav__link--cta:hover,
+.nav__link--cta:focus-visible {
   color: var(--accent-ink);
-  background: #2340d6;
+  background: #2f52f5;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -6px 10px -8px rgba(17, 18, 20, 0.5),
+    0 10px 26px -10px rgba(42, 75, 235, 0.75);
+}
+.nav__link--cta:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
 }
 @media (min-width: 1024px) {
   .nav {
