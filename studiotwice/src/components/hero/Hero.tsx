@@ -232,11 +232,11 @@ export default function Hero() {
           </Magnetic>
         </div>
         {/* La séquence de construction : six mots, un trait qui avance avec le défilement. */}
-        <div className="hero__seq" aria-hidden="true">
-          <span className="hero__seq-track">
-            <span ref={seqFill} className="hero__seq-fill" />
+        <div className="seq hero__seq" aria-hidden="true">
+          <span className="seq__track">
+            <span ref={seqFill} className="seq__fill" />
           </span>
-          <ol ref={seqList} className="hero__seq-list">
+          <ol ref={seqList} className="seq__list">
             {heroCopy.steps.map((s, i) => (
               <li key={s.word} className={i === 0 ? "is-on" : undefined}>
                 {s.word}

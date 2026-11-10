@@ -1032,25 +1032,25 @@ html:not(.is-day) .nav__link:focus-visible {
   transform: translateY(-0.06em);
 }
 
-/* Séquence de construction : six mots, un trait qui avance */
+/* Séquence : des mots, un trait qui avance */
 .hero__seq {
   margin-top: 44px;
   max-width: 560px;
 }
-.hero__seq-track {
+.seq__track {
   position: relative;
   display: block;
   height: 1px;
   background: var(--rule);
 }
-.hero__seq-fill {
+.seq__fill {
   position: absolute;
   inset: 0;
   background: var(--accent-text);
   transform: scaleX(0);
   transform-origin: left;
 }
-.hero__seq-list {
+.seq__list {
   display: flex;
   justify-content: space-between;
   gap: 8px;
@@ -1065,13 +1065,13 @@ html:not(.is-day) .nav__link:focus-visible {
   text-transform: uppercase;
   color: var(--fg-2);
 }
-.hero__seq-list li {
+.seq__list li {
   opacity: 0.55;
   transition:
     opacity var(--dur-m) var(--ease),
     color var(--dur-m) var(--ease);
 }
-.hero__seq-list li.is-on {
+.seq__list li.is-on {
   opacity: 1;
   color: var(--fg);
 }
@@ -2059,21 +2059,36 @@ main {
 /* ------------------------------------------------------------------ */
 /* 05 Comment ça se passe                                              */
 /* ------------------------------------------------------------------ */
+@property --s {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
 .proc__head {
   padding-bottom: 0;
 }
 .proc__stage {
   position: relative;
   height: 100svh;
-  min-height: 640px;
+  min-height: 680px;
   overflow: hidden;
+}
+.proc__glow {
+  position: absolute;
+  right: 4%;
+  top: 6%;
+  width: 60%;
+  height: 84%;
+  background: radial-gradient(ellipse at 50% 48%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.25) 42%, rgba(255, 255, 255, 0) 68%);
+  pointer-events: none;
 }
 .proc__inner {
   position: relative;
+  z-index: 2;
   height: 100%;
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 var(--gutter);
+  padding: 0 var(--gutter) 16vh;
   display: grid;
   grid-template-columns: 5fr 7fr;
   gap: var(--gutter);
@@ -2081,7 +2096,6 @@ main {
 }
 .proc__left {
   position: relative;
-  min-height: 60vh;
   display: grid;
   align-content: center;
 }
@@ -2121,7 +2135,7 @@ main {
 }
 .proc__title {
   margin: 0;
-  font-size: clamp(30px, 3.4vw, 52px);
+  font-size: clamp(30px, 3.2vw, 50px);
   max-width: 14ch;
 }
 .proc__text {
@@ -2130,52 +2144,105 @@ main {
   font-size: 17px;
   color: var(--fg-2);
 }
-.proc__ticks {
-  display: grid;
-  grid-auto-flow: column;
-  gap: 6px;
-  margin-top: 40px;
-  width: min(100%, 320px);
+.proc__seq {
+  margin-top: 44px;
+  max-width: 420px;
 }
-.proc__tick {
-  height: 2px;
-  background: var(--fg);
-  transform: scaleX(0);
-  transform-origin: left;
-  opacity: 0.9;
-}
-.proc__ticks::before {
-  content: "";
-  grid-area: 1 / 1 / 2 / -1;
-  height: 1px;
-  margin-top: 0.5px;
-  background: var(--rule);
-}
+
+/* La table : une scène en perspective, les feuilles sont des plaques */
 .proc__table {
   position: relative;
-  height: min(72vh, 640px);
+  height: min(72vh, 660px);
+  perspective: 1400px;
+  perspective-origin: 42% 46%;
+}
+.proc__space {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+.proc__sheet {
+  position: absolute;
+  left: 8%;
+  top: 4%;
+  width: 78%;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
 }
 .proc__sheet-m {
   display: none;
 }
-.proc__sheet {
+.proc__word {
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  will-change: transform;
+  z-index: 1;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 0;
+  height: 0.82em;
+  overflow: hidden;
+  font-size: clamp(72px, 10.5vw, 170px);
+  line-height: 1;
+  margin-bottom: -0.08em;
+  pointer-events: none;
 }
+.proc__word-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  white-space: nowrap;
+  line-height: 1;
+  transform: translateY(-0.06em);
+}
+
+/* Les feuilles */
 .ps {
   --fg: var(--ink);
   --fg-2: var(--ink-2);
   --rule: rgba(23, 24, 26, 0.14);
-  width: min(100%, 520px);
+  position: relative;
+  width: 100%;
   padding: 28px 30px 30px;
   background: var(--lin);
   color: var(--ink);
   border: 1px solid var(--rule);
-  box-shadow: 0 40px 80px -48px rgba(23, 24, 26, 0.4);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 50px 90px -50px rgba(23, 24, 26, 0.45);
   font-size: 15px;
+  transform-style: preserve-3d;
+}
+.ps::before {
+  /* épaisseur de la plaque */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #d6dae0;
+  transform: translateZ(-8px);
+}
+.ps::after {
+  /* lumière rasante */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(112deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 40%, rgba(23, 24, 26, 0.05) 100%);
+  mix-blend-mode: soft-light;
+}
+.ps.is-in {
+  --s: 1;
+  transition: --s 1.8s var(--ease);
+}
+/* Un élément qui se révèle quand la progression de l'étape dépasse son seuil */
+.rv {
+  --k: clamp(0, calc((var(--s) - var(--at, 0)) * 5), 1);
+  opacity: var(--k);
+  transform: translateY(calc((1 - var(--k)) * 12px));
+}
+.rv--wipe {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 calc((1 - var(--k)) * 100%) 0 0);
 }
 .ps__cap {
   margin: 0 0 20px;
@@ -2342,7 +2409,8 @@ main {
   height: 5px;
   border-left: 1.5px solid var(--accent);
   border-bottom: 1.5px solid var(--accent);
-  transform: rotate(-45deg);
+  transform: rotate(-45deg) scale(var(--k, 1));
+  transform-origin: 30% 60%;
 }
 .chat {
   display: grid;
@@ -2367,40 +2435,62 @@ main {
   color: var(--lin);
   border-bottom-right-radius: 4px;
 }
+@media (prefers-reduced-motion: reduce) {
+  .rv,
+  .rv--wipe {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+}
 @media (max-width: 1023px) {
   .proc__stage {
     height: auto;
     min-height: 0;
     overflow: visible;
   }
+  .proc__glow,
+  .proc__idx,
+  .proc__seq,
+  .proc__table,
+  .proc__word {
+    display: none;
+  }
   .proc__inner {
     display: block;
     padding: 48px var(--gutter) 0;
   }
-  .proc__idx,
-  .proc__ticks {
-    display: none;
-  }
   .proc__steps {
-    gap: 48px;
+    gap: 56px;
   }
   .proc__step {
     grid-area: auto;
   }
+  html[data-js] .proc__step {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.9s var(--ease),
+      transform 1s var(--ease);
+  }
+  html[data-js] .proc__step.is-in {
+    opacity: 1;
+    transform: none;
+  }
   .proc__title {
     font-size: clamp(28px, 7.4vw, 40px);
-  }
-  .proc__table {
-    display: none;
   }
   /* Sur mobile, chaque feuille suit son étape dans le flux. */
   .proc__sheet-m {
     display: block;
     margin-top: 10px;
+    perspective: 1200px;
   }
   .ps {
-    width: 100%;
     padding: 22px 20px;
+  }
+  .ps::before {
+    display: none;
   }
 }
 

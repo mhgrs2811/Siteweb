@@ -1,8 +1,12 @@
+import type { CSSProperties } from "react";
 import { heroCopy } from "@/content/hero";
 import { pricing } from "@/content/pricing";
 import { formatEuro } from "@/lib/estimate";
 
 const d = heroCopy.demo;
+
+/** Seuil de révélation d'un élément dans la feuille (0 à 1 de la progression de l'étape). */
+const at = (v: number) => ({ "--at": v }) as CSSProperties;
 
 /** Feuille 1 : le compte rendu de la visite, rempli à la main sur place. */
 export function SheetVisite() {
@@ -17,14 +21,14 @@ export function SheetVisite() {
     <div className="ps ps--visite" aria-hidden="true">
       <p className="ps__cap">Compte rendu de visite</p>
       <dl className="ps__rows">
-        {rows.map(([k, v]) => (
-          <div key={k} className="ps__row">
+        {rows.map(([k, v], i) => (
+          <div key={k} className="ps__row rv" style={at(0.04 + i * 0.15)}>
             <dt>{k}</dt>
             <dd>{v}</dd>
           </div>
         ))}
       </dl>
-      <p className="ps__total">
+      <p className="ps__total rv" style={at(0.82)}>
         <span>{pricing.showPrices ? "Estimation" : "Devis"}</span>
         <b>{pricing.showPrices ? `${formatEuro(pricing.sites[1].from)} ${pricing.vat}` : "envoyé après la visite"}</b>
       </p>
@@ -38,24 +42,38 @@ export function SheetMaquette() {
     <div className="ps ps--maquette" aria-hidden="true">
       <p className="ps__cap">Maquette, page d’accueil</p>
       <div className="mini">
-        <div className="mini__nav">
+        <div className="mini__nav rv" style={at(0.04)}>
           <b>{d.name}</b>
           <span>{d.links[1]}</span>
         </div>
-        <p className="mini__title">{d.title}</p>
-        <p className="mini__para">{d.para}</p>
-        <div className="mini__photo">
+        <p className="mini__title rv" style={at(0.22)}>
+          {d.title}
+        </p>
+        <p className="mini__para rv" style={at(0.4)}>
+          {d.para}
+        </p>
+        <div className="mini__photo rv" style={at(0.56)}>
           <span>{d.photo}</span>
         </div>
-        <div className="mini__cta">{d.cta}</div>
+        <div className="mini__cta rv" style={at(0.72)}>
+          {d.cta}
+        </div>
       </div>
-      <p className="ps__note">Version 2, après vos remarques</p>
+      <p className="ps__note rv" style={at(0.88)}>
+        Version 2, après vos remarques
+      </p>
     </div>
   );
 }
 
 /** Feuille 3 : la mise en ligne, une adresse et une fiche Google remplies. */
 export function SheetEnLigne() {
+  const checks = [
+    "Nom de domaine réservé à votre nom",
+    "Hébergement et sauvegardes",
+    "Fiche Google Business remplie",
+    "Vérifié ensemble sur votre téléphone",
+  ];
   return (
     <div className="ps ps--enligne" aria-hidden="true">
       <p className="ps__cap">Mise en ligne</p>
@@ -64,15 +82,18 @@ export function SheetEnLigne() {
         <i />
         <i />
         <span className="url__bar">
-          <span className="url__dot" />
-          {d.url}
+          <span className="url__dot rv" style={at(0.3)} />
+          <span className="url__text rv rv--wipe" style={at(0.02)}>
+            {d.url}
+          </span>
         </span>
       </div>
       <ul className="checks">
-        <li>Nom de domaine réservé à votre nom</li>
-        <li>Hébergement et sauvegardes</li>
-        <li>Fiche Google Business remplie</li>
-        <li>Vérifié ensemble sur votre téléphone</li>
+        {checks.map((c, i) => (
+          <li key={c} className="rv" style={at(0.42 + i * 0.14)}>
+            {c}
+          </li>
+        ))}
       </ul>
     </div>
   );
@@ -84,9 +105,15 @@ export function SheetSuivi() {
     <div className="ps ps--suivi" aria-hidden="true">
       <p className="ps__cap">Suivi</p>
       <div className="chat">
-        <p className="chat__msg chat__msg--them">Bonjour, on passe à la carte d’hiver lundi. Je vous envoie la nouvelle carte en photo ?</p>
-        <p className="chat__msg chat__msg--us">Parfait, envoyez-la. Je la mets en ligne et je vous préviens.</p>
-        <p className="chat__msg chat__msg--us">C’est en ligne. Les horaires de décembre sont à jour aussi.</p>
+        <p className="chat__msg chat__msg--them rv" style={at(0.06)}>
+          Bonjour, on passe à la carte d’hiver lundi. Je vous envoie la nouvelle carte en photo ?
+        </p>
+        <p className="chat__msg chat__msg--us rv" style={at(0.42)}>
+          Parfait, envoyez-la. Je la mets en ligne et je vous préviens.
+        </p>
+        <p className="chat__msg chat__msg--us rv" style={at(0.76)}>
+          C’est en ligne. Les horaires de décembre sont à jour aussi.
+        </p>
       </div>
     </div>
   );

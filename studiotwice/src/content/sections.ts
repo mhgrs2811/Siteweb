@@ -86,21 +86,25 @@ export const process = {
       title: "On se rencontre chez vous.",
       text: "Pas de visioconférence. Nous passons à votre commerce, à une heure creuse. On regarde ce que vous faites, ce que vos clients demandent, les photos que vous avez déjà. Vous repartez avec une estimation claire.",
       sheet: "visite",
+      word: "Visite",
     },
     {
       title: "Vous voyez la maquette avant qu’on construise.",
       text: "Une maquette de votre page d’accueil, à regarder sur votre téléphone. Vous dites ce qui va et ce qui ne va pas. On ajuste jusqu’à ce que ça vous ressemble, puis on construit.",
       sheet: "maquette",
+      word: "Maquette",
     },
     {
       title: "Mise en ligne, on s’occupe de tout.",
       text: "Nom de domaine, hébergement, fiche Google, adresse e-mail professionnelle si vous le souhaitez. Le jour venu, on vérifie ensemble sur votre téléphone, puis on met en ligne.",
       sheet: "enligne",
+      word: "En ligne",
     },
     {
       title: "On reste là.",
       text: "Un horaire qui change, une nouvelle photo, une carte de saison : vous nous écrivez, on s’en occupe. C’est compris dans l’entretien. Et si votre commerce grandit, le site grandit avec lui.",
       sheet: "suivi",
+      word: "Suivi",
     },
   ],
 };
