@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang={site.locale} className={`${archivo.variable} ${onest.variable}`} suppressHydrationWarning>
       <head>
         {/* Marque la présence de JavaScript avant le premier rendu : les textes masqués ne clignotent pas. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.setAttribute('data-js','')" }} />
       </head>
       <body>
         <a className="skip" href="#haut">

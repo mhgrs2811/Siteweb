@@ -1469,11 +1469,11 @@ html.has-cursor * {
 .reveal__in {
   display: inline-block;
 }
-.js .reveal:not(.is-in) .reveal__in {
+html[data-js] .reveal:not(.is-in) .reveal__in {
   transform: translateY(112%);
 }
 @media (prefers-reduced-motion: reduce) {
-  .js .reveal .reveal__in {
+  html[data-js] .reveal .reveal__in {
     transform: none !important;
   }
 }

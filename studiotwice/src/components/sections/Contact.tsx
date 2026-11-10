@@ -27,6 +27,8 @@ export default function Contact() {
     e.preventDefault();
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
+    // Aperçu statique : pas de route serveur, on le dit au lieu d'échouer.
+    if (process.env.NEXT_PUBLIC_STATIC_PREVIEW === "1") return setStatus("unconfigured");
     setStatus("sending");
     try {
       const res = await fetch("/api/contact", {
