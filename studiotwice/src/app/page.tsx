@@ -12,6 +12,7 @@ import JsonLd from "@/components/JsonLd";
 export default function Home() {
   return (
     <>
+      <div id="daylayer" className="daylayer" aria-hidden="true" />
       <main id="haut">
         <Hero />
         <Realisations />

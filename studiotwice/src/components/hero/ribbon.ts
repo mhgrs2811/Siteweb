@@ -42,35 +42,36 @@ export function drawRibbon(
   const a = pts[0];
   const b = pts[pts.length - 1];
   const alphaMul = 1 - 0.78 * dayT;
-  const color = dayT < 0.5 ? "255,243,224" : "255,255,255";
+  const color = dayT < 0.5 ? "242,244,246" : "255,255,255";
 
   ctx.save();
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
   ctx.globalCompositeOperation = dayT < 0.5 ? "lighter" : "source-over";
+  // Halo obtenu par superposition de traits de largeur décroissante : aucun flou, donc peu coûteux.
   const k = compact ? 0.6 : 1;
-  const passes: Array<[number, number, number]> = [
-    [96 * k, 0.04, 48 * k],
-    [40 * k, 0.085, 22 * k],
-    [12 * k, 0.22, 8 * k],
-    [2.2, 0.9, 0],
+  const passes: Array<[number, number]> = [
+    [120 * k, 0.025],
+    [80 * k, 0.04],
+    [48 * k, 0.07],
+    [24 * k, 0.12],
+    [10 * k, 0.26],
+    [2.2, 0.9],
   ];
-  for (const [lw, alpha, blur] of passes) {
+  ctx.shadowBlur = 0;
+  for (const [lw, alpha] of passes) {
     const g = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
     g.addColorStop(0, `rgba(${color},0)`);
     g.addColorStop(0.55, `rgba(${color},${alpha * alphaMul})`);
     g.addColorStop(1, `rgba(${color},${alpha * alphaMul})`);
     ctx.strokeStyle = g;
     ctx.lineWidth = lw;
-    ctx.shadowBlur = blur;
-    ctx.shadowColor = `rgba(${color},${alpha * alphaMul})`;
     ctx.beginPath();
     ctx.moveTo(pts[0].x, pts[0].y);
     for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
     ctx.stroke();
   }
   // Pointe lumineuse
-  ctx.shadowBlur = 0;
   ctx.fillStyle = `rgba(${color},${0.95 * alphaMul})`;
   ctx.beginPath();
   ctx.arc(b.x, b.y, 2.5, 0, Math.PI * 2);

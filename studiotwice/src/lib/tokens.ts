@@ -1,16 +1,16 @@
 /** Couleurs du site. Une seule source de vérité, reprise en CSS dans globals.css. */
 export const COLORS = {
-  night: "#15120F",
-  sand: "#EFE8DD",
-  lin: "#F7F2EA",
-  ink: "#1B1816",
-  ink2: "#6B6256",
-  sandOnNight: "#B8AC9C",
-  taupe: "#8C7E6E",
-  light: "#FFF3E0",
+  night: "#111214",
+  sand: "#ECEEF1",
+  lin: "#F8F9FA",
+  ink: "#17181A",
+  ink2: "#5F646C",
+  sandOnNight: "#AEB3BA",
+  taupe: "#8A9099",
+  light: "#F2F4F6",
   accent: "#2A4BEB",
-  ruleDark: "rgba(27, 24, 22, 0.14)",
-  ruleLight: "rgba(247, 242, 234, 0.18)",
+  ruleDark: "rgba(23, 24, 26, 0.14)",
+  ruleLight: "rgba(248, 249, 250, 0.18)",
 } as const;
 
 export const smoothstep = (a: number, b: number, x: number) => {

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { heroCopy } from "@/content/hero";
-import { COLORS, dayFromProgress, smoothstep, stepFromProgress } from "@/lib/tokens";
+import { dayFromProgress, stepFromProgress } from "@/lib/tokens";
 import { setupGsap, ScrollTrigger } from "@/lib/gsap";
 import Stage from "./Stage";
 import Magnetic from "@/components/Magnetic";
@@ -33,30 +33,21 @@ export default function Hero() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const desktop = window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
     const docEl = document.documentElement;
-    const mix = gsap.utils.interpolate;
+    const layer = document.getElementById("daylayer");
     const steps = heroCopy.steps;
     let current = 0;
     let swapping: gsap.core.Timeline | null = null;
+    let isDay = false;
 
-    // Le fond glisse doucement, le texte bascule net au milieu pour rester lisible.
-    const colorAt = (dayT: number) => {
-      const sw = smoothstep(0.4, 0.6, dayT);
-      return {
-        bg: mix(COLORS.night, COLORS.sand)(dayT),
-        fg: mix(COLORS.lin, COLORS.ink)(sw),
-        fg2: mix(COLORS.sandOnNight, COLORS.ink2)(sw),
-        rule: mix("rgba(247,242,234,0.18)", "rgba(27,24,22,0.14)")(sw),
-        accentText: mix("#9db0ff", COLORS.accent)(sw),
-      };
-    };
-
+    // Le fond glisse par l'opacité d'une couche fixe ; les textes basculent une fois, au milieu.
     const applyColors = (p: number) => {
-      const c = colorAt(dayFromProgress(p));
-      docEl.style.setProperty("--bg", c.bg);
-      docEl.style.setProperty("--fg", c.fg);
-      docEl.style.setProperty("--fg-2", c.fg2);
-      docEl.style.setProperty("--rule", c.rule);
-      docEl.style.setProperty("--accent-text", c.accentText);
+      const d = dayFromProgress(p);
+      if (layer) layer.style.opacity = d.toFixed(3);
+      const day = d >= 0.5;
+      if (day !== isDay) {
+        isDay = day;
+        docEl.classList.toggle("is-day", day);
+      }
     };
 
     const setStep = (i: number) => {
@@ -163,6 +154,7 @@ export default function Hero() {
     return () => {
       ctx.revert();
       swapping?.kill();
+      docEl.classList.remove("is-day");
     };
   }, []);
 

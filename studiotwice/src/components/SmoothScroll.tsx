@@ -11,7 +11,7 @@ export default function SmoothScroll() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
     const gsap = setupGsap();
-    const lenis = new Lenis({ lerp: 0.09, smoothWheel: true, anchors: { offset: 0 } });
+    const lenis = new Lenis({ lerp: 0.11, smoothWheel: true, anchors: { offset: 0 } });
     setLenis(lenis);
     lenis.on("scroll", ScrollTrigger.update);
     const raf = (time: number) => lenis.raf(time * 1000);

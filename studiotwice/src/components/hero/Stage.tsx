@@ -108,12 +108,13 @@ export default function Stage({ progress }: Props) {
     let raf = 0;
     const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
     const t0 = performance.now();
+    let lastP = -1;
 
     const resize = () => {
       if (!rctx) return;
       const w = el.clientWidth;
       const h = el.clientHeight;
-      const dpr = Math.min(window.devicePixelRatio, 1.5);
+      const dpr = Math.min(window.devicePixelRatio, 1.25);
       rc.width = Math.round(w * dpr);
       rc.height = Math.round(h * dpr);
       rctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -151,6 +152,8 @@ export default function Stage({ progress }: Props) {
       mouse.y = lerp(mouse.y, mouse.ty, 0.045);
       const idle = reduce ? 0 : Math.sin(t * 0.45) * 0.8;
 
+      if (Math.abs(p - lastP) > 0.0005) {
+        lastP = p;
       set("--face-a", ss(0.08, 0.3, p));
       set("--grid-a", ss(0.12, 0.3, p) * (1 - 0.72 * ss(0.36, 0.52, p)) * (1 - ss(0.7, 0.86, p)));
       set("--dash-a", ss(0.16, 0.3, p) * (1 - ss(0.34, 0.48, p)));
@@ -167,6 +170,7 @@ export default function Stage({ progress }: Props) {
       set("--online-t", ss(0.92, 1, p));
       set("--day", day);
       set("--shade", 1 - e * 0.55);
+      }
 
       const tilt = compact ? 0.4 : 1;
       const rxD = lerp(15, 2.5, e) + mouse.y * 2.5 * tilt + idle * 0.6;
