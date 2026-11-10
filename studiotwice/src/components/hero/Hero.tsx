@@ -125,7 +125,7 @@ export default function Hero() {
           },
         }).to(proxy, { p: 1, ease: "none", duration: 1, onUpdate: () => apply(proxy.p) });
       } else {
-        // Mobile : séquence courte jouée une fois quand le hero est visible, rien d'épinglé.
+        // Mobile : séquence courte jouée une fois quand la scène est visible, rien d'épinglé.
         const play = gsap.to(proxy, { p: 1, duration: 7.5, ease: "power1.inOut", paused: true, onUpdate: () => apply(proxy.p) });
         const io = new IntersectionObserver(
           ([en]) => {
@@ -137,6 +137,18 @@ export default function Hero() {
           { threshold: 0.4 },
         );
         io.observe(stageEl.current ?? el);
+        // Si le hero est déjà passé (lien direct vers une ancre, défilement rapide), on termine tout de suite.
+        const done = new IntersectionObserver(
+          ([en]) => {
+            if (!en.isIntersecting && en.boundingClientRect.bottom < 0) {
+              play.progress(1);
+              io.disconnect();
+              done.disconnect();
+            }
+          },
+          { threshold: 0 },
+        );
+        done.observe(el);
       }
     }, el);
 

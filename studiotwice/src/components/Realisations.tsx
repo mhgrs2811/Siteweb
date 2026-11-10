@@ -6,7 +6,7 @@ export default function Realisations() {
   return (
     <section id="realisations" className="section" aria-labelledby="realisations-title">
       <div className="section__head">
-        <span className="section__num">02</span>
+        <span className="section__num t-caption">02</span>
         <h2 id="realisations-title" className="t-display section__title">
           Réalisations
         </h2>
