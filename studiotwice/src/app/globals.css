@@ -582,7 +582,7 @@ html.has-cursor * {
   inset: 0;
 }
 
-.hero__ribbon {
+.scene-ribbon {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -660,6 +660,13 @@ html.has-cursor * {
 .seq__list li.is-on {
   opacity: 1;
   color: var(--fg);
+}
+
+/* Mode calme : plus d'étape ni de séquence, la scène respire seule */
+.hero--calm .hero__step,
+.hero--calm .hero__seq,
+.hero--calm .hero__hint {
+  display: none;
 }
 
 /* Invitation à défiler */
@@ -896,6 +903,12 @@ html.has-cursor * {
 }
 .bp__filet {
   opacity: var(--bp-filet);
+}
+.bp--filet-only .bp__filet {
+  opacity: 1;
+}
+.bp--filet-only .bp__filet path {
+  stroke-dasharray: none;
 }
 .bp__filet-shadow {
   stroke: rgba(120, 78, 56, 0.18);
@@ -1288,7 +1301,7 @@ html.has-cursor * {
   }
 }
 
-.hero__ribbon {
+.scene-ribbon {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -1365,6 +1378,13 @@ html.has-cursor * {
   .hero__seq {
     display: none;
   }
+}
+
+/* Mode calme : plus d'étape ni de séquence, la scène respire seule */
+.hero--calm .hero__step,
+.hero--calm .hero__seq,
+.hero--calm .hero__hint {
+  display: none;
 }
 
 /* Invitation à défiler */
@@ -2321,6 +2341,122 @@ main {
 @media (max-width: 1023px) {
   .foot {
     padding-bottom: 110px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* 01 Du croquis à la mise en ligne (mode calme)                       */
+/* ------------------------------------------------------------------ */
+.build__head {
+  padding-bottom: 0;
+}
+.build__stage {
+  position: relative;
+  height: 100svh;
+  min-height: 680px;
+  overflow: hidden;
+}
+.build__inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  gap: var(--gutter);
+  align-items: center;
+}
+.build__left {
+  position: relative;
+  display: grid;
+  align-content: center;
+}
+.build__idx {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 28px;
+  color: var(--fg-2);
+  font-variant-numeric: tabular-nums;
+}
+.build__idx b {
+  font-weight: 500;
+  color: var(--fg);
+}
+.build__idx-sep {
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  transform: translateY(-4px);
+}
+.build__name {
+  margin: 0;
+  font-size: clamp(32px, 3.6vw, 56px);
+}
+.build__text {
+  margin: 14px 0 0;
+  max-width: 34ch;
+  font-size: 17px;
+  color: var(--fg-2);
+}
+.build__seq {
+  margin-top: 40px;
+  max-width: 440px;
+}
+.build__scene {
+  position: relative;
+  height: min(78vh, 760px);
+}
+.build__scene .stage {
+  position: absolute;
+  inset: 0;
+}
+.build__scene .slab--desk {
+  left: 2%;
+  top: 10%;
+  width: 66%;
+}
+.build__scene .slab--phone {
+  right: 4%;
+  top: 30%;
+  width: 20%;
+}
+@media (max-width: 1023px) {
+  .build__stage {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+  .build__inner {
+    display: block;
+    padding: 40px var(--gutter) 0;
+  }
+  .build__idx {
+    margin-bottom: 18px;
+  }
+  .build__name {
+    font-size: clamp(28px, 7.4vw, 40px);
+  }
+  .build__seq {
+    display: none;
+  }
+  .build__scene {
+    height: 58svh;
+    min-height: 420px;
+    margin: 28px 0 0;
+  }
+  .build__scene .slab--desk {
+    display: none;
+  }
+  .build__scene .slab--phone {
+    left: 0;
+    right: 0;
+    top: 6%;
+    height: 90%;
+    width: auto;
+    margin-inline: auto;
   }
 }
 

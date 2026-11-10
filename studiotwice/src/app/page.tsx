@@ -1,4 +1,6 @@
 import Hero from "@/components/hero/Hero";
+import Build from "@/components/build/Build";
+import { HERO_MODE } from "@/lib/heroMode";
 import Realisations from "@/components/sections/Realisations";
 import Services from "@/components/sections/Services";
 import Configurator from "@/components/pricing/Configurator";
@@ -14,6 +16,7 @@ export default function Home() {
     <>
       <main id="haut">
         <Hero />
+        {HERO_MODE === "calm" && <Build />}
         <Realisations />
         <Services />
         <Configurator />

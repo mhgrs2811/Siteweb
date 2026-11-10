@@ -11,6 +11,8 @@ interface Props {
   progress: React.RefObject<number>;
   /** Arrivée : 0 au chargement, 1 quand les plaques sont en place. */
   intro: React.RefObject<number>;
+  /** Afficher la feuille de croquis (plaques qui se construisent) ou non (site fini). */
+  sketch?: boolean;
 }
 
 const d = heroCopy.demo;
@@ -65,7 +67,7 @@ function Demo({ variant }: { variant: "desk" | "phone" }) {
   );
 }
 
-function Slab({ variant }: { variant: "desk" | "phone" }) {
+function Slab({ variant, sketch }: { variant: "desk" | "phone"; sketch: boolean }) {
   return (
     <div className={`slab slab--${variant}`} data-slab={variant}>
       <div className="slab__depth" />
@@ -80,7 +82,7 @@ function Slab({ variant }: { variant: "desk" | "phone" }) {
         <i className="slab__line slab__line--t" />
         <i className="slab__line slab__line--b" />
       </div>
-      <Blueprint variant={variant} />
+      <Blueprint variant={variant} filetOnly={!sketch} />
     </div>
   );
 }
@@ -90,14 +92,14 @@ function Slab({ variant }: { variant: "desk" | "phone" }) {
  * une lumière douce et un ruban derrière. Les transformations sont écrites chaque image,
  * les variables CSS seulement quand la progression change.
  */
-export default function Stage({ progress, intro }: Props) {
+export default function Stage({ progress, intro, sketch = true }: Props) {
   const root = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = root.current;
     if (!el) return;
-    // Le canvas du ruban est posé par le hero, sur toute sa largeur.
-    const rc = el.closest(".hero")?.querySelector<HTMLCanvasElement>(".hero__ribbon") ?? null;
+    // Le canvas du ruban est posé par la section hôte, sur toute sa largeur.
+    const rc = el.closest("section")?.querySelector<HTMLCanvasElement>(".scene-ribbon") ?? null;
     if (!rc) return;
     const desk = el.querySelector<HTMLElement>('[data-slab="desk"]');
     const phone = el.querySelector<HTMLElement>('[data-slab="phone"]');
@@ -155,7 +157,10 @@ export default function Stage({ progress, intro }: Props) {
       const e = ss(0, 1, p);
       mouse.x = lerp(mouse.x, mouse.tx, 0.045);
       mouse.y = lerp(mouse.y, mouse.ty, 0.045);
+      // Respiration lente : les plaques montent et descendent à peine, en léger décalage.
       const idle = reduce ? 0 : Math.sin(t * 0.45) * 0.8;
+      const breathD = reduce ? 0 : Math.sin(t * 0.38) * 1.2;
+      const breathP = reduce ? 0 : Math.sin(t * 0.33 + 1.4) * 1.4;
 
       const pChanged = Math.abs(p - lastP) > 0.0005;
       if (pChanged) {
@@ -171,7 +176,7 @@ export default function Stage({ progress, intro }: Props) {
         set("--bp-dim", 1 - ss(0.46, 0.62, p));
         set("--bp-gone", ss(0.3, 0.46, p));
         set("--bp-filet", 1 - ss(0.5, 0.7, p));
-        el.querySelectorAll(".bp").forEach((n) => n.classList.toggle("is-done", p > 0.66));
+        el.querySelectorAll(".bp:not(.bp--filet-only)").forEach((n) => n.classList.toggle("is-done", p > 0.66));
         set("--t-nav", ss(0.3, 0.4, p));
         set("--t-title", ss(0.34, 0.47, p));
         set("--t-para", ss(0.42, 0.54, p));
@@ -184,20 +189,21 @@ export default function Stage({ progress, intro }: Props) {
         set("--shade", 1 - e * 0.55);
       }
 
-      // Trois poses : arrivée (loin, de biais), croquis (p = 0), page finie (p = 1).
-      // Les plaques flottent de part et d'autre de la carte : l'ordinateur à gauche, un peu
+      // Deux poses, croquis (p = 0) et page finie (p = 1), et une arrivée douce : les plaques
+      // se posent depuis un peu plus bas et un peu plus loin. L'ordinateur à gauche, un peu
       // derrière le verre, le téléphone à droite, devant.
       const tilt = compact ? 0.4 : 1;
-      const rxD = lerp(18, lerp(9, 5, e), it) + mouse.y * 2.5 * tilt + idle * 0.6;
-      const ryD = lerp(48, lerp(26, 16, e), it) + mouse.x * 4 * tilt;
-      const tzD = lerp(-360, lerp(-140, -60, e), it);
-      const txD = lerp(-14, lerp(-4, -6, e), it);
-      const tyD = lerp(10, lerp(4, 0, e), it) + idle * 0.5;
-      const rxP = lerp(compact ? 18 : 10, lerp(6, 3, e), it) + mouse.y * 2 * tilt - idle * 0.5;
-      const ryP = lerp(compact ? -22 : -44, lerp(compact ? -12 : -24, compact ? -4 : -14, e), it) + mouse.x * 3.5 * tilt;
-      const tzP = lerp(compact ? -160 : -200, lerp(40, compact ? 40 : 120, e), it);
-      const txP = lerp(compact ? 0 : 22, lerp(compact ? 0 : 8, 0, e), it);
-      const tyP = lerp(compact ? 10 : 16, lerp(compact ? 4 : 6, 0, e), it) - idle * 0.6;
+      const arr = 1 - it;
+      const rxD = lerp(9, 5, e) + arr * 6 + mouse.y * 2.5 * tilt + idle * 0.6;
+      const ryD = lerp(26, 16, e) + arr * 10 + mouse.x * 4 * tilt;
+      const tzD = lerp(-140, -60, e) - arr * 140;
+      const txD = lerp(-4, -6, e) - arr * 3;
+      const tyD = lerp(4, 0, e) + arr * 9 + idle * 0.5 + breathD;
+      const rxP = lerp(6, 3, e) + arr * 6 + mouse.y * 2 * tilt - idle * 0.5;
+      const ryP = lerp(compact ? -12 : -24, compact ? -4 : -14, e) - arr * 10 + mouse.x * 3.5 * tilt;
+      const tzP = lerp(40, compact ? 40 : 120, e) - arr * 120;
+      const txP = lerp(compact ? 0 : 8, 0, e) + arr * 4;
+      const tyP = lerp(compact ? 4 : 6, 0, e) + arr * 11 - idle * 0.6 + breathP;
       desk.style.transform = `translate3d(${txD}%, ${tyD}%, ${tzD}px) rotateX(${rxD}deg) rotateY(${ryD}deg)`;
       phone.style.transform = `translate3d(${txP}%, ${tyP}%, ${tzP}px) rotateX(${rxP}deg) rotateY(${ryP}deg)`;
 
@@ -220,8 +226,8 @@ export default function Stage({ progress, intro }: Props) {
     <div className="stage" ref={root} aria-hidden="true">
       <div className="stage__glow" />
       <div className="stage__space">
-        <Slab variant="desk" />
-        <Slab variant="phone" />
+        <Slab variant="desk" sketch={sketch} />
+        <Slab variant="phone" sketch={sketch} />
       </div>
     </div>
   );

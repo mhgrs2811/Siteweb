@@ -17,7 +17,7 @@ const moved = [
   ["src/app/robots.ts", "robots.ts"],
 ].map(([from, to]) => [join(root, from), join(asideDir, to)]);
 const dist = join(root, ".next-export");
-const out = join(root, "out");
+const out = join(root, process.env.EXPORT_OUT || "out");
 
 rmSync(dist, { recursive: true, force: true });
 rmSync(out, { recursive: true, force: true });

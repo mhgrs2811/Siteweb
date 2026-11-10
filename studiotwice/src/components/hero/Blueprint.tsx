@@ -55,10 +55,29 @@ const filetPath = (w: number, h: number) =>
 const roundedRectPath = (w: number, h: number, r: number) =>
   `M${r} 0H${w - r}A${r} ${r} 0 0 1 ${w} ${r}V${h - r}A${r} ${r} 0 0 1 ${w - r} ${h}H${r}A${r} ${r} 0 0 1 0 ${h - r}V${r}A${r} ${r} 0 0 1 ${r} 0Z`;
 
-export default function Blueprint({ variant }: { variant: Variant }) {
+export default function Blueprint({ variant, filetOnly = false }: { variant: Variant; filetOnly?: boolean }) {
   const L = LAYOUT[variant];
   const dotsId = `bp-dots-${variant}`;
   const dimY = -72;
+  if (filetOnly) {
+    // Plaque finie : seule la baguette cuivrée reste, comme sur les plaques de la référence.
+    return (
+      <svg className={`bp bp--${variant} bp--filet-only is-drawn`} viewBox={`0 0 ${L.w} ${L.h}`} overflow="visible" aria-hidden="true">
+        <defs>
+          <linearGradient id={`bp-copper-${variant}`} x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0" stopColor="#b98a63" />
+            <stop offset="0.45" stopColor="#f0d6bd" />
+            <stop offset="0.6" stopColor="#d9b08a" />
+            <stop offset="1" stopColor="#a97b57" />
+          </linearGradient>
+        </defs>
+        <g className="bp__filet">
+          <path className="bp__filet-shadow" d={filetPath(L.w, L.h)} />
+          <path className="bp__filet-line" d={filetPath(L.w, L.h)} style={{ stroke: `url(#bp-copper-${variant})` }} />
+        </g>
+      </svg>
+    );
+  }
   return (
     <svg className={`bp bp--${variant}`} viewBox={`0 0 ${L.w} ${L.h}`} overflow="visible" aria-hidden="true">
       <defs>
