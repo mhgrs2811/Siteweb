@@ -1,0 +1,81 @@
+.body {
+  padding-block: var(--section-y);
+}
+
+.inner {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  max-width: 52rem;
+}
+
+.banner {
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--c-amber);
+  background: var(--bg-2);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.section {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.h2 {
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+}
+
+.content {
+  color: var(--muted);
+}
+
+.fields {
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.fieldLabel {
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.fieldValue {
+  margin: 0;
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.todo {
+  color: var(--c-red);
+  border-color: var(--c-red);
+}
+
+.updated {
+  font-size: var(--fs-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+@media (min-width: 48rem) {
+  .field {
+    grid-template-columns: 14rem 1fr;
+    align-items: baseline;
+  }
+}

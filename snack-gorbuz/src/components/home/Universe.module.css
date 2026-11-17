@@ -1,0 +1,182 @@
+.section {
+  padding-block: var(--section-y);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.copy {
+  display: grid;
+  gap: 2rem;
+  align-content: start;
+}
+
+.copy > :first-child {
+  margin-bottom: 0;
+}
+
+.block {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.h3 {
+  color: var(--c-amber);
+}
+
+.text {
+  color: var(--muted);
+}
+
+.address {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  font-size: var(--fs-md);
+}
+
+.address svg {
+  color: var(--c-red);
+  margin-top: 0.3rem;
+  flex: none;
+}
+
+/* --- Planche de marque -------------------------------------------------- */
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(7rem, auto);
+  gap: 0.75rem;
+}
+
+.tile {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  min-height: 7rem;
+}
+
+.tileWord {
+  grid-column: 1 / -1;
+  background: var(--c-charcoal-2);
+  border: 1px solid var(--line);
+  min-height: 11rem;
+}
+
+.word {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 14vw, 9rem);
+  line-height: 0.85;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--c-cream);
+  letter-spacing: 0.02em;
+}
+
+.tileRed {
+  background: var(--c-red);
+  color: var(--c-cream);
+  align-content: end;
+  justify-items: start;
+}
+
+.tileBeige {
+  background: var(--c-beige);
+  color: var(--c-charcoal);
+  align-content: end;
+  justify-items: start;
+}
+
+.tileAmber {
+  background: var(--c-amber);
+  color: var(--c-charcoal);
+  align-content: end;
+  justify-items: start;
+}
+
+.tileStripes {
+  background-color: var(--c-cream);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0,
+    transparent 10px,
+    rgba(23, 23, 23, 0.1) 10px,
+    rgba(23, 23, 23, 0.1) 11px
+  );
+  grid-row: span 2;
+}
+
+.tileTicket {
+  background: var(--c-cream);
+  color: var(--c-charcoal);
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 0.5rem;
+  padding: 1.25rem;
+}
+
+.ticketLine {
+  height: 3px;
+  width: 70%;
+  background: var(--c-charcoal);
+  opacity: 0.8;
+}
+
+.ticketLine:nth-child(2) {
+  width: 50%;
+}
+
+.ticketLine:nth-child(3) {
+  width: 35%;
+}
+
+.ticketTag {
+  margin-top: 0.5rem;
+}
+
+.swatchLabel {
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.swatchHex {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: var(--fs-xs);
+  opacity: 0.8;
+}
+
+@media (min-width: 64rem) {
+  .inner {
+    grid-template-columns: 6fr 6fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .board {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 9rem;
+    position: sticky;
+    top: calc(var(--header-h) + 2rem);
+  }
+
+  .tileWord {
+    grid-column: 1 / -1;
+  }
+
+  .tileStripes {
+    grid-row: span 2;
+  }
+}

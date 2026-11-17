@@ -1,0 +1,20 @@
+.section {
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--line);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+}
+
+.head > :first-child {
+  flex: 1 1 24rem;
+}
+
+.more {
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}

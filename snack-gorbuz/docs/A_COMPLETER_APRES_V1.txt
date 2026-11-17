@@ -1,0 +1,135 @@
+À COMPLÉTER APRÈS LA V1 — SNACK GORBUZ
+Liste exacte des contenus à demander au propriétaire pour finaliser le site.
+Chaque ligne indique où la donnée s'intègre dans le code.
+
+======================================================================
+1. IDENTITÉ ET MARQUE
+======================================================================
+[ ] Logo officiel (SVG vectoriel ou PNG transparent, 2 000 px de large minimum)
+    → public/media/logo-gorbuz.svg + siteConfig.logo { src, width, height, alt }
+    → remplace automatiquement le wordmark typographique provisoire partout.
+[ ] Charte existante éventuelle (couleurs, typographies, règles d'usage)
+    → à comparer avec src/app/globals.css (tokens --c-*) et validation DA.
+[ ] Validation ou réécriture de la baseline « La street-food qui a du caractère. »
+    → siteConfig.baseline
+[ ] Validation de la signature « Du caractère. Du croustillant. Du Gorbuz. »
+    → siteConfig.signature
+[ ] Validation des textes provisoires (manifeste, concept, accroches)
+    → src/data/copy.ts (tous les textes sont centralisés)
+
+======================================================================
+2. INFORMATIONS PRATIQUES
+======================================================================
+[ ] Adresse complète (rue, numéro, code postal, commune)
+    → siteConfig.address { street, postalCode, city, country }
+[ ] Lien Google Maps / itinéraire officiel
+    → siteConfig.address.mapsUrl (active le bouton « Itinéraire » header/footer/CTA)
+[ ] URL d'embed de la carte (Google Maps « Intégrer une carte » ou OpenStreetMap)
+    → siteConfig.address.mapEmbedUrl (active la carte interactive sur /contact)
+[ ] Numéro de téléphone (format affiché souhaité)
+    → siteConfig.phone (active les liens tel:)
+[ ] Adresse email de contact
+    → siteConfig.email (active les liens mailto:)
+[ ] Horaires d'ouverture par jour, créneaux multiples et jours de fermeture
+    → siteConfig.openingHours [{ day, slots: [{ from, to }], note? }]
+[ ] Mention horaires (jours fériés, service continu, fermeture annuelle…)
+    → siteConfig.openingNote
+[ ] Canal de commande : téléphone, plateforme (Takeaway, Uber Eats…), click & collect, sur place uniquement
+    → siteConfig.orderUrl (si lien) ; sinon les CTA restent « Voir la carte »
+[ ] Modalités de retrait / livraison, si elles existent
+    → copy.contact.noteText + éventuel bloc dédié
+
+======================================================================
+3. LA CARTE
+======================================================================
+[ ] Liste complète des familles (durums, kumpirs, mitraillettes confirmées ; autres ?)
+    → src/data/menuData.ts → families[] (ajouter un objet Family par famille)
+[ ] Pour chaque produit : nom exact, description courte, prix TTC en euros
+    → families[].products[] { id, name, description, price }
+[ ] Formats / tailles et leurs prix (ex. normal / grand)
+    → products[].variants [{ label, price }]
+[ ] Suppléments et options avec prix (ou « inclus »)
+    → products[].options [{ label, price }]
+[ ] Allergènes CONFIRMÉS par produit (liste UE 14 allergènes)
+    → products[].allergens (ne rien renseigner tant que ce n'est pas validé)
+[ ] Produits à mettre en avant : signature, nouveauté, populaire
+    → products[].badge ; vedette de l'accueil : menuData.featuredProduct
+[ ] Carte PDF officielle si elle existe
+    → public/media/carte-gorbuz.pdf + siteConfig.menuPdfUrl
+[ ] Gestion des disponibilités (produit indisponible) : souhaitée ou non ?
+    → products[].available
+
+======================================================================
+4. PHOTOS ET MÉDIAS (voir public/media/README.txt)
+======================================================================
+[ ] Photos produit des durums, kumpirs, mitraillettes (packshot sur fond uni chaud)
+    → durum-signature.jpg, kumpir-signature.jpg, mitraillette-signature.jpg
+    → menuData.families[].image + products[].image
+[ ] Photo de la vedette du moment (ratio 4:5)
+    → vedette.jpg
+[ ] Photos de l'extérieur / devanture (16:9)
+    → snack-exterior.jpg → galleryData g-06
+[ ] Photos de l'intérieur, du comptoir, de la préparation
+    → snack-interior.jpg, gallery-03.jpg, gallery-04.jpg
+[ ] Photos de l'équipe (avec accord écrit des personnes)
+    → team-gorbuz.jpg, gallery-05.jpg → galleryData catégorie « equipe »
+[ ] Détails : emballages, sauces, garnitures, matières
+    → gallery-01.jpg, gallery-02.jpg, univers-01…04.jpg
+[ ] Image Open Graph 1 200 × 630 px
+    → public/media/og-gorbuz.jpg + seoData (openGraph.images)
+[ ] Textes alternatifs (alt) à rédiger pour chaque photo informative
+    → galleryData.items[].alt, menuData image.alt
+[ ] Photos de référence du produit signature pour affiner le modèle 3D du hero
+    → src/components/hero/HeroScene.tsx (formes, couleurs, proportions)
+
+======================================================================
+5. PREUVE SOCIALE ET RÉSEAUX
+======================================================================
+[ ] Liens Instagram, Facebook, TikTok, autres
+    → siteConfig.socials [{ network, label, url }]
+[ ] Lien de la fiche Google Business Profile
+    → testimonialsData.ratingSummary.source.url
+[ ] Avis clients vérifiés à afficher (texte, auteur, date, source)
+    → testimonialsData.testimonials[] (aucune section avis n'est rendue tant que vide)
+[ ] Note Google actuelle et nombre d'avis, si l'affichage est souhaité
+    → testimonialsData.ratingSummary { value, count, checkedAt }
+
+======================================================================
+6. INFORMATIONS LÉGALES
+======================================================================
+[ ] Dénomination sociale exacte et forme juridique
+    → siteConfig.legal.companyName, legalForm
+[ ] Numéro d'entreprise BCE / TVA
+    → siteConfig.legal.companyNumber
+[ ] Adresse du siège social (si différente du snack)
+    → siteConfig.legal.registeredOffice
+[ ] Responsable de la publication
+    → siteConfig.legal.publisher
+[ ] Hébergeur du site (nom, adresse)
+    → siteConfig.legal.host
+[ ] Responsable du traitement des données + email RGPD
+    → siteConfig.legal.dataController, privacyEmail
+[ ] Date de validation des textes légaux
+    → siteConfig.legal.updatedAt
+    Note : /mentions-legales et /confidentialite restent en noindex tant que
+    companyName, companyNumber et publisher ne sont pas renseignés.
+[ ] Outils de mesure d'audience ou cookies prévus (Analytics, pixels…)
+    → à déclarer dans copy.privacy.cookiesText + bandeau de consentement si nécessaire
+
+======================================================================
+7. MISE EN LIGNE
+======================================================================
+[ ] Nom de domaine et URL de production
+    → siteConfig.siteUrl (active metadataBase, canonical, sitemap)
+[ ] Hébergement cible (Vercel, Netlify, serveur Node) et accès
+[ ] Compte / adresse technique pour le déploiement
+[ ] Souhait de langues supplémentaires (néerlandais, anglais) : oui / non, lesquelles
+    → structure prête pour i18n (textes centralisés), aucune traduction créée sans demande
+
+======================================================================
+8. DÉCISIONS DE DIRECTION ARTISTIQUE À VALIDER
+======================================================================
+[ ] Validation du hero 3D (composition, couleurs, mouvement) ou demande d'ajustement
+[ ] Validation de la palette et du wordmark provisoire
+[ ] Validation du rythme des sections de l'accueil (8 chapitres)
+[ ] Choix définitif entre « Voir la carte » / « Commander » selon le canal retenu

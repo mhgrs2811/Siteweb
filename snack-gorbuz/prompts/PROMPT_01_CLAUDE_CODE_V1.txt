@@ -1,0 +1,146 @@
+PROMPT 01 — EXÉCUTION DE LA V1 COMPLÈTE DU SITE SNACK GORBUZ
+À coller dans Claude Code depuis le dossier racine du projet web.
+
+Tu es le développeur senior chargé de réaliser le site web de Snack Gorbuz au sein
+d'une agence web. Le directeur artistique t'a fourni un dossier de référence complet.
+Tu dois exécuter le projet, pas simplement donner des conseils.
+
+AVANT DE CODER — LECTURE OBLIGATOIRE
+1. Lis intégralement le fichier 01_CONTEXTE_MAITRE_SNACK_GORBUZ.txt.
+2. Lis le fichier references/BRIEF_DIRECTION_ARTISTIQUE_3_REFERENCES.txt.
+3. Lis les éventuels fichiers de projet déjà présents et inspecte le stack existant.
+4. Le dossier contient également le registre des évolutions futures.
+
+OBJECTIF
+Construire de A à Z la V1 du site Snack Gorbuz : un site complet, multi-pages,
+responsive, immersif, très dynamique, avec une direction artistique originale inspirée
+par les qualités de LÜKS Kebab, Qissa et Rumbeke Platse. Je ne veux surtout pas un
+site générique de snack ou un assemblage de composants de template.
+
+Le site doit être suffisamment avancé pour être présenté visuellement même si je ne
+t'ai pas encore transmis les produits détaillés, les prix, le logo final, les photos,
+l'adresse, les horaires ou les coordonnées. Prépare toutes les zones et la structure
+technique afin que ces éléments soient intégrables plus tard sans refaire le site.
+
+RÈGLE ABSOLUE : N'INVENTE AUCUNE DONNÉE
+Les seules familles de produits confirmées à ce stade sont les durums, les kumpirs et
+les mitraillettes. Ne fabrique ni nom de recette, ni ingrédient, ni prix, ni taille,
+ni allergène, ni mention « fait maison », ni provenance, ni best-seller, ni avis client.
+N'invente pas d'adresse, de téléphone, d'email, d'horaires, de lien de commande, de
+note Google, de nombre d'avis, de réseaux sociaux ou d'informations légales.
+Lorsqu'une donnée manque, masque son affichage ou montre un état provisoire élégant.
+Centralise tous les contenus provisoires dans des fichiers de données faciles à éditer.
+
+DIRECTION ARTISTIQUE À SUIVRE
+- Univers : street-food contemporaine, généreuse, chaleureuse, urbaine et affirmée.
+- Impact produit façon LÜKS : gros visuels, textures, catégories lisibles, produits héros.
+- Storytelling façon Qissa : chapitres, rythme éditorial, immersion, alternance des sections.
+- Authenticité façon Rumbeke : humain, réel, pratique et accessible.
+- Palette de départ : charbon #171717, crème #F4EFE6, beige #D7B58B,
+  rouge piment #D94B32, ambre #D49A43, olive #68745A très secondaire.
+- Typographie : display condensée / expressive pour les titres et sans-serif très lisible
+  pour le texte. Deux familles maximum.
+- Grille asymétrique et compositions qui changent d'une section à l'autre.
+- Wordmark Snack Gorbuz traité comme un élément de design. Si aucun logo n'existe,
+  crée un wordmark typographique provisoire propre et remplaçable.
+- Ne copie pas les logos, textes, photos, animations, code ou mises en page exactes des
+  sites de référence. Reproduis le niveau d'impact et les intentions, avec une création
+  visuelle propre à Snack Gorbuz.
+
+EXIGENCE 3D
+Crée une véritable scène 3D WebGL dans le hero, pas une simple image 2D en rotation.
+Privilégie Three.js ou React Three Fiber si le stack le permet. Crée une composition
+procédurale stylisée de street-food : un durum/wrap stylisé, des frites et une forme
+évoquant un kumpir/pomme de terre garnie, avec un support/emballage graphique Gorbuz.
+Ces formes sont une interprétation décorative des familles connues, pas une recette
+exacte : ne représente pas des ingrédients non confirmés.
+
+La scène doit avoir de beaux volumes, une lumière chaude, des matières crédibles, des
+ombres douces, une composition équilibrée, un léger mouvement lent, un flottement
+subtil et une réaction discrète au pointeur. Elle accompagne le H1 au lieu de le cacher.
+Ajoute un fallback élégant sur mobile et lorsque WebGL n'est pas disponible. La 3D
+ne doit jamais retarder l'affichage du texte, des liens ou des actions essentielles.
+Respecte prefers-reduced-motion.
+
+PAGES À CONSTRUIRE
+- / : accueil complet, avec hero 3D, manifeste, familles Durums/Kumpirs/Mitraillettes,
+  mise en avant de produit préparée mais non inventée, concept, galerie/coulisses,
+  informations pratiques conditionnelles et CTA final.
+- /carte : page carte structurée par les familles confirmées, avec composants de produits
+  prêts à accueillir noms, descriptions, photos, prix, options et allergènes plus tard.
+  Tant que les fiches ne sont pas fournies, ne génère pas de fausses fiches produits.
+- /concept : page de présentation de l'univers Gorbuz, sans histoire fictive.
+- /galerie : galerie éditoriale prête pour les vraies photos du snack, du lieu et de
+  l'équipe. En absence de médias réels, utiliser des blocs graphiques provisoires propres.
+- /contact : adresse, horaires et contact conditionnels, sans données inventées.
+- /mentions-legales et /confidentialite : structures à compléter avec vraies informations.
+
+HIÉRARCHIE DES TITRES
+Chaque page doit avoir un H1 unique et pertinent, des H2 pour les sections et des H3
+pour les sous-sections/catégories. Respecte la structure page par page du contexte maître.
+Le footer global doit être réutilisable, stylé et présent sur toutes les pages principales.
+Il doit prévoir navigation, coordonnées, horaires, liens sociaux, itinéraire et liens
+légaux, mais afficher uniquement les données réellement configurées.
+
+EXPÉRIENCE
+- Header élégant qui évolue au scroll.
+- Navigation desktop et menu mobile entièrement fonctionnels.
+- CTA « Voir la carte » / « Découvrir la carte » tant que le service de commande n'est
+  pas défini. Ne pas simuler un panier ni un checkout.
+- Ancres/filtres de familles réels sur la page carte si ajoutés.
+- Animations de reveal, marquee, hover et transitions courtes.
+- Galerie interactive accessible si cela apporte une valeur réelle.
+- Boutons, liens et interactions doivent réellement fonctionner.
+- Responsive mobile, tablette et desktop ; vérifier particulièrement le hero 3D mobile.
+- Pas de scroll-jacking, pas de musique, pas de préloader interminable, pas de curseur
+  custom obligatoire, pas de mouvement permanent agressif.
+
+EXIGENCES DE CONCEPTION
+1. Ne commence pas par un template préfabriqué. Pose d'abord une direction visuelle forte.
+2. Ne répète pas la même structure de trois cartes dans toutes les sections.
+3. Utilise des contrastes typographiques nets, des espaces assumés et des compositions
+   asymétriques, avec de vrais changements de rythme.
+4. Soigne tous les états : hover, focus, active, chargement, menu mobile, éléments vides.
+5. Prévois des composants et des données simples à modifier lors des prochaines itérations.
+6. Les états provisoires doivent paraître intentionnels, pas comme des erreurs ou des
+   contenus manquants accidentels.
+7. Évite de dépendre de liens d'images externes. Utilise les assets présents ou crée
+   des visuels graphiques provisoires originaux, remplaçables par des fichiers locaux.
+8. N'utilise aucune ressource des sites de référence.
+
+MÉTHODE D'EXÉCUTION
+A. Fais un audit rapide du dépôt et indique le stack détecté.
+B. Présente en quelques lignes ton plan d'implémentation et la direction retenue.
+C. Passe immédiatement à la réalisation ; ne t'arrête pas après le plan et ne me demande
+   pas de renseigner les produits manquants pour commencer.
+D. Implémente toutes les routes, composants, styles, animations et données provisoires.
+E. Ajoute un fichier docs/A_COMPLETER_APRES_V1.txt listant exactement les contenus
+   qu'il faudra me demander pour finaliser le site (menu, prix, photos, adresse, horaires,
+   logo, réseaux, mentions légales, commande, etc.).
+F. Vérifie les liens, interactions, responsive, accessibilité et structure H1/H2/H3.
+G. Lance les scripts de lint, typecheck et build disponibles. Corrige les erreurs avant
+   de conclure. Si un script n'existe pas, indique-le précisément.
+H. Vérifie qu'aucun faux prix, faux horaire, faux avis, faux numéro ou lien fictif n'est
+   visible dans le site.
+
+LIVRABLE ATTENDU
+Un site Snack Gorbuz complet, fonctionnel et soigné dans le dépôt actuel, pas une simple
+maquette Figma ni une page statique. Le rendu doit déjà être distinctif avant l'arrivée
+du vrai catalogue : direction artistique aboutie, vrai hero 3D avec fallback, navigation,
+pages, footer, sections, composants et responsive.
+
+À LA FIN, FOURNIS UN COMPTE RENDU QUI CONTIENT
+- les routes/pages créées ;
+- les choix de direction artistique et la façon dont les 3 références ont été fusionnées ;
+- la technologie et les dépendances ajoutées ;
+- le détail de la scène 3D et de son fallback ;
+- les fichiers de configuration où je pourrai ajouter les produits, les prix, les horaires,
+  l'adresse et les médias ;
+- les contenus réels encore nécessaires ;
+- les commandes lancées et leurs résultats (lint, typecheck, build) ;
+- les éventuels points non réalisés ou limites techniques, sans prétendre qu'ils fonctionnent.
+
+CONSIGNE FINALE
+Sois exigeant comme un développeur d'agence haut de gamme. Le résultat doit avoir une
+identité immédiatement reconnaissable : Snack Gorbuz. Prends des décisions de design
+fortes mais cohérentes avec le contexte maître. Construis réellement la V1 maintenant.

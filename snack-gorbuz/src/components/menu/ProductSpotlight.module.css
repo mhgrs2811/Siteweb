@@ -1,0 +1,54 @@
+.panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--c-cream);
+  color: var(--c-charcoal);
+  --bg: var(--c-cream);
+  --bg-2: var(--c-cream-2);
+  --fg: var(--c-charcoal);
+  --muted: var(--c-muted-on-cream);
+  --line: rgba(23, 23, 23, 0.14);
+  --line-strong: rgba(23, 23, 23, 0.4);
+}
+
+.media,
+.launchMedia {
+  min-height: 16rem;
+}
+
+.copy,
+.launchCopy {
+  display: grid;
+  gap: 1rem;
+  align-content: center;
+  justify-items: start;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.name,
+.launchTitle {
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 4.5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.desc,
+.launchText {
+  color: var(--muted);
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--c-red);
+}
+
+@media (min-width: 48rem) {
+  .panel {
+    grid-template-columns: 5fr 7fr;
+  }
+
+  .launch {
+    grid-template-columns: 4fr 8fr;
+  }
+}

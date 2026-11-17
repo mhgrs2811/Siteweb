@@ -1,0 +1,113 @@
+.card {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.featured {
+  grid-column: 1 / -1;
+}
+
+.media {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+}
+
+.body {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.name {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  line-height: 1;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--c-red);
+  white-space: nowrap;
+}
+
+.desc {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.unavailable .media {
+  opacity: 0.6;
+}
+
+.unavailableNote {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-red);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.list {
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--line);
+}
+
+.listTitle {
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.listRow {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: var(--fs-sm);
+}
+
+.dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--line-strong);
+  transform: translateY(-0.3em);
+}
+
+.listPrice {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.allergens {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+
+@media (min-width: 48rem) {
+  .featured {
+    grid-template-columns: 7fr 5fr;
+    align-items: center;
+    gap: 2rem;
+  }
+}

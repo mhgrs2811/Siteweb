@@ -1,0 +1,5 @@
+.section {
+  padding-block: var(--section-y);
+  background-image: radial-gradient(rgba(23, 23, 23, 0.12) 1px, transparent 1.3px);
+  background-size: 16px 16px;
+}
