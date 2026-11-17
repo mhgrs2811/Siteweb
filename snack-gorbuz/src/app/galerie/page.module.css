@@ -1,0 +1,10 @@
+.body {
+  padding-block: var(--section-y);
+}
+
+.note {
+  font-size: var(--fs-sm);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--line-strong);
+}

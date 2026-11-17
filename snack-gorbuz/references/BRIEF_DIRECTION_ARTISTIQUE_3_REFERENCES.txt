@@ -1,0 +1,771 @@
+DOSSIER DE DIRECTION ARTISTIQUE & BRIEF WEB
+Fusion des références LÜKS Kebab × Qissa × Frituur Rumbeke Platse
+
+Version : 1.0
+Date d'analyse : 17 novembre 2026
+Destination : webdesigner / directeur artistique / développeur front-end / intégrateur
+Projet : site vitrine et menu digital d'un snack — identité, nom, adresse et informations définitives à intégrer depuis la fiche officielle du restaurant.
+
+======================================================================
+0. OBJECTIF DU DOCUMENT
+======================================================================
+
+Ce document transforme l'analyse de trois références web en une direction artistique cohérente, exploitable et directement transmissible à un professionnel du web.
+
+L'objectif n'est PAS de reproduire l'un des trois sites, ni de juxtaposer trois univers. Il faut concevoir une identité propre au snack, avec une expérience plus travaillée qu'un site de friterie classique, mais suffisamment claire, gourmande et pratique pour rester immédiatement compréhensible.
+
+La synthèse recherchée :
+- LÜKS Kebab : la puissance visuelle, la mise en scène du produit, l'énergie de la street-food contemporaine et la capacité à donner envie de commander.
+- Qissa : l'immersion, la narration, le sens du détail, la qualité éditoriale et la façon de transformer une visite web en expérience de marque.
+- Frituur Rumbeke Platse : l'authenticité, la proximité, l'humain, la simplicité des informations utiles et le caractère réel d'un établissement local.
+
+Positionnement à viser : un snack contemporain, généreux, identifiable, chaleureux et visuellement marquant. Le site doit être dynamique, mais jamais désordonné ; premium dans son exécution, sans donner l'impression d'un restaurant inaccessible ou trop guindé.
+
+Important : les proportions d'influence sont des recommandations de direction artistique, et non des mesures objectives des sites de référence :
+- 45 % : impact produit et énergie de LÜKS ;
+- 35 % : immersion et narration de Qissa ;
+- 20 % : authenticité et proximité de Rumbeke Platse.
+
+======================================================================
+1. PÉRIMÈTRE ET MÉTHODE D'ANALYSE
+======================================================================
+
+Les pages publiques principales et les pages internes accessibles ont été consultées. Les images liées aux pages ont également été ouvertes directement pour observer les cadrages, les lumières, les matières, les compositions et le traitement des produits.
+
+Pages étudiées :
+
+LÜKS Kebab — https://luks-kebab.fr/
+- Accueil et menu intégré ;
+- Concept / Notre histoire : https://luks-kebab.fr/concept/
+- Restaurants : https://luks-kebab.fr/restaurants/
+- Franchise : https://luks-kebab.fr/franchise/
+- visuels de produits, pains, bowls, desserts, devanture, salle et contenus de notoriété.
+
+Qissa — https://www.qissa.co.uk/
+- Accueil ;
+- Our Story : https://www.qissa.co.uk/story/
+- The Menu : https://www.qissa.co.uk/menu/
+- Gallery : https://www.qissa.co.uk/gallery/
+- Private Dining : https://www.qissa.co.uk/private-dining/
+- Journal : https://www.qissa.co.uk/journal/
+- Visit & Contact : https://www.qissa.co.uk/contact/
+
+Frituur Rumbeke Platse — https://rumbekeplatse.be/
+- Accueil ;
+- présentation de la gérante et de l'établissement ;
+- catégories et sections du menu ;
+- snack du mois ;
+- avis clients ;
+- accès, horaires, contact et réseaux sociaux.
+
+Limite d'observation à respecter : un site public peut être étudié à travers ses pages, son contenu et ses médias accessibles, mais cela ne donne pas automatiquement accès à son code source complet, à ses styles CSS, à toutes ses interactions au chargement, ni à ses éventuels fichiers 3D propriétaires. Les principaux parcours, galeries et familles de visuels ont été examinés, avec ouverture directe d'un échantillon représentatif d'images produit, d'ambiance et de lieu ; les dizaines de fichiers individuels du catalogue LÜKS n'ont pas tous été ouverts un par un. Les appréciations de comportement d'animation ci-dessous sont donc limitées à ce qui est effectivement observable dans les éléments publics consultés. Il ne faut pas attribuer à une référence une technologie ou une animation non vérifiée. Les codes couleur et les familles typographiques proposées plus loin sont des recommandations créatives, pas des valeurs mesurées dans les feuilles de style originales.
+
+Constat particulier sur la 3D : aucun modèle 3D interactif identifiable n'a pu être confirmé sur les trois références consultées. Les visuels observés sont principalement des photographies, des éléments graphiques et des icônes SVG. LÜKS intègre notamment une vidéo Vimeo sur sa page franchise ; ce n'est pas un modèle 3D. Qissa utilise notamment une photographie spectaculaire de son arbre fleuri intérieur ; cette image ne doit pas être confondue avec une scène 3D. Rumbeke utilise des pictogrammes SVG et des photographies de son établissement. La 3D décrite plus loin est donc une recommandation à créer pour le nouveau site, pas un élément qu'il faudrait prétendre avoir trouvé sur ces références.
+
+======================================================================
+2. ANALYSE DÉTAILLÉE DES RÉFÉRENCES
+======================================================================
+
+---------------------------------------------------------------------
+2.1 LÜKS KEBAB — IMPACT, PRODUIT, STREET-FOOD ET NOTORIÉTÉ
+---------------------------------------------------------------------
+
+URL : https://luks-kebab.fr/
+
+A. Positionnement et personnalité
+
+LÜKS construit une marque de kebab gourmet qui revendique une approche créative de la street-food. Le vocabulaire de marque est direct et énergique : « l'Art du kebab », créations gourmandes et audacieuses, produits signatures, nouveautés et éditions spécifiques.
+
+Ce qui rend cette référence intéressante : elle ne présente pas le kebab comme un simple produit de restauration rapide. Elle le traite comme un produit de marque, avec des noms, des compositions, des déclinaisons, des nouveautés, une identité photographique et des signes de popularité.
+
+La personnalité est urbaine, assumée, jeune, généreuse et très orientée produit. Le discours est peu institutionnel. Il mise sur l'envie, la nouveauté et la preuve sociale.
+
+B. Navigation et architecture
+
+La navigation principale est courte : Home, Concept, Menu, Restaurants, Franchise. Le menu et les produits sont au centre du dispositif.
+
+La page d'accueil déroule une longue expérience verticale avec plusieurs blocs :
+1. identité et présentation de la marque ;
+2. mise en avant du produit du moment ;
+3. menu organisé par catégories ;
+4. produits signatures ;
+5. déclinaisons et formats de pains ;
+6. bowls et autres familles de produits ;
+7. menus enfants et extras ;
+8. desserts et boissons ;
+9. contenu de notoriété et personnalités ;
+10. réseaux sociaux et informations de contact en pied de page.
+
+La page Concept reste volontairement simple : elle pose l'histoire de la marque, son année de création et son positionnement de pionnier du kebab gourmet. Cette page démontre qu'un récit de marque peut rester bref lorsqu'il est soutenu par une identité visuelle forte.
+
+La page Restaurants met en avant les points de vente avec adresse, téléphone lorsqu'il est renseigné et lien Google Maps. La page Franchise comporte une vidéo et un formulaire de qualification. Ces deux pages sont moins pertinentes pour un snack indépendant, mais leurs mécanismes de navigation et de conversion peuvent inspirer une page « Nous trouver » et un formulaire de contact.
+
+C. Photographie et traitement des produits
+
+C'est le point le plus fort de LÜKS.
+
+Les sandwichs sont photographiés en gros plan, souvent présentés seuls sur un fond beige ou crème uniforme. Le produit occupe une grande partie de l'image. Le cadrage met en valeur le volume, la garniture, le pain, les sauces, les textures et les contrastes de couleurs. Les images permettent d'identifier le produit rapidement, même avant de lire sa description.
+
+Plusieurs photographies de sandwichs ont un rendu de type « packshot culinaire » : fond neutre, lumière contrôlée, produit isolé, ombre discrète et composition frontale ou légèrement plongeante. Certaines images sont détourées sur fond transparent ou noir dans leur fichier source, afin de pouvoir les intégrer dans une composition plus graphique.
+
+Les photos des bowls et assiettes changent de registre : vue du dessus, contenants visibles, accessoires de service et fonds plus colorés. Les visuels de desserts donnent une place importante aux toppings et aux textures.
+
+Les photos lifestyle montrent des personnes tenant ou partageant des produits, la devanture, la salle et des moments de consommation. Elles humanisent la marque sans remplacer les photographies produit.
+
+D. Palette et langage visuel observés
+
+Les photographies produit utilisent largement des tons crème, beige chaud et brun doré, qui font ressortir les ingrédients. Les images lifestyle montrent des couleurs plus contrastées : textiles foncés, éclairage chaud, vitrines lumineuses, signalétique colorée et détails décoratifs.
+
+La devanture photographiée de LÜKS est particulièrement expressive : enseigne lumineuse, fleurs abondantes, vitrines et inscriptions graphiques. C'est une approche de marque physique forte, très visible dans la rue.
+
+La leçon à retenir n'est pas de reprendre littéralement les fleurs ou les couleurs de la devanture, mais d'assumer un signe de reconnaissance suffisamment fort pour que le lieu et le site soient immédiatement associés.
+
+E. Présentation du menu
+
+Le menu est riche, mais la hiérarchie repose sur des catégories simples : kebabs, bowls, menu enfant, extras, desserts et boissons. Des sous-familles sont indiquées, et certains produits portent des labels comme « New » ou « Luxury Edition ».
+
+Les noms de produits sont distinctifs : Döner, DZ Kebab, Le Suisse, New Yorkais, Fuego, Chèvre Miel, Montagnard, Burrata. Chaque produit est accompagné d'une courte description des ingrédients. Des choix de pains et de sauces sont ensuite explicités.
+
+Cette logique permet de rendre un catalogue volumineux plus vivant. Le site donne envie de découvrir les produits au lieu de présenter une longue liste indifférenciée.
+
+F. Notoriété et preuve sociale
+
+LÜKS utilise des sections dédiées à des personnalités, à Instagram et à TikTok, avec des chiffres d'audience affichés. La preuve sociale ne se limite pas à un bloc d'avis : elle fait partie de la narration de marque.
+
+Pour le futur snack, il faudra préférer des éléments réels et vérifiables : avis Google, photos de clients avec autorisation, événements, partenariats, communauté locale, ou publications sociales. Ne pas inventer d'abonnés, de distinctions, de célébrités ou de chiffres.
+
+G. Ce qu'il faut reprendre
+
+- Des photographies produit grand format, cohérentes et très appétissantes.
+- Une mise en avant forte d'un produit signature ou d'une nouveauté.
+- Des catégories de menu clairement identifiables.
+- Des noms de produits mémorables et des descriptions courtes.
+- Des badges discrets « Nouveau », « Signature » ou « Populaire » lorsque cela est justifié.
+- Une présence de la marque dans les images, les emballages et les détails graphiques.
+- Une hiérarchie commerciale claire : voir le menu, commander, appeler ou trouver le restaurant.
+
+H. Ce qu'il ne faut pas copier
+
+- Ne pas rendre toute l'expérience agressive ou excessivement promotionnelle.
+- Ne pas aligner des dizaines de fiches produit sans respiration ni logique éditoriale.
+- Ne pas multiplier les couleurs vives sans système de palette.
+- Ne pas utiliser la notoriété de célébrités comme substitut à une identité propre.
+- Ne pas reproduire les visuels, logos, photographies ou textes de LÜKS : ils servent de référence de traitement, pas de ressources à réutiliser.
+
+---------------------------------------------------------------------
+2.2 QISSA — IMMERSION, NARRATION ET EXPÉRIENCE DE MARQUE
+---------------------------------------------------------------------
+
+URL : https://www.qissa.co.uk/
+
+A. Positionnement et personnalité
+
+Qissa se présente comme « A Tale of Food ». Le nom est expliqué comme un mot signifiant une histoire ou un récit. Toute l'expérience est organisée autour de cette idée : origine, épices, texture, goût, savoir-faire, lieu et convivialité.
+
+La marque ne vend pas uniquement des plats. Elle raconte la cuisine, les personnes, la salle et les moments passés dans le restaurant. La narration est cohérente sur la page d'accueil, la page « Our Story », le menu, la galerie, le journal et les pages de contact.
+
+C'est la référence la plus intéressante pour donner au nouveau site une vraie personnalité et éviter l'effet de template de restaurant.
+
+B. Navigation et structure
+
+La navigation de Qissa est plus éditoriale et plus immersive. Les sections sont numérotées : 00 Home, 01 Our Story, 02 The Menu, 03 Gallery, 04 Private Dining, 05 Journal, 06 Visit & Contact.
+
+Deux actions commerciales restent visibles : Order et Reserve. Cette répétition est importante : les actions de conversion ne sont pas cachées à la fin de la visite.
+
+La page d'accueil est construite comme une succession de chapitres :
+1. image d'ouverture, nom et promesse ;
+2. introduction au concept ;
+3. galerie de plats signatures ;
+4. présentation des familles de cuisine ;
+5. mise en avant de plats signatures ;
+6. chiffres clés et avis ;
+7. présentation de la salle et de son atmosphère ;
+8. appel à réserver ou commander ;
+9. pied de page très structuré.
+
+C. La narration visuelle
+
+Le site accompagne son texte d'images qui ne montrent pas uniquement la nourriture. Il fait alterner les assiettes, les cocktails, les détails de service, l'extérieur du restaurant, les tables dressées et la décoration intérieure.
+
+Le récit est soutenu par des intertitres courts et évocateurs : « A Tale of Food », « Begin the story », « The Masterpieces », « The Room », « Beneath the blossoms ». La structure donne à chaque section une fonction émotionnelle identifiable.
+
+Un bandeau de mots répétés — autour de notions comme Origin, Spice, Aroma, Texture, Taste, Craft, Gathering et Celebration — sert de transition graphique et de signature éditoriale. Le même principe apparaît sur la page Our Story avec une phrase répétée autour du rassemblement et de la célébration.
+
+C'est un bon procédé à adapter : créer une bande de mots qui exprime la personnalité du snack, et non recopier le vocabulaire de Qissa.
+
+D. Palette, matières et ambiance photographique
+
+La photographie de l'intérieur repose sur un contraste marqué : bleu nuit et velours, éclairage doré et chaud, surfaces de marbre, reflets, tonalités sombres et arbre fleuri rose placé au centre de la salle.
+
+La salle devient un décor immédiatement mémorisable. Le visiteur comprend qu'il ne s'agit pas d'une salle neutre ou interchangeable.
+
+Les images de plats sont plus contrôlées : assiettes bien isolées, fonds clairs, gros plans précis, lumière équilibrée et dressage soigné. Cette dualité est intéressante : images propres et lisibles pour les produits ; images atmosphériques et cinématographiques pour l'expérience du lieu.
+
+Les photographies accessibles montrent notamment des currys, plats de riz, grillades, pain, cocktails, tables dressées, mobilier bleu, éclairages chauds et détails de décoration. Les couleurs naturelles des plats sont fortes et contrastent avec le décor plus sombre.
+
+E. Menu
+
+La page Menu fonctionne comme une carte structurée, avec un sommaire par ancres et des catégories clairement différenciées : Appetisers, Veg Starters, Grills, Biryani, Mains, Traditional Curries, Vegetarian, Rice, Breads et Vegan. Chaque catégorie a un titre, une courte phrase d'ambiance, puis une liste de plats et de prix.
+
+Des photographies de plats ponctuent régulièrement la carte. Le menu peut également être consulté en version PDF. Les actions Order et Reserve sont conservées en haut et en bas du parcours.
+
+La leçon à retenir : une carte très fournie n'a pas besoin d'être un mur de texte. Elle peut s'organiser par familles, avec des repères et quelques images soigneusement choisies.
+
+F. Pages complémentaires
+
+- Our Story : raconte le sens du nom, les origines culinaires, le savoir-faire et l'ambiance. La page est découpée en chapitres illustrés.
+- Gallery : regroupe les plats, les salles, les tables, les événements et les boissons. Elle sert de preuve visuelle et de projection.
+- Private Dining : présente des usages précis du lieu et propose un formulaire adapté à une demande événementielle.
+- Journal : raconte l'origine de plats ou de détails de décoration. C'est une forme de contenu de marque, à utiliser seulement si le snack dispose d'histoires réelles à partager.
+- Visit & Contact : met l'adresse, le téléphone, l'e-mail, les horaires, les liens de réservation et la carte au premier plan.
+
+G. Ce qu'il faut reprendre
+
+- Un fil narratif cohérent de haut en bas.
+- Des titres éditoriaux mémorables et une vraie hiérarchie H1/H2/H3.
+- Une alternance de photos produit et de photos d'ambiance.
+- Des transitions typographiques ou bandeaux de mots animés.
+- Une galerie qui mélange produit, équipe, lieu et détails.
+- Des actions principales toujours accessibles.
+- Un footer complet, lisible et structuré.
+- Une page menu avec ancres ou filtres de catégories.
+
+H. Ce qu'il ne faut pas copier
+
+- Ne pas reprendre l'univers de restaurant gastronomique si le concept du snack est plus décontracté.
+- Ne pas copier l'arbre fleuri, le velours bleu, le décor indien ou les codes spécifiques de Qissa.
+- Ne pas ajouter un Journal ou un formulaire événementiel si cela n'apporte rien au projet.
+- Ne pas écrire un récit artificiel : l'histoire doit venir du vrai établissement, de ses produits et de son équipe.
+
+---------------------------------------------------------------------
+2.3 FRITUUR RUMBEKE PLATSE — PROXIMITÉ, HUMAIN ET SIMPLICITÉ
+---------------------------------------------------------------------
+
+URL : https://rumbekeplatse.be/
+
+A. Positionnement et personnalité
+
+Rumbeke Platse est une friterie locale qui met au premier plan la fraîcheur, la convivialité, les habitudes du quartier et la personne qui fait vivre l'établissement.
+
+La page explique qui est Jamie, son ancrage à Rumbeke, son expérience dans le secteur et ses priorités : des frites fraîches et une ambiance agréable. La marque est humaine, accessible et sans sophistication inutile.
+
+C'est la référence la plus forte pour ne pas perdre le caractère réel du snack derrière un site trop design.
+
+B. Architecture et contenu
+
+L'accueil rassemble sur une même page :
+1. bandeau de statut d'ouverture ;
+2. navigation simple : À propos, Menu, Contact et itinéraire ;
+3. nom de l'établissement, promesse de fraîcheur, localisation et boutons utiles ;
+4. présentation de la gérante ;
+5. raisons de venir ;
+6. bon cadeau ;
+7. menu par catégories ;
+8. produit/snack du mois ;
+9. argument de qualité et de convivialité ;
+10. avis clients ;
+11. rappel du snack du mois ;
+12. visuels de l'établissement ;
+13. itinéraire, réseaux sociaux, coordonnées et horaires dans le footer.
+
+C. Photographies et iconographie
+
+La photographie la plus instructive montre Jamie en situation réelle, devant la friteuse et les panneaux de menu. Une autre la montre souriante dans la friterie. Le propos est documentaire, naturel et humain : le visiteur voit la personne et le lieu au lieu d'une image publicitaire générique.
+
+Les panneaux de menu rouges et l'environnement de préparation donnent de la crédibilité au commerce. Les images ne cherchent pas toutes à être des packshots parfaits : elles racontent l'activité et le quotidien.
+
+Le logo visible sur les ressources consultées combine une représentation stylisée d'un cornet de frites rouge, des frites dessinées et un lettrage manuscrit noir. Le site expose également des pictogrammes SVG pour certaines familles de menu. Leur fichier n'a pas pu être prévisualisé par l'outil d'inspection, mais leur présence est identifiable dans les ressources liées.
+
+D. Menu et informations pratiques
+
+Le menu est très exhaustif et organisé par familles : frites, burgers, sauces, snacks, boissons. Les prix sont affichés de façon directe en euros. Le snack du mois bénéficie d'une mise en avant distincte avec nom, description, prix et photo.
+
+Le site facilite l'accès aux informations de base : adresse, téléphone, e-mail, itinéraire, horaires et réseaux sociaux. Les avis clients sont insérés directement dans la page et parlent de la qualité des produits, de la rapidité du service, du prix et de l'amabilité de l'équipe.
+
+E. Ton rédactionnel
+
+Le ton est local, spontané, sympathique et familier. Il valorise des expressions quotidiennes, l'accueil et le plaisir de partager une portion de frites. Il ne surjoue pas le luxe.
+
+Le nouveau site doit reprendre cette sincérité, mais avec une rédaction plus homogène et une correction soignée. Le ton peut être vivant, complice et gourmand sans devenir brouillon.
+
+F. Ce qu'il faut reprendre
+
+- Présenter une personne réelle et l'histoire du lieu.
+- Montrer le restaurant, les préparations et l'équipe en situation.
+- Afficher rapidement horaires, adresse, téléphone et itinéraire.
+- Donner une place identifiable au produit du mois.
+- Présenter les avis clients de façon visible.
+- Garder un menu simple à parcourir et des prix faciles à repérer.
+- Faire ressortir la proximité et le côté accueillant.
+
+G. Ce qu'il ne faut pas copier
+
+- Ne pas reproduire la densité d'un long menu affiché en continu sur la page d'accueil.
+- Ne pas laisser les catégories et les prix prendre le dessus sur la direction artistique.
+- Ne pas multiplier les répétitions d'informations.
+- Ne pas utiliser uniquement des photos prises au téléphone si le projet vise une exécution premium ; prévoir une vraie séance photo tout en gardant quelques images authentiques.
+
+======================================================================
+3. SYNTHÈSE : L'UNIVERS À CRÉER
+======================================================================
+
+CONCEPT CRÉATIF PROPOSÉ : « STREET-FOOD DE CARACTÈRE »
+
+Le futur site doit évoquer un lieu où l'on vient pour des produits généreux, une identité reconnaissable et une expérience chaleureuse. Le résultat doit être plus travaillé qu'un site de snack standard, mais rester ancré dans les codes de la restauration rapide et de la proximité.
+
+La personnalité se situe à l'intersection de cinq qualités :
+- Gourmande : on doit presque ressentir les textures et les saveurs à travers les photos.
+- Urbaine : composition graphique, titres affirmés, rythme et mouvement.
+- Chaleureuse : couleurs chaudes, lumière, accueil, équipe et lieu réel.
+- Authentique : preuves concrètes, produits réels, adresse, horaires et avis.
+- Soignée : alignements, espaces, typographie, micro-interactions et cohérence de marque.
+
+RÈGLE DE PRIORITÉ : le produit attire ; l'expérience fait rester ; les informations pratiques font passer à l'action.
+
+La page ne doit pas ressembler à une plateforme de commande impersonnelle. Elle doit raconter un établissement identifiable, tout en permettant à une personne pressée de trouver le menu, les prix, les horaires ou l'itinéraire en quelques secondes.
+
+======================================================================
+4. DIRECTION ARTISTIQUE RECOMMANDÉE
+======================================================================
+
+---------------------------------------------------------------------
+4.1 Palette chromatique
+---------------------------------------------------------------------
+
+Proposition de palette à valider avec le logo et les photos réelles du restaurant :
+
+- Charbon profond : #171717 — fonds sombres, navigation, grandes zones immersives.
+- Crème chaud : #F4EFE6 — fonds de respiration et zones de menu.
+- Beige toasté : #D7B58B — rappels pain, cuisson, matières et fonds photo.
+- Rouge piment / tomate : #D94B32 — accent principal, CTA, badges et détails de marque.
+- Ambre doré : #D49A43 — lumière, accents premium et micro-détails.
+- Vert olive atténué : #68745A — accent secondaire éventuel, à utiliser avec parcimonie.
+
+Règles :
+- Limiter la palette à deux couleurs dominantes, une couleur d'accent et un neutre.
+- Le rouge doit agir comme un signal, pas couvrir tout le site.
+- Garder le beige et le crème pour laisser respirer les produits.
+- Réserver les noirs/charbons aux grandes séquences immersives, aux textes forts et aux transitions.
+- Éviter de reprendre le bleu nuit et le rose de Qissa comme palette complète ; ils appartiennent à son identité et à son décor.
+- Les couleurs exactes sont des propositions de travail, pas des prélèvements techniques des sites de référence.
+
+---------------------------------------------------------------------
+4.2 Typographie
+---------------------------------------------------------------------
+
+Créer un contraste clair entre titres et textes courants.
+
+Titres : sans-serif condensée ou très affirmée, lourde, compacte, avec une présence éditoriale. Exemples à tester : Anton, Archivo Black, Bebas Neue ou une police de display équivalente, sous réserve de licence et de lisibilité.
+
+Textes : sans-serif contemporaine et très lisible. Exemples : Inter, Manrope, DM Sans ou équivalent.
+
+Option éditoriale : une serif expressive peut être utilisée sur quelques citations ou accroches courtes, mais elle ne doit pas dominer le langage d'un snack.
+
+Hiérarchie recommandée :
+- H1 : grande accroche manifeste, très visible, une seule par page.
+- H2 : titre de chapitre avec une personnalité forte.
+- H3 : titre de produit, de catégorie ou de sous-section.
+- Paragraphes : phrases courtes, longueur limitée, interlignage confortable.
+- Labels : capitales, petites tailles et espacement léger pour les catégories, badges et micro-informations.
+
+Ne pas utiliser la même taille et le même poids pour tous les titres. Le contraste doit guider l'œil.
+
+---------------------------------------------------------------------
+4.3 Grille, composition et formes
+---------------------------------------------------------------------
+
+- Construire une grille éditoriale asymétrique et maîtrisée : grandes images, blocs texte décalés, compositions en deux colonnes, sections pleine largeur.
+- Alterner des séquences sombres et claires pour créer un rythme de lecture.
+- Utiliser des images parfois très grandes, avec des recadrages dynamiques.
+- Autoriser quelques débordements visuels de produit hors de la grille, mais toujours avec contrôle.
+- Préférer des coins légèrement arrondis ou des formes nettes cohérentes ; éviter les cartes génériques toutes identiques.
+- Utiliser des séparateurs, lignes fines, numéros de section et petites étiquettes éditoriales.
+- Faire apparaître des détails graphiques inspirés de l'univers alimentaire : traits de sauce, empreintes, tampons, motifs de papier alimentaire ou lignes évoquant la chaleur. Ces motifs doivent rester subtils et propres à la marque.
+
+Éviter le template classique : grand hero avec texte centré, trois cartes identiques, bloc « À propos », bloc contact, footer sans personnalité. Chaque section doit avoir une composition propre tout en restant dans la même grammaire visuelle.
+
+---------------------------------------------------------------------
+4.4 Photographie et direction de contenu
+---------------------------------------------------------------------
+
+Prévoir trois familles d'images complémentaires :
+
+1. PHOTOS PRODUIT — priorité commerciale
+- Gros plans précis, lumière maîtrisée, produit identifiable immédiatement.
+- Fonds unis chauds ou fonds de matière très discrets.
+- Images détourées en WebP/PNG lorsque cela permet une intégration graphique.
+- Montrer les ingrédients et les textures, pas uniquement la forme générale.
+- Prévoir un cadrage cohérent pour toutes les cartes du menu.
+
+2. PHOTOS D'AMBIANCE — immersion
+- Salle, comptoir, vitrine, enseigne, détails de décoration, emballages et lumière.
+- Plans larges et détails serrés pour varier le rythme.
+- Colorimétrie cohérente avec la palette du site.
+
+3. PHOTOS HUMAINES — authenticité
+- Équipe, gérant, préparation, service, gestes et moments réels.
+- Visages et personnes uniquement avec leur accord.
+- Privilégier des scènes naturelles et vivantes plutôt que des poses publicitaires rigides.
+
+Ne pas mélanger sans logique des photos ultra détourées, des images amateurs très sombres et des photos de stock. Prévoir une mini-charte photographique : angle, lumière, arrière-plan, saturation, taille et format.
+
+Les images IA peuvent servir à explorer la direction artistique ou à créer des visuels abstraits, mais ne doivent pas représenter comme réels des plats, locaux ou membres d'équipe qui n'existent pas. Les produits et le lieu doivent être photographiés fidèlement.
+
+======================================================================
+5. MOTION DESIGN ET 3D — EXIGENCE CRÉATIVE DU NOUVEAU SITE
+======================================================================
+
+Cette partie décrit ce qu'il faut créer pour le nouveau site. Elle ne prétend pas que les trois sites de référence possèdent déjà ces modèles 3D.
+
+---------------------------------------------------------------------
+5.1 Objet 3D principal
+---------------------------------------------------------------------
+
+Créer un objet 3D original lié au produit le plus représentatif du snack : burger, sandwich, kebab, cornet de frites, boîte signature ou autre produit réellement vendu.
+
+L'objet doit être reconnaissable, appétissant et fidèle au produit réel. Il ne doit pas ressembler à un emoji, à un jouet plastique ou à une illustration générique.
+
+Mise en scène recommandée :
+- Objet en grand format dans le hero, avec une légère rotation en perspective.
+- Rotation lente et limitée sur l'axe vertical, comme un mouvement de présentation produit.
+- Très légère oscillation ou variation de position pour éviter l'effet statique.
+- Ombre douce pour ancrer le produit dans l'espace.
+- Quelques ingrédients ou éléments graphiques en orbite/parallaxe, uniquement si cela reste crédible et lisible.
+- Interaction au scroll : le produit peut se décaler, pivoter légèrement ou changer d'échelle pour accompagner la transition vers le menu.
+
+Le modèle doit rester le point focal. Les effets secondaires ne doivent jamais détourner l'attention de l'accroche et des boutons d'action.
+
+---------------------------------------------------------------------
+5.2 Autres usages 3D possibles
+---------------------------------------------------------------------
+
+- Une boîte ou un emballage du snack en objet 3D secondaire dans une section de marque.
+- Une composition d'ingrédients qui s'assemble brièvement au scroll pour illustrer la préparation d'un produit signature.
+- Un cornet de frites ou une sauce en micro-animation pour ponctuer une transition.
+
+Ne pas multiplier les modèles 3D. Un modèle principal très bien exécuté vaut mieux que six objets décoratifs sans fonction.
+
+---------------------------------------------------------------------
+5.3 Animations et interactions
+---------------------------------------------------------------------
+
+À prévoir :
+- Entrée du hero avec apparition progressive de la typographie et du produit.
+- Effet de profondeur/parallaxe léger entre fond, texte et objet.
+- Marquee horizontal ou bandeau typographique avec quelques mots de marque ; animation lente et élégante.
+- Reveal des sections au scroll : fondu, translation courte ou masque d'image.
+- Hover des cartes menu : zoom photo très léger, apparition des détails ou mouvement du badge.
+- Transitions entre catégories du menu fluides et immédiates.
+- Micro-feedback sur les boutons : contraste, légère translation, état hover/focus.
+- Galerie avec ouverture grand format/lightbox si cela est utile.
+
+Ne pas utiliser :
+- scroll-jacking ou défilement imposé ;
+- animations trop longues avant d'accéder au menu ;
+- effets qui font bouger le texte au point de nuire à la lecture ;
+- curseur custom obligatoire ;
+- effets de chargement qui bloquent la navigation ;
+- animations automatiques incessantes.
+
+---------------------------------------------------------------------
+5.4 Contraintes techniques de la 3D
+---------------------------------------------------------------------
+
+- Technologie possible : Three.js ou React Three Fiber si l'environnement technique le justifie.
+- Modèle au format GLB/GLTF, optimisé et compressé.
+- Réduire le nombre de polygones, textures et lumières ; préférer un éclairage baked lorsque cela suffit.
+- Charger le modèle après le contenu prioritaire, avec un placeholder visuel léger.
+- Prévoir une image de remplacement pour les mobiles peu puissants et les appareils qui ne supportent pas WebGL.
+- Respecter prefers-reduced-motion : supprimer ou réduire les animations pour les personnes qui le demandent.
+- Le site doit rester parfaitement lisible, navigable et rapide même si la 3D ne se charge pas.
+- Ne jamais faire dépendre l'accès au menu, aux horaires ou au téléphone du chargement d'un modèle 3D.
+
+======================================================================
+6. ARCHITECTURE DU SITE ET HIÉRARCHIE H1 / H2 / H3
+======================================================================
+
+Structure conseillée pour une page d'accueil immersive, avec une page Menu séparée si la carte est longue. Les intitulés entre crochets sont des champs à personnaliser après validation de la fiche du restaurant.
+
+HEADER / NAVIGATION
+
+- Logo à gauche.
+- Navigation : Accueil / Le concept / La carte / Galerie / Nous trouver.
+- Bouton primaire : Commander ou Voir la carte, selon le canal de commande réellement disponible.
+- Bouton secondaire : Itinéraire ou Appeler.
+- Sur mobile : menu compact, actions principales toujours faciles d'accès.
+- Le header peut être transparent sur le hero puis devenir opaque ou compact au scroll.
+
+SECTION 01 — HERO / PREMIÈRE IMPRESSION
+
+H1 : « [PROMESSE FORTE DU SNACK] »
+
+Texte d'accroche : une phrase courte, directe et spécifique au restaurant. Elle doit expliquer ce qui rend le lieu ou les produits différents, sans adjectifs génériques accumulés.
+
+CTA principal : « Découvrir la carte » ou « Commander ».
+CTA secondaire : « Nous trouver ».
+
+Composition : grand titre typographique, produit 3D signature, photographie ou texture en arrière-plan, petit élément de marque et indication de scroll. Le produit doit être immédiatement lisible.
+
+SECTION 02 — SIGNATURE / PROMESSE
+
+H2 : « Le goût qui fait revenir. » (texte de travail à adapter)
+
+H3 : « Des produits généreux »
+H3 : « Une préparation soignée »
+H3 : « Un accueil qui compte »
+
+Présenter trois preuves concrètes maximum. Ne publier que des affirmations confirmées par l'établissement (fraîcheur, fabrication maison, provenance, préparation minute, etc.).
+
+SECTION 03 — PRODUITS SIGNATURES
+
+H2 : « Les incontournables »
+
+Mettre en avant trois à six produits représentatifs, pas tout le menu.
+
+Pour chaque carte :
+- photographie produit ;
+- nom du produit (H3) ;
+- description courte des ingrédients ;
+- prix, si confirmé ;
+- label éventuel : Signature / Nouveau / Populaire ;
+- lien vers la carte complète.
+
+Composition possible : une grande carte éditoriale pour le best-seller, puis plusieurs cartes secondaires de formats différents. Éviter une grille monotone de six cartes identiques.
+
+SECTION 04 — LA CARTE COMPLÈTE
+
+H2 : « Toute la carte »
+
+Afficher des catégories filtrables ou accessibles par ancres.
+
+H3 : catégories réelles du restaurant (à confirmer à partir de la fiche menu)
+
+Chaque produit doit comporter un nom clair, une description utile et son prix. Les suppléments, tailles, options et allergènes doivent être compréhensibles. Les prix doivent être faciles à retrouver.
+
+Prévoir :
+- navigation sticky ou barre de catégories sur desktop ;
+- navigation horizontale scrollable sur mobile ;
+- ouverture/fermeture des sous-catégories si la carte est longue ;
+- recherche simple uniquement si le catalogue le justifie ;
+- version imprimable ou PDF si le restaurant en possède une.
+
+Ne pas inventer les produits, prix, allergènes, options ou disponibilité.
+
+SECTION 05 — LE CONCEPT / L'HISTOIRE
+
+H2 : « Un snack, une identité. » (titre de travail)
+
+Présenter le lieu, son origine, sa philosophie, sa spécialité et ce que les clients peuvent attendre de l'expérience.
+
+Composition : texte court sur une moitié de section ; photographie de l'équipe, du comptoir ou du lieu sur l'autre. Cette séquence doit s'inspirer de la narration de Qissa et de l'authenticité de Rumbeke.
+
+H3 : « Notre manière de faire »
+H3 : « Ce qui nous distingue »
+
+SECTION 06 — COULISSES / SAVOIR-FAIRE
+
+H2 : « Du geste au comptoir »
+
+Montrer la préparation, la cuisson, les ingrédients, le service et les détails de l'établissement. Utiliser une courte vidéo ou un montage photo si des images réelles de qualité sont disponibles.
+
+Cette section doit donner de la crédibilité au discours. Elle ne doit pas être une vidéo décorative sans lien avec les produits.
+
+SECTION 07 — GALERIE / AMBIANCE
+
+H2 : « Entrez dans l'univers de [NOM] »
+
+Mélanger :
+- plats et produits ;
+- équipe ;
+- comptoir et salle ;
+- détails de marque/emballage ;
+- moments de vie du restaurant.
+
+Prévoir une grille asymétrique ou une composition éditoriale. Les photos doivent pouvoir s'ouvrir en grand. Ajouter des textes alternatifs accessibles.
+
+SECTION 08 — AVIS ET PREUVE SOCIALE
+
+H2 : « Ils en parlent mieux que nous »
+
+Afficher des avis réels, idéalement issus de Google ou d'une source validée. Afficher une note uniquement si elle est actuelle et vérifiable, avec le nombre d'avis et la source. Les avis doivent rester lisibles et ne pas être manipulés pour inventer une réputation.
+
+SECTION 09 — INFORMATIONS PRATIQUES
+
+H2 : « On vous attend »
+
+H3 : « Horaires »
+H3 : « Adresse »
+H3 : « Contact »
+
+Afficher clairement : horaires complets, jours de fermeture, adresse, téléphone, e-mail si pertinent, lien vers Google Maps, itinéraire, options de commande ou de retrait si elles existent.
+
+Un indicateur ouvert/fermé peut être utilisé si les horaires sont correctement configurés et les règles de jours fériés gérées. Sinon, afficher simplement les horaires officiels.
+
+SECTION 10 — FOOTER
+
+Le pied de page doit être conçu comme une vraie dernière section, pas comme une ligne de liens ajoutée à la fin.
+
+À inclure :
+- logo et courte phrase de marque ;
+- navigation secondaire ;
+- adresse cliquable ;
+- téléphone cliquable ;
+- horaires ;
+- itinéraire Google Maps ;
+- liens réseaux sociaux ;
+- mentions légales ;
+- politique de confidentialité et cookies si nécessaires ;
+- copyright.
+
+Sur mobile, les coordonnées et le bouton d'itinéraire doivent rester très faciles d'accès.
+
+======================================================================
+7. EXPÉRIENCE UTILISATEUR ET CONVERSION
+======================================================================
+
+Priorité absolue : le visiteur doit comprendre en quelques secondes ce que propose le snack et comment agir.
+
+Les trois actions à rendre évidentes :
+1. Voir la carte et les prix.
+2. Commander ou appeler, selon les moyens réellement disponibles.
+3. Trouver le restaurant et vérifier ses horaires.
+
+Prévoir un bouton d'action principal dans le header, puis des rappels contextuels dans les sections menu, produits signatures et contact.
+
+Ne pas afficher un bouton « Commander » qui renvoie vers une plateforme non configurée. Ne pas simuler une commande intégrée si le restaurant ne dispose pas de ce système.
+
+Mobile-first :
+- la première vue mobile doit contenir une accroche courte, une image produit forte et au moins une action ;
+- les boutons doivent être confortables au toucher ;
+- les cartes produits ne doivent pas être trop serrées ;
+- la navigation par catégories doit rester fluide ;
+- le téléphone, l'itinéraire et les horaires doivent être immédiatement accessibles ;
+- les effets 3D doivent être simplifiés ou remplacés si nécessaire.
+
+======================================================================
+8. TON RÉDACTIONNEL
+======================================================================
+
+Voix recommandée : directe, gourmande, conviviale, confiante et un peu audacieuse.
+
+À privilégier :
+- phrases courtes ;
+- verbes actifs ;
+- noms de produits distinctifs ;
+- mots concrets liés aux textures, à la cuisson et aux ingrédients ;
+- petites touches de complicité ;
+- informations pratiques sans détour.
+
+À éviter :
+- promesses vagues comme « le meilleur snack du monde » ;
+- superlatifs permanents ;
+- paragraphes trop longs ;
+- langage gastronomique artificiel si le positionnement est celui d'un snack ;
+- fautes, incohérences de ton, traductions littérales ou mélange non maîtrisé des langues.
+
+La langue principale du site doit être définie selon la clientèle réelle du restaurant. Si plusieurs langues sont nécessaires, prévoir une structure multilingue propre plutôt qu'un mélange de langues sur une même page.
+
+======================================================================
+9. LIVRABLES À DEMANDER AU WEBDESIGNER
+======================================================================
+
+1. Moodboard de direction artistique montrant palette, typographies, références photo, matières, iconographie et ambiance générale.
+2. Proposition de logo/wordmark ou intégration du logo existant, selon l'identité déjà définie.
+3. Maquette desktop complète de la page d'accueil.
+4. Maquette mobile complète de la page d'accueil.
+5. Design de la carte/menu, avec catégories et composants produits.
+6. Design des pages complémentaires nécessaires : menu détaillé, contact/localisation, éventuellement concept ou galerie.
+7. Storyboard du hero animé et du modèle 3D principal.
+8. Démonstration des interactions et transitions au scroll.
+9. Footer final et états mobiles.
+10. Spécifications des images et modèles 3D à produire ou à fournir.
+
+Avant intégration, demander une validation du moodboard et de la maquette du hero. Ce sont les deux éléments qui fixent l'identité de l'ensemble.
+
+======================================================================
+10. EXIGENCES TECHNIQUES, ACCESSIBILITÉ ET QUALITÉ
+======================================================================
+
+- Responsive complet : mobile, tablette, desktop et grands écrans.
+- Performance : images WebP/AVIF, dimensions adaptées, lazy loading des images hors écran, compression des vidéos et modèles 3D.
+- Le contenu principal doit apparaître rapidement, même si les animations ne sont pas chargées.
+- Hiérarchie sémantique : un H1 clair par page, H2 par grandes sections, H3 pour sous-sections et produits lorsque pertinent.
+- Contrastes lisibles, taille de texte adaptée et navigation clavier fonctionnelle.
+- Focus visible sur les liens, boutons et contrôles.
+- Textes alternatifs pertinents pour les images informatives ; alt vide pour les images purement décoratives.
+- Respect de prefers-reduced-motion.
+- Pas de contenu essentiel uniquement accessible au hover.
+- Pas de musique automatique.
+- SEO local : nom officiel, adresse, téléphone, horaires cohérents, données structurées de type Restaurant/LocalBusiness si adaptées, titres et métadescriptions uniques.
+- Liens directs vers itinéraire, téléphone et réseaux sociaux.
+- Prévoir un système simple de mise à jour du menu, des prix, des horaires, du snack du mois et des photos.
+- Prévoir les mentions légales, politique de confidentialité et gestion du consentement aux cookies selon les outils réellement utilisés.
+
+======================================================================
+11. CRITÈRES D'ACCEPTATION — COMMENT JUGER LE RÉSULTAT
+======================================================================
+
+Le site est réussi si :
+
+- On reconnaît une marque, pas un template générique.
+- Le produit principal est immédiatement visible et appétissant.
+- La 3D est un vrai élément de mise en scène, pas un gadget lourd.
+- L'expérience a un rythme : alternance de sections immersives, éditoriales, produit et pratiques.
+- Les photos du lieu et de l'équipe rendent le snack crédible et humain.
+- Les catégories du menu sont claires et le prix facile à trouver.
+- Les horaires, l'adresse et le téléphone sont visibles sans devoir chercher longtemps.
+- Les CTA fonctionnent et mènent aux bons endroits.
+- Le site garde sa qualité sur mobile.
+- La navigation reste rapide, accessible et compréhensible même sans animations.
+- Les titres H1/H2/H3 structurent chaque section de manière cohérente.
+- Le footer contient toutes les informations utiles.
+
+Le site n'est PAS réussi si :
+- il ressemble à une simple copie de LÜKS ou Qissa ;
+- il accumule des effets 3D sans cohérence ;
+- les images sont génériques ou ne correspondent pas aux produits réels ;
+- les sections se répètent avec le même layout ;
+- la carte est illisible ou les prix sont cachés ;
+- les informations de contact sont difficiles à trouver ;
+- les animations ralentissent l'accès au contenu.
+
+======================================================================
+12. BRIEF SYNTHÉTIQUE À TRANSMETTRE TEL QUEL AU WEBDESIGNER
+======================================================================
+
+Conçois un site web sur mesure pour [NOM DU SNACK], avec une direction artistique qui combine trois qualités : l'impact produit et l'énergie street-food de LÜKS Kebab, l'immersion éditoriale et le storytelling de Qissa, ainsi que l'authenticité locale et humaine de Frituur Rumbeke Platse.
+
+Je ne veux pas d'un site de snack générique. Je veux une expérience de marque dynamique, contemporaine, gourmande et mémorable, avec des compositions asymétriques, une typographie forte, des photos produit très travaillées, des images réelles du lieu et de l'équipe, des transitions fluides et un modèle 3D original lié à notre produit signature.
+
+Le hero doit être spectaculaire sans être confus : un H1 fort, une promesse claire, un CTA principal, un CTA secondaire et un produit 3D mis en scène avec une rotation subtile et une animation au scroll. Utilise ensuite une alternance de sections claires et sombres, des grands visuels, des bandeaux typographiques et des cartes de menu expressives.
+
+La structure doit inclure au minimum : accueil/hero, promesse, produits signatures, carte complète, concept/histoire, coulisses, galerie, avis, informations pratiques et footer complet. Le menu doit être organisé par catégories et rester facile à parcourir sur mobile. Les prix, horaires, adresse, téléphone, itinéraire et liens de commande doivent être faciles à trouver.
+
+La direction artistique doit rester chaleureuse et accessible : charbon, crème, beige toasté, rouge piment et touches ambrées sont une base de travail à valider avec le logo. Le rendu doit être premium dans sa qualité de design, mais conserver l'énergie et la simplicité d'un snack.
+
+Je veux des animations utiles et élégantes, pas des effets gratuits. Prévois un modèle 3D optimisé avec fallback mobile, des animations au scroll, des interactions de cartes, des transitions de section et une version respectueuse de prefers-reduced-motion. Le site doit rester rapide, lisible et entièrement fonctionnel même si la 3D est désactivée.
+
+Chaque section doit être structurée avec une hiérarchie réelle H1, H2, H3. Le header doit comporter une navigation et une action principale ; le footer doit afficher les coordonnées, horaires, réseaux sociaux, itinéraire et mentions nécessaires. Tous les textes, produits, prix, photos et informations pratiques doivent correspondre aux données vérifiées de l'établissement. Ne rien inventer.
+
+Avant de développer, présente un moodboard, une proposition de hero desktop/mobile et un storyboard du modèle 3D. L'objectif est d'obtenir une identité visuelle forte et cohérente, pas de reproduire les sites d'inspiration.
+
+======================================================================
+13. CHECKLIST DES CONTENUS À FOURNIR POUR FINALISER LA CRÉATION
+======================================================================
+
+- Nom exact du restaurant et éventuelle baseline.
+- Logo en vectoriel ou PNG transparent.
+- Adresse exacte et lien Google Maps.
+- Numéro de téléphone et e-mail.
+- Horaires précis et jours de fermeture.
+- Menu complet, prix, options et suppléments.
+- Produits signatures à mettre en avant.
+- Canal de commande (téléphone, plateforme, commande en ligne ou retrait).
+- Photos réelles des produits, de préférence prises dans des conditions cohérentes.
+- Photos de l'équipe, du comptoir, de la salle et de la devanture.
+- Avis clients ou lien vers la fiche Google Business Profile.
+- Liens Instagram, Facebook, TikTok et autres réseaux utilisés.
+- Éléments réels d'histoire, de savoir-faire, de fraîcheur ou de provenance pouvant être affirmés publiquement.
+- Produit qui servira de modèle 3D principal et photos de référence sous plusieurs angles.
+
+FIN DU DOCUMENT

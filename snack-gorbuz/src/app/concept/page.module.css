@@ -1,0 +1,206 @@
+/* --- Positionnement --------------------------------------------------- */
+
+.positioning {
+  padding-top: var(--section-y);
+}
+
+.posInner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding-bottom: var(--section-y);
+}
+
+.posHead > :first-child {
+  margin-bottom: 0;
+}
+
+.posText {
+  color: var(--muted);
+  font-size: var(--fs-md);
+}
+
+.first {
+  color: var(--fg);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.posStamp {
+  display: none;
+}
+
+/* --- Envies ----------------------------------------------------------- */
+
+.families {
+  padding-block: var(--section-y);
+}
+
+.famList {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.famItem {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  grid-template-areas:
+    "index glyph copy"
+    "index glyph link";
+  align-items: center;
+  column-gap: 1.25rem;
+  row-gap: 0.75rem;
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--line);
+  transition: padding-left var(--dur-base) var(--ease-out);
+}
+
+.famItem:hover {
+  padding-left: 0.75rem;
+}
+
+.famIndex {
+  grid-area: index;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--c-amber);
+}
+
+.famGlyph {
+  grid-area: glyph;
+  color: var(--c-red);
+}
+
+.famCopy {
+  grid-area: copy;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.famTitle {
+  font-size: clamp(2rem, 1.5rem + 3vw, 4.5rem);
+  line-height: 0.95;
+}
+
+.famLink {
+  grid-area: link;
+  justify-self: start;
+}
+
+/* --- Univers ---------------------------------------------------------- */
+
+.universe {
+  padding-block: var(--section-y);
+}
+
+.uniHead {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.uniHead > :first-child {
+  margin-bottom: 0;
+}
+
+.uniText {
+  font-size: var(--fs-md);
+  color: var(--muted);
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 1rem;
+}
+
+.tile {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.tile:nth-child(even) {
+  margin-top: 2rem;
+}
+
+.tileCaption {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.tileTitle {
+  font-weight: 700;
+}
+
+/* --- Retrouvez-nous --------------------------------------------------- */
+
+.find {
+  padding-block: var(--section-y);
+}
+
+.findInner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: end;
+}
+
+.findTitle {
+  margin-block: 1rem;
+}
+
+.findText,
+.findAddress {
+  font-size: var(--fs-md);
+}
+
+.findActions {
+  display: flex;
+}
+
+@media (min-width: 48rem) {
+  .famItem {
+    grid-template-columns: 4rem 4rem 1fr auto;
+    grid-template-areas: "index glyph copy link";
+  }
+
+  .famLink {
+    justify-self: end;
+  }
+
+  .tiles {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .posInner {
+    grid-template-columns: 5fr 5fr 2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .posText {
+    padding-top: 0.5rem;
+  }
+
+  .posStamp {
+    display: grid;
+    justify-items: end;
+  }
+
+  .uniHead {
+    grid-template-columns: 7fr 5fr;
+    align-items: end;
+    gap: 2rem;
+  }
+
+  .findInner {
+    grid-template-columns: 8fr 4fr;
+  }
+
+  .findActions {
+    justify-content: flex-end;
+  }
+}

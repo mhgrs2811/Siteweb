@@ -1,0 +1,147 @@
+.section {
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+  border-top: 1px solid var(--line);
+  scroll-margin-top: calc(var(--header-h) + 3.5rem);
+}
+
+.section:first-of-type {
+  border-top: 0;
+}
+
+.head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.headCopy {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.num {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 2rem + 4vw, 6rem);
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--c-red);
+}
+
+.title {
+  font-size: clamp(2.75rem, 2rem + 4vw, 6rem);
+  line-height: 0.92;
+}
+
+.tagline {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+
+.intro {
+  font-size: var(--fs-base);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* --- État provisoire ---------------------------------------------------- */
+
+.empty {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--c-charcoal);
+  color: var(--c-cream);
+}
+
+.emptyCopy {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+  align-content: start;
+}
+
+.emptyTitle {
+  font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  line-height: 0.95;
+}
+
+.emptyText {
+  color: var(--c-muted-on-dark);
+  max-width: 40ch;
+  line-height: 1.55;
+}
+
+.fields {
+  display: grid;
+  gap: 0.25rem;
+  align-content: start;
+  border-top: 1px dashed rgba(244, 239, 230, 0.3);
+  padding-top: 0.75rem;
+}
+
+.field {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.fieldIndex {
+  font-family: var(--font-display);
+  color: var(--c-amber);
+  font-size: 0.9rem;
+}
+
+.fieldDots {
+  flex: 1;
+  border-bottom: 1px dotted rgba(244, 239, 230, 0.35);
+  transform: translateY(-0.3em);
+}
+
+.fieldValue {
+  color: var(--c-muted-on-dark);
+}
+
+@media (min-width: 48rem) {
+  .head {
+    grid-template-columns: 5fr 7fr;
+    gap: 2.5rem;
+  }
+
+  .flipped .head {
+    grid-template-columns: 7fr 5fr;
+  }
+
+  .flipped .headMedia {
+    order: 2;
+    width: 100%;
+    max-width: 24rem;
+    margin-left: auto;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .empty {
+    grid-template-columns: 7fr 5fr;
+    gap: 3rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

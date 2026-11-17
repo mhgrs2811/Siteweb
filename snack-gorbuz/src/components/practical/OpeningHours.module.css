@@ -1,0 +1,53 @@
+.wrap {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.list {
+  margin: 0;
+  display: grid;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.compact .row {
+  padding: 0.4rem 0;
+  font-size: var(--fs-sm);
+}
+
+.day {
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.slots {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.25rem 0.75rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.closed {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.note {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  width: 100%;
+}
+
+.footnote {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}

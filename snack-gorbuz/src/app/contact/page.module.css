@@ -1,0 +1,31 @@
+.body {
+  padding-block: var(--section-y);
+}
+
+.note {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin-top: 2rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--c-cream);
+  color: var(--c-charcoal);
+}
+
+.noteTitle {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.noteText {
+  color: var(--c-muted-on-cream);
+  max-width: 60ch;
+  line-height: 1.55;
+}
+
+@media (min-width: 48rem) {
+  .note {
+    grid-template-columns: 1fr auto;
+  }
+}

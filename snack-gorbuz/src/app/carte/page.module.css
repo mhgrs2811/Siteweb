@@ -1,0 +1,44 @@
+.families {
+  padding-block: var(--section-y) calc(var(--section-y) * 0.6);
+}
+
+.head {
+  margin-bottom: clamp(1rem, 2vw, 2rem);
+}
+
+.question {
+  padding-block: var(--section-y);
+}
+
+.questionInner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: end;
+}
+
+.questionTitle {
+  margin-block: 1rem;
+  max-width: 14ch;
+}
+
+.questionText {
+  font-size: var(--fs-md);
+}
+
+.questionActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@media (min-width: 64rem) {
+  .questionInner {
+    grid-template-columns: 7fr 5fr;
+  }
+
+  .questionActions {
+    justify-content: flex-end;
+  }
+}

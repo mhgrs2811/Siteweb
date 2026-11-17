@@ -1,0 +1,226 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: calc(var(--header-h) + 1.5rem);
+  padding-bottom: 5rem;
+  overflow: hidden;
+}
+
+/* rayures papier sur la moitié droite, très discrètes */
+.bgStripes {
+  position: absolute;
+  inset: 0 0 0 55%;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0,
+    transparent 14px,
+    rgba(244, 239, 230, 0.045) 14px,
+    rgba(244, 239, 230, 0.045) 15px
+  );
+  mask-image: linear-gradient(to right, transparent, #000 30%);
+  pointer-events: none;
+}
+
+.side {
+  position: absolute;
+  left: calc(var(--gutter) * 0.35);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  display: none;
+}
+
+.inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.text {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  max-width: 44rem;
+}
+
+.kicker {
+  color: var(--muted);
+}
+
+.title {
+  letter-spacing: -0.01em;
+}
+
+.br {
+  display: none;
+}
+
+.lead {
+  color: var(--muted);
+  max-width: 34rem;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+}
+
+/* --- Visuel ------------------------------------------------------------ */
+
+.stage {
+  position: relative;
+  width: 100%;
+}
+
+.visual {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: min(70vw, 520px);
+  margin-inline: auto;
+}
+
+.poster,
+.canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.poster {
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+.canvas {
+  opacity: 0;
+  transition: opacity 900ms var(--ease-out);
+}
+
+.visual[data-ready] .canvas {
+  opacity: 1;
+}
+
+.visual[data-ready] .poster {
+  opacity: 0;
+}
+
+.canvas > :global(canvas) {
+  width: 100% !important;
+  height: 100% !important;
+  touch-action: pan-y;
+}
+
+.stamp {
+  position: absolute;
+  top: -1rem;
+  right: -0.25rem;
+  color: var(--c-red);
+  z-index: 2;
+}
+
+.caption {
+  margin-top: 0.75rem;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+/* --- Scroll ------------------------------------------------------------- */
+
+.scroll {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--muted);
+  padding: 0.5rem 0;
+  min-height: 2.75rem;
+  transition: color var(--dur-fast);
+}
+
+.scroll:hover {
+  color: var(--c-cream);
+}
+
+.scroll svg {
+  animation: nudge 2.2s var(--ease-in-out) infinite;
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* --- Breakpoints -------------------------------------------------------- */
+
+@media (min-width: 48rem) {
+  .visual {
+    max-height: 560px;
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero {
+    padding-bottom: 6rem;
+  }
+
+  .inner {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(1rem, 2.5vw, 2rem);
+  }
+
+  .text {
+    grid-column: 1 / span 7;
+    max-width: none;
+  }
+
+  .br {
+    display: inline;
+  }
+
+  .stage {
+    grid-column: 7 / span 6;
+    transform: translateY(-2%);
+  }
+
+  .visual {
+    max-height: min(64vh, 620px);
+  }
+
+  .side {
+    display: block;
+  }
+
+  .stamp {
+    top: 0.5rem;
+    right: -1rem;
+  }
+}
+
+@media (min-width: 90rem) {
+  .text {
+    grid-column: 1 / span 7;
+  }
+
+  .stage {
+    grid-column: 8 / span 5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll svg {
+    animation: none;
+  }
+}

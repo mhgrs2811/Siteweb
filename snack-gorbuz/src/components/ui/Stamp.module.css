@@ -1,0 +1,69 @@
+.stamp {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  color: var(--c-red);
+}
+
+.cream {
+  color: var(--c-cream);
+}
+
+.ink {
+  color: var(--c-charcoal);
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.spin .svg {
+  animation: spin 40s linear infinite;
+}
+
+.ring {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.ringInner {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+
+.text {
+  fill: currentColor;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 8.4px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.center {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 1.6em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin .svg {
+    animation: none;
+  }
+}

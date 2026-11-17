@@ -1,0 +1,204 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.filter {
+  min-height: 2.75rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background-color var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+}
+
+.filter:hover {
+  border-color: var(--fg);
+}
+
+.filter[aria-pressed="true"] {
+  background: var(--c-red);
+  color: var(--c-cream);
+  border-color: var(--c-red);
+}
+
+.chapter {
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.chapter:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.chapterHead {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.cell {
+  min-width: 0;
+}
+
+.media {
+  height: 100%;
+}
+
+.openBtn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--r-md);
+}
+
+.tall {
+  grid-row: span 2;
+}
+
+.wide,
+.large {
+  grid-column: span 2;
+}
+
+/* --- Lightbox ----------------------------------------------------------- */
+
+.dialog {
+  border: 0;
+  padding: 0;
+  max-width: 100vw;
+  max-height: 100dvh;
+  width: 100vw;
+  height: 100dvh;
+  background: rgba(23, 23, 23, 0.96);
+  color: var(--c-cream);
+}
+
+.dialog::backdrop {
+  background: rgba(23, 23, 23, 0.8);
+}
+
+.dialogInner {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height: 100%;
+  padding: 4rem var(--gutter) 2rem;
+}
+
+.dialogClose {
+  position: absolute;
+  top: 1rem;
+  right: var(--gutter);
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--r-sm);
+}
+
+.figure {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+  min-height: 0;
+}
+
+.figureImg {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - 10rem);
+  object-fit: contain;
+}
+
+.figcaption {
+  font-size: var(--fs-sm);
+  color: var(--c-muted-on-dark);
+}
+
+.dialogNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.navBtn {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  transition: background-color var(--dur-fast), color var(--dur-fast);
+}
+
+.navBtn:hover {
+  background: var(--c-cream);
+  color: var(--c-charcoal);
+}
+
+.counter {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+@media (min-width: 48rem) {
+  .grid {
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 12rem;
+    grid-auto-flow: dense;
+    gap: 1rem;
+  }
+
+  .cell > *,
+  .openBtn > * {
+    aspect-ratio: auto !important;
+    height: 100%;
+  }
+
+  .tall {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .square {
+    grid-column: span 2;
+  }
+
+  .wide {
+    grid-column: span 2;
+  }
+
+  .large {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+
+  .chapterHead {
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .grid {
+    grid-auto-rows: 14rem;
+  }
+}

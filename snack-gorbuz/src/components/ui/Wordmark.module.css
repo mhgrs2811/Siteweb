@@ -1,0 +1,76 @@
+.mark {
+  --wm-size: 2rem;
+  display: inline-grid;
+  grid-template-rows: auto auto;
+  line-height: 1;
+  color: var(--c-cream);
+  user-select: none;
+}
+
+.ink {
+  color: var(--c-charcoal);
+}
+
+.top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-family: var(--font-body);
+  font-size: calc(var(--wm-size) * 0.28);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: calc(var(--wm-size) * 0.06);
+  padding-left: 0.08em;
+}
+
+.dot {
+  width: 0.55em;
+  height: 0.55em;
+  background: var(--c-red);
+  border-radius: 50%;
+}
+
+.main {
+  font-family: var(--font-display);
+  font-size: var(--wm-size);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.88;
+}
+
+.sm {
+  --wm-size: 1.5rem;
+}
+
+.md {
+  --wm-size: 2rem;
+}
+
+.lg {
+  --wm-size: 3.25rem;
+}
+
+.xl {
+  --wm-size: clamp(4rem, 14vw, 12rem);
+}
+
+.logo {
+  height: auto;
+}
+
+.logo.sm {
+  width: 7rem;
+}
+
+.logo.md {
+  width: 9rem;
+}
+
+.logo.lg {
+  width: 14rem;
+}
+
+.logo.xl {
+  width: clamp(14rem, 40vw, 30rem);
+}
