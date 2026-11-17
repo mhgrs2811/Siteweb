@@ -1,0 +1,99 @@
+---
+import Base from '@/layouts/Base.astro';
+import { restaurant } from '@/data/restaurant';
+import { addressLine, telHref } from '@/lib/hours';
+
+/**
+ * Page légale minimale. Les champs marqués « à compléter » doivent être fournis
+ * par l'établissement avant mise en ligne (dénomination, numéro d'entreprise BCE,
+ * TVA, hébergeur, responsable de publication).
+ */
+const todo = 'À compléter par l’établissement';
+---
+
+<Base title="Mentions légales" description={`Mentions légales du site de ${restaurant.name}, ${restaurant.address.city}.`}>
+  <div class="container legal">
+    <header class="legal__head">
+      <p class="eyebrow">Informations</p>
+      <h1>Mentions légales</h1>
+      <p class="notice">Page à compléter avant mise en ligne</p>
+    </header>
+
+    <section class="legal__section" aria-labelledby="editeur">
+      <h2 id="editeur">Éditeur du site</h2>
+      <dl class="legal__dl">
+        <div><dt>Nom commercial</dt><dd>{restaurant.name}</dd></div>
+        <div><dt>Dénomination légale</dt><dd>{restaurant.legalName ?? todo}</dd></div>
+        <div><dt>Adresse</dt><dd>{addressLine(true)}</dd></div>
+        <div><dt>Téléphone</dt><dd><a href={telHref()}>{restaurant.phone.display}</a></dd></div>
+        <div><dt>E-mail</dt><dd>{restaurant.email ?? todo}</dd></div>
+        <div><dt>Numéro d’entreprise (BCE)</dt><dd>{todo}</dd></div>
+        <div><dt>Numéro de TVA</dt><dd>{todo}</dd></div>
+        <div><dt>Responsable de publication</dt><dd>{todo}</dd></div>
+      </dl>
+    </section>
+
+    <section class="legal__section" aria-labelledby="hebergeur">
+      <h2 id="hebergeur">Hébergement</h2>
+      <p>{todo} (nom, adresse et coordonnées de l’hébergeur).</p>
+    </section>
+
+    <section class="legal__section" aria-labelledby="propriete">
+      <h2 id="propriete">Propriété intellectuelle</h2>
+      <p>
+        L’ensemble des contenus de ce site (textes, visuels, logo) est la propriété de {restaurant.name} ou
+        de ses partenaires. Toute reproduction sans autorisation préalable est interdite.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style is:global>
+  .legal {
+    display: grid;
+    gap: var(--sp-7);
+    padding-block: var(--sp-8) var(--sp-9);
+    max-width: 48rem;
+  }
+
+  .legal__head {
+    display: grid;
+    gap: var(--sp-4);
+    justify-items: start;
+  }
+
+  .legal__section {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .legal__section h2 {
+    font-size: var(--fs-lg);
+  }
+
+  .legal__dl {
+    display: grid;
+    border-top: 1px solid var(--c-line);
+  }
+
+  .legal__dl > div {
+    display: grid;
+    grid-template-columns: minmax(9rem, 14rem) 1fr;
+    gap: var(--sp-3);
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--c-line);
+    font-size: var(--fs-sm);
+  }
+
+  .legal__dl dt {
+    font-weight: 700;
+    color: var(--c-ink-soft);
+  }
+
+  @media (max-width: 30em) {
+    .legal__dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+    }
+  }
+</style>

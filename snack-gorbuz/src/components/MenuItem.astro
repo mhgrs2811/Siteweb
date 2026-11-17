@@ -1,0 +1,127 @@
+---
+/**
+ * Fiche produit de la carte. Se remplit automatiquement depuis `src/data/menu.ts`.
+ * Nom, description, prix, tags, allergènes et visuel (placeholder si absent).
+ */
+import Placeholder from './Placeholder.astro';
+import { allergenLabels, formatPrice, tagLabels, type MenuItem } from '@/data/menu';
+
+interface Props {
+  item: MenuItem;
+  index?: number;
+}
+const { item, index = 0 } = Astro.props;
+---
+
+<article class:list={['item', { 'is-unavailable': !item.available }]} id={`produit-${item.id}`}>
+  <div class="item__media">
+    <Placeholder
+      subject={item.name}
+      src={item.image}
+      alt={item.image ? item.name : ''}
+      ratio="4 / 3"
+      tone={index % 2 === 0 ? 'cream' : 'copper'}
+      variant={index}
+    />
+  </div>
+  <div class="item__body">
+    <div class="item__head">
+      <h3 class="item__name">{item.name}</h3>
+      <p class="item__price tabular">{formatPrice(item.price)}</p>
+    </div>
+    {item.description && <p class="item__desc">{item.description}</p>}
+    {
+      item.tags.length > 0 && (
+        <ul class="item__tags" aria-label="Caractéristiques">
+          {item.tags.map((tag) => (
+            <li class="item__tag">{tagLabels[tag]}</li>
+          ))}
+        </ul>
+      )
+    }
+    {
+      item.allergens.length > 0 && (
+        <p class="item__allergens">
+          <span class="item__allergens-label">Allergènes&nbsp;:</span>{' '}
+          {item.allergens.map((a) => allergenLabels[a]).join(', ')}
+        </p>
+      )
+    }
+    {!item.available && <p class="item__unavailable">Indisponible pour le moment</p>}
+  </div>
+</article>
+
+<style>
+  .item {
+    display: grid;
+    gap: var(--sp-4);
+    padding-block: var(--sp-5);
+    border-top: 1px solid var(--c-line);
+  }
+
+  .item__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--sp-4);
+  }
+
+  .item__name {
+    font-size: var(--fs-md);
+  }
+
+  .item__price {
+    flex: none;
+    font-weight: 700;
+    font-size: var(--fs-base);
+    color: var(--c-accent);
+  }
+
+  .item__desc {
+    color: var(--c-ink-soft);
+    font-size: var(--fs-sm);
+  }
+
+  .item__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+
+  .item__tag {
+    padding: 0.2em 0.6em;
+    border-radius: var(--radius-pill);
+    background: var(--c-accent-soft);
+    color: var(--c-accent-deep);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .item__allergens {
+    font-size: var(--fs-xs);
+    color: var(--c-ink-soft);
+  }
+
+  .item__allergens-label {
+    font-weight: 700;
+  }
+
+  .is-unavailable .item__name,
+  .is-unavailable .item__price {
+    opacity: 0.55;
+  }
+
+  .item__unavailable {
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    color: var(--c-ink-soft);
+  }
+
+  @media (min-width: 40em) {
+    .item {
+      grid-template-columns: 11rem 1fr;
+      gap: var(--sp-5);
+    }
+  }
+</style>

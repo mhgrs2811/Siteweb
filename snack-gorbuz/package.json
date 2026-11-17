@@ -1,0 +1,32 @@
+{
+  "name": "snack-gorbuz",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Site vitrine de Snack Gorbuz (Zaventem) — V1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "lint": "eslint .",
+    "typecheck": "astro check",
+    "verify": "npm run check && npm run lint && npm run build",
+    "capture": "node tools/capture.mjs",
+    "og": "node tools/og/generate.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/sitemap": "^3.7.5",
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "astro": "^5.18.2",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "typescript-eslint": "^8.73.0"
+  }
+}

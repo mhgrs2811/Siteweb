@@ -1,0 +1,121 @@
+---
+/**
+ * Tableau des horaires. Le jour courant est mis en évidence et un statut
+ * « Ouvert / Fermé » est calculé côté client (fuseau Europe/Brussels) à partir
+ * des horaires de `src/data/restaurant.ts` — aucune donnée extérieure.
+ */
+import { restaurant } from '@/data/restaurant';
+import { hoursRows } from '@/lib/hours';
+
+interface Props {
+  showStatus?: boolean;
+  class?: string;
+}
+const { showStatus = true, class: className } = Astro.props;
+const rows = hoursRows();
+const hoursJson = JSON.stringify(restaurant.hours);
+---
+
+<div class:list={['hours', className]} data-hours={hoursJson}>
+  {
+    showStatus && (
+      <p class="hours__status" data-hours-status aria-live="polite">
+        <span class="hours__dot" aria-hidden="true" />
+        <span data-hours-status-text>Horaires d’ouverture</span>
+      </p>
+    )
+  }
+  <dl class="hours__list">
+    {
+      rows.map((row) => (
+        <div class:list={['hours__row', { 'is-closed': row.closed }]} data-day={row.key}>
+          <dt>{row.label}</dt>
+          <dd class="tabular">{row.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</div>
+
+<script>
+  import '@/scripts/hours-status';
+</script>
+
+<style>
+  .hours {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .hours__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 650;
+    font-size: var(--fs-sm);
+  }
+
+  .hours__dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--c-line);
+    flex: none;
+  }
+
+  .hours__status.is-open .hours__dot {
+    background: var(--c-sage);
+    box-shadow: 0 0 0 4px rgb(142 155 116 / 0.25);
+  }
+
+  .hours__status.is-closed .hours__dot {
+    background: var(--c-accent);
+    box-shadow: 0 0 0 4px rgb(138 47 42 / 0.18);
+  }
+
+  .hours__list {
+    display: grid;
+    max-width: 24rem;
+  }
+
+  .hours__row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--hours-line, var(--c-line));
+    font-size: var(--fs-sm);
+  }
+
+  .hours__row dt {
+    font-weight: 500;
+  }
+
+  .hours__row dd {
+    font-weight: 650;
+  }
+
+  .hours__row.is-closed dd {
+    font-weight: 500;
+    color: var(--hours-muted, var(--c-ink-soft));
+  }
+
+  .hours__row.is-today {
+    font-weight: 700;
+    color: var(--hours-today, var(--c-accent));
+    border-bottom-color: currentColor;
+  }
+
+  .hours__row.is-today dt::after {
+    content: ' · aujourd’hui';
+    font-weight: 500;
+    font-size: var(--fs-xs);
+    letter-spacing: 0.04em;
+  }
+
+  :global(.on-dark) .hours {
+    --hours-line: var(--c-espresso-line);
+    --hours-muted: var(--c-ink-on-dark-soft);
+    --hours-today: var(--c-copper);
+  }
+</style>

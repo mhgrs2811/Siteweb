@@ -1,0 +1,76 @@
+---
+import Base from '@/layouts/Base.astro';
+import { restaurant } from '@/data/restaurant';
+import { addressLine } from '@/lib/hours';
+
+/**
+ * Politique de confidentialité minimale, adaptée à l'état actuel du site :
+ * aucun formulaire, aucun cookie de suivi, aucun script tiers.
+ * À compléter / faire valider si un outil de mesure d'audience ou un formulaire est ajouté.
+ */
+---
+
+<Base
+  title="Politique de confidentialité"
+  description={`Politique de confidentialité du site de ${restaurant.name}, ${restaurant.address.city}.`}
+>
+  <div class="container legal">
+    <header class="legal__head">
+      <p class="eyebrow">Informations</p>
+      <h1>Politique de confidentialité</h1>
+      <p class="notice">À faire valider avant mise en ligne</p>
+    </header>
+
+    <section class="legal__section" aria-labelledby="donnees">
+      <h2 id="donnees">Données collectées</h2>
+      <p>
+        Dans sa version actuelle, ce site ne comporte ni formulaire, ni compte utilisateur, ni outil de
+        mesure d’audience, ni cookie de suivi. Aucune donnée personnelle n’est collectée via le site.
+      </p>
+      <p>
+        Les polices de caractères sont hébergées avec le site : aucune requête n’est envoyée à un service
+        tiers lors de la consultation des pages.
+      </p>
+    </section>
+
+    <section class="legal__section" aria-labelledby="liens">
+      <h2 id="liens">Liens externes</h2>
+      <p>
+        Les liens « Itinéraire » et « Fiche Google » renvoient vers Google Maps. L’utilisation de ces
+        services est soumise à la politique de confidentialité de Google.
+      </p>
+    </section>
+
+    <section class="legal__section" aria-labelledby="contact-rgpd">
+      <h2 id="contact-rgpd">Contact</h2>
+      <p>
+        Pour toute question relative à vos données, vous pouvez contacter {restaurant.name},
+        {addressLine(true)}{restaurant.email ? `, ${restaurant.email}` : ''}.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style is:global>
+  .legal {
+    display: grid;
+    gap: var(--sp-7);
+    padding-block: var(--sp-8) var(--sp-9);
+    max-width: 48rem;
+  }
+
+  .legal__head {
+    display: grid;
+    gap: var(--sp-4);
+    justify-items: start;
+  }
+
+  .legal__section {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .legal__section h2 {
+    font-size: var(--fs-lg);
+  }
+</style>

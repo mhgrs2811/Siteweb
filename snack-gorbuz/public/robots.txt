@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Le sitemap est généré au build (sitemap-index.xml) dès que SITE_URL est défini.
+Sitemap: https://snack-gorbuz.example/sitemap-index.xml

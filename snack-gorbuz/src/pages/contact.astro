@@ -1,0 +1,240 @@
+---
+import Base from '@/layouts/Base.astro';
+import Button from '@/components/Button.astro';
+import Hours from '@/components/Hours.astro';
+import Icon from '@/components/Icon.astro';
+import { restaurant } from '@/data/restaurant';
+import { content } from '@/data/content';
+import { addressLine, directionsUrl, listingUrl, telHref } from '@/lib/hours';
+
+const page = content.pages.contact;
+const g = restaurant.googleListing;
+const options = [
+  g.mentions.takeaway ? 'À emporter' : null,
+  g.mentions.delivery ? 'Se faire livrer' : null,
+].filter(Boolean);
+---
+
+<Base
+  title="Contact & accès"
+  description={`${restaurant.name} — ${addressLine(true)}. Téléphone ${restaurant.phone.display}. Horaires d’ouverture et itinéraire.`}
+>
+  <header class="page-head">
+    <div class="container page-head__inner">
+      <p class="eyebrow">{content.visit.eyebrow}</p>
+      <h1>{page.title}</h1>
+      <p class="lead">{page.intro}</p>
+    </div>
+  </header>
+
+  <div class="container contact">
+    <section class="contact__main" aria-labelledby="coord-title" data-reveal>
+      <h2 id="coord-title" class="sr-only">Coordonnées</h2>
+
+      <address class="card card--address">
+        <span class="card__label"><Icon name="map-pin" size={16} /> Adresse</span>
+        <span class="card__big">{restaurant.address.street}</span>
+        <span class="card__sub">
+          {restaurant.address.postalCode} {restaurant.address.city}, {restaurant.address.country}
+        </span>
+        <div class="card__actions">
+          <Button href={directionsUrl()} variant="primary" icon="arrow-up-right" external>
+            {content.visit.directionsCta}
+          </Button>
+          <Button href={listingUrl()} variant="link" icon="arrow-up-right" external>
+            Fiche Google
+          </Button>
+        </div>
+      </address>
+
+      <div class="card card--phone">
+        <span class="card__label"><Icon name="phone" size={16} /> Téléphone</span>
+        <a class="card__big card__big--link" href={telHref()}>{restaurant.phone.display}</a>
+        <span class="card__sub">Numéro cliquable depuis un téléphone.</span>
+      </div>
+
+      {
+        options.length > 0 && (
+          <div class="card card--options">
+            <span class="card__label">
+              <Icon name="bag" size={16} /> Options
+            </span>
+            <ul class="options">
+              {options.map((o) => (
+                <li>{o}</li>
+              ))}
+            </ul>
+            <span class="card__sub">Options mentionnées sur la fiche Google de l’établissement.</span>
+          </div>
+        )
+      }
+
+      <div class="card card--access">
+        <h3 class="card__title">{page.accessHeading}</h3>
+        <p class="muted">{page.accessText}</p>
+      </div>
+    </section>
+
+    <aside class="contact__hours" aria-labelledby="hours-title" data-reveal style="--reveal-delay: 100ms">
+      <h2 id="hours-title" class="contact__hours-title">
+        <Icon name="clock" size={20} /> Horaires d’ouverture
+      </h2>
+      <Hours />
+      <p class="contact__hours-note muted">{page.hoursNote}</p>
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .page-head {
+    padding-block: var(--sp-8) var(--sp-7);
+    background: var(--c-cream-2);
+  }
+
+  .page-head__inner {
+    display: grid;
+    gap: var(--sp-4);
+    justify-items: start;
+  }
+
+  .contact {
+    display: grid;
+    gap: var(--sp-6);
+    padding-block: var(--sp-7) var(--sp-9);
+  }
+
+  .contact__main {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .card {
+    display: grid;
+    gap: var(--sp-2);
+    padding: var(--sp-6);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-md);
+    background: var(--c-paper);
+    font-style: normal;
+    justify-items: start;
+  }
+
+  .card__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-ink-soft);
+  }
+
+  .card__big {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1rem + 3.2vw, 2.75rem);
+    overflow-wrap: anywhere;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-top: var(--sp-2);
+  }
+
+  .card__big--link {
+    text-decoration: none;
+  }
+
+  .card__big--link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    text-decoration-thickness: 2px;
+  }
+
+  .card__sub {
+    color: var(--c-ink-soft);
+    font-size: var(--fs-sm);
+  }
+
+  .card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-4);
+    margin-top: var(--sp-3);
+  }
+
+  .card__title {
+    font-size: var(--fs-md);
+  }
+
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-top: var(--sp-2);
+  }
+
+  .options li {
+    padding: 0.35em 0.8em;
+    border: 1px solid var(--c-ink);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+  }
+
+  .contact__hours {
+    display: grid;
+    gap: var(--sp-4);
+    align-content: start;
+    padding: var(--sp-6);
+    border-radius: var(--radius-md);
+    background: var(--c-espresso);
+    color: var(--c-ink-on-dark);
+  }
+
+  .contact__hours :global(.hours) {
+    --hours-line: var(--c-espresso-line);
+    --hours-muted: var(--c-ink-on-dark-soft);
+    --hours-today: var(--c-copper);
+  }
+
+  .contact__hours-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--fs-md);
+  }
+
+  .contact__hours-title :global(.icon) {
+    color: var(--c-copper);
+  }
+
+  .contact__hours-note {
+    color: var(--c-ink-on-dark-soft);
+    font-size: var(--fs-sm);
+  }
+
+  @media (min-width: 48em) {
+    .contact__main {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .card--address,
+    .card--access {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 64em) {
+    .contact {
+      grid-template-columns: 7fr 5fr;
+      column-gap: var(--gutter);
+      align-items: start;
+    }
+
+    .contact__hours {
+      position: sticky;
+      top: calc(var(--header-h) + var(--sp-6));
+    }
+  }
+</style>

@@ -1,0 +1,403 @@
+---
+/**
+ * En-tête sticky : logo, navigation, action principale.
+ * Sur mobile : bouton « Appeler » toujours visible + menu plein écran accessible
+ * (aria-expanded, fermeture à Échap et au clic sur un lien).
+ */
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+import { restaurant } from '@/data/restaurant';
+import { addressLine, compactHours, telHref } from '@/lib/hours';
+
+interface Props {
+  theme?: 'light' | 'dark';
+}
+const { theme = 'light' } = Astro.props;
+
+const nav = [
+  { href: '/menu/', label: 'La carte' },
+  { href: '/univers/', label: 'L’univers' },
+  { href: '/galerie/', label: 'Galerie' },
+  { href: '/contact/', label: 'Contact & accès' },
+];
+
+const current = Astro.url.pathname;
+const isCurrent = (href: string) => current === href || current === href.replace(/\/$/, '');
+const hours = compactHours();
+---
+
+<header class="header" data-theme={theme} data-header>
+  <div class="container header__inner">
+    <Logo class="header__logo" />
+
+    <nav class="header__nav" aria-label="Navigation principale">
+      <ul class="header__list">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="header__link"
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <a class="header__phone" href={telHref()} aria-label={`Appeler le ${restaurant.phone.display}`}>
+        <Icon name="phone" size={20} />
+        <span class="header__phone-label">{restaurant.phone.display}</span>
+      </a>
+      <Button href="/menu/" variant="primary" class="header__cta">Voir la carte</Button>
+      <button
+        class="header__burger"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menu-mobile"
+        data-menu-toggle
+      >
+        <span class="header__burger-icon header__burger-icon--open"><Icon name="menu" size={24} /></span>
+        <span class="header__burger-icon header__burger-icon--close"><Icon name="close" size={24} /></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile" id="menu-mobile" data-menu-panel hidden>
+    <div class="container mobile__inner">
+      <nav aria-label="Navigation mobile">
+        <ul class="mobile__list">
+          <li>
+            <a href="/" class="mobile__link" aria-current={current === '/' ? 'page' : undefined}>
+              Accueil
+            </a>
+          </li>
+          {
+            nav.map((item, i) => (
+              <li style={`--i:${i + 1}`}>
+                <a
+                  href={item.href}
+                  class="mobile__link"
+                  aria-current={isCurrent(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="mobile__info">
+        <p class="mobile__eyebrow">Nous trouver</p>
+        <p class="mobile__address">{addressLine()}</p>
+        <ul class="mobile__hours">
+          {
+            hours.map((h) => (
+              <li>
+                <span>{h.days}</span>
+                <span class="tabular">{h.value}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="mobile__cta">
+          <Button href={telHref()} variant="inverse" icon="phone" iconPosition="start" size="lg">
+            Appeler
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  import '@/scripts/header';
+</script>
+
+<style>
+  .header {
+    --h-bg: var(--c-cream);
+    --h-fg: var(--c-ink);
+    --h-line: var(--c-line);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: var(--header-h);
+    background: var(--h-bg);
+    color: var(--h-fg);
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      color var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out);
+  }
+
+  /* Au-dessus d'un hero sombre, l'en-tête est transparent et clair. */
+  .header[data-theme='dark']:not(.is-scrolled):not(.is-open) {
+    --h-bg: transparent;
+    --h-fg: var(--c-ink-on-dark);
+    --logo-mark-bg: var(--c-cream);
+    --logo-mark-fg: var(--c-espresso);
+  }
+
+  .header.is-scrolled {
+    border-bottom-color: var(--h-line);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-5);
+    height: 100%;
+  }
+
+  .header__logo {
+    margin-right: auto;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .header__list {
+    display: flex;
+    gap: var(--sp-6);
+  }
+
+  .header__link {
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 0;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .header__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.2rem;
+    height: 1.5px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .header__link:hover::after,
+  .header__link[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+
+  .header__link:hover {
+    color: inherit;
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+
+  .header__phone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--fs-sm);
+  }
+
+  .header__phone:hover {
+    color: inherit;
+    background: rgb(128 100 80 / 0.1);
+  }
+
+  .header__phone-label {
+    display: none;
+  }
+
+  .header__cta {
+    display: none;
+  }
+
+  .header__burger {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+  }
+
+  .header__burger-icon {
+    grid-area: 1 / 1;
+    display: grid;
+    place-items: center;
+    transition:
+      opacity var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+
+  .header__burger-icon--close {
+    opacity: 0;
+    transform: rotate(-45deg);
+  }
+
+  .header.is-open .header__burger-icon--open {
+    opacity: 0;
+    transform: rotate(45deg);
+  }
+
+  .header.is-open .header__burger-icon--close {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* --- Menu mobile --- */
+  .mobile {
+    position: fixed;
+    inset: var(--header-h) 0 0 0;
+    z-index: 49;
+    overflow-y: auto;
+    background: var(--c-espresso);
+    color: var(--c-ink-on-dark);
+  }
+
+  .mobile[hidden] {
+    display: none;
+  }
+
+  .mobile__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-7);
+    padding-block: var(--sp-6) var(--sp-8);
+    min-height: 100%;
+  }
+
+  .mobile__list {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .mobile__link {
+    display: block;
+    padding: 0.55rem 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    border-bottom: 1px solid var(--c-espresso-line);
+    transition:
+      opacity var(--dur-slow) var(--ease-out),
+      transform var(--dur-slow) var(--ease-out);
+  }
+
+  .header.is-open .mobile__link {
+    animation: slide-in var(--dur-slow) var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 50ms);
+  }
+
+  .mobile__link[aria-current='page'] {
+    color: var(--c-copper);
+  }
+
+  .mobile__link:hover {
+    color: var(--c-copper);
+  }
+
+  .mobile__info {
+    display: grid;
+    gap: var(--sp-3);
+    margin-top: auto;
+  }
+
+  .mobile__eyebrow {
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-copper);
+  }
+
+  .mobile__address {
+    font-size: var(--fs-md);
+    font-weight: 600;
+  }
+
+  .mobile__hours {
+    display: grid;
+    gap: 0.25rem;
+    color: var(--c-ink-on-dark-soft);
+    font-size: var(--fs-sm);
+  }
+
+  .mobile__hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    max-width: 22rem;
+  }
+
+  .mobile__cta {
+    margin-top: var(--sp-3);
+  }
+
+  .mobile__cta :global(.btn) {
+    width: 100%;
+  }
+
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (min-width: 48em) {
+    .header__phone-label {
+      display: inline;
+    }
+  }
+
+  @media (min-width: 64em) {
+    .header__nav {
+      display: block;
+    }
+
+    .header__cta {
+      display: inline-flex;
+    }
+
+    .header__burger,
+    .mobile {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header.is-open .mobile__link {
+      animation: none;
+    }
+  }
+</style>

@@ -1,0 +1,261 @@
+---
+/**
+ * Visuel temporaire : composition graphique (lumière, formes, grain) dans la
+ * palette du site. Clairement identifié « Visuel à venir ». Remplacé par une
+ * vraie <img> dès que `src` est renseigné dans les données.
+ */
+import Icon from './Icon.astro';
+import type { PlaceholderTone } from '@/data/gallery';
+
+interface Props {
+  subject: string;
+  tone?: PlaceholderTone;
+  ratio?: string;
+  src?: string | null;
+  alt?: string;
+  width?: number | null;
+  height?: number | null;
+  caption?: string | null;
+  /** Variation de composition (0–3) pour éviter la répétition. */
+  variant?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const {
+  subject,
+  tone = 'cream',
+  ratio = '4 / 3',
+  src = null,
+  alt = '',
+  width = null,
+  height = null,
+  caption = null,
+  variant = 0,
+  class: className,
+  loading = 'lazy',
+} = Astro.props;
+---
+
+<figure class:list={['ph', className]} style={`--ph-ratio:${ratio}`}>
+  {
+    src ? (
+      <img src={src} alt={alt} width={width ?? undefined} height={height ?? undefined} loading={loading} decoding="async" class="ph__img" />
+    ) : (
+      <div
+        class:list={['ph__art', `ph__art--${tone}`, `ph__art--v${variant % 4}`, 'grain']}
+        role="img"
+        aria-label={`Emplacement réservé : ${subject} (photo à venir)`}
+      >
+        <span class="ph__shape ph__shape--a" />
+        <span class="ph__shape ph__shape--b" />
+        <span class="ph__ring" />
+        <span class="ph__label">
+          <Icon name="image" size={14} />
+          <span>Visuel à venir</span>
+        </span>
+        <span class="ph__subject">{subject}</span>
+      </div>
+    )
+  }
+  {caption && <figcaption class="ph__caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .ph {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .ph__img,
+  .ph__art {
+    width: 100%;
+    aspect-ratio: var(--ph-ratio);
+    border-radius: var(--radius-md);
+    object-fit: cover;
+  }
+
+  .ph__art {
+    --ph-bg: var(--c-cream-2);
+    --ph-fg: var(--c-ink);
+    --ph-a: var(--c-accent);
+    --ph-b: var(--c-paper);
+    --ph-ring: var(--c-copper);
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 15% 10%, rgb(255 255 255 / 0.35), transparent 55%),
+      var(--ph-bg);
+    color: var(--ph-fg);
+  }
+
+  .ph__art--espresso {
+    --ph-bg: var(--c-espresso-2);
+    --ph-fg: var(--c-ink-on-dark);
+    --ph-a: var(--c-accent);
+    --ph-b: var(--c-espresso);
+    background:
+      radial-gradient(120% 90% at 20% 0%, rgb(243 236 223 / 0.14), transparent 55%),
+      var(--ph-bg);
+  }
+
+  .ph__art--bordeaux {
+    --ph-bg: var(--c-accent);
+    --ph-fg: var(--c-ink-on-dark);
+    --ph-a: var(--c-accent-deep);
+    --ph-b: var(--c-cream);
+    --ph-ring: var(--c-cream);
+    background:
+      radial-gradient(120% 90% at 20% 0%, rgb(243 236 223 / 0.18), transparent 55%),
+      var(--ph-bg);
+  }
+
+  .ph__art--sage {
+    --ph-bg: #c9cdb6;
+    --ph-fg: var(--c-ink);
+    --ph-a: var(--c-sage);
+    --ph-b: var(--c-cream);
+  }
+
+  .ph__art--copper {
+    --ph-bg: #d9b98a;
+    --ph-fg: var(--c-ink);
+    --ph-a: var(--c-copper);
+    --ph-b: var(--c-cream);
+    --ph-ring: var(--c-espresso);
+  }
+
+  .ph__shape {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .ph__shape--a {
+    width: 62%;
+    aspect-ratio: 1;
+    right: -14%;
+    bottom: -22%;
+    background: var(--ph-a);
+    opacity: 0.9;
+  }
+
+  .ph__shape--b {
+    width: 34%;
+    aspect-ratio: 1;
+    left: 8%;
+    top: 12%;
+    background: var(--ph-b);
+    opacity: 0.55;
+  }
+
+  .ph__ring {
+    position: absolute;
+    width: 28%;
+    aspect-ratio: 1;
+    right: 18%;
+    top: 14%;
+    border: 1.5px solid var(--ph-ring);
+    border-radius: 50%;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* Variations de composition */
+  .ph__art--v1 .ph__shape--a {
+    right: auto;
+    left: -18%;
+    bottom: -10%;
+    width: 70%;
+  }
+  .ph__art--v1 .ph__shape--b {
+    left: auto;
+    right: 10%;
+    top: 8%;
+  }
+  .ph__art--v1 .ph__ring {
+    right: auto;
+    left: 55%;
+    top: 55%;
+  }
+
+  .ph__art--v2 .ph__shape--a {
+    width: 90%;
+    right: -40%;
+    top: -30%;
+    bottom: auto;
+  }
+  .ph__art--v2 .ph__shape--b {
+    width: 26%;
+    left: 12%;
+    top: auto;
+    bottom: 28%;
+  }
+  .ph__art--v2 .ph__ring {
+    width: 18%;
+    right: 12%;
+    top: auto;
+    bottom: 16%;
+  }
+
+  .ph__art--v3 .ph__shape--a {
+    width: 48%;
+    right: 20%;
+    top: 20%;
+    bottom: auto;
+    border-radius: 42% 58% 55% 45% / 50% 40% 60% 50%;
+  }
+  .ph__art--v3 .ph__shape--b {
+    width: 42%;
+    left: -10%;
+    top: auto;
+    bottom: -12%;
+  }
+  .ph__art--v3 .ph__ring {
+    width: 56%;
+    right: -12%;
+    top: auto;
+    bottom: -24%;
+  }
+
+  .ph__label {
+    position: absolute;
+    top: var(--sp-3);
+    left: var(--sp-3);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.6rem;
+    border: 1px dashed currentColor;
+    border-radius: var(--radius-sm);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  .ph__subject {
+    position: absolute;
+    left: var(--sp-4);
+    bottom: var(--sp-4);
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem);
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    font-variation-settings:
+      'opsz' 36,
+      'SOFT' 80;
+  }
+
+  .ph__caption {
+    font-size: var(--fs-sm);
+    color: var(--c-ink-soft);
+  }
+
+  :global(.on-dark) .ph__caption {
+    color: var(--c-ink-on-dark-soft);
+  }
+</style>

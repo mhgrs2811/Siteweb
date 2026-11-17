@@ -1,0 +1,83 @@
+/* ============================================================
+   DESIGN TOKENS — SNACK GORBUZ
+   Direction : « comptoir éditorial chaleureux » — ivoire minéral, espresso
+   profond, accent bordeaux épicé, filet de cuivre, pointe de sauge.
+   Typographie : Fraunces (display, serif contemporaine) + Manrope (interface).
+   ============================================================ */
+:root {
+  /* --- Couleurs --- */
+  --c-cream: #f3ecdf; /* fond principal, ivoire minéral */
+  --c-cream-2: #e9dfcd; /* surface secondaire, un ton plus profond */
+  --c-paper: #faf6ee; /* cartes et surfaces claires */
+  --c-line: #d8cbb6; /* filets sur fond clair */
+
+  --c-espresso: #2a1f19; /* sections profondes */
+  --c-espresso-2: #3b2c23; /* surfaces sur fond profond */
+  --c-espresso-line: #55423a; /* filets sur fond profond */
+
+  --c-ink: #1d1512; /* texte principal */
+  --c-ink-soft: #5c4f47; /* texte secondaire (contraste 6,6:1 sur crème) */
+  --c-ink-on-dark: #f3ecdf; /* texte sur fond profond */
+  --c-ink-on-dark-soft: #c9bba9; /* texte secondaire sur fond profond (7,5:1) */
+
+  --c-accent: #8a2f2a; /* bordeaux épicé — accent unique */
+  --c-accent-deep: #6f2320; /* hover / active */
+  --c-accent-soft: #f1dcd8; /* fond tag / surlignage léger */
+  --c-copper: #b8874f; /* micro-accent (filets, numéros) */
+  --c-sage: #8e9b74; /* touche de fraîcheur (très parcimonieuse) */
+
+  --c-focus: #1d1512;
+
+  /* --- Typographie --- */
+  --font-display: 'Fraunces Variable', 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Manrope Variable', 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Échelle fluide (ratio ≈ 1,25) */
+  --fs-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --fs-sm: clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem);
+  --fs-base: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --fs-md: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --fs-lg: clamp(1.375rem, 1.2rem + 0.8vw, 1.875rem);
+  --fs-xl: clamp(1.875rem, 1.5rem + 1.6vw, 2.75rem);
+  --fs-2xl: clamp(2.5rem, 1.8rem + 3vw, 4.25rem);
+  --fs-hero: clamp(3rem, 1.6rem + 7vw, 7.5rem);
+
+  --lh-tight: 1.05;
+  --lh-snug: 1.2;
+  --lh-body: 1.6;
+
+  /* --- Espacements (base 4 px) --- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-9: 6rem;
+  --sp-10: 8rem;
+
+  --section-y: clamp(4rem, 3rem + 5vw, 8rem);
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --container: 80rem; /* 1280 px */
+  --measure: 62ch;
+
+  /* --- Formes --- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 1px 2px rgb(29 21 18 / 0.06), 0 8px 24px -12px rgb(29 21 18 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(29 21 18 / 0.08), 0 20px 40px -20px rgb(29 21 18 / 0.3);
+
+  /* --- Mouvement --- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+  --dur-slow: 480ms;
+
+  /* --- Composants --- */
+  --header-h: 4.5rem;
+}

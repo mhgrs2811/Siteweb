@@ -1,0 +1,165 @@
+---
+import Base from '@/layouts/Base.astro';
+import Button from '@/components/Button.astro';
+import Placeholder from '@/components/Placeholder.astro';
+import { restaurant } from '@/data/restaurant';
+import { content } from '@/data/content';
+
+const page = content.pages.universe;
+const tones = ['espresso', 'cream', 'bordeaux'] as const;
+---
+
+<Base
+  title="Notre univers"
+  description={`${restaurant.name}, snack à ${restaurant.address.city} : le lieu, le comptoir, l’équipe. Présentation de l’établissement.`}
+>
+  <header class="page-head">
+    <div class="container page-head__inner">
+      <p class="eyebrow">{content.universe.eyebrow}</p>
+      <h1>{page.title}</h1>
+      <p class="lead">{page.intro}</p>
+      <p class="notice">Contenu provisoire, en attente des informations de l’établissement</p>
+    </div>
+  </header>
+
+  <div class="container chapters">
+    {
+      page.sections.map((s, i) => (
+        <section class:list={['chapter', { 'chapter--flip': i % 2 === 1 }]} aria-labelledby={`chapitre-${i}`} data-reveal>
+          <div class="chapter__media">
+            <Placeholder subject={s.heading} tone={tones[i % tones.length]} ratio={i % 2 === 1 ? '4 / 3' : '4 / 5'} variant={i + 1} />
+          </div>
+          <div class="chapter__text">
+            <span class="chapter__num tabular" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h2 id={`chapitre-${i}`}>{s.heading}</h2>
+            <p class="muted">{s.text}</p>
+          </div>
+        </section>
+      ))
+    }
+  </div>
+
+  <section class="section surface-2" aria-labelledby="reperes-title">
+    <div class="container reperes">
+      <div data-reveal>
+        <p class="eyebrow">En bref</p>
+        <h2 id="reperes-title">Les repères.</h2>
+      </div>
+      <dl class="reperes__list" data-reveal style="--reveal-delay: 80ms">
+        {
+          content.universe.facts.map((f) => (
+            <div class="reperes__row">
+              <dt>{f.label}</dt>
+              <dd>{f.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <div class="reperes__cta" data-reveal style="--reveal-delay: 160ms">
+        <Button href="/menu/" variant="primary" icon="arrow-right">Voir la carte</Button>
+        <Button href="/contact/" variant="outline">Nous trouver</Button>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-head {
+    padding-block: var(--sp-8) var(--sp-7);
+  }
+
+  .page-head__inner {
+    display: grid;
+    gap: var(--sp-4);
+    justify-items: start;
+  }
+
+  .chapters {
+    display: grid;
+    gap: var(--sp-9);
+    padding-block: var(--sp-6) var(--sp-9);
+  }
+
+  .chapter {
+    display: grid;
+    gap: var(--sp-5);
+    align-items: center;
+  }
+
+  .chapter__text {
+    display: grid;
+    gap: var(--sp-3);
+    justify-items: start;
+  }
+
+  .chapter__num {
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--c-copper);
+    letter-spacing: 0.08em;
+  }
+
+  @media (min-width: 48em) {
+    .chapter {
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: var(--gutter);
+    }
+
+    .chapter__media {
+      grid-column: 1 / 7;
+    }
+
+    .chapter__text {
+      grid-column: 8 / 13;
+    }
+
+    .chapter--flip .chapter__media {
+      grid-column: 7 / 13;
+      grid-row: 1;
+    }
+
+    .chapter--flip .chapter__text {
+      grid-column: 1 / 6;
+      grid-row: 1;
+    }
+  }
+
+  .reperes {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .reperes__list {
+    border-top: 1px solid var(--c-line);
+    max-width: 40rem;
+  }
+
+  .reperes__row {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: var(--sp-3);
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .reperes__row dt {
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-ink-soft);
+    padding-top: 0.2em;
+  }
+
+  .reperes__row dd {
+    font-weight: 500;
+  }
+
+  .reperes__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+  }
+</style>

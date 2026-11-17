@@ -1,0 +1,48 @@
+---
+/**
+ * État vide honnête et soigné : utilisé lorsqu'une catégorie n'a pas encore de produits.
+ */
+interface Props {
+  text: string;
+  class?: string;
+}
+const { text, class: className } = Astro.props;
+---
+
+<div class:list={['empty', className]}>
+  <span class="empty__mark" aria-hidden="true"></span>
+  <p class="empty__text">{text}</p>
+</div>
+
+<style>
+  .empty {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    padding: var(--sp-5) var(--sp-5);
+    border: 1px dashed var(--c-copper);
+    border-radius: var(--radius-md);
+    background: var(--c-paper);
+  }
+
+  .empty__mark {
+    flex: none;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 30%, rgb(255 255 255 / 0.5), transparent 55%),
+      var(--c-cream-2);
+    box-shadow: inset 0 0 0 1px var(--c-line);
+  }
+
+  .empty__text {
+    font-size: var(--fs-sm);
+    color: var(--c-ink-soft);
+    font-style: italic;
+    font-family: var(--font-display);
+    font-variation-settings:
+      'opsz' 24,
+      'SOFT' 60;
+  }
+</style>

@@ -1,0 +1,149 @@
+---
+/**
+ * Bouton / lien d'action.
+ * - `primary`   : plein bordeaux (sur fond clair) — action principale.
+ * - `inverse`   : plein crème (sur fond profond) — action principale sur hero/sections sombres.
+ * - `outline`   : contour, s'adapte au fond.
+ * - `link`      : texte + flèche, sans fond.
+ */
+import Icon from './Icon.astro';
+import type { IconName } from '@/lib/icons';
+
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'inverse' | 'outline' | 'link';
+  icon?: IconName;
+  iconPosition?: 'start' | 'end';
+  size?: 'md' | 'lg';
+  class?: string;
+  type?: 'button' | 'submit';
+  external?: boolean;
+  [key: string]: unknown;
+}
+
+const {
+  href,
+  variant = 'primary',
+  icon,
+  iconPosition = 'end',
+  size = 'md',
+  class: className,
+  type = 'button',
+  external = false,
+  ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+const attrs = href
+  ? { href, ...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {}) }
+  : { type };
+---
+
+<Tag class:list={['btn', `btn--${variant}`, `btn--${size}`, className]} {...attrs} {...rest}>
+  {icon && iconPosition === 'start' && <Icon name={icon} size={18} />}
+  <span class="btn__label"><slot /></span>
+  {icon && iconPosition === 'end' && <Icon name={icon} size={18} class="btn__icon-end" />}
+</Tag>
+
+<style>
+  .btn {
+    --btn-bg: var(--c-accent);
+    --btn-fg: var(--c-ink-on-dark);
+    --btn-bd: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    min-height: 3rem;
+    padding: 0.8em 1.4em;
+    border: 1px solid var(--btn-bd);
+    border-radius: var(--radius-sm);
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    font-weight: 650;
+    font-size: var(--fs-sm);
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+
+  .btn:hover {
+    color: var(--btn-fg);
+  }
+
+  .btn:active {
+    transform: translateY(1px);
+  }
+
+  .btn--lg {
+    min-height: 3.5rem;
+    padding: 0.95em 1.75em;
+    font-size: var(--fs-base);
+  }
+
+  .btn__icon-end {
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+
+  .btn:hover .btn__icon-end {
+    transform: translateX(3px);
+  }
+
+  /* Variantes */
+  .btn--primary:hover {
+    --btn-bg: var(--c-accent-deep);
+  }
+
+  .btn--inverse {
+    --btn-bg: var(--c-cream);
+    --btn-fg: var(--c-ink);
+  }
+
+  .btn--inverse:hover {
+    --btn-bg: var(--c-paper);
+  }
+
+  .btn--outline {
+    --btn-bg: transparent;
+    --btn-fg: currentColor;
+    --btn-bd: currentColor;
+  }
+
+  .btn--outline:hover {
+    --btn-bg: rgb(29 21 18 / 0.06);
+  }
+
+  :global(.on-dark) .btn--outline:hover {
+    --btn-bg: rgb(243 236 223 / 0.1);
+  }
+
+  .btn--link {
+    --btn-bg: transparent;
+    --btn-fg: var(--c-accent);
+    min-height: 0;
+    padding: 0.2em 0;
+    border: 0;
+    border-radius: 0;
+    font-weight: 700;
+  }
+
+  .btn--link:hover {
+    --btn-fg: var(--c-accent-deep);
+  }
+
+  :global(.on-dark) .btn--link {
+    --btn-fg: var(--c-copper);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn:hover .btn__icon-end {
+      transform: none;
+    }
+  }
+</style>

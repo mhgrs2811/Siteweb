@@ -1,0 +1,259 @@
+---
+import Base from '@/layouts/Base.astro';
+import Button from '@/components/Button.astro';
+import EmptyState from '@/components/EmptyState.astro';
+import MenuItem from '@/components/MenuItem.astro';
+import { restaurant } from '@/data/restaurant';
+import { content } from '@/data/content';
+import { itemsForCategory, menuItems, sortedCategories } from '@/data/menu';
+import { telHref } from '@/lib/hours';
+
+const categories = sortedCategories();
+const hasItems = menuItems.length > 0;
+const hasProposed = categories.some((c) => c.status === 'proposed');
+const orderCta = restaurant.cta.order;
+const page = content.pages.menu;
+---
+
+<Base
+  title="La carte"
+  description={`La carte de ${restaurant.name} à ${restaurant.address.city} : catégories, produits et prix. Mise en ligne en cours.`}
+>
+  <header class="page-head">
+    <div class="container page-head__inner">
+      <p class="eyebrow">{restaurant.name} · {restaurant.address.city}</p>
+      <h1>{page.title}</h1>
+      <p class="lead">{page.intro}</p>
+      {
+        !hasItems && (
+          <p class="notice">Carte en cours de mise en ligne</p>
+        )
+      }
+      <div class="page-head__cta">
+        {
+          orderCta.enabled && orderCta.url ? (
+            <Button href={orderCta.url} variant="primary" external icon="arrow-up-right">
+              {orderCta.label}
+            </Button>
+          ) : (
+            <Button href={telHref()} variant="outline" icon="phone" iconPosition="start">
+              Appeler le {restaurant.phone.display}
+            </Button>
+          )
+        }
+      </div>
+    </div>
+  </header>
+
+  <nav class="catnav" aria-label="Catégories de la carte" id="categories">
+    <div class="container">
+      <ul class="catnav__list">
+        {
+          categories.map((cat) => (
+            <li>
+              <a href={`#${cat.id}`} class="catnav__link">
+                {cat.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container menu">
+    {hasProposed && <p class="notice menu__notice">{content.menuPreview.structureNote}</p>}
+
+    {
+      categories.map((cat, i) => {
+        const items = itemsForCategory(cat.id);
+        return (
+          <section class="cat" id={cat.id} aria-labelledby={`cat-${cat.id}`} data-reveal>
+            <div class="cat__head">
+              <span class="cat__num tabular" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h2 id={`cat-${cat.id}`} class="cat__title">
+                  {cat.name}
+                </h2>
+                {cat.description && <p class="cat__desc muted">{cat.description}</p>}
+              </div>
+            </div>
+            <div class="cat__body">
+              {items.length === 0 ? (
+                <EmptyState text={page.emptyCategory} />
+              ) : (
+                items.map((item, j) => <MenuItem item={item} index={j} />)
+              )}
+            </div>
+            <a href="#categories" class="cat__back">↑ Toutes les catégories</a>
+          </section>
+        );
+      })
+    }
+
+    <aside class="menu__allergens" aria-label="Allergènes">
+      <h2 class="menu__allergens-title">Allergènes</h2>
+      <p class="muted">{page.allergenNote}</p>
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .page-head {
+    padding-block: var(--sp-8) var(--sp-7);
+    background: var(--c-cream-2);
+  }
+
+  .page-head__inner {
+    display: grid;
+    gap: var(--sp-4);
+    justify-items: start;
+  }
+
+  .page-head__cta {
+    margin-top: var(--sp-2);
+  }
+
+  /* Navigation de catégories collante sous l'en-tête */
+  .catnav {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 30;
+    background: var(--c-cream);
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .catnav__list {
+    display: flex;
+    gap: var(--sp-2);
+    overflow-x: auto;
+    padding-block: var(--sp-3);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .catnav__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .catnav__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+    background: var(--c-paper);
+    transition:
+      background-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .catnav__link:hover {
+    background: var(--c-ink);
+    border-color: var(--c-ink);
+    color: var(--c-ink-on-dark);
+  }
+
+  .menu {
+    display: grid;
+    gap: var(--sp-8);
+    padding-block: var(--sp-7) var(--sp-9);
+  }
+
+  .menu__notice {
+    justify-self: start;
+  }
+
+  .cat {
+    display: grid;
+    gap: var(--sp-5);
+    scroll-margin-top: calc(var(--header-h) + 5rem);
+  }
+
+  .cat__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-4);
+  }
+
+  .cat__num {
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--c-copper);
+    letter-spacing: 0.08em;
+  }
+
+  .cat__title {
+    font-size: var(--fs-xl);
+  }
+
+  .cat__desc {
+    margin-top: var(--sp-2);
+  }
+
+  .cat__body {
+    display: grid;
+  }
+
+  .cat__back {
+    justify-self: start;
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-ink-soft);
+    text-decoration: none;
+    padding: 0.5rem 0;
+  }
+
+  .cat__back:hover {
+    color: var(--c-accent);
+  }
+
+  .menu__allergens {
+    display: grid;
+    gap: var(--sp-3);
+    padding: var(--sp-6);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-md);
+    background: var(--c-paper);
+  }
+
+  .menu__allergens-title {
+    font-size: var(--fs-md);
+  }
+
+  @media (min-width: 64em) {
+    .cat {
+      grid-template-columns: 1fr 2fr;
+      column-gap: var(--gutter);
+    }
+
+    .cat__head {
+      align-items: flex-start;
+      position: sticky;
+      top: calc(var(--header-h) + 5.5rem);
+      align-self: start;
+    }
+
+    .cat__back {
+      grid-column: 2;
+    }
+
+    .cat__back {
+      display: none;
+    }
+
+    .menu__allergens {
+      max-width: 48rem;
+    }
+  }
+</style>

@@ -1,0 +1,224 @@
+---
+/**
+ * Pied de page complet : coordonnées, navigation, horaires, liens légaux.
+ * Les réseaux sociaux n'apparaissent que si une URL est renseignée dans la config.
+ */
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { restaurant } from '@/data/restaurant';
+import { content } from '@/data/content';
+import { addressLine, compactHours, directionsUrl, telHref } from '@/lib/hours';
+
+const year = new Date().getFullYear();
+const hours = compactHours();
+const socials = [
+  { key: 'instagram', label: 'Instagram', url: restaurant.social.instagram },
+  { key: 'facebook', label: 'Facebook', url: restaurant.social.facebook },
+  { key: 'tiktok', label: 'TikTok', url: restaurant.social.tiktok },
+].filter((s) => s.url);
+
+const nav = [
+  { href: '/', label: 'Accueil' },
+  { href: '/menu/', label: 'La carte' },
+  { href: '/univers/', label: 'L’univers' },
+  { href: '/galerie/', label: 'Galerie' },
+  { href: '/contact/', label: 'Contact & accès' },
+];
+---
+
+<footer class="footer on-dark">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <Logo />
+        <p class="footer__tag muted">{restaurant.category} · {restaurant.address.city}</p>
+        <address class="footer__address">
+          <a href={directionsUrl()} target="_blank" rel="noopener noreferrer" class="footer__addr-link">
+            <Icon name="map-pin" size={18} />
+            <span>{addressLine(true)}</span>
+          </a>
+          <a href={telHref()} class="footer__addr-link">
+            <Icon name="phone" size={18} />
+            <span>{restaurant.phone.display}</span>
+          </a>
+        </address>
+      </div>
+
+      <nav class="footer__col" aria-label="Navigation du pied de page">
+        <h2 class="footer__heading">Navigation</h2>
+        <ul class="footer__list">
+          {
+            nav.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <h2 class="footer__heading">Horaires</h2>
+        <ul class="footer__list footer__hours">
+          {
+            hours.map((h) => (
+              <li>
+                <span>{h.days}</span>
+                <span class="tabular">{h.value}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h2 class="footer__heading">Informations</h2>
+        <ul class="footer__list">
+          <li><a href="/mentions-legales/">Mentions légales</a></li>
+          <li><a href="/confidentialite/">Politique de confidentialité</a></li>
+          {
+            socials.length > 0 && (
+              <li class="footer__socials">
+                {socials.map((s) => (
+                  <a href={s.url!} target="_blank" rel="noopener noreferrer">
+                    {s.label}
+                  </a>
+                ))}
+              </li>
+            )
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">© {year} {restaurant.name}. Tous droits réservés.</p>
+      <p class="footer__note muted">{content.footer.note}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--c-ink);
+    padding-block: var(--sp-8) var(--sp-6);
+  }
+
+  .footer__grid {
+    display: grid;
+    gap: var(--sp-7) var(--gutter);
+    grid-template-columns: 1fr;
+  }
+
+  .footer__brand {
+    display: grid;
+    gap: var(--sp-4);
+    justify-items: start;
+  }
+
+  .footer__tag {
+    font-size: var(--fs-sm);
+  }
+
+  .footer__address {
+    display: grid;
+    gap: var(--sp-2);
+    font-style: normal;
+  }
+
+  .footer__addr-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--fs-sm);
+  }
+
+  .footer__addr-link:hover span {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .footer__heading {
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-copper);
+    margin-bottom: var(--sp-4);
+    font-variation-settings: normal;
+  }
+
+  .footer__list {
+    display: grid;
+    gap: 0.4rem;
+    font-size: var(--fs-sm);
+  }
+
+  .footer__list a {
+    display: inline-block;
+    padding: 0.2rem 0;
+    text-decoration: none;
+  }
+
+  .footer__list a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .footer__hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    max-width: 16rem;
+    color: var(--c-ink-on-dark-soft);
+  }
+
+  .footer__hours li span:first-child {
+    color: var(--c-ink-on-dark);
+  }
+
+  .footer__socials {
+    display: flex;
+    gap: var(--sp-4);
+    margin-top: var(--sp-2);
+  }
+
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--sp-3) var(--sp-6);
+    margin-top: var(--sp-8);
+    padding-top: var(--sp-5);
+    border-top: 1px solid var(--c-espresso-line);
+    font-size: var(--fs-xs);
+  }
+
+  .footer__copy {
+    color: var(--c-ink-on-dark-soft);
+  }
+
+  @media (min-width: 40em) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 64em) {
+    .footer__grid {
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    }
+
+    .footer__brand {
+      grid-column: auto;
+    }
+  }
+</style>
