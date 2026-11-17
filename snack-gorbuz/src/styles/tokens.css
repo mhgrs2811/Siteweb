@@ -23,7 +23,8 @@
   --c-accent: #8a2f2a; /* bordeaux épicé — accent unique */
   --c-accent-deep: #6f2320; /* hover / active */
   --c-accent-soft: #f1dcd8; /* fond tag / surlignage léger */
-  --c-copper: #b8874f; /* micro-accent (filets, numéros) */
+  --c-copper: #b8874f; /* micro-accent sur fond sombre (filets, eyebrows, numéros) */
+  --c-copper-ink: #7a5527; /* cuivre foncé pour le texte sur fond clair (5,1:1 sur crème-2) */
   --c-sage: #8e9b74; /* touche de fraîcheur (très parcimonieuse) */
 
   --c-focus: #1d1512;

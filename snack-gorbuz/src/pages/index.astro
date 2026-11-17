@@ -139,7 +139,7 @@ const deliveryCta = restaurant.cta.delivery;
             categories.map((cat, i) => (
               <li class="cat-list__item">
                 <a href={`/menu/#${cat.id}`} class="cat-list__link">
-                  <span class="cat-list__num tabular">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="cat-list__num tabular" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
                   <span class="cat-list__name">{cat.name}</span>
                   <span class="cat-list__state">
                     {cat.status === 'proposed' ? 'à confirmer' : 'bientôt en ligne'}
@@ -313,10 +313,7 @@ const deliveryCta = restaurant.cta.delivery;
     font-style: italic;
     letter-spacing: -0.01em;
     color: var(--c-ink-on-dark-soft);
-    font-variation-settings:
-      'opsz' 72,
-      'SOFT' 100,
-      'WONK' 1;
+    font-variation-settings: 'opsz' 72;
     margin-bottom: 0.08em;
   }
 
@@ -361,6 +358,9 @@ const deliveryCta = restaurant.cta.delivery;
   }
 
   .hero__facts a {
+    display: inline-block;
+    padding: 0.4rem 0;
+    margin: -0.4rem 0;
     text-decoration: none;
     color: var(--c-ink-on-dark);
   }
@@ -428,6 +428,11 @@ const deliveryCta = restaurant.cta.delivery;
   .band__value {
     display: block;
     font-weight: 600;
+  }
+
+  a.band__value {
+    padding: 0.35rem 0;
+    margin: -0.35rem 0;
     font-size: var(--fs-sm);
     text-decoration: none;
   }
@@ -449,7 +454,7 @@ const deliveryCta = restaurant.cta.delivery;
   }
 
   .band__sep {
-    color: var(--c-copper);
+    color: var(--c-copper-ink);
   }
 
   .band__rating {
@@ -531,7 +536,7 @@ const deliveryCta = restaurant.cta.delivery;
   .cat-list__num {
     font-size: var(--fs-xs);
     font-weight: 700;
-    color: var(--c-copper);
+    color: var(--c-copper-ink);
     letter-spacing: 0.06em;
   }
 

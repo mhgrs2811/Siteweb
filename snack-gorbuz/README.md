@@ -117,7 +117,8 @@ Fusion des trois références du brief :
 | `--c-espresso` | `#2a1f19` | hero, sections profondes |
 | `--c-ink` | `#1d1512` | texte, footer |
 | `--c-accent` | `#8a2f2a` | **accent unique** : bordeaux épicé (CTA, liens, prix) |
-| `--c-copper` | `#b8874f` | micro-accent : numéros, filets, eyebrows sur fond sombre |
+| `--c-copper` | `#b8874f` | micro-accent sur fond sombre : filets, eyebrows |
+| `--c-copper-ink` | `#7a5527` | cuivre foncé pour les numéros sur fond clair (contraste AA) |
 | `--c-sage` | `#8e9b74` | touche de fraîcheur (statut ouvert, un visuel) |
 
 Choix de l'accent : le brief proposait **olive profond ou bordeaux**. Le bordeaux a été retenu
@@ -127,8 +128,8 @@ La sauge n'est utilisée qu'en touche (jamais en concurrence avec le bordeaux).
 
 ### Typographie
 
-- **Fraunces** (variable, axes `opsz` et `SOFT`) pour les titres : serif contemporaine, gourmande,
-  avec de la personnalité ; italique pour les mots d'accroche.
+- **Fraunces** (variable, axe optique `opsz`, romain + vraie italique) pour les titres : serif
+  contemporaine, gourmande, avec de la personnalité ; italique pour les mots d'accroche.
 - **Manrope** (variable) pour l'interface, les prix, les horaires et le texte courant.
 - Échelle fluide `clamp()` (ratio ≈ 1,25), prix et horaires en chiffres tabulaires.
 
@@ -234,6 +235,8 @@ node tools/capture.mjs          # captures 375 / 768 / 1440 px (+ EXTRA_WIDTHS=3
 
 `tools/capture.mjs` (Playwright, Chromium) capture chaque page en pleine page et vérifie :
 absence de défilement horizontal, polices web chargées, un seul `<h1>`, aucune erreur console.
+Le contrôle qualité de réception a en plus été passé avec axe-core (WCAG 2.1 AA + bonnes pratiques)
+sur les 8 pages à 375 et 1440 px : 0 violation.
 Sorties dans `tools/output/` (ignoré par git). Si Playwright n'est pas installé :
 `npm i -D playwright && npx playwright install chromium`.
 
