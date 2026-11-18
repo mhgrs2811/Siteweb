@@ -26,7 +26,7 @@
     "clsx": "^2.1.1",
     "csv-writer": "^1.6.0",
     "date-fns": "^4.4.0",
-    "framer-motion": "^12.40.0",
+    "framer-motion": "^12.43.0",
     "jspdf": "^4.2.1",
     "lucide-react": "^1.18.0",
     "next": "16.2.9",
