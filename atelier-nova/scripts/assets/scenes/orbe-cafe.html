@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&display=block">
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<style>body{margin:0;background:#111}</style></head><body>
+<script type="module">
+import { THREE, run, shot, W, H, createRenderer, roomEnv, cyclorama, canvasTex, speckle, lathe, smoothProfile, shadowLight, enableShadows, accumulate, finish, rand, rr, setSeed } from './lib.js';
+
+await document.fonts.load('800 120px "Bricolage Grotesque"');
+await document.fonts.load('500 40px "Bricolage Grotesque"');
+await document.fonts.load('600 40px "Figtree"');
+await document.fonts.load('400 40px "Figtree"');
+
+const C = { cream: '#F3EDE2', tomato: '#D2452B', espresso: '#2A1A14', mustard: '#E2B13C' };
+
+function label({ bg, fg, disc, origin, region, notes, use }) {
+  const c = document.createElement('canvas');
+  c.width = 2400; c.height = 860;
+  const x = c.getContext('2d');
+  x.fillStyle = bg; x.fillRect(0, 0, c.width, c.height);
+  // front of tin is the horizontal centre (u = 0.5)
+  const cx = 1200;
+  // the orb
+  x.fillStyle = disc;
+  x.beginPath(); x.arc(cx + 150, 470, 330, 0, Math.PI * 2); x.fill();
+  x.fillStyle = fg;
+  x.textBaseline = 'alphabetic';
+  x.font = '500 46px "Bricolage Grotesque"';
+  x.textAlign = 'left';
+  x.fillText('ORBE — torréfacteur', cx - 390, 120);
+  x.textAlign = 'right';
+  x.fillText('n° ' + use.n, cx + 390, 120);
+  x.fillRect(cx - 390, 146, 780, 4);
+  x.textAlign = 'left';
+  x.font = '800 168px "Bricolage Grotesque"';
+  x.fillText(origin, cx - 396, 330);
+  x.font = '600 40px "Figtree"';
+  x.fillText(region, cx - 390, 400);
+  x.font = '400 36px "Figtree"';
+  notes.forEach((n, i) => x.fillText(n, cx - 390, 480 + i * 46));
+  x.fillRect(cx - 390, 690, 780, 3);
+  x.font = '600 38px "Figtree"';
+  x.fillText(use.roast, cx - 390, 750);
+  x.textAlign = 'right';
+  x.fillText('250 g', cx + 390, 750);
+  // back side small print
+  x.textAlign = 'left';
+  x.font = '400 30px "Figtree"';
+  x.globalAlpha = 0.75;
+  ['Torréfié à Bruxelles', 'en petits lots,', 'chaque mardi.'].forEach((t, i) => x.fillText(t, 140, 300 + i * 40));
+  x.globalAlpha = 1;
+  return canvasTex(c, { repeat: [1, 1] });
+}
+
+const TINS = {
+  tomato: label({ bg: C.tomato, fg: C.cream, disc: '#E2593C', origin: 'Éthiopie', region: 'Guji — Hambela', notes: ['Pêche blanche', 'Jasmin, bergamote'], use: { n: '01', roast: 'Torréfaction filtre' } }),
+  mustard: label({ bg: C.mustard, fg: C.espresso, disc: '#EDC25A', origin: 'Colombie', region: 'Huila — El Mirador', notes: ['Panela, orange sanguine', 'Cacao'], use: { n: '02', roast: 'Espresso' } }),
+  espresso: label({ bg: C.espresso, fg: C.cream, disc: '#3A261D', origin: 'Brésil', region: 'Cerrado Mineiro', notes: ['Noisette grillée', 'Chocolat au lait'], use: { n: '03', roast: 'Moka & espresso' } }),
+};
+const LID = { tomato: C.tomato, mustard: C.mustard, espresso: C.espresso };
+
+function tin(kind, { open = false } = {}) {
+  const g = new THREE.Group();
+  const R = 1, Hb = 2.5;
+  const metal = new THREE.MeshPhysicalMaterial({ color: 0xcfcac2, metalness: 1, roughness: 0.32 });
+  const paint = new THREE.MeshPhysicalMaterial({ map: TINS[kind], roughness: 0.42, clearcoat: 0.6, clearcoatRoughness: 0.25 });
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(R, R, Hb - 0.16, 128, 1, true), paint);
+  body.position.y = 0.08 + (Hb - 0.16) / 2;
+  body.rotation.y = Math.PI;
+  g.add(body);
+  // rolled bottom rim + base
+  const base = new THREE.Mesh(lathe([[0, 0.012], [0.96, 0.012], [1.0, 0.0], [1.025, 0.04], [1.02, 0.09], [1.0, 0.1]], 128), metal);
+  g.add(base);
+  const lidMat = new THREE.MeshPhysicalMaterial({ color: LID[kind], roughness: 0.38, clearcoat: 0.7, clearcoatRoughness: 0.2 });
+  const lid = new THREE.Mesh(lathe(smoothProfile([[1.03, 0], [1.035, 0.1], [1.035, 0.3], [1.02, 0.34], [0.95, 0.35], [0.5, 0.352], [0.0001, 0.353]], 60), 128), lidMat);
+  if (!open) { lid.position.y = Hb - 0.3; g.add(lid); }
+  else {
+    const inner = new THREE.Mesh(new THREE.CylinderGeometry(0.985, 0.985, 0.02, 96), new THREE.MeshStandardMaterial({ color: 0x241510, roughness: 0.7 }));
+    inner.position.y = Hb - 0.25; g.add(inner);
+    const rim = new THREE.Mesh(new THREE.TorusGeometry(0.995, 0.022, 16, 128), metal);
+    rim.rotation.x = Math.PI / 2; rim.position.y = Hb - 0.08; g.add(rim);
+  }
+  // top rim of body under lid
+  g.userData.lid = lid;
+  enableShadows(g);
+  return g;
+}
+
+function beanGeo() {
+  const geo = new THREE.SphereGeometry(1, 40, 28);
+  const p = geo.attributes.position;
+  const v = new THREE.Vector3();
+  for (let i = 0; i < p.count; i++) {
+    v.fromBufferAttribute(p, i);
+    if (v.y > 0) v.y *= 0.45;
+    const s = Math.sin(v.z * 2.2) * 0.12; // S-shaped crease
+    const d = v.x - s;
+    if (v.y > 0) v.y -= 0.28 * Math.exp(-(d * d) / 0.006) * Math.min(1, (1 - Math.abs(v.z)) * 3);
+    v.x *= 0.78;
+    p.setXYZ(i, v.x, v.y, v.z);
+  }
+  geo.computeVertexNormals();
+  geo.scale(0.13, 0.13, 0.18);
+  return geo;
+}
+
+function beans(n, area, center = new THREE.Vector3(), { pile = 0 } = {}) {
+  const mat = new THREE.MeshPhysicalMaterial({ color: 0x5a3422, roughness: 0.5, clearcoat: 0.15, clearcoatRoughness: 0.5 });
+  const mesh = new THREE.InstancedMesh(beanGeo(), mat, n);
+  const m = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), s = new THREE.Vector3(), pos = new THREE.Vector3();
+  const col = new THREE.Color();
+  for (let i = 0; i < n; i++) {
+    const r = area * Math.pow(rand(), 0.7), a = rand() * Math.PI * 2;
+    const flip = rand() < 0.5;
+    pos.set(center.x + Math.cos(a) * r, 0.055 + (pile ? Math.max(0, pile * (1 - r / area)) * rand() : 0), center.z + Math.sin(a) * r * 0.8);
+    e.set(flip ? Math.PI + rr(-0.15, 0.15) : rr(-0.15, 0.15), rand() * Math.PI * 2, rr(-0.2, 0.2));
+    q.setFromEuler(e);
+    const k = rr(0.9, 1.12);
+    s.set(k, k, k);
+    m.compose(pos, q, s);
+    mesh.setMatrixAt(i, m);
+    mesh.setColorAt(i, col.setHSL(0.05 + rr(-0.01, 0.01), rr(0.45, 0.6), rr(0.65, 0.95)));
+  }
+  mesh.castShadow = mesh.receiveShadow = true;
+  return mesh;
+}
+
+function cup() {
+  const g = new THREE.Group();
+  const glaze = new THREE.MeshPhysicalMaterial({ color: 0xf1ece4, roughness: 0.22, clearcoat: 1, clearcoatRoughness: 0.08 });
+  const prof = smoothProfile([[0.0001, 0.02], [0.4, 0.0], [0.55, 0.05], [0.72, 0.4], [0.82, 0.95], [0.8, 1.0], [0.76, 0.96], [0.68, 0.45], [0.5, 0.14], [0.0001, 0.12]], 90);
+  const body = new THREE.Mesh(lathe(prof, 128), glaze);
+  g.add(body);
+  const handle = new THREE.Mesh(new THREE.TorusGeometry(0.26, 0.055, 24, 64, Math.PI * 1.25), glaze);
+  handle.position.set(0.86, 0.55, 0); handle.rotation.z = -Math.PI * 0.62;
+  g.add(handle);
+  // coffee with crema
+  const cc = document.createElement('canvas'); cc.width = cc.height = 512;
+  const x = cc.getContext('2d');
+  const gr = x.createRadialGradient(256, 256, 0, 256, 256, 256);
+  gr.addColorStop(0, '#4a2a17'); gr.addColorStop(0.55, '#6b3d21'); gr.addColorStop(0.85, '#9a6236'); gr.addColorStop(1, '#5a3420');
+  x.fillStyle = gr; x.fillRect(0, 0, 512, 512);
+  for (let i = 0; i < 900; i++) { x.fillStyle = `rgba(${rand() < 0.5 ? '210,160,110' : '60,30,15'},${rr(0.05, 0.2)})`; x.beginPath(); x.arc(rand() * 512, rand() * 512, rr(1, 5), 0, 7); x.fill(); }
+  const liquid = new THREE.Mesh(new THREE.CircleGeometry(0.74, 96), new THREE.MeshPhysicalMaterial({ map: canvasTex(cc), roughness: 0.25, clearcoat: 1, clearcoatRoughness: 0.05 }));
+  liquid.rotation.x = -Math.PI / 2; liquid.position.y = 0.82;
+  g.add(liquid);
+  enableShadows(g);
+  return g;
+}
+
+function saucer() {
+  const glaze = new THREE.MeshPhysicalMaterial({ color: 0xf1ece4, roughness: 0.22, clearcoat: 1, clearcoatRoughness: 0.08 });
+  const m = new THREE.Mesh(lathe(smoothProfile([[0.0001, 0.02], [0.5, 0.0], [0.6, 0.02], [1.15, 0.08], [1.3, 0.16], [1.28, 0.18], [1.1, 0.12], [0.6, 0.08], [0.0001, 0.1]], 80), 128), glaze);
+  m.castShadow = m.receiveShadow = true;
+  return m;
+}
+
+function sceneBase(bg, renderer) {
+  const scene = new THREE.Scene();
+  scene.environment = roomEnv(renderer);
+  scene.environmentIntensity = 0.28;
+  const paper = canvasTex(speckle(1024, bg, ['rgba(0,0,0,ALPHA)', 'rgba(255,255,255,ALPHA)'], { count: 4000, min: 0.3, max: 0.8, blotches: 40 }), { repeat: [1, 1] });
+  scene.add(cyclorama({ width: 80, depth: 30, height: 30, radius: 7, color: 0xffffff, roughness: 0.92, map: paper }));
+  return scene;
+}
+
+function lights(scene, { sunPos = [-9, 12, 7], sun = 3.2, warm = 0xfff1de, sky = 0.9 }) {
+  const key = shadowLight(new THREE.DirectionalLight(warm, sun), { area: 9, size: 4096, far: 60 });
+  key.position.set(...sunPos);
+  scene.add(key); scene.add(key.target);
+  const sk = shadowLight(new THREE.DirectionalLight(0xffffff, sky), { area: 9, size: 2048, far: 60 });
+  scene.add(sk); scene.add(sk.target);
+  const amb = new THREE.HemisphereLight(0xfff8ee, 0xe8dccb, 0.12);
+  scene.add(amb);
+  return { key, sk };
+}
+
+run(async () => {
+  setSeed(shot.length * 97 + 11);
+  if (shot === 'cover') {
+    const renderer = createRenderer({ exposure: 0.9 });
+    const scene = sceneBase('#E8D9C2', renderer);
+    const { key, sk } = lights(scene, { sunPos: [-10, 9, 8], sun: 4.2, sky: 0.45 });
+    const t1 = tin('tomato'); t1.position.set(-1.25, 0, 0); t1.rotation.y = 0.12; scene.add(t1);
+    const t2 = tin('mustard'); t2.position.set(1.05, 0, -1.25); t2.rotation.y = -0.18; scene.add(t2);
+    const t3 = tin('espresso'); t3.position.set(-3.55, 0, -1.5); t3.rotation.y = 0.35; scene.add(t3);
+    const s = saucer(); s.position.set(2.35, 0, 1.75); scene.add(s);
+    const c = cup(); c.position.set(2.35, 0.1, 1.75); c.rotation.y = -0.6; scene.add(c);
+    scene.add(beans(46, 1.4, new THREE.Vector3(-0.3, 0, 2.2)));
+    const cam = new THREE.PerspectiveCamera(28, W / H, 0.1, 200);
+    cam.position.set(1.0, 4.0, 12.6); cam.lookAt(-0.3, 1.05, 0);
+    const acc = await accumulate(renderer, scene, cam, { lights: [{ light: key, jitter: 0.35 }], sky: { light: sk, minElev: 0.3 } });
+    return finish(acc, { grain: 0.06, vignette: 0.18 });
+  }
+  if (shot === 'render-1') {
+    const renderer = createRenderer({ exposure: 1.0 });
+    const scene = sceneBase('#C9432A', renderer);
+    const { key, sk } = lights(scene, { sunPos: [8, 10, 8], sun: 3.6, sky: 0.45, warm: 0xfff4e6 });
+    const t = tin('mustard', { open: true }); t.position.set(-0.6, 0, -0.2); t.rotation.y = -0.25; scene.add(t);
+    const lid = t.userData.lid; lid.position.set(1.15, 1.06, 0.6); lid.rotation.set(0, 0.4, 1.32); scene.add(lid);
+    lid.castShadow = lid.receiveShadow = true;
+    scene.add(beans(90, 1.9, new THREE.Vector3(0.3, 0, 1.6), { pile: 0.25 }));
+    const t2 = tin('espresso'); t2.position.set(-3.1, 0, -2.2); t2.rotation.y = 0.5; scene.add(t2);
+    const cam = new THREE.PerspectiveCamera(30, W / H, 0.1, 200);
+    cam.position.set(-1.0, 3.9, 12.5); cam.lookAt(-0.4, 1.0, 0);
+    const acc = await accumulate(renderer, scene, cam, { lights: [{ light: key, jitter: 0.3 }], sky: { light: sk, minElev: 0.3 } });
+    return finish(acc, { grain: 0.06, vignette: 0.2 });
+  }
+  // render-2: high angle, cup + saucer + tin + beans
+  const renderer = createRenderer({ exposure: 1.05 });
+  const scene = sceneBase('#E8D9C2', renderer);
+  const { key, sk } = lights(scene, { sunPos: [-8, 12, 4], sun: 4.0, sky: 0.45 });
+  const s = saucer(); s.position.set(0.55, 0, 1.15); scene.add(s);
+  const c = cup(); c.position.set(0.55, 0.1, 1.15); c.rotation.y = 0.9; scene.add(c);
+  const t = tin('tomato'); t.position.set(-1.2, 0, -1.3); t.rotation.y = -0.45; scene.add(t);
+  scene.add(beans(55, 1.6, new THREE.Vector3(1.1, 0, -0.9)));
+  const cam = new THREE.PerspectiveCamera(32, W / H, 0.1, 200);
+  cam.position.set(0.7, 8.6, 7.6); cam.lookAt(0.0, 0.55, 0.0);
+  const acc = await accumulate(renderer, scene, cam, { lights: [{ light: key, jitter: 0.3 }], sky: { light: sk, minElev: 0.3 } });
+  return finish(acc, { grain: 0.06, vignette: 0.18 });
+});
+</script>
+</body></html>

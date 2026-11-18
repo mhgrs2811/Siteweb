@@ -1,0 +1,83 @@
+import { deepTypo } from "@/lib/typo";
+
+export const contact = deepTypo({
+  meta: {
+    title: "Contact — Brief de projet",
+    description:
+      "Décrivez votre projet de site vitrine, e-commerce, restaurant ou refonte. Atelier Nova vous répond avec une première analyse et une proposition d’appel.",
+  },
+  hero: {
+    label: "Brief projet",
+    title: ["Parlons de", "votre projet."],
+    lead: "Quelques questions pour comprendre votre besoin. Plus votre description est précise, plus notre première réponse sera utile.",
+  },
+  form: {
+    sections: ["Vous", "Le projet", "Les détails"],
+    firstName: "Prénom",
+    lastName: "Nom",
+    email: "Adresse e-mail",
+    company: "Entreprise",
+    companyHint: "facultatif",
+    projectType: "Type de projet",
+    budget: "Budget estimé (HTVA)",
+    timeline: "Délai souhaité",
+    description: "Description du projet",
+    descriptionPlaceholder: "Votre activité, vos objectifs, ce qui vous plaît ou vous déplaît dans votre site actuel, vos références…",
+    website: "Site existant",
+    websiteHint: "facultatif",
+    consent:
+      "J’accepte qu’Atelier Nova utilise ces informations pour répondre à ma demande. Elles ne sont ni revendues ni utilisées à d’autres fins.",
+    privacyLink: "Politique de confidentialité",
+    submit: "Envoyer le brief",
+    sending: "Envoi en cours",
+    successTitle: "Brief bien reçu.",
+    successText: "Merci. Nous lisons chaque demande avec attention et revenons vers vous avec une première analyse.",
+    errorGeneric: "L’envoi n’a pas abouti. Réessayez dans un instant ou écrivez-nous directement.",
+    errorSummary: "Le formulaire contient des erreurs. Corrigez les champs signalés.",
+    required: "obligatoire",
+    errors: {
+      firstName: "Indiquez votre prénom.",
+      lastName: "Indiquez votre nom.",
+      email: "Indiquez une adresse e-mail valide.",
+      projectType: "Choisissez un type de projet.",
+      budget: "Choisissez une fourchette de budget.",
+      timeline: "Choisissez un délai.",
+      description: "Décrivez votre projet en quelques phrases (30 caractères minimum).",
+      website: "Indiquez une adresse web valide, par exemple https://exemple.be.",
+      consent: "Votre accord est nécessaire pour que nous puissions vous répondre.",
+    },
+  },
+  projectTypes: [
+    { value: "site-vitrine", label: "Site vitrine" },
+    { value: "e-commerce", label: "E-commerce" },
+    { value: "restaurant-commerce", label: "Restaurant ou commerce" },
+    { value: "refonte", label: "Refonte" },
+    { value: "landing-page", label: "Landing page" },
+    { value: "direction-artistique", label: "Direction artistique" },
+    { value: "ia-automatisation", label: "IA ou automatisation" },
+    { value: "maintenance", label: "Maintenance" },
+  ],
+  budgets: [
+    { value: "lt-3000", label: "Moins de 3 000 €" },
+    { value: "3000-6000", label: "3 000 à 6 000 €" },
+    { value: "6000-10000", label: "6 000 à 10 000 €" },
+    { value: "10000-20000", label: "10 000 à 20 000 €" },
+    { value: "gt-20000", label: "Plus de 20 000 €" },
+    { value: "unknown", label: "Je ne sais pas encore" },
+  ],
+  timelines: [
+    { value: "urgent", label: "Moins d’un mois" },
+    { value: "1-3", label: "1 à 3 mois" },
+    { value: "3-6", label: "3 à 6 mois" },
+    { value: "flexible", label: "Flexible" },
+  ],
+  aside: {
+    direct: "Écrire directement",
+    next: "Et ensuite ?",
+    steps: [
+      "Nous lisons votre brief et préparons quelques questions.",
+      "Nous vous proposons un appel de trente minutes.",
+      "Vous recevez une proposition et un devis détaillés.",
+    ],
+  },
+});

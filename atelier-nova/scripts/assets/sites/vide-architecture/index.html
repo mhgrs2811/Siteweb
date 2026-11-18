@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VIDE — Atelier d’architecture, Namur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--concrete:#CFCBC4;--chalk:#F2F1EE;--black:#111;--grey:#6f6c67;--ochre:#B9872F;--line:rgba(17,17,17,.14);
+  --sans:"Archivo",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;--g:clamp(16px,2.4vw,36px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{background:var(--chalk);color:var(--black);font-family:var(--sans);font-size:16px;line-height:1.55}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.02em;text-transform:uppercase}
+.bw{filter:grayscale(1) contrast(1.08) brightness(1.02)}
+header{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;padding:18px var(--g);align-items:start}
+.logo{grid-column:1/4;font-weight:900;font-stretch:125%;font-size:22px;letter-spacing:-.01em}
+header .coord{grid-column:5/8;color:var(--grey)}
+header nav{grid-column:9/13;display:flex;justify-content:space-between}
+header nav a.on{text-decoration:underline;text-underline-offset:4px}
+.burger{display:none}
+.hero{padding:0 var(--g)}
+.hero-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.hero-img{grid-column:1/10;height:calc(100vh - 150px);min-height:520px;overflow:hidden;position:relative}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.hero-img .cap{position:absolute;left:14px;bottom:12px;color:#fff;mix-blend-mode:difference}
+.index{grid-column:10/13;display:flex;flex-direction:column;justify-content:space-between}
+.index ol{list-style:none;border-top:1px solid var(--black)}
+.index li{display:grid;grid-template-columns:34px 1fr auto;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.index li span:last-child{color:var(--grey);font-family:var(--mono);font-size:12px}
+.index li.on{color:var(--ochre)}
+.index p{font-size:15px;max-width:30ch}
+.giant{position:relative;z-index:3;font-weight:900;font-stretch:125%;font-size:clamp(120px,31vw,560px);line-height:.74;letter-spacing:-.045em;margin:-.36em 0 0 -.05em;white-space:nowrap;color:#F2F1EE;mix-blend-mode:difference;pointer-events:none}
+section{padding:clamp(70px,9vw,140px) var(--g)}
+.s-head{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-bottom:40px;align-items:end}
+.s-head h2{grid-column:1/7;font-weight:800;font-stretch:62%;font-size:clamp(64px,9vw,150px);line-height:.82;letter-spacing:-.02em;text-transform:uppercase}
+.s-head p{grid-column:9/13;font-size:15px;color:var(--grey)}
+.table{border-top:1px solid var(--black)}
+.tr{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:center;position:relative}
+.tr .n{grid-column:1/2;font-family:var(--mono);font-size:13px}
+.tr h3{grid-column:2/7;font-weight:500;font-stretch:100%;font-size:clamp(22px,2.4vw,34px);letter-spacing:-.01em;line-height:1.1}
+.tr .l{grid-column:7/9}
+.tr .y{grid-column:9/10}
+.tr .k{grid-column:10/12;color:var(--grey)}
+.tr .a{grid-column:12/13;text-align:right}
+.tr.th{color:var(--grey);padding:10px 0}
+.tr.hl{background:var(--black);color:var(--chalk);margin:0 calc(var(--g) * -1);padding:18px var(--g)}
+.tr.hl .k{color:#a9a59e}
+.tr.hl h3 em{font-style:normal;color:var(--ochre)}
+.tr .thumb{position:absolute;right:5%;top:50%;transform:translateY(-50%) rotate(-2deg);width:260px;aspect-ratio:4/3;overflow:hidden;z-index:2;box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.tr .thumb img{width:100%;height:100%;object-fit:cover}
+.asym{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;padding-top:0}
+.asym .a1{grid-column:1/6;aspect-ratio:4/5;overflow:hidden}
+.asym .a2{grid-column:7/13;margin-top:180px;aspect-ratio:16/11;overflow:hidden}
+.asym img{width:100%;height:100%;object-fit:cover}
+.asym figcaption{display:flex;justify-content:space-between;margin-top:10px;color:var(--grey)}
+.asym .q{grid-column:7/12;margin-top:-260px;font-weight:300;font-stretch:87%;font-size:clamp(26px,2.6vw,40px);line-height:1.15;letter-spacing:-.01em}
+.agence{background:var(--concrete)}
+.ag{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.ag h2{grid-column:1/10;font-weight:300;font-stretch:75%;font-size:clamp(46px,6.2vw,104px);line-height:.95;letter-spacing:-.025em}
+.ag h2 b{font-weight:900}
+.ag .cols{grid-column:1/13;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:80px;border-top:1px solid var(--black);padding-top:16px}
+.ag .cols div{font-size:14px}
+.ag .cols .mono{display:block;margin-bottom:10px;color:#4f4c48}
+footer{background:var(--black);color:var(--chalk);padding:40px var(--g) 24px}
+.f-top{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.f-top .mail{grid-column:1/8;font-weight:500;font-stretch:87%;font-size:clamp(34px,4.8vw,76px);letter-spacing:-.02em;line-height:1}
+.f-top .mail span{color:var(--ochre)}
+.f-top .info{grid-column:9/13;font-size:14px;color:#b8b4ad}
+.f-logo{font-weight:900;font-stretch:125%;font-size:clamp(100px,22vw,360px);line-height:.75;letter-spacing:-.045em;margin-top:70px;color:#1f1f1f}
+.f-bot{display:flex;justify-content:space-between;color:#8c8882;margin-top:20px}
+.concept{border:1px solid #444;padding:3px 10px;border-radius:99px}
+@media (max-width:900px){
+  header{grid-template-columns:1fr auto;padding:14px 16px}
+  header .coord,header nav{display:none}
+  .logo{grid-column:1}
+  .burger{display:block;font-family:var(--mono);font-size:12px;border:1px solid var(--black);padding:12px 14px}
+  .hero{padding:0 16px}
+  .hero-grid,.s-head,.asym,.ag,.f-top{grid-template-columns:1fr}
+  .hero-img,.index,.s-head h2,.s-head p,.asym .a1,.asym .a2,.asym .q,.ag h2,.ag .cols,.f-top .mail,.f-top .info{grid-column:1}
+  .hero-img{height:56vh;min-height:400px}
+  .index{margin-top:16px;gap:18px}
+  .giant{font-size:31vw;margin-top:-.2em}
+  .s-head h2{font-size:84px}
+  .tr{grid-template-columns:36px 1fr auto;gap:4px 10px}
+  .tr .n{grid-column:1}.tr h3{grid-column:2/4;font-size:22px}
+  .tr .l{grid-column:2}.tr .y{grid-column:3;text-align:right}
+  .tr .k,.tr .a{display:none}
+  .tr.th{display:none}
+  .tr .thumb{position:relative;grid-column:1/4;right:auto;top:auto;transform:none;width:100%;margin-top:12px;box-shadow:none}
+  .asym .a2{margin-top:0}
+  .asym .q{margin-top:10px}
+  .ag .cols{grid-template-columns:1fr 1fr;margin-top:40px}
+  .f-bot{flex-direction:column;gap:10px}
+}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#">VIDE</a>
+  <span class="coord mono">Atelier d’architecture<br>Namur — 50.4669° N, 4.8675° E</span>
+  <nav class="mono"><a class="on" href="#projets">Projets</a><a href="#agence">Agence</a><a href="#">Publications</a><a href="#contact">Contact</a></nav>
+  <span class="burger">Menu</span>
+</header>
+
+<div class="hero">
+  <div class="hero-grid">
+    <div class="hero-img"><img class="bw" src="/public/images/projects/vide-architecture/cover.webp" alt="Maison en béton brut au porte-à-faux de six mètres"><span class="cap mono">01 — Maison Ruelle, Profondeville, 2025</span></div>
+    <div class="index">
+      <ol>
+        <li class="on"><span class="mono">01</span><span>Maison Ruelle</span><span>2025</span></li>
+        <li><span class="mono">02</span><span>Pavillon des Carrières</span><span>2024</span></li>
+        <li><span class="mono">03</span><span>Atelier Sambre</span><span>2024</span></li>
+        <li><span class="mono">04</span><span>Maison Cendre</span><span>2023</span></li>
+        <li><span class="mono">05</span><span>Logements Citadelle</span><span>2022</span></li>
+      </ol>
+      <p>Nous dessinons des maisons, des ateliers et de petits équipements publics en Wallonie. Peu de matériaux, beaucoup de lumière.</p>
+    </div>
+  </div>
+  <div class="giant">VIDE</div>
+</div>
+
+<section id="projets">
+  <div class="s-head"><h2>Projets</h2><p class="mono">Sélection 2019 — 2026 · 23 réalisations · 8 en cours d’étude</p></div>
+  <div class="table">
+    <div class="tr th mono"><span class="n">N°</span><h3 style="font-size:12px;font-family:var(--mono)">Projet</h3><span class="l">Lieu</span><span class="y">Année</span><span class="k">Programme</span><span class="a">m²</span></div>
+    <div class="tr hl"><span class="n">01</span><h3>Maison Ruelle <em>→</em></h3><span class="l">Profondeville</span><span class="y mono">2025</span><span class="k">Habitation unifamiliale</span><span class="a mono">240</span><div class="thumb"><img src="/public/images/projects/vide-architecture/render-1.webp" alt="Maison Ruelle au crépuscule"></div></div>
+    <div class="tr"><span class="n">02</span><h3>Pavillon des Carrières</h3><span class="l">Dinant</span><span class="y mono">2024</span><span class="k">Équipement culturel</span><span class="a mono">610</span></div>
+    <div class="tr"><span class="n">03</span><h3>Atelier Sambre</h3><span class="l">Namur</span><span class="y mono">2024</span><span class="k">Atelier d’artiste</span><span class="a mono">180</span></div>
+    <div class="tr"><span class="n">04</span><h3>Maison Cendre</h3><span class="l">Gesves</span><span class="y mono">2023</span><span class="k">Rénovation, extension</span><span class="a mono">165</span></div>
+    <div class="tr"><span class="n">05</span><h3>Logements Citadelle</h3><span class="l">Namur</span><span class="y mono">2022</span><span class="k">12 logements</span><span class="a mono">1 140</span></div>
+    <div class="tr"><span class="n">06</span><h3>Chapelle de Wépion</h3><span class="l">Wépion</span><span class="y mono">2021</span><span class="k">Restauration</span><span class="a mono">95</span></div>
+  </div>
+</section>
+
+<section class="asym">
+  <figure class="a1"><img class="bw" src="/public/images/projects/vide-architecture/render-2.webp" alt="Escalier en béton éclairé par une fente zénithale"></figure>
+  <figure class="a2" style="aspect-ratio:auto"><div style="aspect-ratio:16/11;overflow:hidden"><img class="bw" src="/public/images/projects/vide-architecture/render-1.webp" alt="Le séjour vitré sous le porte-à-faux, au crépuscule"></div><figcaption class="mono"><span>Maison Ruelle — séjour</span><span>Photo : atelier</span></figcaption></figure>
+  <p class="q">« La lumière zénithale descend l’escalier avant nous. Le béton ne fait que la recevoir. »</p>
+</section>
+
+<section class="agence" id="agence">
+  <div class="ag">
+    <h2>Nous construisons peu, <b>mais nous construisons juste.</b></h2>
+    <div class="cols">
+      <div><span class="mono">Fondé</span>2014, à Namur, par deux architectes formées à Liège et à Mendrisio.</div>
+      <div><span class="mono">Équipe</span>Sept personnes : architectes, une ingénieure, un maquettiste.</div>
+      <div><span class="mono">Méthode</span>Chaque projet commence par une maquette en plâtre au 1/50.</div>
+      <div><span class="mono">Missions</span>Conception, permis d’urbanisme, suivi de chantier complet.</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="f-top">
+    <div class="mail">atelier@vide-archi.be <span>↗</span></div>
+    <div class="info">Rue du Lombard 00<br>5000 Namur<br>+32 81 00 00 00</div>
+  </div>
+  <div class="f-logo">VIDE</div>
+  <div class="f-bot mono"><span>© 2026 VIDE architectes</span><span class="concept">Concept fictif — Atelier Nova</span></div>
+</footer>
+</body>
+</html>
