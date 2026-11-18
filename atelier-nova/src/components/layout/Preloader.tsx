@@ -59,7 +59,7 @@ export function Preloader() {
       }, 0.15);
 
     const ready = Promise.race([
-      Promise.all([document.fonts.ready, new Promise((r) => setTimeout(r, 1150))]),
+      Promise.all([document.fonts.ready, new Promise((r) => setTimeout(r, 850))]),
       new Promise((r) => setTimeout(r, 2000)),
     ]);
     ready.then(() => {

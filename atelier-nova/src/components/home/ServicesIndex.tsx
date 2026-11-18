@@ -1,8 +1,5 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { home, services } from "@/content";
 import { SectionLabel } from "@/components/ui/Label";
@@ -10,7 +7,7 @@ import { ArrowLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { Line } from "@/components/ui/Split";
 import { AutomationDiagram } from "@/components/sections/AutomationDiagram";
-import { getGsap, isFinePointer, prefersReducedMotion } from "@/lib/motion";
+import { ServicesPreviewController } from "./ServicesPreviewController";
 
 /**
  * Services en index éditorial : de grandes lignes typographiques.
@@ -18,32 +15,9 @@ import { getGsap, isFinePointer, prefersReducedMotion } from "@/lib/motion";
  */
 export function ServicesIndex() {
   const list = services.filter((s) => s.onHome);
-  const [active, setActive] = useState<number | null>(null);
-  const previewRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    const preview = previewRef.current;
-    if (!el || !preview || !isFinePointer() || prefersReducedMotion()) return;
-    const { gsap } = getGsap();
-    const xTo = gsap.quickTo(preview, "x", { duration: 0.7, ease: "power3.out" });
-    const yTo = gsap.quickTo(preview, "y", { duration: 0.7, ease: "power3.out" });
-    const rTo = gsap.quickTo(preview, "rotate", { duration: 0.9, ease: "power3.out" });
-    let lastX = 0;
-    const move = (e: PointerEvent) => {
-      // L’aperçu se place à côté du curseur pour ne jamais masquer le titre survolé.
-      xTo(e.clientX + (e.clientX < window.innerWidth * 0.55 ? 250 : -250));
-      yTo(e.clientY - 20);
-      rTo(Math.max(-8, Math.min(8, (e.clientX - lastX) * 0.4)));
-      lastX = e.clientX;
-    };
-    el.addEventListener("pointermove", move);
-    return () => el.removeEventListener("pointermove", move);
-  }, []);
-
   return (
-    <section ref={sectionRef} data-surface="dark" aria-labelledby="services-title" className="surface-dark-2 relative section-y">
+    <section id="services-index" data-surface="dark" aria-labelledby="services-title" className="surface-dark-2 relative section-y">
+      <ServicesPreviewController id="services-index" />
       <div className="wrap-wide">
         <div className="grid-12 gap-y-8">
           <div className="col-span-4 md:col-span-7">
@@ -60,9 +34,9 @@ export function ServicesIndex() {
           </Reveal>
         </div>
 
-        <ul className="mt-16 border-b border-line md:mt-24" onPointerLeave={() => setActive(null)}>
+        <ul data-list className="mt-16 border-b border-line md:mt-24">
           {list.map((s, i) => (
-            <li key={s.slug} className="border-t border-line" onPointerEnter={() => setActive(i)}>
+            <li key={s.slug} data-index={i} className="border-t border-line">
               <Link
                 href={`/services#${s.slug}`}
                 data-cursor="Découvrir"
@@ -98,7 +72,7 @@ export function ServicesIndex() {
 
       {/* Aperçu flottant (desktop) */}
       <div
-        ref={previewRef}
+        data-preview
         aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-30 hidden h-[260px] w-[380px] -translate-x-1/2 -translate-y-1/2 md:block"
       >
@@ -106,10 +80,8 @@ export function ServicesIndex() {
           <div
             key={s.slug}
             className="absolute inset-0 overflow-hidden bg-graphite-3 transition-[clip-path,opacity] duration-700 ease-[var(--ease-out-expo)]"
-            style={{
-              clipPath: active === i ? "inset(0% 0% 0% 0%)" : "inset(50% 50% 50% 50%)",
-              opacity: active === i ? 1 : 0,
-            }}
+            data-preview-item={i}
+            style={{ clipPath: "inset(50% 50% 50% 50%)", opacity: 0 }}
           >
             {s.image ? (
               <Image src={s.image} alt="" fill sizes="380px" className="object-cover object-top" />

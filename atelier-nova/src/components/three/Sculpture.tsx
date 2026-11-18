@@ -371,7 +371,8 @@ export function Sculpture({ className, poster, posterAlt = "", scrollContainer, 
           sizes="(min-width: 1024px) 60vw, 100vw"
           className={cn(
             "object-contain transition-opacity duration-700",
-            state === "live" ? "opacity-0" : state === "static" ? "opacity-100" : "opacity-0",
+            // Visible dès le HTML (LCP rapide) ; s’efface quand le rendu temps réel prend le relais.
+            state === "live" ? "opacity-0" : "opacity-100",
           )}
         />
       ) : null}

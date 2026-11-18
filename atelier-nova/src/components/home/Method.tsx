@@ -97,8 +97,7 @@ export function Method({ index = "04", compact = false }: { index?: string; comp
               key={s.number}
               data-step={i}
               className={cn(
-                "relative pb-16 pl-8 transition-opacity duration-500 last:pb-0 md:pb-28 md:pl-12",
-                i === active ? "opacity-100" : "md:opacity-40",
+                "relative pb-16 pl-8 last:pb-0 md:pb-28 md:pl-12",
               )}
             >
               <span
@@ -111,7 +110,7 @@ export function Method({ index = "04", compact = false }: { index?: string; comp
               <p className="t-label text-muted">
                 <span className="text-accent">{s.number}</span> — {s.duration}
               </p>
-              <h3 className="t-h3 mt-4">{s.title}</h3>
+              <h3 className={cn("t-h3 mt-4 transition-colors duration-500", i === active ? "text-[var(--fg)]" : "md:text-[var(--muted)]")}>{s.title}</h3>
               <p className="mt-4 max-w-[52ch] text-[color-mix(in_srgb,var(--fg)_78%,transparent)]">{s.text}</p>
               <p className="mt-5 inline-flex items-center gap-3 text-sm">
                 <span className="t-label text-muted">Livrable</span>

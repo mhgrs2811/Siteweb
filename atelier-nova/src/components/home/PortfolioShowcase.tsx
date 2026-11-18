@@ -1,12 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useRef } from "react";
 import { home, projects, ui } from "@/content";
 import { SectionLabel, FictionalBadge } from "@/components/ui/Label";
 import { BrowserFrame, PhoneFrame } from "@/components/ui/Frames";
 import { ButtonLink } from "@/components/ui/Button";
-import { getGsap, prefersReducedMotion } from "@/lib/motion";
+import { PortfolioScroller } from "./PortfolioScroller";
 
 /**
  * Portfolio cinématographique.
@@ -15,59 +12,11 @@ import { getGsap, prefersReducedMotion } from "@/lib/motion";
  * natif (scroll-snap), aucun détournement du défilement.
  */
 export function PortfolioShowcase() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLSpanElement>(null);
-  const counterRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const track = trackRef.current;
-    if (!section || !track || prefersReducedMotion()) return;
-    const { gsap } = getGsap();
-    const mm = gsap.matchMedia();
-    mm.add("(min-width: 1024px)", () => {
-      const distance = () => track.scrollWidth - window.innerWidth;
-      const tween = gsap.to(track, {
-        x: () => -distance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => `+=${distance()}`,
-          pin: true,
-          scrub: 0.8,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (progressRef.current) progressRef.current.style.transform = `scaleX(${self.progress})`;
-            if (counterRef.current) {
-              const i = Math.min(projects.length, Math.max(1, Math.round(self.progress * projects.length + 0.5)));
-              counterRef.current.textContent = String(i).padStart(2, "0");
-            }
-          },
-        },
-      });
-      // Parallaxe interne : les mockups glissent un peu plus vite que leur panneau.
-      track.querySelectorAll<HTMLElement>("[data-parallax]").forEach((el) => {
-        gsap.fromTo(
-          el,
-          { xPercent: 12 },
-          {
-            xPercent: -12,
-            ease: "none",
-            scrollTrigger: { trigger: el.closest("[data-panel]"), containerAnimation: tween, start: "left right", end: "right left", scrub: true },
-          },
-        );
-      });
-      return () => tween.kill();
-    });
-    return () => mm.revert();
-  }, []);
-
   return (
-    <section ref={sectionRef} id="realisations" data-surface="dark" aria-labelledby="portfolio-title" className="surface-dark relative overflow-hidden">
+    <section id="realisations" data-surface="dark" aria-labelledby="portfolio-title" className="surface-dark relative overflow-hidden">
+      <PortfolioScroller id="realisations" />
       <div
-        ref={trackRef}
+        data-track
         className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto lg:h-[100svh] lg:snap-none lg:overflow-visible"
       >
         {/* Panneau d’introduction */}
@@ -109,17 +58,17 @@ export function PortfolioShowcase() {
             >
               <div className="flex flex-col lg:col-span-4 lg:justify-between">
                 <div className="flex items-center justify-between gap-4">
-                  <span className="t-label tabular-nums opacity-70">
+                  <span className="t-label tabular-nums">
                     {p.number} / {String(projects.length).padStart(2, "0")}
                   </span>
                   <FictionalBadge />
                 </div>
                 <div className="mt-8 lg:mt-0">
-                  <p className="t-label opacity-70">{p.categoryLabel}</p>
+                  <p className="t-label">{p.categoryLabel}</p>
                   <h3 id={`p-${p.slug}`} className="mt-4 text-[clamp(2.3rem,1rem+2.9vw,4.8rem)] font-medium leading-[0.92] tracking-[-0.045em] hyphens-auto">
                     {p.name}
                   </h3>
-                  <p className="t-it mt-5 max-w-[22ch] text-[clamp(1.35rem,1rem+1vw,2rem)] leading-[1.15] opacity-85">{p.tagline}</p>
+                  <p className="t-it mt-5 max-w-[22ch] text-[clamp(1.35rem,1rem+1vw,2rem)] leading-[1.15]">{p.tagline}</p>
                   <span className="mt-8 inline-flex min-h-11 items-center gap-3 border-b border-current pb-1 font-medium">
                     {ui.viewProject}
                     <span aria-hidden="true" className="transition-transform duration-500 group-hover:translate-x-1.5">
@@ -157,11 +106,11 @@ export function PortfolioShowcase() {
 
       {/* Progression (desktop) */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 hidden items-center gap-6 px-[var(--gutter)] pb-6 mix-blend-difference lg:flex">
-        <span ref={counterRef} className="t-label tabular-nums text-ivory">
+        <span data-counter className="t-label tabular-nums text-ivory">
           01
         </span>
         <span className="relative h-px flex-1 bg-ivory/30">
-          <span ref={progressRef} className="absolute inset-0 origin-left scale-x-0 bg-ivory" />
+          <span data-progress className="absolute inset-0 origin-left scale-x-0 bg-ivory" />
         </span>
         <span className="t-label tabular-nums text-ivory">{String(projects.length).padStart(2, "0")}</span>
       </div>

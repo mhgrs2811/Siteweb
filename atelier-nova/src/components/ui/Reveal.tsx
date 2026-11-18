@@ -35,28 +35,56 @@ export function Reveal<T extends ElementType = "div">({
     const el = ref.current;
     if (!el || prefersReducedMotion()) return;
     const { gsap } = getGsap();
-    const ctx = gsap.context(() => {
-      const st = { trigger: el, start, once: true };
-      if (mode === "lines" || mode === "words") {
-        const targets = el.querySelectorAll(mode === "lines" ? ".split-line > span" : ".split-word > span");
-        gsap.from(targets, { yPercent: 115, rotate: 2, duration: 1.2, stagger, delay, scrollTrigger: st });
-      } else if (mode === "clip") {
-        gsap.fromTo(
-          el,
-          { clipPath: "inset(18% 8% 18% 8%)" },
-          { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, delay, ease: "expo.inOut", scrollTrigger: st },
-        );
-        const media = el.querySelector("img, video");
-        if (media) gsap.from(media, { scale: 1.25, duration: 1.8, delay, ease: "expo.out", scrollTrigger: st });
-      } else if (mode === "stagger") {
-        gsap.from(el.children, { y: 40, opacity: 0, duration: 1, stagger, delay, scrollTrigger: st });
-      } else if (mode === "scale") {
-        gsap.from(el, { scale: 0.92, opacity: 0, duration: 1.4, delay, scrollTrigger: st });
-      } else {
-        gsap.from(el, { y: 36, opacity: 0, duration: 1.1, delay, scrollTrigger: st });
-      }
-    }, el);
-    return () => ctx.revert();
+    // Déjà visible au montage (au-dessus de la ligne de flottaison) : pas d’animation d’entrée tardive.
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight * 0.85 && r.bottom > 0 && start === "top 85%") return;
+
+    const ctx = gsap.context(() => {}, el);
+    const targetsFor = () =>
+      mode === "lines" || mode === "words"
+        ? el.querySelectorAll(mode === "lines" ? ".split-line > span" : ".split-word > span")
+        : mode === "stagger"
+          ? el.children
+          : [el];
+
+    // État initial
+    ctx.add(() => {
+      if (mode === "lines" || mode === "words") gsap.set(targetsFor(), { yPercent: 115, rotate: 2 });
+      else if (mode === "clip") gsap.set(el, { clipPath: "inset(18% 8% 18% 8%)" });
+      else if (mode === "stagger") gsap.set(el.children, { y: 40, opacity: 0 });
+      else if (mode === "scale") gsap.set(el, { scale: 0.92, opacity: 0 });
+      else gsap.set(el, { y: 36, opacity: 0 });
+    });
+
+    // Déclenchement par IntersectionObserver (plus léger qu’un ScrollTrigger par élément)
+    const pct = parseInt(start.split(" ")[1] ?? "85", 10);
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        ctx.add(() => {
+          if (mode === "lines" || mode === "words") {
+            gsap.to(targetsFor(), { yPercent: 0, rotate: 0, duration: 1.2, stagger, delay });
+          } else if (mode === "clip") {
+            gsap.to(el, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, delay, ease: "expo.inOut" });
+            const media = el.querySelector("img, video");
+            if (media) gsap.from(media, { scale: 1.25, duration: 1.8, delay, ease: "expo.out" });
+          } else if (mode === "stagger") {
+            gsap.to(el.children, { y: 0, opacity: 1, duration: 1, stagger, delay });
+          } else if (mode === "scale") {
+            gsap.to(el, { scale: 1, opacity: 1, duration: 1.4, delay });
+          } else {
+            gsap.to(el, { y: 0, opacity: 1, duration: 1.1, delay });
+          }
+        });
+      },
+      { rootMargin: `0px 0px -${100 - (Number.isFinite(pct) ? pct : 85)}% 0px` },
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      ctx.revert();
+    };
   }, [mode, delay, stagger, start]);
 
   return (

@@ -38,7 +38,7 @@ function shell(r, y0, y1, tex) {
 }
 
 const frosted = () => new THREE.MeshPhysicalMaterial({ color: 0xf7efe8, transmission: 1, roughness: 0.42, thickness: 1.2, ior: 1.5, attenuationColor: new THREE.Color(0xf1d9cc), attenuationDistance: 3 });
-const amber = () => new THREE.MeshPhysicalMaterial({ color: 0xffffff, transmission: 1, roughness: 0.06, thickness: 0.6, ior: 1.5, attenuationColor: new THREE.Color(0xc0702e), attenuationDistance: 1.4, clearcoat: 1 });
+const amber = () => new THREE.MeshPhysicalMaterial({ color: 0xffffff, transmission: 1, roughness: 0.06, thickness: 0.6, ior: 1.5, attenuationColor: new THREE.Color(0xc0702e), attenuationDistance: 0.6, clearcoat: 1 });
 const ceramic = (c = 0xefe6da) => new THREE.MeshPhysicalMaterial({ color: c, roughness: 0.55, sheen: 0.3, sheenColor: new THREE.Color(0xffffff) });
 const capMat = () => new THREE.MeshPhysicalMaterial({ color: 0xc8b4a2, roughness: 0.35, metalness: 0.0, clearcoat: 0.6 });
 
@@ -170,12 +170,12 @@ run(async () => {
     scene.add(plinth(1.15, 0.45, 1.45, 0.7));
     const b = tallBottle(); b.position.set(-1.2, 1.0, -0.3); b.rotation.y = 0.15; scene.add(b);
     const j = jar(); j.scale.setScalar(0.85); j.position.set(1.45, 0.45, 0.7); j.rotation.y = -0.4; scene.add(j);
-    const d = serumBottle(); d.position.set(0.15, 0, 1.75); d.rotation.y = -0.2; scene.add(d);
+    const d = serumBottle(); d.position.set(-0.05, 0, 1.95); d.rotation.y = -0.15; scene.add(d);
     const s3 = stone(0.62, 0.5, '#e0d2c3'); s3.position.set(-2.95, 0.22, 1.5); scene.add(s3);
     const s4 = stone(0.38, 0.55, '#cdb9a6'); s4.position.set(1.15, 0.15, 2.35); scene.add(s4);
     const cam = new THREE.PerspectiveCamera(26, W / H, 0.1, 200);
-    cam.position.set(0.6, 3.4, 15.5);
-    const focus = new THREE.Vector3(0.4, 1.6, 0.3);
+    cam.position.set(0.6, 4.4, 18.5);
+    const focus = new THREE.Vector3(0.1, 1.85, 0.3);
     const acc = await accumulate(renderer, scene, cam, { lights: [{ light: key, jitter: 0.25 }], sky: { light: sk, minElev: 0.3 }, dof: { focus, aperture: 0.12 } });
     return finish(acc, { grain: 0.05, vignette: 0.14, tint: { color: '#e8b9a0', alpha: 0.12 } });
   }
@@ -203,7 +203,7 @@ run(async () => {
   const a = stone(1.9, 0.32, '#cdb8a4'); a.position.set(0, 0.55, 0); scene.add(a);
   const b = stone(1.35, 0.32, '#dccbb9'); b.position.set(0.15, 1.45, 0.05); b.rotation.y = 0.8; scene.add(b);
   const j = jar(); j.scale.setScalar(0.72); j.position.set(0.1, 1.8, 0.1); scene.add(j);
-  const t = tallBottle(); t.scale.setScalar(0.9); t.position.set(-2.6, 0, -0.9); scene.add(t);
+  const t = tallBottle(); t.scale.setScalar(0.9); t.position.set(-2.2, 0, -1.6); scene.add(t);
   const cam = new THREE.PerspectiveCamera(30, W / H, 0.1, 200);
   cam.position.set(0.5, 3.6, 12);
   const focus = new THREE.Vector3(0, 2.0, 0);

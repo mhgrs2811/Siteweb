@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Hero } from "@/components/home/Hero";
 import { Manifesto } from "@/components/home/Manifesto";
 import { ServicesIndex } from "@/components/home/ServicesIndex";
@@ -22,12 +23,23 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <Manifesto />
-      <ServicesIndex />
-      <PortfolioShowcase />
-      <Method />
-      <Why />
+      <Suspense>
+        <Manifesto />
+      </Suspense>
+      <Suspense>
+        <ServicesIndex />
+      </Suspense>
+      <Suspense>
+        <PortfolioShowcase />
+      </Suspense>
+      <Suspense>
+        <Method />
+      </Suspense>
+      <Suspense>
+        <Why />
+      </Suspense>
 
+      <Suspense>
       <section data-surface="light" aria-labelledby="offres-title" className="surface-light section-y">
         <div className="wrap-wide">
           <div className="grid-12 mb-16 gap-y-8 md:mb-24">
@@ -47,10 +59,17 @@ export default function HomePage() {
           <PlanColumns limit={5} />
         </div>
       </section>
+      </Suspense>
 
-      <Testimonials />
-      <Faq />
-      <FinalCta />
+      <Suspense>
+        <Testimonials />
+      </Suspense>
+      <Suspense>
+        <Faq />
+      </Suspense>
+      <Suspense>
+        <FinalCta />
+      </Suspense>
     </>
   );
 }

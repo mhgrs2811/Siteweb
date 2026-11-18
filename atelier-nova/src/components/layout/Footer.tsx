@@ -29,10 +29,10 @@ export function Footer() {
 
           <nav aria-label="Pied de page" className="col-span-2 md:col-span-4 lg:col-span-2 lg:col-start-7">
             <p className="t-label text-muted mb-5">Navigation</p>
-            <ul className="space-y-1">
+            <ul>
               {[{ label: nav.home, href: "/" }, ...nav.main, { label: "Contact", href: "/contact" }].map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="link-u inline-block py-1.5">
+                  <Link href={l.href} className="link-u inline-flex min-h-11 items-center">
                     {l.label}
                   </Link>
                 </li>
@@ -42,10 +42,10 @@ export function Footer() {
 
           <div className="col-span-2 md:col-span-4 lg:col-span-2">
             <p className="t-label text-muted mb-5">Services</p>
-            <ul className="space-y-1">
+            <ul>
               {services.map((s) => (
                 <li key={s.slug}>
-                  <Link href={`/services#${s.slug}`} className="link-u inline-block py-1.5">
+                  <Link href={`/services#${s.slug}`} className="link-u inline-flex min-h-11 items-center">
                     {s.short}
                   </Link>
                 </li>
@@ -64,7 +64,7 @@ export function Footer() {
             <ul className="flex flex-wrap gap-x-5 gap-y-1">
               {site.socials.map((s) => (
                 <li key={s.label}>
-                  <a href={s.href} className="link-u inline-block py-1.5" target="_blank" rel="noopener noreferrer">
+                  <a href={s.href} className="link-u inline-flex min-h-11 items-center" target="_blank" rel="noopener noreferrer">
                     {s.label}
                     <span className="sr-only"> (nouvel onglet)</span>
                   </a>
@@ -85,7 +85,7 @@ export function Footer() {
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {nav.legal.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="link-u inline-block py-2">
+                <Link href={l.href} className="link-u inline-flex min-h-11 items-center">
                   {l.label}
                 </Link>
               </li>

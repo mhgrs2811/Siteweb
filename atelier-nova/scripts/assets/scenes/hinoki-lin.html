@@ -55,7 +55,7 @@ function branch(root, dir, len, depth, mat, group) {
 
 function paperLamp(r = 0.9) {
   const g = new THREE.Group();
-  const paper = new THREE.MeshPhysicalMaterial({ color: 0xfff4e2, emissive: 0xffb469, emissiveIntensity: 0.55, roughness: 0.9, side: THREE.DoubleSide });
+  const paper = new THREE.MeshPhysicalMaterial({ color: 0xf3e6cf, emissive: 0xffa95c, emissiveIntensity: 0.32, roughness: 0.9, side: THREE.DoubleSide });
   const prof = []; for (let i = 0; i <= 40; i++) { const a = -Math.PI / 2 + (i / 40) * Math.PI; prof.push([Math.max(0.0001, Math.cos(a) * r * (1 + 0.04 * Math.sin(i * 1.6))), Math.sin(a) * r * 0.92]); }
   const s = new THREE.Mesh(lathe(prof, 96), paper); g.add(s);
   const rib = new THREE.MeshStandardMaterial({ color: 0xd9c7a8, emissive: 0xffb36b, emissiveIntensity: 0.6, roughness: 0.8 });
@@ -127,14 +127,12 @@ run(async () => {
   branch(new THREE.Vector3(-0.9, 3.5, -2.25), new THREE.Vector3(-0.5, 1, 0.2).normalize(), 0.9, 4, twigMat, twig);
   scene.add(twig);
   const lamp = paperLamp(0.85); lamp.position.set(3.9, 0.85, -1.4); scene.add(lamp);
-  const c1 = cushion('#7f8462'); c1.position.set(-2.6, 0.21, 0.4); c1.rotation.y = 0.3; scene.add(c1);
-  const c2 = cushion('#cbbb9f'); c2.position.set(-2.4, 0.62, 0.5); c2.rotation.y = 0.9; c2.scale.setScalar(0.92); scene.add(c2);
 
   const cam = new THREE.PerspectiveCamera(36, W / H, 0.1, 100);
   let focus, aperture, shift = [0, 0];
-  if (shot === 'cover') { cam.position.set(1.8, 2.4, 9.5); focus = new THREE.Vector3(0.0, 1.9, -2.1); aperture = 0.08; }
+  if (shot === 'cover') { cam.position.set(1.6, 2.7, 11.2); focus = new THREE.Vector3(0.0, 1.9, -2.1); aperture = 0.08; }
   else if (shot === 'render-1') { cam.fov = 30; cam.position.set(0.4, 2.6, 5.6); focus = new THREE.Vector3(-0.3, 2.35, -2.1); aperture = 0.05; }
-  else { cam.fov = 38; cam.position.set(2.3, 1.9, 3.6); focus = new THREE.Vector3(3.3, 1.15, -1.5); aperture = 0.05; }
+  else { cam.fov = 38; cam.position.set(2.5, 1.9, 3.7); focus = new THREE.Vector3(3.55, 1.15, -1.45); aperture = 0.05; }
   cam.lookAt(focus);
   const acc = await accumulate(renderer, scene, cam, { lights: [{ light: sun, jitter: 0.5 }], dof: { focus, aperture }, shift });
   return finish(acc, { grain: 0.05, vignette: 0.2, tint: { color: '#d9b88a', alpha: 0.12 } });

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Geist, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { site } from "@/config/site";
@@ -47,7 +48,7 @@ export const viewport: Viewport = {
 };
 
 /** Exécuté avant le premier rendu : classe .js et préchargeur (1 fois par session). */
-const bootScript = `(function(){var d=document.documentElement;d.classList.add('js');try{if(!sessionStorage.getItem('nova-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.dataset.preload='1'}}catch(e){}})();`;
+const bootScript = `(function(){var d=document.documentElement;d.classList.add('js');try{if(!sessionStorage.getItem('nova-intro')&&location.search.indexOf('nopreload')<0&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.dataset.preload='1'}}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -66,9 +67,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="contenu" tabIndex={-1} className="outline-none">
           {children}
         </main>
-        <Footer />
-        <Cursor />
-        <SurfaceObserver />
+        <Suspense>
+          <Footer />
+        </Suspense>
+        <Suspense>
+          <Cursor />
+          <SurfaceObserver />
+        </Suspense>
       </body>
     </html>
   );
