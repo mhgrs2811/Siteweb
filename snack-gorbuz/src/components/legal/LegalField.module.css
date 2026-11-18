@@ -1,0 +1,45 @@
+.field {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem 2rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.field dt {
+  font-weight: 700;
+  font-size: var(--fs-small);
+}
+.field dd {
+  margin: 0;
+}
+.todo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--fg-muted);
+  border-bottom: 1.5px dashed var(--line-strong);
+  padding-bottom: 1px;
+}
+.todo::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--piment);
+  transform: rotate(45deg);
+}
+@media (min-width: 640px) {
+  .field {
+    grid-template-columns: 220px 1fr;
+  }
+}
+.banner {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--piment);
+  background: var(--surface);
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+  max-width: 64ch;
+}

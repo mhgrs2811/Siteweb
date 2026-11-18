@@ -1,0 +1,137 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gap);
+  align-items: start;
+}
+.block {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+.head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.head svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--piment);
+  flex: none;
+}
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-s);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.soon {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.soonLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+}
+.soonLabel::before {
+  background: var(--piment) !important;
+
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  background: currentColor;
+  transform: rotate(45deg);
+}
+.soonText {
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+  max-width: 30ch;
+}
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: var(--fs-lead);
+  line-height: 1.4;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+.hours {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 1.25rem;
+}
+.hours dt {
+  font-weight: 650;
+}
+.hours dd {
+  margin: 0;
+  color: var(--fg-muted);
+}
+.closed {
+  color: var(--fg-muted);
+}
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.contactList a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--fs-lead);
+  font-weight: 650;
+  text-decoration: none;
+}
+.contactList a:hover {
+  color: var(--accent-text);
+}
+.map {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--r-s);
+  width: 100%;
+}
+.mapSoon {
+  grid-column: 1 / -1;
+}
+.noForm {
+  grid-column: 1 / -1;
+  max-width: 52ch;
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+}
+
+@media (min-width: 768px) {
+  .block {
+    grid-column: span 4;
+  }
+  /* Décalage vertical : les trois blocs ne sont pas alignés mécaniquement. */
+  .block:nth-child(2) {
+    margin-top: 2.5rem;
+  }
+  .block:nth-child(3) {
+    margin-top: 5rem;
+  }
+  .full .block:nth-child(2),
+  .full .block:nth-child(3) {
+    margin-top: 0;
+  }
+  .full .block {
+    grid-column: span 4;
+  }
+}

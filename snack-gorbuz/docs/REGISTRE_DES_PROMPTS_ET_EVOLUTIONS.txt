@@ -1,0 +1,40 @@
+REGISTRE DES PROMPTS — SNACK GORBUZ
+
+Règle de versionnage : chaque demande de modification fera l'objet d'un nouveau prompt
+numéroté dans le dossier prompts/. Le contexte maître sera modifié uniquement si une
+règle structurante ou une décision de direction artistique change.
+
+PROMPTS EXISTANTS
+
+01 — PROMPT_01_CLAUDE_CODE_V1.txt
+Objet : création intégrale de la V1 du site Snack Gorbuz avant réception du menu et des
+photos définitives.
+Statut : EXÉCUTÉ le 18 novembre 2026. Projet livré dans le dossier snack-gorbuz/ du dépôt
+(Next.js 16, React Three Fiber). Liste des contenus restants : docs/A_COMPLETER_APRES_V1.txt.
+
+PROMPTS À AJOUTER AU FIL DES DÉCISIONS (NE PAS EXÉCUTER AVANT VALIDATION)
+
+02 — À définir après retour visuel de Claude Code.
+Exemples possibles : correction du hero, ajustement de la 3D, navigation, responsive.
+
+03 — À définir après transmission du menu réel.
+Exemples possibles : intégration des produits, descriptions, prix, options, suppléments,
+allergènes et filtres de catégories.
+
+04 — À définir après transmission des médias de marque.
+Exemples possibles : remplacement des placeholders par le logo, photos de produits,
+photos de l'équipe, photos du snack et optimisation des images.
+
+05 — À définir après transmission des informations pratiques.
+Exemples possibles : coordonnées, adresse, itinéraire, horaires, réseaux et commande.
+
+06 — À définir après revue UX/SEO et validation finale.
+Exemples possibles : optimisation performance, SEO local, mentions et mise en production.
+
+RÈGLE POUR LES MODIFICATIONS FUTURES
+- Conserver le travail déjà validé.
+- Ne pas reconstruire le site depuis zéro pour une simple retouche.
+- Décrire précisément les fichiers ou composants à modifier.
+- Inclure des critères d'acceptation vérifiables.
+- Numéroter le nouveau prompt et l'enregistrer dans prompts/.
+- Mettre à jour ce registre avec sa date, son objectif et son statut.

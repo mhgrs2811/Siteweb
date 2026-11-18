@@ -1,0 +1,68 @@
+.slot {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-s);
+  background: var(--surface);
+  isolation: isolate;
+}
+.slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms var(--ease-out);
+}
+.zoomable:hover img {
+  transform: scale(1.03);
+}
+
+/* État provisoire : papier alimentaire, cadre intérieur, étiquette. */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(0.75rem, 2.5cqi, 1.25rem);
+  background-color: var(--surface);
+  background-image: repeating-linear-gradient(135deg, transparent 0 14px, var(--line) 14px 15px);
+}
+.placeholder::before {
+  content: "";
+  position: absolute;
+  inset: clamp(0.5rem, 2cqi, 0.9rem);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.mark {
+  position: absolute;
+  top: clamp(0.9rem, 3cqi, 1.5rem);
+  right: clamp(0.9rem, 3cqi, 1.5rem);
+  width: clamp(2.4rem, 16cqi, 4.5rem);
+  color: var(--fg-muted);
+}
+.tag {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  align-self: flex-start;
+  max-width: 100%;
+  padding: 0.45rem 0.7rem;
+  border-radius: 2px;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: var(--fs-label);
+  line-height: 1.25;
+}
+.tag strong {
+  font-weight: 700;
+}
+.tag span {
+  color: var(--fg-muted);
+}
+.slot {
+  container-type: inline-size;
+}

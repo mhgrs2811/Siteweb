@@ -1,0 +1,32 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(6rem, 14vw, 12rem);
+  text-align: left;
+}
+.stamp {
+  position: absolute;
+  right: -6%;
+  top: 50%;
+  width: clamp(16rem, 38vw, 34rem);
+  color: var(--creme);
+  opacity: 0.08;
+  transform: translateY(-50%) rotate(-8deg);
+}
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+.title {
+  max-width: 10ch;
+}
+.text {
+  color: var(--fg-muted);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}

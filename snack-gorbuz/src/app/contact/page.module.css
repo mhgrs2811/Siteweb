@@ -1,0 +1,6 @@
+.section {
+  padding-block: var(--section);
+}
+.head {
+  margin-bottom: clamp(2.5rem, 6vw, 5rem);
+}

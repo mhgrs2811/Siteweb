@@ -1,0 +1,4 @@
+Polices auto-hébergées (copiées depuis les paquets npm @fontsource, licence SIL Open Font License 1.1) :
+- anton-latin-400-normal.woff2        → Anton (Vernon Adams), titres display.
+- manrope-latin-wght-normal.woff2     → Manrope variable (Mikhail Sharanda), texte courant.
+Le sous-ensemble « latin » couvre l’intégralité des caractères du français (accents, œ, « », ’).

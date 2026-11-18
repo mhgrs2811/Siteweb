@@ -1,0 +1,482 @@
+/* =====================================================================
+   SNACK GORBUZ — système de design
+   Base : charbon + crème. Signal : rouge piment. Lumière : ambre.
+   ===================================================================== */
+
+:root {
+  /* Palette de marque */
+  --charbon: #171717;
+  --charbon-2: #221e1a;
+  --charbon-3: #2e2823;
+  --creme: #f4efe6;
+  --creme-2: #eae3d6;
+  --creme-3: #dcd2bf;
+  --beige: #d7b58b;
+  --beige-2: #c6a070;
+  --piment: #d94b32; /* signal graphique (formes, filets, 3D, SVG) */
+  --piment-ink: #bf3a24; /* fond des boutons/étiquettes portant du texte crème (contraste AA) */
+  --piment-2: #bb3c26;
+  --ambre: #d49a43;
+  --ambre-2: #e6b566;
+  --olive: #68745a;
+
+  /* Typographie */
+  --font-display: var(--font-anton), Impact, "Arial Narrow", sans-serif;
+  --font-text: var(--font-manrope), system-ui, sans-serif;
+
+  --fs-display-xxl: clamp(3.4rem, 10.5vw, 9rem);
+  --fs-display-xl: clamp(2.9rem, 7.2vw, 6rem);
+  --fs-display-l: clamp(2.3rem, 4.8vw, 4.2rem);
+  --fs-display-m: clamp(1.6rem, 2.8vw, 2.4rem);
+  --fs-display-s: clamp(1.25rem, 1.9vw, 1.6rem);
+  --fs-lead: clamp(1.125rem, 1.35vw, 1.3125rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9375rem;
+  --fs-label: 0.8125rem;
+
+  /* Espacement (base 4 px) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+  --section: clamp(4.5rem, 10vw, 9rem);
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --gap: clamp(1rem, 2.4vw, 2rem);
+  --container: 1320px;
+  --header-h: 76px;
+
+  /* Formes */
+  --r-s: 4px;
+  --r-m: 10px;
+  --r-l: 18px;
+
+  /* Mouvement */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 240ms;
+  --dur-slow: 600ms;
+
+  color-scheme: light;
+}
+
+/* Tons de section : chaque section déclare son fond et ses couleurs dérivées. */
+.tone-dark {
+  --bg: var(--charbon);
+  --fg: var(--creme);
+  --fg-muted: rgba(244, 239, 230, 0.7);
+  --fg-faint: rgba(244, 239, 230, 0.42);
+  --line: rgba(244, 239, 230, 0.16);
+  --line-strong: rgba(244, 239, 230, 0.34);
+  --surface: var(--charbon-2);
+  --surface-2: var(--charbon-3);
+  --accent-text: #ee6b50; /* rouge lisible sur charbon (≥ 4,5:1) */
+  color: var(--fg);
+  background: var(--bg);
+}
+.tone-light {
+  --bg: var(--creme);
+  --fg: var(--charbon);
+  --fg-muted: rgba(23, 23, 23, 0.7);
+  --fg-faint: rgba(23, 23, 23, 0.45);
+  --line: rgba(23, 23, 23, 0.14);
+  --line-strong: rgba(23, 23, 23, 0.32);
+  --surface: var(--creme-2);
+  --surface-2: var(--creme-3);
+  --accent-text: #bf3a24; /* rouge lisible sur crème (≥ 4,5:1) */
+  color: var(--fg);
+  background: var(--bg);
+}
+.tone-beige {
+  --bg: var(--beige);
+  --fg: var(--charbon);
+  --fg-muted: rgba(23, 23, 23, 0.82); /* plus dense que sur crème : contraste AA sur beige et beige-2 */
+  --fg-faint: rgba(23, 23, 23, 0.48);
+  --line: rgba(23, 23, 23, 0.18);
+  --line-strong: rgba(23, 23, 23, 0.4);
+  --surface: var(--beige-2);
+  --surface-2: #b58d5c;
+  --accent-text: #7f2211; /* rouge profond lisible sur beige (≥ 4,5:1) */
+  color: var(--fg);
+  background: var(--bg);
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-text);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  font-weight: 450;
+  color: var(--charbon);
+  background: var(--charbon);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+ul,
+ol {
+  margin: 0;
+}
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 3px solid var(--ambre);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+::selection {
+  background: var(--piment);
+  color: var(--creme);
+}
+
+/* ---------- Typographie ---------- */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.display-xxl {
+  font-size: var(--fs-display-xxl);
+  line-height: 0.9;
+}
+.display-xl {
+  font-size: var(--fs-display-xl);
+  line-height: 0.92;
+}
+.display-l {
+  font-size: var(--fs-display-l);
+}
+.display-m {
+  font-size: var(--fs-display-m);
+  line-height: 1;
+}
+.display-s {
+  font-size: var(--fs-display-s);
+  line-height: 1.05;
+}
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  font-weight: 450;
+  max-width: 34em;
+  text-wrap: pretty;
+}
+.text {
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+.text p + p {
+  margin-top: 1em;
+}
+.muted {
+  color: var(--fg-muted);
+}
+.small {
+  font-size: var(--fs-small);
+}
+.label {
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+
+/* ---------- Mise en page ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gap);
+}
+.section {
+  position: relative;
+  padding-block: var(--section);
+}
+.section-tight {
+  padding-block: calc(var(--section) * 0.6);
+}
+
+/* Repère de chapitre : numéro + intitulé, filet fin. */
+.chapter {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+}
+.chapter::after {
+  content: "";
+  flex: 0 0 2.5rem;
+  height: 1px;
+  background: var(--line-strong);
+}
+.chapter-num {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  color: var(--accent-text, var(--piment-ink));
+}
+
+/* ---------- Boutons ---------- */
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: currentColor;
+  --btn-line: currentColor;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  min-height: 3rem;
+  padding: 0 1.4rem;
+  border-radius: var(--r-s);
+  border: 1.5px solid var(--btn-line);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-weight: 650;
+  font-size: 0.975rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn-primary {
+  --btn-bg: var(--piment-ink);
+  --btn-fg: var(--creme);
+  --btn-line: var(--piment-ink);
+}
+.btn-primary:hover {
+  --btn-bg: var(--piment-2);
+  --btn-line: var(--piment-2);
+}
+.btn-ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--fg, currentColor);
+  --btn-line: var(--line-strong, currentColor);
+}
+.btn-ghost:hover {
+  --btn-bg: var(--fg);
+  --btn-fg: var(--bg);
+  --btn-line: var(--fg);
+}
+.btn-solid {
+  --btn-bg: var(--fg);
+  --btn-fg: var(--bg);
+  --btn-line: var(--fg);
+}
+.btn-solid:hover {
+  --btn-bg: var(--piment-ink);
+  --btn-fg: var(--creme);
+  --btn-line: var(--piment-ink);
+}
+.btn-lg {
+  min-height: 3.5rem;
+  padding: 0 1.9rem;
+  font-size: 1.05rem;
+}
+.btn svg {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+}
+
+/* Lien éditorial souligné au survol */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 650;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size var(--dur) var(--ease);
+  padding-bottom: 2px;
+}
+.link:hover,
+.link:focus-visible {
+  background-size: 100% 1.5px;
+}
+
+/* ---------- Motifs de marque ---------- */
+/* Ticket de comptoir : bord perforé et encoches latérales. */
+.ticket {
+  position: relative;
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--r-s);
+  padding: var(--s-5);
+  background: var(--surface);
+}
+.ticket::before,
+.ticket::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px dashed var(--line-strong);
+  transform: translateY(-50%);
+}
+.ticket::before {
+  left: -10px;
+  clip-path: inset(0 0 0 50%);
+}
+.ticket::after {
+  right: -10px;
+  clip-path: inset(0 50% 0 0);
+}
+
+/* Papier alimentaire : fines lignes diagonales. */
+.paper {
+  background-color: var(--surface);
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 14px,
+    var(--line) 14px 15px
+  );
+}
+
+/* Lettrage fantôme : grand mot au trait. */
+.ghost {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ---------- Révélation au défilement ---------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  transition-delay: calc(var(--reveal-delay, 0) * 90ms);
+}
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Accessibilité ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: var(--r-s);
+  background: var(--piment-ink);
+  color: var(--creme);
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--dur) var(--ease);
+}
+.skip-link:focus-visible {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

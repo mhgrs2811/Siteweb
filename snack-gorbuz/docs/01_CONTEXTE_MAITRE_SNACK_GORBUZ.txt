@@ -1,0 +1,619 @@
+CONTEXTE MAÎTRE — SNACK GORBUZ
+Document directeur pour Claude Code
+Version 1.0 — V1 du site
+
+======================================================================
+0. TON RÔLE ET TA MISSION
+======================================================================
+
+Tu interviens comme développeur senior et webdesigner exécutant au sein d'une agence
+web. Le projet est piloté par un directeur artistique. Tu dois transformer le brief
+ci-dessous en un véritable site web abouti, fonctionnel, responsive et mémorable.
+
+Tu ne dois pas livrer uniquement une maquette, un prototype visuel ou une liste de
+recommandations : tu dois construire la V1 dans le dépôt de code, de bout en bout.
+
+Le directeur artistique valide la direction générale. Ton rôle est de l'exécuter avec
+exigence, de signaler les limites techniques et de prendre des décisions de réalisation
+cohérentes sans dénaturer le brief.
+
+Marque : SNACK GORBUZ
+Activité : snack / restauration rapide
+Produits dont l'existence est confirmée : durums, kumpirs, mitraillettes, ainsi que
+d'autres familles qui seront précisées plus tard par le propriétaire.
+Langue de départ : français.
+Pays : Belgique. La commune et les coordonnées exactes ne sont pas encore fournies.
+Périmètre : site complet V1, avant réception de la carte détaillée et des photographies.
+
+OBJECTIF CENTRAL
+Créer un site de snack très design, dynamique, singulier et orienté conversion. Le site
+doit avoir le caractère d'une véritable marque street-food, et non l'apparence d'un
+thème de restaurant préfabriqué. Il doit être aussi fort visuellement que simple à utiliser.
+
+======================================================================
+1. LES TROIS RÉFÉRENCES ET LA SYNTHÈSE À RESPECTER
+======================================================================
+
+Le brief source détaillé est disponible dans :
+references/BRIEF_DIRECTION_ARTISTIQUE_3_REFERENCES.txt
+Lis-le avant de commencer.
+
+Références étudiées :
+- https://luks-kebab.fr/
+- https://www.qissa.co.uk/
+- https://rumbekeplatse.be/
+
+La fusion recherchée est la suivante :
+
+A. LÜKS KEBAB — IMPACT PRODUIT (environ 45 % de l'influence créative)
+- Produits traités comme des héros visuels.
+- Gros plans alimentaires, cadrages assumés, textures généreuses.
+- Identité street-food contemporaine, directe, énergique.
+- Catégories de carte faciles à comprendre et produits signatures mis en scène.
+- CTA commerciaux évidents et parcours sans friction.
+
+B. QISSA — IMMERSION ET STORYTELLING (environ 35 %)
+- Page d'accueil pensée comme une succession de chapitres.
+- Narration cohérente, titres éditoriaux, rythme visuel.
+- Alternance entre photos de produits, détails, ambiance et lieu.
+- Grandes compositions, typographie, mouvements subtils et transitions.
+- Sens de l'atmosphère et expérience de marque mémorable.
+
+C. RUMBEKE PLATSE — AUTHENTICITÉ ET PROXIMITÉ (environ 20 %)
+- Le vrai établissement, ses personnes et ses gestes.
+- Informations pratiques simples à trouver.
+- Carte compréhensible, catégories claires et prix faciles à lire.
+- Ton humain, local, accueillant et sans prétention artificielle.
+
+RÈGLE DE FUSION
+Le site Snack Gorbuz doit être plus proche d'une marque de street-food contemporaine
+que d'un restaurant gastronomique. Il doit combiner l'impact visuel de LÜKS, le rythme
+éditorial de Qissa et la sincérité de Rumbeke. Ne pas juxtaposer trois templates et ne
+pas reprendre leurs éléments propriétaires.
+
+RÈGLE DE PROPRIÉTÉ INTELLECTUELLE
+Les sites fournis sont des références d'intention et de niveau de finition. Ne pas
+copier à l'identique leurs mises en page, leur code, leurs textes, logos, illustrations,
+photographies, vidéos, icônes propriétaires ou compositions distinctives. Ne pas
+réutiliser leurs ressources. Créer un système visuel original pour Snack Gorbuz qui
+restitue les qualités recherchées sans plagier les créations.
+
+IMPORTANT SUR LA 3D
+L'analyse préalable n'a pas permis de confirmer la présence de modèles 3D interactifs
+sur les trois références. La 3D est une exigence créative nouvelle pour Snack Gorbuz,
+pas un élément à prétendre avoir découvert sur les sites d'inspiration.
+
+======================================================================
+2. IDENTITÉ ET PERSONNALITÉ DE SNACK GORBUZ
+======================================================================
+
+Positionnement : snack contemporain, généreux, urbain, chaleureux et accessible.
+
+Personnalité :
+- Gourmande : les textures, la cuisson et le volume des produits doivent donner envie.
+- Affirmée : un nom visible, une typographie forte et un univers reconnaissable.
+- Chaleureuse : lumière dorée, matières chaudes et ambiance conviviale.
+- Authentique : ne pas inventer de récit, de recette, de provenance ou de promesse.
+- Soignée : détails d'interface, grille, alignements, espaces et interactions maîtrisés.
+
+Promesse de design : « La street-food qui a du caractère. »
+C'est une baseline de travail proposée pour la maquette, modifiable ultérieurement.
+
+Piste de signature éditoriale : « Du caractère. Du croustillant. Du Gorbuz. »
+À traiter comme une proposition de copywriting provisoire et non comme une affirmation
+factuelle sur les recettes.
+
+Le nom GORBUZ doit devenir un élément graphique à part entière : grand lettrage,
+wordmark typographique, présence répétée dans les repères de section et les éléments
+de packaging simulés. Si aucun logo officiel n'est fourni, créer un wordmark provisoire
+original en typographie (pas un faux logo complexe) et rendre son remplacement facile.
+
+Éviter les clichés graphiques : flammes partout, silhouette de burger générique, icônes
+fast-food standards, damier rouge/blanc omniprésent, illustrations enfantines, photos
+stock sans cohérence, accumulation d'effets néon et dégradés sans intention.
+
+======================================================================
+3. DIRECTION ARTISTIQUE — SYSTÈME VISUEL
+======================================================================
+
+3.1 Palette de départ
+
+Palette de travail à implémenter sous forme de variables CSS/tokens :
+- Charbon profond : #171717 — fonds immersifs, navigation, titres contrastés.
+- Crème chaud : #F4EFE6 — fonds de respiration et sections éditoriales.
+- Beige toasté : #D7B58B — matières, fonds secondaires et rappel du pain.
+- Rouge piment / tomate : #D94B32 — accent de marque, CTA, repères et badges.
+- Ambre doré : #D49A43 — touches de lumière et détails.
+- Vert olive atténué : #68745A — accent secondaire très limité, seulement si utile.
+
+Règles : charbon + crème comme base ; rouge comme signal ; ambre pour les détails.
+Ne pas employer toutes les couleurs à parts égales. Éviter un fond rouge dominant.
+Prévoir un thème cohérent, pas un patchwork de couleurs.
+
+3.2 Typographie
+
+Créer un contraste fort et maîtrisé :
+- Titres : display sans-serif lourde, condensée ou compacte, très expressive.
+- Corps : sans-serif nette, moderne et excellente en petite taille.
+- Labels : capitales/espacement modéré pour les micro-informations.
+
+Pistes de familles : Anton / Archivo Black / Bebas Neue pour les titres ; Inter /
+Manrope / DM Sans pour le texte. Choisir deux familles maximum, en vérifiant que les
+fichiers ou imports sont réellement disponibles et autorisés. Utiliser des fallbacks.
+Les titres doivent avoir une personnalité éditoriale, sans devenir difficiles à lire.
+
+3.3 Composition
+
+- Grille éditoriale asymétrique et équilibrée.
+- Grandes images ou compositions graphiques pleine largeur.
+- Sections de hauteurs et de structures différentes.
+- Alternance de fonds charbon et crème.
+- Titres XXL, petites étiquettes numérotées et séparateurs fins.
+- Quelques débordements contrôlés de visuels, jamais de contenu illisible.
+- Rythme de lecture : impact / respiration / produit / humain / action.
+- Éviter absolument le layout générique : hero centré + trois cartes identiques +
+  section « À propos » banale + footer standard.
+
+3.4 Motifs propres à la marque
+
+Créer un petit langage graphique original : tampons GORBUZ, étiquettes de comptoir,
+traits inspirés du papier alimentaire, formes évoquant une découpe d'emballage,
+repères typographiques et numéros de chapitres. Ces signes doivent être subtils et
+répétés avec cohérence. Ils doivent pouvoir être réutilisés dans le site et plus tard
+sur des emballages ou supports sociaux.
+
+3.5 Photographies et médias
+
+Aucun vrai produit, local, membre de l'équipe, avis client ou emballage officiel n'a
+encore été fourni. Ne pas faire passer une photo stock ou une image générée pour une
+photo réelle de Snack Gorbuz.
+
+Pour la V1 :
+- Créer une direction d'image cohérente et des composants de médias remplaçables.
+- Chercher d'abord les ressources déjà présentes dans le dépôt.
+- En l'absence de vrais médias, utiliser des compositions provisoires élégantes :
+  aplats texturés, dégradés subtils, illustrations graphiques originales et éléments
+  3D stylisés explicitement décoratifs.
+- Si des photos d'illustration libres sont utilisées, les isoler dans un dossier, noter
+  leur source/licence et ne pas les présenter comme des photos du restaurant.
+- Ne pas mettre des URL d'images externes fragiles directement dans le contenu.
+- Créer des noms de fichiers définitifs prévus pour le remplacement :
+  hero-gorbuz, durum-signature, kumpir-signature, mitraillette-signature,
+  snack-interior, team-gorbuz, gallery-01, etc.
+- Prévoir les ratios, crops et alt text dans les données, pour remplacer les images
+  sans refaire le design.
+
+======================================================================
+4. 3D ET MOTION DESIGN — EXIGENCE FORTE
+======================================================================
+
+Le site doit comporter une véritable séquence 3D dans le hero, pas simplement un PNG
+qui tourne avec du CSS. Utiliser une scène WebGL (Three.js / React Three Fiber si le
+stack React le permet) avec un fallback statique.
+
+4.1 Concept 3D pour la V1
+
+Créer une nature morte street-food stylisée et originale, en 3D temps réel, composée
+par exemple de :
+- un durum/wrap stylisé, présenté en diagonale dans un papier d'emballage ;
+- quelques frites dorées, avec des volumes et matières crédibles ;
+- une forme évoquant le kumpir/pomme de terre garnie ;
+- un plateau ou socle graphique inspiré d'un emballage de snack ;
+- quelques détails de sauce ou de matière, utilisés avec parcimonie.
+
+Ce concept illustre les catégories confirmées par le client, mais n'est pas une
+reconstitution exacte des recettes qui n'ont pas encore été communiquées. Ne pas
+ajouter d'ingrédients spécifiques qui seraient supposés être réellement vendus.
+
+La qualité attendue : silhouettes lisibles, formes arrondies réalistes/stylisées,
+matériaux mats et légèrement brillants, éclairage chaud, ombres douces, profondeur,
+composition soignée et rendu propre. Le résultat ne doit ressembler ni à un emoji ni
+à un jouet en plastique.
+
+Si une création 3D détaillée dépasse les capacités immédiates du projet, réaliser une
+scène procédurale convaincante avec géométries Three.js paramétriques et matériaux
+soignés. Ne pas simuler la 3D avec un simple effet de rotation d'une image plate.
+
+4.2 Mise en scène / animation
+
+- Entrée douce de la scène et du titre au chargement.
+- Légère rotation lente et limitée de la composition, pas une toupie permanente.
+- Très léger flottement, profondeur et variation de perspective.
+- Réaction discrète à la position du pointeur sur desktop.
+- Progression subtile au scroll vers la section suivante.
+- Objet placé en équilibre avec le H1 et les CTA, jamais au détriment du message.
+- Possibilité de couper ou simplifier l'animation sur mobile.
+- Les animations de typographie et de sections doivent être cohérentes avec la 3D.
+
+4.3 Autres animations
+
+- Reveals au scroll (opacité + translation courte ou masque).
+- Marquee typographique lent, avec des mots propres à Gorbuz.
+- Parallaxe limitée entre le fond, la typographie et l'objet 3D.
+- Hover des cartes : zoom très léger, déplacement de détails, accent coloré.
+- Transitions de navigation discrètes.
+- Boutons avec hover/focus/active soignés.
+- Galerie avec ouverture grand format si pertinente.
+
+4.4 Contraintes de performance et d'accessibilité
+
+- Charger la 3D de façon différée ; ne pas bloquer le contenu principal.
+- Optimiser meshes, textures, lumières et fréquence d'animation.
+- Fallback image/illustration pour WebGL indisponible et appareils mobiles faibles.
+- Respecter prefers-reduced-motion ; aucun mouvement indispensable à la compréhension.
+- Stopper/mettre en pause les animations hors écran quand cela est utile.
+- Ne jamais imposer le scroll, le curseur personnalisé, un préloader long ou une musique.
+- Garder les menus, liens, horaires et coordonnées accessibles sans 3D.
+
+======================================================================
+5. ARCHITECTURE DU SITE — PAGES V1
+======================================================================
+
+Construire une vraie architecture multi-pages, pas seulement une landing page.
+Pages principales :
+1. Accueil : /
+2. La carte : /carte
+3. Le concept / Notre univers : /concept
+4. Galerie : /galerie
+5. Nous trouver / Contact : /contact
+6. Mentions légales : /mentions-legales
+7. Politique de confidentialité : /confidentialite
+
+Le header, la navigation, les CTA et le footer sont réutilisables. Chaque page doit
+avoir un H1 unique, une hiérarchie H2/H3 correcte et un contenu adapté. Ne pas
+multiplier des pages vides : si une page secondaire est créée, elle doit avoir un
+minimum de contenu éditorial et une fonction identifiable.
+
+5.1 HEADER GLOBAL
+
+- Wordmark Snack Gorbuz à gauche.
+- Liens : Accueil / La carte / Le concept / Galerie / Contact.
+- CTA principal : « Découvrir la carte » ou « Voir la carte » (pas « Commander » tant
+  qu'aucune solution de commande n'a été confirmée).
+- CTA secondaire éventuel « Nous trouver », activé seulement quand l'adresse est connue.
+- Header transparent ou intégré au hero au départ, puis fond solide/compact au scroll.
+- Menu mobile accessible, animation courte, fermeture au clic et à l'échap.
+- Boutons de contact conditionnels : ne pas créer de lien tel: ou map vide.
+
+5.2 ACCUEIL — HIÉRARCHIE ET CONTENU
+
+H1 : « La street-food qui a du caractère. »
+Accroche temporaire : « Durums, kumpirs et mitraillettes : l'univers Snack Gorbuz se
+prépare ici. » Texte provisoire, modifiable facilement.
+CTA principal : « Explorer la carte » → /carte.
+CTA secondaire : « Découvrir Gorbuz » → /concept.
+Composition : H1 typographique fort sur une moitié, scène 3D sur l'autre, repères de
+marque et indication de scroll.
+
+SECTION 01 — HERO
+- H1 unique de la page.
+- Accroche courte et deux CTA maximum.
+- Objet 3D principal.
+- Marque / repère graphique Gorbuz.
+- Header clair et fonctionnel.
+
+SECTION 02 — MARQUE / MANIFESTE
+H2 : « Du caractère, à chaque bouchée. » (formule provisoire)
+Texte court qui présente Snack Gorbuz sans inventer l'histoire, la provenance ou les
+méthodes de préparation.
+Marquee possible : « STREET-FOOD / GÉNÉREUX / GORBUZ / À EMPORTER » ; éviter les
+promesses non vérifiées.
+
+SECTION 03 — LES GRANDES ENVIES
+H2 : « Les envies Gorbuz »
+H3 : « Durums »
+H3 : « Kumpirs »
+H3 : « Mitraillettes »
+Créer trois compositions visuelles distinctes, pas trois cartes interchangeables.
+Ces trois familles sont confirmées. Ne pas encore inventer les déclinaisons, ingrédients,
+prix ou options.
+CTA : « Voir la carte complète » → /carte.
+
+SECTION 04 — SIGNATURE VISUELLE / PRODUIT À L'HONNEUR
+H2 : « La vedette du moment »
+Créer le composant réutilisable de mise en avant d'un produit (image, nom, description,
+prix, badge optionnel). Pour la V1, masquer la fiche produit complète tant qu'aucune
+sélection réelle n'a été communiquée ou afficher un état éditorial de lancement clair.
+Ne pas inventer un « best-seller » ou un « produit du mois ».
+
+SECTION 05 — L'UNIVERS GORBUZ
+H2 : « Un snack. Une identité. »
+H3 : « Une adresse à découvrir » (à afficher seulement quand l'adresse est fournie)
+H3 : « Un univers qui nous ressemble »
+Section de marque avec photos réelles à remplacer ; en attendant, composition graphique
+ou illustration 3D abstraite clairement décorative.
+CTA : « Découvrir notre univers » → /concept.
+
+SECTION 06 — GALERIE / COULISSES
+H2 : « Dans les coulisses de Gorbuz »
+Prévoir une galerie asymétrique et remplaçable : produits, comptoir, équipe, détails.
+Aucune photo fictive de l'équipe ou du local. Les médias manquants doivent être
+remplacés par des blocs graphiques propres, sans image brisée.
+CTA : « Voir la galerie » → /galerie.
+
+SECTION 07 — INFORMATIONS PRATIQUES
+H2 : « On se retrouve chez Gorbuz ? »
+H3 : « Adresse »
+H3 : « Horaires »
+H3 : « Contact »
+Les blocs n'affichent que des valeurs réelles présentes dans la configuration. Tant
+que l'information est vide, afficher un message sobre du type « Informations bientôt
+disponibles » ou masquer le champ. Aucun horaire, adresse, téléphone, note ou lien
+Google Maps ne doit être inventé.
+
+SECTION 08 — CTA FINAL
+H2 : « L'envie est là ? »
+CTA principal : « Voir la carte ».
+CTA secondaire : contact / itinéraire seulement si renseigné.
+
+FOOTER GLOBAL
+- Wordmark Snack Gorbuz et baseline provisoire.
+- Navigation secondaire.
+- Carte, concept, galerie, contact.
+- Bloc « Nous trouver » uniquement avec adresse vérifiée.
+- Téléphone cliquable uniquement si le numéro est fourni.
+- Horaires uniquement s'ils sont fournis.
+- Liens réseaux sociaux uniquement s'ils sont fournis.
+- Mentions légales, confidentialité, copyright.
+- Footer riche visuellement, avec une composition éditoriale, pas une bande générique.
+- Sur mobile, informations pratiques et actions faciles à atteindre.
+
+5.3 PAGE LA CARTE — /carte
+
+H1 : « La carte Snack Gorbuz »
+Chapeau : introduire les grandes familles connues, sans prétendre que le catalogue
+complet est déjà fourni.
+
+H2 : « Trouve ton envie »
+H3 : « Durums »
+H3 : « Kumpirs »
+H3 : « Mitraillettes »
+
+Pour chaque famille, créer une zone prête à accueillir :
+- photo produit ;
+- nom du produit ;
+- description ;
+- prix en euros ;
+- variantes et suppléments ;
+- allergènes (uniquement sur données confirmées) ;
+- badge conditionnel ;
+- disponibilité éventuelle, seulement si elle est gérée.
+
+La V1 doit être conçue pour accueillir facilement la future carte, via un tableau de
+produits typé centralisé. Pour l'instant, ne pas inventer de produits, de recettes, de
+prix ou de grammages. Si les données sont absentes, présenter les trois familles dans
+une expérience visuelle aboutie et signaler discrètement que le détail de la carte sera
+complété, sans générer de fausses fiches produits.
+
+Prévoir une navigation par ancres ou filtres de familles, utilisable au clavier et
+sur mobile. Pas de filtre décoratif inactif.
+
+H2 : « Une question sur la carte ? »
+Un CTA contact fonctionnel vers /contact, sans numéro fictif.
+
+FOOTER GLOBAL commun.
+
+5.4 PAGE LE CONCEPT — /concept
+
+H1 : « L'esprit Gorbuz »
+H2 : « La street-food, avec du caractère »
+Présenter le positionnement de Snack Gorbuz en quelques paragraphes de texte provisoire.
+Ne pas inventer une date de fondation, une histoire familiale, une recette secrète, une
+origine de produits, une fabrication maison ou un engagement qualité non communiqué.
+
+H2 : « Les envies qui nous ressemblent »
+H3 : « Durums »
+H3 : « Kumpirs »
+H3 : « Mitraillettes »
+
+H2 : « L'univers Snack Gorbuz »
+Galerie de détails de marque et zones médias remplaçables.
+
+H2 : « Retrouvez-nous »
+Lien vers /contact ; adresse seulement si disponible.
+
+FOOTER GLOBAL commun.
+
+5.5 PAGE GALERIE — /galerie
+
+H1 : « L'univers Snack Gorbuz »
+H2 : « Les produits »
+H2 : « Le lieu et les coulisses »
+H2 : « L'équipe »
+Préparer une grille éditoriale irrégulière avec filtres seulement si chaque filtre a du
+contenu réel. Les blocs vides doivent être élégants et signalés comme contenu à fournir,
+ou masqués en production. Prévoir lightbox accessible si cela apporte de la valeur.
+Ne jamais attribuer de faux visuels au restaurant.
+
+FOOTER GLOBAL commun.
+
+5.6 PAGE CONTACT — /contact
+
+H1 : « On se retrouve chez Gorbuz ? »
+H2 : « Toutes les infos pratiques »
+H3 : « Adresse et itinéraire »
+H3 : « Horaires »
+H3 : « Nous contacter »
+Afficher les champs disponibles. Pour les champs vides, prévoir un état propre et
+facile à compléter ou les masquer. La carte interactive n'est affichée qu'après ajout
+d'une adresse réelle. Ne pas inventer de formulaire de réservation ou de commande.
+Un formulaire de contact n'est à activer que s'il dispose d'un vrai traitement serveur
+ou d'un service configuré ; sinon ne pas afficher un faux formulaire fonctionnel.
+
+FOOTER GLOBAL commun.
+
+5.7 PAGES LÉGALES
+
+Créer les routes /mentions-legales et /confidentialite en structure de base, avec des
+champs à compléter et une indication interne claire. Ne pas inventer le nom de société,
+le numéro BCE, l'éditeur, l'adresse ou le responsable du traitement. Prévoir un rendu
+minimal lisible et non indexer les pages incomplètes si cela est pertinent.
+
+======================================================================
+6. HIÉRARCHIE SÉMANTIQUE ET ACCESSIBILITÉ
+======================================================================
+
+- Un H1 unique et explicite par page.
+- H2 pour les grandes sections.
+- H3 pour les sous-parties, catégories ou composants éditoriaux.
+- Ne pas utiliser les niveaux de titre uniquement pour obtenir une taille visuelle.
+- Prévoir des labels sémantiques, boutons et liens corrects.
+- Contraste lisible dans toutes les sections, y compris sur image.
+- Focus clavier très visible.
+- Menu mobile navigable au clavier et utilisable avec lecteur d'écran.
+- Textes alternatifs pour les images informatives ; alt vide pour les décors.
+- Tous les éléments interactifs doivent fonctionner sans souris.
+- Respecter prefers-reduced-motion.
+- Ne pas cacher une information essentielle dans une animation ou un hover.
+- Prévoir des zones tactiles confortables.
+
+======================================================================
+7. EXPÉRIENCE UTILISATEUR ET CONVERSION
+======================================================================
+
+Les objectifs prioritaires :
+1. Comprendre rapidement ce que propose Snack Gorbuz.
+2. Voir les familles de produits et accéder à la carte.
+3. Trouver facilement l'adresse, les horaires et le contact dès qu'ils seront fournis.
+
+Les CTA doivent être cohérents et vrais. Tant que l'établissement n'a pas communiqué
+son canal de commande, utiliser « Voir la carte » ou « Nous contacter » si possible.
+Ne pas fabriquer de tunnel de commande, de panier, de paiement ou de réservation.
+
+Mobile-first :
+- hero lisible en première vue ;
+- visuel 3D simplifié ou poster sur mobile ;
+- menu accessible rapidement ;
+- catégories faciles à toucher ;
+- pas de débordement horizontal ;
+- footer court à parcourir, mais complet ;
+- boutons de contact/itinéraire visibles quand leurs données existent.
+
+======================================================================
+8. TON RÉDACTIONNEL
+======================================================================
+
+Français naturel, direct, gourmand, confiant et complice. Le snack doit paraître
+accueillant et de caractère, jamais prétentieux.
+
+Privilégier les formulations courtes, concrètes et mémorables. Éviter les phrases
+publicitaires génériques (« une expérience culinaire inoubliable », « le meilleur snack
+de Belgique »), les superlatifs non prouvés et les longues histoires inventées.
+
+Tous les textes provisoires doivent être centralisés pour faciliter leur réécriture.
+Le site doit être prêt pour une traduction future, mais ne pas fabriquer une version
+néerlandaise ou anglaise sans demande explicite.
+
+======================================================================
+9. DONNÉES ET CONFIGURATION — PRÉPARER LA SUITE
+======================================================================
+
+Centraliser les contenus dans des fichiers de données faciles à éditer, par exemple :
+- siteConfig : marque, baseline, téléphone, adresse, email, horaires, réseaux, liens ;
+- menuData : catégories, produits, descriptions, prix, images, options, allergènes ;
+- galleryData : médias, catégories, textes alternatifs ;
+- testimonialsData : avis et sources vérifiés ;
+- seoData : title, description, Open Graph.
+
+Utiliser des types TypeScript adaptés et des états conditionnels cohérents. Ne pas
+répéter les coordonnées et textes en dur dans plusieurs composants.
+
+Créer un document : docs/A_COMPLETER_APRES_V1.txt qui liste au minimum :
+- logo officiel et charte existante, si disponible ;
+- adresse complète ;
+- téléphone et email ;
+- horaires et jours de fermeture ;
+- canal de commande et retrait ;
+- menu détaillé, prix, suppléments, options ;
+- allergènes et informations alimentaires validées ;
+- photos réelles des durums, kumpirs, mitraillettes et autres produits ;
+- photos de l'extérieur, de l'intérieur et de l'équipe ;
+- avis clients vérifiés ;
+- réseaux sociaux ;
+- mentions légales et informations de l'entreprise ;
+- souhaits de langue supplémentaire.
+
+======================================================================
+10. CHOIX TECHNIQUES ET QUALITÉ DE CODE
+======================================================================
+
+Avant tout changement, inspecter le dépôt existant, le framework, le gestionnaire de
+paquets, les scripts, les composants et les assets. Si un projet existe, le respecter
+et l'améliorer ; ne pas le remplacer aveuglément.
+
+Si le dossier est vide, choisir une base moderne adaptée, par exemple :
+- Next.js avec App Router et TypeScript ;
+- Tailwind CSS ou CSS Modules avec design tokens CSS ;
+- Motion/Framer Motion pour animations UI ;
+- React Three Fiber / Three.js pour la scène WebGL ;
+- bibliothèque d'icônes sobre si nécessaire.
+
+Ne pas ajouter une dépendance simplement pour un effet isolé. Utiliser les versions
+stables compatibles au moment de l'implémentation et respecter le lockfile.
+
+Exigences :
+- composants réutilisables ;
+- structure de code claire ;
+- séparation données / présentation ;
+- routes et liens fonctionnels ;
+- images optimisées et lazy-load hors écran ;
+- pas de CLS important ;
+- métadonnées SEO de base par page ;
+- données structurées Restaurant/LocalBusiness seulement quand les données réelles
+  nécessaires sont disponibles ;
+- éviter les erreurs console ;
+- pas de code mort, de dépendances superflues ou de liens factices ;
+- vérifier build, lint et TypeScript ;
+- ne pas laisser de TODO visibles dans la maquette sauf états explicitement voulus.
+
+Si un élément demandé est irréalisable avec le stack disponible, expliquer exactement
+la limite et mettre en œuvre la meilleure alternative sans prétendre l'avoir réalisé.
+
+======================================================================
+11. CRITÈRES DE RÉUSSITE DE LA V1
+======================================================================
+
+Le site doit :
+- afficher une identité Snack Gorbuz forte, visible dès le premier écran ;
+- paraître conçu sur mesure, non générique ;
+- proposer une 3D réelle dans le hero avec fallback ;
+- posséder des animations fluides, cohérentes et non intrusives ;
+- inclure toutes les pages principales décrites ;
+- respecter H1/H2/H3 sur toutes les pages ;
+- avoir un footer global travaillé et complet dans sa structure ;
+- être parfaitement utilisable sur mobile ;
+- préparer l'intégration ultérieure de la carte et des photos ;
+- n'inventer aucune information commerciale ou légale ;
+- garder les fonctions essentielles accessibles sans WebGL ni animation.
+
+Le résultat échoue si :
+- il ressemble à un template de restaurant standard ;
+- il copie de manière reconnaissable un des trois sites ;
+- il utilise des photos stock en prétendant qu'elles représentent le snack ;
+- il contient des prix, adresses, horaires, avis, allergènes ou recettes inventés ;
+- les animations ralentissent ou bloquent l'accès au contenu ;
+- la 3D est seulement une image plate qui tourne ;
+- les routes, boutons ou filtres sont décoratifs et ne fonctionnent pas.
+
+======================================================================
+12. PRINCIPES DE COLLABORATION POUR LES ITÉRATIONS
+======================================================================
+
+Ce document est la source de vérité du projet. En cas de nouvelle instruction, appliquer
+les modifications les plus récentes tout en conservant les principes structurants,
+sauf demande explicite de les changer.
+
+Ne pas réinitialiser le projet lors d'une demande de retouche. Modifier précisément
+les fichiers concernés et préserver les éléments déjà validés.
+
+Pour chaque intervention ultérieure :
+- comprendre la demande et identifier les composants touchés ;
+- faire une modification ciblée ;
+- vérifier les régressions visuelles et fonctionnelles ;
+- mettre à jour les données et documents concernés ;
+- résumer les fichiers modifiés et les vérifications effectuées.
+
+Les nouveaux prompts seront versionnés dans le dossier prompts/ et inscrits dans
+ docs/REGISTRE_DES_PROMPTS_ET_EVOLUTIONS.txt.
+
+FIN DU CONTEXTE MAÎTRE

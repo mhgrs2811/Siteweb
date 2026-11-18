@@ -1,0 +1,144 @@
+À COMPLÉTER APRÈS LA V1 — SNACK GORBUZ
+=======================================
+Liste exacte des contenus à demander au propriétaire pour finaliser le site.
+Chaque élément indique le fichier où l’intégrer. Tant qu’une donnée est absente,
+le site masque son affichage ou montre un état provisoire (« Bientôt disponible »).
+Aucune donnée n’a été inventée dans la V1.
+
+----------------------------------------------------------------------
+1. IDENTITÉ ET LOGO                                  → src/data/site.ts (brand)
+----------------------------------------------------------------------
+[ ] Logo officiel (SVG vectoriel ou PNG transparent, fond clair ET fond sombre si possible).
+    Déposer dans public/images/ puis renseigner brand.logo = { src, alt, width, height }.
+    Tant que brand.logo est null, le wordmark typographique provisoire est affiché.
+[ ] Charte graphique existante (couleurs, polices) si elle existe, pour ajuster les tokens
+    de src/app/globals.css.
+[ ] Validation ou réécriture de la baseline provisoire : « La street-food qui a du caractère. »
+[ ] Validation de la signature éditoriale provisoire : « Du caractère. Du croustillant. Du Gorbuz. »
+
+----------------------------------------------------------------------
+2. ADRESSE ET ACCÈS                                  → src/data/site.ts (city, address)
+----------------------------------------------------------------------
+[ ] Commune (city).
+[ ] Adresse complète : rue, numéro, code postal, commune.
+[ ] Lien d’itinéraire réel (Google Maps / fiche Google Business) → address.mapsUrl.
+[ ] URL d’intégration de la carte (iframe Google Maps « Intégrer une carte ») → address.mapEmbedUrl.
+    La carte interactive de la page /contact ne s’affiche qu’avec cette URL.
+[ ] Informations d’accès utiles (parking, transports) si souhaitées → à ajouter dans copy.ts.
+
+----------------------------------------------------------------------
+3. TÉLÉPHONE, E-MAIL, RÉSEAUX                        → src/data/site.ts
+----------------------------------------------------------------------
+[ ] Numéro de téléphone public (format d’affichage souhaité, ex. +32 …) → phone.
+[ ] Adresse e-mail publique → email.
+[ ] Liens Instagram / Facebook / TikTok / autres → socials[].
+[ ] Lien vers la fiche Google Business → googleBusinessUrl.
+
+----------------------------------------------------------------------
+4. HORAIRES                                          → src/data/site.ts (openingHours)
+----------------------------------------------------------------------
+[ ] Horaires d’ouverture par jour (plages matin/soir), ex. { day: 1, ranges: ["11:30-14:00","17:30-22:00"] }.
+[ ] Jours de fermeture hebdomadaire (ranges: []).
+[ ] Fermetures exceptionnelles / congés annuels / jours fériés → hoursNote.
+
+----------------------------------------------------------------------
+5. CANAL DE COMMANDE ET SERVICE                      → src/data/site.ts (orderUrl) + copy.ts
+----------------------------------------------------------------------
+[ ] Existe-t-il une commande en ligne (plateforme, site, téléphone) ? Si oui, URL réelle → orderUrl.
+    Tant que orderUrl est null, les CTA restent « Voir la carte » (aucun panier ni checkout simulé).
+[ ] Modes de service réellement proposés : sur place, à emporter, livraison, click & collect.
+    Le mot « À emporter » figure dans le bandeau provisoire (copy.marquee) : à confirmer ou retirer.
+[ ] Moyens de paiement acceptés (si vous souhaitez les afficher).
+
+----------------------------------------------------------------------
+6. CARTE DÉTAILLÉE                                   → src/data/menu.ts (products)
+----------------------------------------------------------------------
+Pour chaque produit, par famille (Durums, Kumpirs, Mitraillettes, et toute famille supplémentaire) :
+[ ] Nom officiel.
+[ ] Description courte (composition telle que vous souhaitez la communiquer).
+[ ] Prix TTC en euros (et variantes par taille si elles existent).
+[ ] Options et suppléments, avec leur prix.
+[ ] Badge éventuel : nouveau / signature / populaire (uniquement si c’est vrai).
+[ ] Disponibilité à gérer ou non.
+[ ] Familles supplémentaires à créer (ex. accompagnements, boissons, desserts) : noms et ordre.
+[ ] Photo de chaque produit (voir section 8).
+Les définitions génériques actuelles des familles (ce qu’est un durum, un kumpir, une mitraillette)
+sont éditables dans menu.ts (champ definition) et ne décrivent pas vos recettes.
+
+----------------------------------------------------------------------
+7. ALLERGÈNES ET INFORMATIONS ALIMENTAIRES           → src/data/menu.ts (allergens)
+----------------------------------------------------------------------
+[ ] Liste validée des allergènes par produit (14 allergènes réglementaires UE).
+[ ] Mentions éventuelles (halal, végétarien, etc.) uniquement si confirmées.
+Aucun allergène n’est affiché tant qu’il n’est pas renseigné.
+
+----------------------------------------------------------------------
+8. PHOTOS ET MÉDIAS                                  → public/images/ + src/data/gallery.ts + menu.ts
+----------------------------------------------------------------------
+Noms de fichiers attendus (voir public/images/README.txt), en WebP/AVIF, ≥ 1600 px de large :
+[ ] hero-gorbuz           visuel principal (si vous préférez une photo au poster/3D).
+[ ] durum-signature, kumpir-signature, mitraillette-signature (produits « héros »).
+[ ] Photos produit de chaque fiche de la carte (cadrage cohérent, fond uni chaud).
+[ ] snack-exterior        devanture / enseigne.
+[ ] snack-interior        comptoir, salle, préparation.
+[ ] team-gorbuz           équipe (avec accord des personnes photographiées).
+[ ] gallery-01 … gallery-07  galerie (produits, lieu, coulisses, équipe).
+[ ] Textes alternatifs à ajuster (champ alt) si les photos diffèrent des légendes prévues.
+Règle : aucune photo de stock ne doit être présentée comme une photo du snack.
+
+----------------------------------------------------------------------
+9. PRODUIT À L’HONNEUR                               → src/data/featured.ts
+----------------------------------------------------------------------
+[ ] Produit à mettre en avant (« La vedette du moment »), texte d’accroche, photo.
+    L’id doit correspondre à un produit de menu.ts.
+
+----------------------------------------------------------------------
+10. AVIS CLIENTS                                     → src/data/testimonials.ts
+----------------------------------------------------------------------
+[ ] Avis réels et vérifiables (auteur, texte, source, lien, date) — ex. extraits Google.
+[ ] Note moyenne et nombre d’avis uniquement s’ils sont actuels et sourcés.
+Aucune section d’avis n’est affichée tant que la liste est vide (composant à activer en V2).
+
+----------------------------------------------------------------------
+11. TEXTES DE MARQUE                                 → src/data/copy.ts
+----------------------------------------------------------------------
+[ ] Relecture et validation de tous les textes provisoires (hero, manifeste, concept, états « bientôt »).
+[ ] Éléments réels que vous souhaitez affirmer publiquement : histoire du lieu, équipe,
+    engagements (fraîcheur, fait maison, provenance…). Rien de tout cela n’est affirmé en V1.
+[ ] Mots du bandeau défilant (copy.marquee).
+
+----------------------------------------------------------------------
+12. MENTIONS LÉGALES ET CONFIDENTIALITÉ              → src/data/site.ts (legal)
+----------------------------------------------------------------------
+[ ] Dénomination sociale, forme juridique, numéro d’entreprise (BCE), numéro de TVA.
+[ ] Adresse du siège social.
+[ ] Responsable de la publication, e-mail de contact.
+[ ] Hébergeur du site (nom, adresse).
+[ ] Responsable du traitement des données (RGPD).
+[ ] Outils réellement utilisés (statistiques, formulaire, commande) pour adapter la politique
+    de confidentialité et, si nécessaire, un bandeau de consentement aux cookies.
+Passer legal.complete à true une fois tout renseigné : cela retire le bandeau « page en cours de
+rédaction » et autorise l’indexation des pages légales.
+
+----------------------------------------------------------------------
+13. MISE EN LIGNE ET SEO                             → src/data/site.ts (siteUrl) + src/data/seo.ts
+----------------------------------------------------------------------
+[ ] Nom de domaine définitif → siteUrl (active metadataBase pour Open Graph ; sitemap et robots
+    à générer en V2 une fois le domaine connu).
+[ ] Image Open Graph (1200 × 630) à produire avec le logo officiel.
+[ ] Validation des titres et descriptions SEO par page (seo.ts).
+[ ] Données structurées Restaurant/LocalBusiness : à activer uniquement quand adresse, téléphone
+    et horaires réels sont disponibles.
+
+----------------------------------------------------------------------
+14. LANGUES
+----------------------------------------------------------------------
+[ ] Souhait d’une version néerlandaise et/ou anglaise ? Les textes sont centralisés dans copy.ts
+    pour préparer une structure multilingue propre (non réalisée en V1, sur demande explicite).
+
+----------------------------------------------------------------------
+15. 3D DU HERO
+----------------------------------------------------------------------
+[ ] Validation de la composition procédurale actuelle (durum emballé, frites, kumpir, plateau).
+[ ] Si un vrai modèle 3D du produit signature est souhaité : photos de référence sous plusieurs
+    angles (ou fichier GLB/GLTF existant).

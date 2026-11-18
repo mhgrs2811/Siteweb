@@ -1,0 +1,81 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  height: 100%;
+}
+.card:hover .media img {
+  transform: scale(1.03);
+}
+.media {
+  position: relative;
+}
+.badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1;
+  padding: 0.3rem 0.6rem;
+  background: var(--piment-ink);
+  color: var(--creme);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.name {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-s);
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+.price {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  white-space: nowrap;
+}
+.priceSoon {
+  font-size: var(--fs-label);
+  font-weight: 600;
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+.desc {
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+}
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: var(--fs-small);
+}
+.meta dt {
+  font-weight: 700;
+}
+.meta dd {
+  margin: 0;
+  color: var(--fg-muted);
+}
+.variants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  font-size: var(--fs-small);
+}
+.variants span b {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.05rem;
+  margin-left: 0.35rem;
+}
+.unavailable {
+  color: var(--accent-text);
+  font-size: var(--fs-label);
+  font-weight: 700;
+}
