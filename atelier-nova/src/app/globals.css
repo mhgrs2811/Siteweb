@@ -1,0 +1,923 @@
+/* Ordre des couches : nos composants passent sous les utilitaires Tailwind. */
+@layer theme, base, nova, components, utilities;
+@import "tailwindcss";
+
+/* ==========================================================================
+   ATELIER NOVA — design tokens
+   Direction : galerie de nuit éditoriale. Graphite profond, ivoire, gris
+   minéral, chrome (sculpture 3D), une seule couleur signature « Nova ».
+   Toutes les couleurs passent par ces variables : ne pas coder de valeurs
+   en dur dans les composants.
+   ========================================================================== */
+
+@theme {
+  --color-graphite: #0e0e0d;
+  --color-graphite-2: #161615;
+  --color-graphite-3: #1f1f1d;
+  --color-ivory: #eeeae2;
+  --color-ivory-2: #e3ded3;
+  --color-mineral: #8e8b84;
+  --color-mineral-dark: #5f5c56;
+  --color-chrome: #c8cbcf;
+  --color-nova: #ff4f17;
+  --color-nova-ink: #b5330a;
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --breakpoint-xs: 26rem;
+  --breakpoint-3xl: 112rem;
+}
+
+@layer nova {
+
+:root {
+  /* Échelle d’espacement (base 8) */
+  --space-section: clamp(6rem, 14vw, 13rem);
+  --gutter: clamp(1.25rem, 3.2vw, 3rem);
+  --maxw: 88rem;
+
+  /* Échelle typographique fluide (ratio ≈ 1.25 → monumental) */
+  --fs-label: 0.75rem;
+  --fs-small: 0.875rem;
+  --fs-body: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+  --fs-lead: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
+  --fs-h4: clamp(1.25rem, 1.1rem + 0.7vw, 1.75rem);
+  --fs-h3: clamp(1.6rem, 1.2rem + 1.6vw, 2.75rem);
+  --fs-h2: clamp(2.4rem, 1.6rem + 3.8vw, 5.5rem);
+  --fs-h1: clamp(3rem, 1.6rem + 7vw, 9.5rem);
+  --fs-mega: clamp(3.6rem, 1rem + 12.5vw, 16rem);
+
+  --radius-s: 2px;
+  --radius-m: 6px;
+
+  --dur-fast: 180ms;
+  --dur: 320ms;
+  --dur-slow: 700ms;
+
+  /* Surface courante (pilotée par les sections) */
+  --bg: var(--color-graphite);
+  --fg: var(--color-ivory);
+  --muted: var(--color-mineral);
+  --line: rgb(238 234 226 / 0.14);
+  --accent: var(--color-nova);
+  --accent-text: var(--color-nova);
+}
+
+.surface-dark {
+  --bg: var(--color-graphite);
+  --fg: var(--color-ivory);
+  --muted: var(--color-mineral);
+  --line: rgb(238 234 226 / 0.14);
+  --accent-text: var(--color-nova);
+  background-color: var(--bg);
+  color: var(--fg);
+}
+.surface-dark-2 {
+  --bg: var(--color-graphite-2);
+  --fg: var(--color-ivory);
+  --muted: var(--color-mineral);
+  --line: rgb(238 234 226 / 0.14);
+  --accent-text: var(--color-nova);
+  background-color: var(--bg);
+  color: var(--fg);
+}
+.surface-light {
+  --bg: var(--color-ivory);
+  --fg: var(--color-graphite);
+  --muted: var(--color-mineral-dark);
+  --line: rgb(14 14 13 / 0.14);
+  --accent-text: var(--color-nova-ink);
+  background-color: var(--bg);
+  color: var(--fg);
+}
+.surface-paper {
+  --bg: var(--color-ivory-2);
+  --fg: var(--color-graphite);
+  --muted: var(--color-mineral-dark);
+  --line: rgb(14 14 13 / 0.16);
+  --accent-text: var(--color-nova-ink);
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background-color: var(--color-graphite);
+  color-scheme: dark;
+  scroll-padding-top: 6rem;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-nova);
+  color: var(--color-graphite);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-nova);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+img,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* ==========================================================================
+   Typographie
+   ========================================================================== */
+
+.font-serif {
+  font-weight: 400;
+}
+
+.t-mega {
+  font-size: var(--fs-mega);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+}
+.t-h1 {
+  font-size: var(--fs-h1);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+}
+.t-h2 {
+  font-size: var(--fs-h2);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+}
+.t-h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+}
+.t-h4 {
+  font-size: var(--fs-h4);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+.t-lead {
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+.t-label {
+  font-size: var(--fs-label);
+  line-height: 1.3;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.t-small {
+  font-size: var(--fs-small);
+  line-height: 1.55;
+}
+/* Mots en serif italique dans les titres sans-serif */
+.t-it {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.t-serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+.measure {
+  max-width: 62ch;
+}
+.text-muted {
+  color: var(--muted);
+}
+.text-accent {
+  color: var(--accent-text);
+}
+.border-line {
+  border-color: var(--line);
+}
+
+/* ==========================================================================
+   Mise en page
+   ========================================================================== */
+
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.wrap-wide {
+  width: 100%;
+  max-width: 120rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+/* Une grille sans gabarit explicite ne doit jamais s’élargir à son contenu. */
+[class~="grid"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: clamp(1rem, 2vw, 1.5rem);
+}
+@media (min-width: 48rem) {
+  .grid-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+.section-y {
+  padding-block: var(--space-section);
+}
+.hairline {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+}
+
+/* ==========================================================================
+   Liens & boutons
+   ========================================================================== */
+
+.link-u {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--dur) var(--ease-out-expo);
+  padding-bottom: 2px;
+}
+.link-u:hover,
+.link-u:focus-visible {
+  background-size: 100% 1px;
+  background-position: 0% 100%;
+}
+.link-u-static {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  transition: text-decoration-color var(--dur);
+}
+.link-u-static:hover {
+  text-decoration-color: currentColor;
+}
+
+/* Bouton : le libellé « roule » vers le haut au survol */
+.btn {
+  --btn-bg: var(--fg);
+  --btn-fg: var(--bg);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0 1.5rem 0 1.6rem;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: -0.005em;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    color var(--dur) var(--ease-out-expo),
+    background-color var(--dur) var(--ease-out-expo);
+  -webkit-tap-highlight-color: transparent;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-nova);
+  border-radius: inherit;
+  transform: translateY(101%);
+  transition: transform 520ms var(--ease-out-expo);
+}
+.btn:hover::before,
+.btn:focus-visible::before {
+  transform: translateY(0);
+}
+.btn:hover,
+.btn:focus-visible {
+  color: var(--color-graphite);
+}
+.btn-accent {
+  --btn-bg: var(--color-nova);
+  --btn-fg: var(--color-graphite);
+}
+.btn-accent::before {
+  background: var(--color-ivory);
+}
+.btn-ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--fg);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--fg) 35%, transparent);
+}
+.btn-ghost::before {
+  background: var(--fg);
+}
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  color: var(--bg);
+}
+.btn-roll {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1.2;
+}
+.btn-roll > span {
+  display: block;
+  transition: transform 520ms var(--ease-out-expo);
+}
+.btn-roll > span + span {
+  position: absolute;
+  inset: 0;
+  transform: translateY(110%);
+}
+.btn:hover .btn-roll > span:first-child,
+.btn:focus-visible .btn-roll > span:first-child,
+.roll-host:hover .btn-roll > span:first-child {
+  transform: translateY(-110%);
+}
+.btn:hover .btn-roll > span + span,
+.btn:focus-visible .btn-roll > span + span,
+.roll-host:hover .btn-roll > span + span {
+  transform: translateY(0);
+}
+.btn-icon {
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  margin-right: -0.7rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--btn-fg) 12%, transparent);
+  transition: transform 520ms var(--ease-out-expo);
+}
+.btn:hover .btn-icon {
+  transform: rotate(-45deg);
+}
+
+/* ==========================================================================
+   Animations utilitaires
+   ========================================================================== */
+
+/* Mots découpés pour les révélations typographiques */
+.split-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.split-word > span,
+.split-line > span {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Marquee */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  --marquee-dur: 38s;
+}
+.marquee__track {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 100%;
+  align-items: center;
+  animation: marquee var(--marquee-dur) linear infinite;
+}
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Grain discret sur les surfaces sombres */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+}
+
+/* Préchargeur : visible seulement si le script inline l’a demandé */
+.preloader {
+  display: none;
+}
+html[data-preload="1"] .preloader {
+  display: flex;
+}
+html[data-preload="1"] body {
+  overflow: hidden;
+}
+
+/* Hero : lignes masquées jusqu’à l’intro (avec filet de sécurité CSS) */
+html.js .hero-reveal {
+  transform: translateY(105%);
+  animation: hero-failsafe 0.9s var(--ease-out-expo) 4s forwards;
+}
+html.js .hero-fade {
+  opacity: 0;
+  animation: hero-failsafe-fade 0.6s ease 4s forwards;
+}
+@keyframes hero-failsafe {
+  to {
+    transform: none;
+  }
+}
+@keyframes hero-failsafe-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Curseur personnalisé (desktop, pointeur fin uniquement) */
+.cursor {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cursor {
+    display: block;
+  }
+  html.has-cursor,
+  html.has-cursor a,
+  html.has-cursor button,
+  html.has-cursor [role="button"],
+  html.has-cursor label {
+    cursor: none;
+  }
+  html.has-cursor input,
+  html.has-cursor textarea,
+  html.has-cursor select {
+    cursor: text;
+  }
+}
+
+/* Scrollfinger */
+@keyframes finger-swipe {
+  0%,
+  12% {
+    transform: translate(0, 18px);
+    opacity: 0;
+  }
+  22% {
+    opacity: 1;
+  }
+  62% {
+    transform: translate(0, -20px);
+    opacity: 1;
+  }
+  78%,
+  100% {
+    transform: translate(0, -24px);
+    opacity: 0;
+  }
+}
+@keyframes screen-scroll {
+  0%,
+  22% {
+    transform: translateY(0);
+  }
+  62%,
+  100% {
+    transform: translateY(-22px);
+  }
+}
+@keyframes finger-trail {
+  0%,
+  22% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.9;
+  }
+  62% {
+    transform: scaleY(1);
+    opacity: 0.5;
+  }
+  80%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+@keyframes wheel-dot {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(9px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(9px);
+    opacity: 0;
+  }
+}
+@keyframes trackpad-swipe {
+  0%,
+  10% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  65% {
+    transform: translateY(-12px);
+    opacity: 1;
+  }
+  80%,
+  100% {
+    transform: translateY(-14px);
+    opacity: 0;
+  }
+}
+.sf-finger {
+  animation: finger-swipe 2.6s var(--ease-in-out-quart) infinite;
+}
+.sf-screen {
+  animation: screen-scroll 2.6s var(--ease-in-out-quart) infinite;
+}
+.sf-trail {
+  transform-origin: 50% 100%;
+  animation: finger-trail 2.6s var(--ease-in-out-quart) infinite;
+}
+.sf-tp {
+  animation: trackpad-swipe 2.6s var(--ease-in-out-quart) infinite;
+}
+
+/* Pulsation lente (point de disponibilité) */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+.pulse-dot {
+  position: relative;
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: pulse-ring 2.2s ease-out infinite;
+}
+
+/* Formulaires */
+.field {
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.85rem 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg);
+  font-size: 1.0625rem;
+  border-radius: 0;
+  transition: border-color var(--dur);
+}
+.field::placeholder {
+  color: color-mix(in srgb, var(--fg) 45%, transparent);
+}
+.field:hover {
+  border-bottom-color: color-mix(in srgb, var(--fg) 45%, transparent);
+}
+.field:focus {
+  outline: none;
+  border-bottom-color: var(--fg);
+  box-shadow: 0 1px 0 0 var(--fg);
+}
+.field[aria-invalid="true"] {
+  border-bottom-color: var(--accent-text);
+  box-shadow: 0 1px 0 0 var(--accent-text);
+}
+textarea.field {
+  min-height: 9rem;
+  resize: vertical;
+  line-height: 1.55;
+}
+select.field {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%238e8b84' stroke-width='1.5'%3E%3Cpath d='m3 5 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.25rem center;
+  padding-right: 2rem;
+}
+select.field option {
+  background: var(--color-graphite-2);
+  color: var(--color-ivory);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 0.9375rem;
+  transition:
+    background-color var(--dur) var(--ease-out-expo),
+    color var(--dur) var(--ease-out-expo),
+    border-color var(--dur);
+  -webkit-tap-highlight-color: transparent;
+}
+.chip:hover {
+  border-color: color-mix(in srgb, var(--fg) 50%, transparent);
+}
+.chip[aria-pressed="true"],
+.chip[aria-checked="true"],
+input:checked + .chip {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+input:focus-visible + .chip {
+  outline: 2px solid var(--color-nova);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Mouvement réduit : on coupe le superflu, le contenu reste visible
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html.js .hero-reveal {
+    transform: none;
+  }
+  html.js .hero-fade {
+    opacity: 1;
+  }
+  .marquee__track {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   En-tête, menu mobile, curseur, scrollfinger
+   ========================================================================== */
+.site-header {
+  --fg: var(--color-ivory);
+  --bg: var(--color-graphite);
+  color: var(--fg);
+}
+html[data-surface="light"] .site-header:not(.is-open) {
+  --fg: var(--color-graphite);
+  --bg: var(--color-ivory);
+}
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  opacity: 0;
+  transition: opacity var(--dur) ease;
+  z-index: -1;
+}
+.site-header.is-scrolled::before {
+  opacity: 1;
+}
+html.menu-open,
+html.menu-open body {
+  overflow: hidden;
+}
+.mobile-menu:not([hidden]) .mm-item {
+  animation: mm-in 0.9s var(--ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * 55ms + 80ms);
+}
+.mobile-menu:not([hidden]) {
+  animation: mm-panel 0.6s var(--ease-out-expo) both;
+}
+@keyframes mm-in {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+@keyframes mm-panel {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 300;
+  pointer-events: none;
+  border-radius: 999px;
+}
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-nova);
+}
+.cursor-ring {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgb(238 234 226 / 0.7);
+  mix-blend-mode: difference;
+  transition:
+    width 0.45s var(--ease-out-expo),
+    height 0.45s var(--ease-out-expo),
+    background-color 0.3s,
+    border-color 0.3s;
+}
+.cursor-ring[data-mode="link"] {
+  width: 64px;
+  height: 64px;
+  border-color: rgb(238 234 226 / 0.9);
+}
+.cursor-ring[data-mode="text"] {
+  width: 4px;
+  height: 28px;
+  border-radius: 2px;
+}
+.cursor-ring[data-mode="label"] {
+  width: 104px;
+  height: 104px;
+  background: var(--color-ivory);
+  border-color: transparent;
+  mix-blend-mode: normal;
+}
+.cursor-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-graphite);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.cursor-ring[data-mode="label"] .cursor-label {
+  opacity: 1;
+}
+
+@keyframes sf-line {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+.sf-line {
+  animation: sf-line 2.6s var(--ease-in-out-quart) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sf-finger,
+  .sf-tp,
+  .sf-screen,
+  .sf-trail,
+  .sf-line,
+  .pulse-dot::after {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Mockups */
+.browser-scroll {
+  container-type: inline-size;
+}
+.browser-scroll img {
+  transition: transform 7s cubic-bezier(0.45, 0, 0.55, 1);
+  will-change: transform;
+}
+.browser-scroll:hover img,
+a:hover .browser-scroll img,
+a:focus-visible .browser-scroll img {
+  transform: translateY(calc(-100% + var(--fh)));
+}
+
+/* Flux de l’automatisation */
+@keyframes flow {
+  0% {
+    top: 0.5rem;
+    opacity: 0;
+  }
+  10%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 1.75rem);
+    opacity: 0;
+  }
+}
+.flow-pulse {
+  animation: flow 3.2s var(--ease-in-out-quart) infinite;
+}
+
+@keyframes tin-in {
+  from {
+    transform: translateY(24px) rotate(-6deg);
+    opacity: 0;
+  }
+}
+.cart-tin {
+  animation: tin-in 0.7s var(--ease-out-expo) both;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+} /* fin @layer nova */
+
+@keyframes curtain-up {
+  0% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+.page-curtain {
+  animation: curtain-up 0.85s cubic-bezier(0.76, 0, 0.24, 1) 0.05s both;
+}

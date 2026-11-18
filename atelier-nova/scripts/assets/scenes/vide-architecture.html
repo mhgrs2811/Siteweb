@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<style>body{margin:0;background:#111}</style></head><body>
+<script type="module">
+import { THREE, run, shot, W, H, createRenderer, canvasTex, noiseCanvas, shadowLight, enableShadows, accumulate, finish, rand, rr, setSeed } from './lib.js';
+
+// Rescale BoxGeometry UVs to world units so textures keep a constant scale.
+function box(w, h, d, mat, tile = 4) {
+  const g = new THREE.BoxGeometry(w, h, d);
+  const uv = g.attributes.uv;
+  const dims = [[d, h], [d, h], [w, d], [w, d], [w, h], [w, h]];
+  for (let f = 0; f < 6; f++) for (let k = 0; k < 4; k++) {
+    const i = f * 4 + k;
+    uv.setXY(i, uv.getX(i) * dims[f][0] / tile, uv.getY(i) * dims[f][1] / tile);
+  }
+  const m = new THREE.Mesh(g, mat);
+  m.castShadow = m.receiveShadow = true;
+  return m;
+}
+
+function concreteTex(base = 178, { boards = true } = {}) {
+  const c = noiseCanvas(1024, (x, s) => {
+    x.fillStyle = `rgb(${base},${base - 3},${base - 8})`; x.fillRect(0, 0, s, s);
+    for (let i = 0; i < 260; i++) {
+      const r = rr(20, 140), px = rand() * s, py = rand() * s;
+      const g = x.createRadialGradient(0, 0, 0, 0, 0, r);
+      const v = rand() < 0.5 ? '0,0,0' : '255,255,255';
+      g.addColorStop(0, `rgba(${v},${rr(0.012, 0.035)})`); g.addColorStop(1, `rgba(${v},0)`);
+      for (const ox of [-s, 0, s]) for (const oy of [-s, 0, s]) { x.save(); x.translate(px + ox, py + oy); x.fillStyle = g; x.fillRect(-r, -r, 2 * r, 2 * r); x.restore(); }
+    }
+    for (let i = 0; i < 26000; i++) { x.fillStyle = `rgba(${rand() < 0.5 ? '40,40,40' : '240,240,240'},${rr(0.03, 0.12)})`; x.fillRect(rand() * s, rand() * s, rr(0.6, 2), rr(0.6, 2)); }
+    if (boards) {
+      // formwork panels 1.0 × 0.5 tile units (tile = 4 m → 256 px/m)
+      x.strokeStyle = 'rgba(60,58,55,0.22)'; x.lineWidth = 1.5;
+      for (let y = 0; y <= s; y += 128) { x.beginPath(); x.moveTo(0, y); x.lineTo(s, y); x.stroke(); }
+      for (let row = 0; row < 8; row++) for (let xx = (row % 2) * 128; xx <= s; xx += 256) { x.beginPath(); x.moveTo(xx, row * 128); x.lineTo(xx, row * 128 + 128); x.stroke(); }
+      x.fillStyle = 'rgba(50,48,45,0.45)';
+      for (let row = 0; row < 8; row++) for (let xx = 32; xx < s; xx += 64) { x.beginPath(); x.arc(xx + (row % 2) * 32, row * 128 + 64, 3, 0, 7); x.fill(); }
+    }
+  });
+  return canvasTex(c);
+}
+
+function skyTexture(top, mid, bottom) {
+  const c = document.createElement('canvas'); c.width = 16; c.height = 1024;
+  const x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, 0, 1024);
+  g.addColorStop(0, top); g.addColorStop(0.42, mid); g.addColorStop(0.5, bottom); g.addColorStop(1, bottom);
+  x.fillStyle = g; x.fillRect(0, 0, 16, 1024);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+
+function skyEnv(renderer, tex, sunDir, sunColor = 0xffffff) {
+  const s = new THREE.Scene();
+  const sph = new THREE.Mesh(new THREE.SphereGeometry(50, 64, 32), new THREE.MeshBasicMaterial({ map: tex, side: THREE.BackSide }));
+  s.add(sph);
+  const sun = new THREE.Mesh(new THREE.SphereGeometry(3, 16, 16), new THREE.MeshBasicMaterial({ color: new THREE.Color(sunColor).multiplyScalar(1.2) }));
+  sun.position.copy(sunDir).multiplyScalar(45);
+  s.add(sun);
+  const ground = new THREE.Mesh(new THREE.CircleGeometry(49, 32), new THREE.MeshBasicMaterial({ color: 0x8a8370 }));
+  ground.rotation.x = -Math.PI / 2; ground.position.y = -2; s.add(ground);
+  return new THREE.PMREMGenerator(renderer).fromScene(s, 0.01).texture;
+}
+
+function meadowTex() {
+  const c = noiseCanvas(1024, (x, s) => {
+    x.fillStyle = '#7c8160'; x.fillRect(0, 0, s, s);
+    for (let i = 0; i < 300; i++) {
+      const r = rr(30, 160), px = rand() * s, py = rand() * s;
+      const g = x.createRadialGradient(0, 0, 0, 0, 0, r);
+      const col = ['120,118,80', '168,158,112', '110,104,70', '150,140,92'][Math.floor(rand() * 4)];
+      g.addColorStop(0, `rgba(${col},0.35)`); g.addColorStop(1, `rgba(${col},0)`);
+      for (const ox of [-s, 0, s]) for (const oy of [-s, 0, s]) { x.save(); x.translate(px + ox, py + oy); x.fillStyle = g; x.fillRect(-r, -r, 2 * r, 2 * r); x.restore(); }
+    }
+    for (let i = 0; i < 60000; i++) {
+      x.strokeStyle = `rgba(${rand() < 0.5 ? '70,72,45' : '200,190,140'},${rr(0.15, 0.45)})`; x.lineWidth = 1;
+      const px = rand() * s, py = rand() * s; x.beginPath(); x.moveTo(px, py); x.lineTo(px + rr(-2, 2), py - rr(2, 6)); x.stroke();
+    }
+  });
+  return canvasTex(c, { repeat: [1, 1] });
+}
+
+function house(scene, { glow = false } = {}) {
+  const conc = new THREE.MeshStandardMaterial({ map: concreteTex(186), roughness: 0.88 });
+  const concDark = new THREE.MeshStandardMaterial({ map: concreteTex(150, { boards: false }), roughness: 0.9 });
+  const glass = new THREE.MeshPhysicalMaterial({ color: 0x5a636a, metalness: 0.92, roughness: 0.06, envMapIntensity: 1.6 });
+  const frame = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.5, metalness: 0.6 });
+  const g = new THREE.Group();
+  // terrace slab
+  const slab = box(30, 0.3, 14, concDark, 4); slab.position.set(2, 0.15, 1); g.add(slab);
+  // glazed ground floor (recessed)
+  const core = box(9, 3, 6, concDark, 4); core.position.set(-3, 1.8, -1.2); g.add(core);
+  const gl = box(9.2, 2.9, 0.08, glass, 4); gl.position.set(-3, 1.75, 1.85); g.add(gl);
+  for (let i = 0; i <= 6; i++) { const m = box(0.07, 2.9, 0.12, frame); m.position.set(-7.6 + i * 1.53, 1.75, 1.9); g.add(m); }
+  if (glow) {
+    const warm = new THREE.Mesh(new THREE.PlaneGeometry(8.8, 2.7), new THREE.MeshBasicMaterial({ color: new THREE.Color(0xffc98a).multiplyScalar(1.6) }));
+    warm.position.set(-3, 1.75, 1.6); g.add(warm);
+    gl.material = new THREE.MeshPhysicalMaterial({ color: 0x0d0f10, roughness: 0.04, transparent: true, opacity: 0.35 });
+    const pl = new THREE.PointLight(0xffb070, 30, 14, 2); pl.position.set(-3, 2.2, 3.5); g.add(pl);
+  }
+  // cantilevered upper volume
+  const top = box(20, 3.4, 7.2, conc, 4); top.position.set(3.2, 4.95, -0.6); g.add(top);
+  // ribbon window cut into the upper volume (dark inset)
+  const rib = box(13, 0.9, 0.05, glass, 4); rib.position.set(5.8, 5.0, 3.0); g.add(rib);
+  if (glow) { const w2 = new THREE.Mesh(new THREE.PlaneGeometry(12.8, 0.8), new THREE.MeshBasicMaterial({ color: new THREE.Color(0xffd29a).multiplyScalar(1.3) })); w2.position.set(5.8, 5.0, 2.96); g.add(w2); rib.material = gl.material; }
+  // free-standing wall
+  const wall = box(12, 2.6, 0.35, conc, 4); wall.position.set(-12.5, 1.6, 3.6); g.add(wall);
+  // reflecting pool
+  const pool = new THREE.Mesh(new THREE.PlaneGeometry(11, 3.2), new THREE.MeshPhysicalMaterial({ color: 0x1b2326, roughness: 0.03, metalness: 0.0, clearcoat: 1, clearcoatRoughness: 0 }));
+  pool.rotation.x = -Math.PI / 2; pool.position.set(8.5, 0.27, 5.2); pool.receiveShadow = true; g.add(pool);
+  const poolEdge = box(11.6, 0.1, 3.8, concDark); poolEdge.position.set(8.5, 0.24, 5.2); g.add(poolEdge);
+  scene.add(g);
+  return g;
+}
+
+run(async () => {
+  setSeed(77 + shot.length);
+  if (shot === 'cover' || shot === 'render-1') {
+    const dusk = shot === 'render-1';
+    const renderer = createRenderer({ exposure: dusk ? 0.85 : 0.72 });
+    const scene = new THREE.Scene();
+    const sky = dusk ? skyTexture('#1d2c40', '#7a8597', '#d9a77c') : skyTexture('#2f5a85', '#a7bfd0', '#dfe3e0');
+    scene.background = sky;
+    const sunDir = dusk ? new THREE.Vector3(0.6, 0.14, -0.8).normalize() : new THREE.Vector3(0.62, 0.55, 0.56).normalize();
+    scene.environment = skyEnv(renderer, sky, sunDir, dusk ? 0xffb080 : 0xfff1d8);
+    scene.environmentIntensity = dusk ? 0.3 : 0.4;
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshStandardMaterial({ map: (() => { const t = meadowTex(); t.repeat.set(40, 40); return t; })(), roughness: 1 }));
+    ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+    house(scene, { glow: dusk });
+    scene.fog = new THREE.Fog(dusk ? 0x6c6f7c : 0xcfd8dc, 30, 220);
+    // distant tree line: clusters of displaced spheres
+    const treeGeo = new THREE.SphereGeometry(1, 28, 18);
+    { const p = treeGeo.attributes.position; const v = new THREE.Vector3();
+      for (let i = 0; i < p.count; i++) { v.fromBufferAttribute(p, i); const n = 1 + 0.09 * Math.sin(v.x * 3.1 + v.y * 2.3) * Math.cos(v.z * 2.7 + v.x * 1.9) + 0.04 * Math.sin(v.y * 9.0 + v.z * 7.0); v.multiplyScalar(n); p.setXYZ(i, v.x, v.y, v.z); }
+      treeGeo.computeVertexNormals(); }
+    const treeMat = new THREE.MeshStandardMaterial({ color: dusk ? 0x2c3226 : 0x3c4630, roughness: 1 });
+    const trees = new THREE.InstancedMesh(treeGeo, treeMat, 160);
+    const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), sc = new THREE.Vector3(), ps = new THREE.Vector3();
+    for (let i = 0; i < 160; i++) {
+      const ang = rr(-2.4, 1.4) - Math.PI / 2, dist = rr(80, 130);
+      const r = rr(2.5, 5);
+      ps.set(Math.cos(ang) * dist + 5, r * rr(0.7, 1.1), Math.sin(ang) * dist + 5);
+      q.setFromEuler(new THREE.Euler(0, rand() * 6, 0)); sc.set(r * rr(0.8, 1.2), r * rr(1.0, 1.6), r * rr(0.8, 1.2));
+      m4.compose(ps, q, sc); trees.setMatrixAt(i, m4);
+    }
+    trees.castShadow = true; trees.receiveShadow = true; scene.add(trees);
+    const sun = shadowLight(new THREE.DirectionalLight(dusk ? 0xffb37a : 0xfff0d6, dusk ? 2.2 : 6.5), { area: 30, size: 4096, far: 160, bias: -0.0005 });
+    sun.position.copy(sunDir).multiplyScalar(60); scene.add(sun); scene.add(sun.target);
+    const skyL = shadowLight(new THREE.DirectionalLight(dusk ? 0x6d7fa0 : 0xbcd2ea, dusk ? 0.45 : 0.7), { area: 30, size: 2048, far: 160 });
+    scene.add(skyL); scene.add(skyL.target);
+    scene.add(new THREE.HemisphereLight(dusk ? 0x5a6a88 : 0xbfd4ea, 0x6b6450, dusk ? 0.2 : 0.18));
+    const cam = new THREE.PerspectiveCamera(dusk ? 36 : 42, W / H, 0.1, 600);
+    // eye-level, two-point perspective with lens shift (verticals stay vertical)
+    let shift;
+    if (dusk) { cam.position.set(4, 1.5, 21); cam.lookAt(-0.5, 1.5, 0); shift = [0, -0.12]; }
+    else { cam.position.set(-9, 1.4, 17); cam.lookAt(3, 1.4, 0); shift = [0, -0.2]; }
+    const acc = await accumulate(renderer, scene, cam, { shift, lights: [{ light: sun, jitter: 0.25 }], sky: { light: skyL, minElev: 0.35, distance: 60 } });
+    return finish(acc, { grain: 0.05, vignette: 0.16 });
+  }
+  // render-2: interior stair, light slit
+  const renderer = createRenderer({ exposure: 1.0 });
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0b0b0b);
+  const conc = new THREE.MeshStandardMaterial({ map: concreteTex(176), roughness: 0.9 });
+  const concPlain = new THREE.MeshStandardMaterial({ map: concreteTex(166, { boards: false }), roughness: 0.92 });
+  const room = new THREE.Group();
+  const D = 8, Wd = 5, Ht = 9;
+  const floor = box(Wd + 2, 0.4, D + 2, concPlain); floor.position.set(0, -0.2, 0); room.add(floor);
+  const back = box(Wd + 2, Ht, 0.4, conc); back.position.set(0, Ht / 2, -D / 2); room.add(back);
+  const left = box(0.4, Ht, D + 2, conc); left.position.set(-Wd / 2, Ht / 2, 0); room.add(left);
+  const right = box(0.4, Ht, D + 2, conc); right.position.set(Wd / 2, Ht / 2, 0); room.add(right);
+  // ceiling with a slit along the left wall
+  const ceil = box(Wd - 0.5, 0.4, D + 2, concPlain); ceil.position.set(0.25 + 0.25, Ht, 0); room.add(ceil);
+  // stair: cantilevered treads along the back wall
+  for (let i = 0; i < 13; i++) {
+    const t = box(1.3, 0.16, 1.3, concPlain);
+    t.position.set(-1.6 + i * 0.28 * 0 + 0, 0.35 + i * 0.36, -D / 2 + 0.85);
+    t.position.x = -Wd / 2 + 0.85 + i * 0.29;
+    room.add(t);
+  }
+  scene.add(room);
+  // sun shaft through the slit (between left wall and ceiling)
+  const sun = shadowLight(new THREE.DirectionalLight(0xfff2dc, 9), { area: 12, size: 4096, far: 80, bias: -0.0004 });
+  sun.position.set(-6, 30, 8); sun.target.position.set(-1.6, 0, -1); scene.add(sun); scene.add(sun.target);
+  scene.add(new THREE.HemisphereLight(0xcfcac2, 0x3a3836, 0.12));
+  const bounce = new THREE.PointLight(0xfff0dc, 6, 12, 2); bounce.position.set(-1.6, 1.0, 1.5); scene.add(bounce);
+  const cam = new THREE.PerspectiveCamera(42, W / H, 0.1, 100);
+  cam.position.set(1.3, 1.6, 4.6); cam.lookAt(-0.6, 3.2, -3.5);
+  const acc = await accumulate(renderer, scene, cam, { lights: [{ light: sun, jitter: 0.4 }] });
+  return finish(acc, { grain: 0.07, vignette: 0.3 });
+});
+</script>
+</body></html>

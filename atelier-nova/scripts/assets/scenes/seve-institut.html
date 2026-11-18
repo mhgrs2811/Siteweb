@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400&family=Manrope:wght@400;500;600&display=block">
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<style>body{margin:0;background:#111}</style></head><body>
+<script type="module">
+import { THREE, run, shot, W, H, createRenderer, roomEnv, cyclorama, canvasTex, noiseCanvas, speckle, lathe, smoothProfile, shadowLight, enableShadows, accumulate, finish, rand, rr, setSeed } from './lib.js';
+
+await document.fonts.load('500 120px "Bodoni Moda"');
+await document.fonts.load('italic 400 80px "Bodoni Moda"');
+await document.fonts.load('500 40px "Manrope"');
+
+const COCOA = '#3B2A24';
+
+// Transparent label (printed directly on glass / ceramic)
+function printTex({ name, sub, w = 1024, h = 512, color = COCOA, align = 'center', size = 1 }) {
+  const c = document.createElement('canvas'); c.width = w * 4; c.height = h;
+  const x = c.getContext('2d');
+  x.clearRect(0, 0, c.width, c.height);
+  x.fillStyle = color; x.textAlign = 'center';
+  const cx = c.width / 2;
+  x.font = `500 ${Math.round(150 * size)}px "Bodoni Moda"`;
+  x.fillText('SÈVE', cx, h * 0.36);
+  x.font = `italic 400 ${Math.round(64 * size)}px "Bodoni Moda"`;
+  x.fillText(name, cx, h * 0.58);
+  x.font = `500 ${Math.round(30 * size)}px "Manrope"`;
+  if ('letterSpacing' in x) x.letterSpacing = '6px';
+  x.fillText(sub, cx, h * 0.76);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+  return t;
+}
+
+function shell(r, y0, y1, tex) {
+  const g = new THREE.CylinderGeometry(r, r, y1 - y0, 128, 1, true);
+  const m = new THREE.Mesh(g, new THREE.MeshPhysicalMaterial({ map: tex, transparent: true, roughness: 0.5, depthWrite: false, alphaTest: 0.05 }));
+  m.position.y = (y0 + y1) / 2; m.rotation.y = Math.PI;
+  return m;
+}
+
+const frosted = () => new THREE.MeshPhysicalMaterial({ color: 0xf7efe8, transmission: 1, roughness: 0.42, thickness: 1.2, ior: 1.5, attenuationColor: new THREE.Color(0xf1d9cc), attenuationDistance: 3 });
+const amber = () => new THREE.MeshPhysicalMaterial({ color: 0xffffff, transmission: 1, roughness: 0.06, thickness: 0.6, ior: 1.5, attenuationColor: new THREE.Color(0xc0702e), attenuationDistance: 0.6, clearcoat: 1 });
+const ceramic = (c = 0xefe6da) => new THREE.MeshPhysicalMaterial({ color: c, roughness: 0.55, sheen: 0.3, sheenColor: new THREE.Color(0xffffff) });
+const capMat = () => new THREE.MeshPhysicalMaterial({ color: 0xc8b4a2, roughness: 0.35, metalness: 0.0, clearcoat: 0.6 });
+
+function serumBottle() { // amber dropper
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(lathe(smoothProfile([[0.0001, 0], [0.55, 0], [0.6, 0.06], [0.6, 1.5], [0.5, 1.75], [0.24, 1.86], [0.22, 2.0], [0.0001, 2.0]], 70), 96), amber());
+  g.add(body);
+  const collar = new THREE.Mesh(lathe(smoothProfile([[0.0001, 1.98], [0.27, 1.98], [0.28, 2.3], [0.2, 2.34], [0.0001, 2.34]], 30), 64), new THREE.MeshPhysicalMaterial({ color: 0xd8c7b6, roughness: 0.3, metalness: 0.8 }));
+  g.add(collar);
+  const bulb = new THREE.Mesh(lathe(smoothProfile([[0.0001, 2.3], [0.2, 2.32], [0.21, 2.6], [0.19, 2.95], [0.1, 3.1], [0.0001, 3.12]], 40), 64), new THREE.MeshPhysicalMaterial({ color: 0x3b2a24, roughness: 0.55, sheen: 0.4 }));
+  g.add(bulb);
+  g.add(shell(0.606, 0.35, 1.3, printTex({ name: 'Sérum lumière', sub: '30 ML — VITAMINE C 12 %', color: '#f4e9de', size: 0.8 })));
+  enableShadows(g, { cast: true, receive: true });
+  return g;
+}
+
+function tallBottle() { // frosted lotion bottle with ceramic cap
+  const g = new THREE.Group();
+  g.add(new THREE.Mesh(lathe(smoothProfile([[0.0001, 0], [0.62, 0], [0.68, 0.08], [0.68, 3.0], [0.62, 3.12], [0.3, 3.18], [0.28, 3.3], [0.0001, 3.3]], 80), 96), frosted()));
+  const cap = new THREE.Mesh(lathe(smoothProfile([[0.0001, 3.2], [0.42, 3.2], [0.44, 3.25], [0.44, 4.1], [0.4, 4.16], [0.0001, 4.17]], 40), 96), capMat());
+  g.add(cap);
+  g.add(shell(0.688, 0.9, 2.4, printTex({ name: 'Lait démaquillant', sub: '200 ML — AVOINE & CAMÉLIA' })));
+  enableShadows(g);
+  return g;
+}
+
+function jar() {
+  const g = new THREE.Group();
+  g.add(new THREE.Mesh(lathe(smoothProfile([[0.0001, 0], [0.95, 0], [1.02, 0.08], [1.04, 0.85], [0.98, 0.92], [0.0001, 0.92]], 40), 128), ceramic(0xefe3d6)));
+  g.add(new THREE.Mesh(lathe(smoothProfile([[0.0001, 0.9], [1.05, 0.9], [1.08, 0.95], [1.08, 1.32], [1.0, 1.4], [0.0001, 1.41]], 40), 128), capMat()));
+  g.add(shell(1.045, 0.15, 0.82, printTex({ name: 'Baume nuit', sub: '50 ML — KARITÉ & BAKUCHIOL', size: 0.75 })));
+  enableShadows(g);
+  return g;
+}
+
+function stoneGeo(seedOff = 0) {
+  const geo = new THREE.SphereGeometry(1, 64, 40);
+  const p = geo.attributes.position; const v = new THREE.Vector3();
+  const a = rr(1, 3), b = rr(1, 3), c = rr(0, 6);
+  for (let i = 0; i < p.count; i++) {
+    v.fromBufferAttribute(p, i);
+    const n = 1 + 0.06 * Math.sin(v.x * a + c) * Math.cos(v.z * b + c) + 0.03 * Math.sin(v.y * 5 + v.x * 3);
+    v.multiplyScalar(n); p.setXYZ(i, v.x, v.y, v.z);
+  }
+  geo.computeVertexNormals();
+  return geo;
+}
+
+function travertine(base = '#d9c9b8') {
+  return canvasTex(noiseCanvas(1024, (x, s) => {
+    x.fillStyle = base; x.fillRect(0, 0, s, s);
+    for (let i = 0; i < 90; i++) { const y = rand() * s; x.fillStyle = `rgba(${rand() < 0.5 ? '120,95,70' : '255,250,240'},${rr(0.03, 0.09)})`; for (const oy of [-s, 0, s]) x.fillRect(0, y + oy, s, rr(2, 18)); }
+    for (let i = 0; i < 1400; i++) { x.fillStyle = `rgba(110,85,60,${rr(0.15, 0.4)})`; const px = rand() * s, py = rand() * s; x.beginPath(); x.ellipse(px, py, rr(1, 6), rr(0.5, 1.5), 0, 0, 7); x.fill(); }
+  }));
+}
+
+function stone(r, sy, color) {
+  const m = new THREE.Mesh(stoneGeo(), new THREE.MeshStandardMaterial({ map: travertine(color), roughness: 0.85 }));
+  m.scale.set(r, r * sy, r * rr(0.85, 1));
+  m.castShadow = m.receiveShadow = true;
+  return m;
+}
+
+function plinth(r, h, x = 0, z = 0) {
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 128, 1), new THREE.MeshStandardMaterial({ map: travertine('#e2d3c2'), roughness: 0.8 }));
+  m.position.set(x, h / 2, z); m.castShadow = m.receiveShadow = true;
+  return m;
+}
+
+// Window frame + leafy branch between the sun and the set: cast "gobo" shadows.
+function gobos(scene, sunPos) {
+  const frame = new THREE.MeshBasicMaterial({ color: 0x000000 });
+  const g = new THREE.Group();
+  const add = (w, h, x, y) => { const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.2), frame); b.position.set(x, y, 0); b.castShadow = true; g.add(b); };
+  // a tall window: outer frame + one vertical and two horizontal muntins
+  add(0.35, 14, -4, 0); add(0.35, 14, 4, 0); add(8.4, 0.35, 0, 7); add(8.4, 0.35, 0, -7);
+  add(0.18, 14, 0, 0); add(8, 0.18, 0, 2.2);
+  // olive branch leaves (alpha-tested planes)
+  const lc = document.createElement('canvas'); lc.width = lc.height = 1024;
+  const lx = lc.getContext('2d');
+  lx.strokeStyle = '#000'; lx.lineWidth = 6; lx.beginPath(); lx.moveTo(40, 980); lx.bezierCurveTo(300, 700, 500, 500, 980, 120); lx.stroke();
+  for (let i = 0; i < 46; i++) {
+    const t = i / 46; const px = 40 + t * 920 + rr(-20, 20), py = 980 - t * 860 + rr(-30, 30);
+    lx.save(); lx.translate(px, py); lx.rotate(rr(-2.6, 0.6)); lx.fillStyle = '#000';
+    lx.beginPath(); lx.ellipse(40, 0, 44, 9, 0, 0, 7); lx.fill(); lx.restore();
+  }
+  const tex = new THREE.CanvasTexture(lc);
+  const leaf = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), new THREE.MeshBasicMaterial({ map: tex, alphaTest: 0.5, transparent: false, side: THREE.DoubleSide }));
+  leaf.material.alphaMap = null;
+  leaf.position.set(-2.6, 2.8, 0.8); leaf.castShadow = true;
+  // use the canvas alpha as the shape: make a depth material that discards transparent pixels
+  leaf.customDepthMaterial = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking, map: tex, alphaTest: 0.5 });
+  g.add(leaf);
+  g.position.copy(sunPos).multiplyScalar(0.55);
+  g.lookAt(0, 0, 0);
+  g.traverse(o => { if (o.isMesh) o.layers.set(0); });
+  scene.add(g);
+  // hide gobos from camera but keep their shadows
+  g.traverse(o => { if (o.isMesh) { o.material.colorWrite = false; o.material.depthWrite = false; } });
+  return g;
+}
+
+function setBase(renderer, color = '#E8D8CC') {
+  const scene = new THREE.Scene();
+  scene.environment = roomEnv(renderer); scene.environmentIntensity = 0.3;
+  const paper = canvasTex(speckle(1024, color, ['rgba(0,0,0,ALPHA)', 'rgba(255,255,255,ALPHA)'], { count: 2500, min: 0.3, max: 0.7, blotches: 30 }));
+  scene.add(cyclorama({ width: 80, depth: 30, height: 30, radius: 6, color: 0xffffff, roughness: 0.95, map: paper }));
+  return scene;
+}
+
+function sunLight(scene, pos, intensity = 4.5) {
+  const key = shadowLight(new THREE.DirectionalLight(0xfff3e6, intensity), { area: 10, size: 4096, far: 60, bias: -0.0003 });
+  key.position.set(...pos); scene.add(key); scene.add(key.target);
+  const sk = shadowLight(new THREE.DirectionalLight(0xffeee6, 0.35), { area: 10, size: 2048, far: 60 });
+  scene.add(sk); scene.add(sk.target);
+  scene.add(new THREE.HemisphereLight(0xfff6f0, 0xe2cfc2, 0.12));
+  return { key, sk };
+}
+
+run(async () => {
+  setSeed(9 + shot.length * 7);
+  const renderer = createRenderer({ exposure: 0.95 });
+  if (shot === 'cover') {
+    const scene = setBase(renderer);
+    const sunPos = new THREE.Vector3(-9, 9, 8);
+    const { key, sk } = sunLight(scene, sunPos.toArray());
+    gobos(scene, sunPos);
+    scene.add(plinth(1.45, 1.0, -1.2, -0.3));
+    scene.add(plinth(1.15, 0.45, 1.45, 0.7));
+    const b = tallBottle(); b.position.set(-1.2, 1.0, -0.3); b.rotation.y = 0.15; scene.add(b);
+    const j = jar(); j.scale.setScalar(0.85); j.position.set(1.45, 0.45, 0.7); j.rotation.y = -0.4; scene.add(j);
+    const d = serumBottle(); d.position.set(-0.05, 0, 1.95); d.rotation.y = -0.15; scene.add(d);
+    const s3 = stone(0.62, 0.5, '#e0d2c3'); s3.position.set(-2.95, 0.22, 1.5); scene.add(s3);
+    const s4 = stone(0.38, 0.55, '#cdb9a6'); s4.position.set(1.15, 0.15, 2.35); scene.add(s4);
+    const cam = new THREE.PerspectiveCamera(26, W / H, 0.1, 200);
+    cam.position.set(0.6, 4.4, 18.5);
+    const focus = new THREE.Vector3(0.1, 1.85, 0.3);
+    const acc = await accumulate(renderer, scene, cam, { lights: [{ light: key, jitter: 0.25 }], sky: { light: sk, minElev: 0.3 }, dof: { focus, aperture: 0.12 } });
+    return finish(acc, { grain: 0.05, vignette: 0.14, tint: { color: '#e8b9a0', alpha: 0.12 } });
+  }
+  if (shot === 'render-1') {
+    const scene = setBase(renderer, '#DCC7B8');
+    const sunPos = new THREE.Vector3(8, 10, 6);
+    const { key, sk } = sunLight(scene, sunPos.toArray(), 5);
+    gobos(scene, sunPos);
+    scene.add(plinth(1.6, 1.2, -0.4, 0));
+    scene.add(plinth(1.1, 0.5, 1.9, 1.0));
+    const d = serumBottle(); d.position.set(-0.6, 1.2, 0.1); d.rotation.y = 0.1; scene.add(d);
+    const j = jar(); j.scale.setScalar(0.7); j.position.set(1.9, 0.5, 1.0); scene.add(j);
+    const s = stone(0.42, 0.5, '#e3d6c8'); s.position.set(0.55, 1.36, 0.75); scene.add(s);
+    const cam = new THREE.PerspectiveCamera(28, W / H, 0.1, 200);
+    cam.position.set(1.2, 3.2, 11.5);
+    const focus = new THREE.Vector3(0.2, 1.7, 0.2);
+    const acc = await accumulate(renderer, scene, cam, { lights: [{ light: key, jitter: 0.25 }], sky: { light: sk, minElev: 0.3 }, dof: { focus, aperture: 0.14 } });
+    return finish(acc, { grain: 0.05, vignette: 0.14, tint: { color: '#e8b9a0', alpha: 0.1 } });
+  }
+  // render-2 portrait: stacked stones, jar on top, bottle beside
+  const scene = setBase(renderer, '#E6D3C6');
+  const sunPos = new THREE.Vector3(-7, 11, 6);
+  const { key, sk } = sunLight(scene, sunPos.toArray(), 4.6);
+  gobos(scene, sunPos);
+  const a = stone(1.9, 0.32, '#cdb8a4'); a.position.set(0, 0.55, 0); scene.add(a);
+  const b = stone(1.35, 0.32, '#dccbb9'); b.position.set(0.15, 1.45, 0.05); b.rotation.y = 0.8; scene.add(b);
+  const j = jar(); j.scale.setScalar(0.72); j.position.set(0.1, 1.8, 0.1); scene.add(j);
+  const t = tallBottle(); t.scale.setScalar(0.9); t.position.set(-2.2, 0, -1.6); scene.add(t);
+  const cam = new THREE.PerspectiveCamera(30, W / H, 0.1, 200);
+  cam.position.set(0.5, 3.6, 12);
+  const focus = new THREE.Vector3(0, 2.0, 0);
+  const acc = await accumulate(renderer, scene, cam, { lights: [{ light: key, jitter: 0.25 }], sky: { light: sk, minElev: 0.3 }, dof: { focus, aperture: 0.12 } });
+  return finish(acc, { grain: 0.05, vignette: 0.14, tint: { color: '#e8b9a0', alpha: 0.12 } });
+});
+</script>
+</body></html>

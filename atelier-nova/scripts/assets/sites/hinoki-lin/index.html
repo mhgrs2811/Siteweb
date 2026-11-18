@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hinoki &amp; Lin — Objets pour la maison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap">
+<style>
+:root{--rice:#EEE8DC;--rice-2:#e5ddcd;--oak:#B4966F;--char:#2A2825;--char-2:#5f5a52;--moss:#6A6E4C;--line:rgba(42,40,37,.15);
+  --serif:"Zen Old Mincho",serif;--sans:"Zen Kaku Gothic New",system-ui,sans-serif;--g:clamp(20px,4vw,56px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{background:var(--rice);color:var(--char);font-family:var(--sans);font-size:15.5px;line-height:1.75}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.lab{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px var(--g)}
+.logo{font-family:var(--serif);font-size:24px;letter-spacing:.04em}
+.logo span{color:var(--oak)}
+header nav{display:flex;gap:34px;font-size:14px}
+.cart{display:flex;gap:28px;font-size:14px;align-items:center}
+.cart b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--char);color:var(--rice);font-size:11px;font-weight:500;margin-left:6px}
+.burger{display:none}
+.hero{position:relative;margin:0 var(--g);height:calc(100vh - 100px);min-height:640px}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.hero-card{position:absolute;left:0;bottom:0;background:var(--rice);padding:44px 56px 0 0;max-width:620px}
+.hero-card h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,5.4vw,82px);line-height:1.08;letter-spacing:-.01em}
+.hero-card p{color:var(--char-2);max-width:42ch;margin-top:22px}
+.hero-card .links{display:flex;gap:28px;margin-top:26px;font-size:14px}
+.hero-card .links a:first-child{background:var(--char);color:var(--rice);padding:13px 24px}
+.hero-card .links a:last-child{padding:13px 0;border-bottom:1px solid var(--char)}
+.tate{position:absolute;right:28px;top:28px;writing-mode:vertical-rl;font-family:var(--serif);font-size:28px;color:var(--rice);letter-spacing:.3em;text-shadow:0 1px 12px rgba(0,0,0,.15)}
+section{padding:clamp(80px,10vw,140px) var(--g)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:46px}
+.sec-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,4vw,60px);line-height:1.1}
+.sec-head p{max-width:40ch;color:var(--char-2)}
+.filters{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap}
+.filters span{border:1px solid var(--line);padding:7px 16px;border-radius:999px;font-size:13px}
+.filters .on{background:var(--char);color:var(--rice);border-color:var(--char)}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 22px}
+.p .ph{aspect-ratio:3/4;background:var(--rice-2);overflow:hidden;position:relative}
+.p .ph img{position:absolute;max-width:none}
+.p .ph em{position:absolute;left:12px;top:12px;font-style:normal;background:var(--rice);font-size:11px;padding:3px 9px;letter-spacing:.08em}
+.p .meta{display:flex;justify-content:space-between;margin-top:14px;gap:10px}
+.p h3{font-family:var(--serif);font-weight:400;font-size:19px}
+.p .sub{font-size:13px;color:var(--char-2)}
+.p .price{font-size:15px;white-space:nowrap}
+.p.wide{grid-column:span 2}
+.p.wide .ph{aspect-ratio:auto;height:calc(100% - 66px);min-height:400px}
+.story{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;background:var(--char);color:var(--rice)}
+.story figure{grid-column:1/6;aspect-ratio:4/5;overflow:hidden}
+.story figure img{width:100%;height:100%;object-fit:cover}
+.story .txt{grid-column:7/12;align-self:center}
+.story .lab{color:var(--oak)}
+.story h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,3.8vw,58px);line-height:1.15;margin:20px 0 26px}
+.story p{color:#c9c1b2;max-width:46ch;margin-bottom:16px}
+.story .sign{margin-top:30px;display:flex;gap:40px;border-top:1px solid rgba(238,232,220,.18);padding-top:22px}
+.story .sign b{display:block;font-family:var(--serif);font-weight:400;font-size:28px;color:var(--rice)}
+.story .sign span{font-size:13px;color:#a69e90}
+.mat-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.mat{padding:28px 26px 0 0;border-right:1px solid var(--line);margin-right:26px}
+.mat:last-child{border-right:0}
+.sw{height:150px;margin-bottom:22px;position:relative;overflow:hidden}
+.sw.oak{background:repeating-linear-gradient(178deg,#b8996f 0 6px,#ad8d64 6px 9px,#bfa37b 9px 17px,#a88860 17px 19px)}
+.sw.clay{background:radial-gradient(circle at 30% 30%,#7a5a3f 0 1px,transparent 2px) 0 0/9px 11px,radial-gradient(circle at 60% 70%,#efe6d4 0 1px,transparent 2px) 0 0/13px 7px,#d6c8b0}
+.sw.linen{background:repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(255,255,255,.18) 0 1px,transparent 1px 3px),#9a9a7e}
+.sw.washi{background:radial-gradient(ellipse at 50% 40%,#fff6e6,#efe2c9 70%);box-shadow:inset 0 0 0 1px var(--line)}
+.mat h3{font-family:var(--serif);font-weight:400;font-size:22px}
+.mat p{color:var(--char-2);font-size:14px;margin-top:8px}
+.mat .o{font-size:12px;color:var(--moss);margin-top:14px;letter-spacing:.06em}
+footer{padding:80px var(--g) 30px;border-top:1px solid var(--line)}
+.f{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:24px;font-size:14px;color:var(--char-2)}
+.f h2{font-family:var(--serif);font-weight:400;font-size:34px;color:var(--char);line-height:1.2}
+.f b{display:block;color:var(--char);font-weight:500;margin-bottom:6px}
+.news{margin-top:22px;display:flex;border-bottom:1px solid var(--char);max-width:380px;justify-content:space-between;padding:10px 0;color:var(--char-2)}
+.legal{display:flex;justify-content:space-between;margin-top:70px;font-size:12px;color:var(--char-2)}
+.concept{border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+@media (max-width:900px){
+  header{padding:16px 20px}
+  header nav,.cart span{display:none}
+  .burger{display:flex;flex-direction:column;gap:6px;width:44px;height:44px;justify-content:center;align-items:flex-end}
+  .burger i{height:1.5px;width:24px;background:var(--char);display:block}
+  .cart{gap:6px}
+  .hero{margin:0;height:auto;min-height:0}
+  .hero img{height:56vh;min-height:440px}
+  .hero-card{position:relative;padding:30px 20px 0}
+  .hero-card h1{font-size:42px}
+  .tate{font-size:20px;right:16px;top:16px}
+  .sec-head{flex-direction:column;align-items:start;margin-bottom:28px}
+  .products{grid-template-columns:1fr 1fr;gap:28px 12px}
+  .p.wide{grid-column:span 2}
+  .p.wide .ph{height:320px;min-height:0}
+  .p h3{font-size:16px}
+  .p .meta{flex-direction:column;gap:0}
+  .story{grid-template-columns:1fr}
+  .story figure,.story .txt{grid-column:1}
+  .mat-grid{grid-template-columns:1fr 1fr}
+  .mat{border-right:0;margin-right:0;padding-right:12px}
+  .f{grid-template-columns:1fr 1fr}
+  .f>div:first-child{grid-column:1/3}
+  .legal{flex-direction:column;gap:10px}
+}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#">Hinoki <span>&amp;</span> Lin</a>
+  <nav><a href="#collection">Collection</a><a href="#atelier">L’atelier</a><a href="#matieres">Matières</a><a href="#">Journal</a></nav>
+  <div class="cart"><span>Rechercher</span><span>Compte</span><a href="#">Panier<b>2</b></a><span class="burger" aria-hidden="true"><i></i><i></i></span></div>
+</header>
+
+<div class="hero">
+  <img src="/public/images/projects/hinoki-lin/cover.webp" alt="Banc en chêne, vases en grès et lampe en papier dans la lumière d’une fenêtre">
+  <span class="tate">檜と麻</span>
+  <div class="hero-card">
+    <span class="lab" style="color:var(--moss)">Collection Automne — 2026</span>
+    <h1 style="margin-top:14px">Des objets lents<br>pour des maisons calmes.</h1>
+    <p>Grès tourné à la main, chêne massif, lin lavé et papier washi. Des pièces fabriquées en petites séries par six ateliers, au Japon et en Belgique.</p>
+    <div class="links"><a href="#collection">Voir la collection</a><a href="#atelier">Nos ateliers</a></div>
+  </div>
+</div>
+
+<section id="collection">
+  <div class="sec-head"><h2>Collection Automne</h2><p>Vingt-quatre pièces pensées pour vivre ensemble : à poser, à remplir, à allumer quand les jours raccourcissent.</p></div>
+  <div class="filters"><span class="on">Tout</span><span>Vases</span><span>Bols &amp; tasses</span><span>Luminaires</span><span>Mobilier</span><span>Textile</span></div>
+  <div class="products">
+    <div class="p"><div class="ph"><img src="/public/images/projects/hinoki-lin/render-1.webp" alt="Vase Kasumi" style="width:300%;left:-62%;top:-12%"><em>Nouveau</em></div><div class="meta"><div><h3>Vase Kasumi</h3><span class="sub">Grès émaillé charbon, 42 cm</span></div><span class="price">128 €</span></div></div>
+    <div class="p"><div class="ph"><img src="/public/images/projects/hinoki-lin/render-1.webp" alt="Vase Tsuki" style="width:300%;left:-125%;top:-14%"></div><div class="meta"><div><h3>Vase Tsuki</h3><span class="sub">Grès moucheté, 22 cm</span></div><span class="price">96 €</span></div></div>
+    <div class="p wide"><div class="ph"><img src="/public/images/projects/hinoki-lin/render-2.webp" alt="Lampe Hoshi allumée" style="width:100%;left:0;top:-8%"><em>Fait main</em></div><div class="meta"><div><h3>Lampe Hoshi</h3><span class="sub">Papier washi, armature bambou, Ø 50 cm</span></div><span class="price">189 €</span></div></div>
+    <div class="p"><div class="ph"><img src="/public/images/projects/hinoki-lin/render-1.webp" alt="Bol Ido" style="width:330%;left:-215%;top:-18%"></div><div class="meta"><div><h3>Bol Ido</h3><span class="sub">Grès brun, Ø 24 cm</span></div><span class="price">42 €</span></div></div>
+    <div class="p"><div class="ph"><img src="/public/images/projects/hinoki-lin/cover.webp" alt="Banc Sora" style="width:240%;left:-60%;top:-28%"></div><div class="meta"><div><h3>Banc Sora</h3><span class="sub">Chêne massif huilé, 160 cm</span></div><span class="price">890 €</span></div></div>
+    <div class="p"><div class="ph"><img src="/public/images/projects/hinoki-lin/cover.webp" alt="Coussin Nami" style="width:330%;left:-8%;top:-120%"></div><div class="meta"><div><h3>Coussin Nami</h3><span class="sub">Lin lavé mousse, 60 × 60</span></div><span class="price">74 €</span></div></div>
+    <div class="p"><div class="ph"><img src="/public/images/projects/hinoki-lin/render-2.webp" alt="Composition de grès" style="width:210%;left:-8%;top:-38%"></div><div class="meta"><div><h3>Set Ishi</h3><span class="sub">Trois pièces en grès</span></div><span class="price">156 €</span></div></div>
+  </div>
+</section>
+
+<section class="story" id="atelier">
+  <figure><img src="/public/images/projects/hinoki-lin/render-2.webp" alt="Lampe en papier allumée dans un coin de pièce"></figure>
+  <div class="txt">
+    <span class="lab">Mise en scène</span>
+    <h2>Une lampe ne s’éteint jamais vraiment. Elle attend le soir.</h2>
+    <p>La lampe Hoshi est fabriquée à Gifu par un atelier familial qui travaille le papier et le bambou depuis quatre générations. Chaque nervure est posée à la main, puis le papier est tendu humide pour sécher sans un pli.</p>
+    <p>Nous la photographions comme elle vit : posée au sol, à côté d’un banc, dans la lumière rasante de novembre.</p>
+    <div class="sign"><div><b>6</b><span>ateliers partenaires</span></div><div><b>24</b><span>pièces cette saison</span></div><div><b>2–5 j</b><span>livraison en Belgique</span></div></div>
+  </div>
+</section>
+
+<section id="matieres">
+  <div class="sec-head"><h2>Matières</h2><p>Quatre matières, choisies pour bien vieillir. Chaque fiche produit précise leur origine et leur entretien.</p></div>
+  <div class="mat-grid">
+    <div class="mat"><div class="sw oak"></div><h3>Chêne massif</h3><p>Huilé, jamais verni. Il fonce doucement avec la lumière.</p><div class="o">Ardennes belges</div></div>
+    <div class="mat"><div class="sw clay"></div><h3>Grès moucheté</h3><p>Cuit à 1 280 °C, il garde les points de fer de l’argile.</p><div class="o">Shigaraki, Japon</div></div>
+    <div class="mat"><div class="sw linen"></div><h3>Lin lavé</h3><p>Lavé à la pierre pour une main souple dès le premier jour.</p><div class="o">Flandre</div></div>
+    <div class="mat"><div class="sw washi"></div><h3>Papier washi</h3><p>Fibres de kozo, translucide et étonnamment résistant.</p><div class="o">Gifu, Japon</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="f">
+    <div><h2>Lettre de saison</h2><p>Quatre fois par an, les nouvelles pièces et les histoires d’ateliers.</p><div class="news"><span>Votre adresse e-mail</span><span>S’inscrire →</span></div></div>
+    <div><b>Boutique</b>Collection<br>Cartes cadeaux<br>Livraison &amp; retours</div>
+    <div><b>Maison</b>Nos ateliers<br>Journal<br>Showroom, Gand</div>
+    <div><b>Aide</b>Entretien<br>Contact<br>CGV</div>
+  </div>
+  <div class="legal"><span>© 2026 Hinoki &amp; Lin</span><span class="concept">Concept fictif — Atelier Nova</span></div>
+</footer>
+</body>
+</html>

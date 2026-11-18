@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sève — Institut de soins visage, Uccle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..500&family=Manrope:wght@400;500;600&display=swap">
+<style>
+:root{--blush:#E8D8CC;--cream:#F6F0E8;--cocoa:#3B2A24;--cocoa-2:#6b5850;--sage:#8A9A82;--sage-ink:#5d6b56;--line:rgba(59,42,36,.16);
+  --serif:"Bodoni Moda",Didot,serif;--sans:"Manrope",system-ui,sans-serif;--g:clamp(20px,4vw,60px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{background:var(--cream);color:var(--cocoa);font-family:var(--sans);font-size:16px;line-height:1.65}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.lab{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600}
+header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:26px var(--g);border-bottom:1px solid var(--line)}
+header nav{display:flex;gap:34px;font-size:14px}
+.logo{font-family:var(--serif);font-size:34px;font-weight:500;letter-spacing:.32em;padding-left:.32em}
+.rdv{justify-self:end;display:flex;gap:26px;align-items:center;font-size:14px}
+.rdv a.b{background:var(--cocoa);color:var(--cream);padding:12px 22px;border-radius:999px}
+.burger{display:none}
+.hero{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:56px var(--g) 80px;align-items:end}
+.hero-text{grid-column:1/8;padding-bottom:20px}
+.hero-text .lab{color:var(--sage-ink)}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(68px,10vw,168px);line-height:.86;letter-spacing:-.035em;margin:28px 0 40px}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--sage-ink)}
+.hero-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:640px}
+.hero-row p{color:var(--cocoa-2);font-size:15px}
+.cta{display:inline-flex;align-items:center;gap:12px;border-bottom:1px solid var(--cocoa);padding-bottom:6px;font-weight:600;font-size:15px;margin-top:6px}
+.hero-img{grid-column:8/13;position:relative}
+.arch{aspect-ratio:4/5.2;border-radius:999px 999px 0 0;overflow:hidden;background:var(--blush)}
+.arch img{width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;left:-58px;bottom:56px;width:132px;height:132px;border-radius:50%;background:var(--sage);color:var(--cream);display:grid;place-items:center;text-align:center;font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.15;transform:rotate(-8deg)}
+.ticker{display:flex;gap:56px;padding:22px var(--g);border-block:1px solid var(--line);font-family:var(--serif);font-style:italic;font-size:26px;white-space:nowrap;overflow:hidden;color:var(--cocoa-2)}
+.ticker span::before{content:"✦";font-style:normal;font-size:12px;margin-right:56px;color:var(--sage);vertical-align:middle}
+section{padding:clamp(80px,10vw,150px) var(--g)}
+.soins{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.soins-head{grid-column:1/5}
+.soins-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(46px,5vw,78px);line-height:.95;letter-spacing:-.025em;margin:20px 0 26px}
+.soins-head h2 em{font-style:italic}
+.soins-head p{color:var(--cocoa-2);max-width:34ch}
+.soins-img{margin-top:40px;aspect-ratio:1;overflow:hidden;border-radius:4px}
+.soins-img img{width:100%;height:100%;object-fit:cover}
+.list{grid-column:6/13}
+.item{display:grid;grid-template-columns:1fr 110px 90px;gap:20px;align-items:baseline;padding:28px 0;border-top:1px solid var(--line)}
+.item:last-child{border-bottom:1px solid var(--line)}
+.item h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.3vw,32px);line-height:1.15}
+.item p{color:var(--cocoa-2);font-size:14.5px;margin-top:6px;max-width:46ch}
+.item .t{font-size:14px;color:var(--cocoa-2)}
+.item .p{font-family:var(--serif);font-size:26px;text-align:right}
+.item .pill{display:inline-block;margin-left:10px;font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;background:var(--blush);padding:4px 9px;border-radius:999px;vertical-align:middle}
+.philo{background:var(--blush);display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:center}
+.philo figure{grid-column:1/6;aspect-ratio:16/11;overflow:hidden}
+.philo figure img{width:100%;height:100%;object-fit:cover}
+.philo blockquote{grid-column:7/13;font-family:var(--serif);font-size:clamp(32px,3.4vw,52px);line-height:1.12;letter-spacing:-.015em}
+.philo blockquote em{font-style:italic;color:var(--sage-ink)}
+.philo cite{display:block;margin-top:28px;font-family:var(--sans);font-style:normal;font-size:14px;color:var(--cocoa-2)}
+.values{grid-column:7/13;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:1px solid var(--line);padding-top:24px;margin-top:-20px}
+.values b{display:block;font-family:var(--serif);font-weight:400;font-size:22px}
+.values span{font-size:13.5px;color:var(--cocoa-2)}
+.book{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.book-head{grid-column:1/5}
+.book-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(46px,5vw,78px);line-height:.95;letter-spacing:-.025em;margin:20px 0 24px}
+.book-head h2 em{font-style:italic}
+.book-head p{color:var(--cocoa-2);max-width:34ch}
+.panel{grid-column:6/13;background:#fffaf4;border:1px solid var(--line);border-radius:6px;padding:34px}
+.steps{display:flex;gap:10px;margin-bottom:30px}
+.steps span{flex:1;border-top:2px solid var(--line);padding-top:10px;font-size:13px;color:var(--cocoa-2)}
+.steps .done{border-color:var(--sage)}
+.steps .cur{border-color:var(--cocoa);color:var(--cocoa);font-weight:600}
+.chosen{display:flex;justify-content:space-between;align-items:center;background:var(--cream);border:1px solid var(--line);border-radius:4px;padding:16px 20px;margin-bottom:28px}
+.chosen b{font-family:var(--serif);font-weight:400;font-size:22px}
+.chosen span{font-size:13px;color:var(--cocoa-2)}
+.days{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:14px 0 26px}
+.days span{border:1px solid var(--line);border-radius:4px;text-align:center;padding:10px 0;font-size:12px;line-height:1.3;color:var(--cocoa-2)}
+.days b{display:block;font-family:var(--serif);font-weight:400;font-size:22px;color:var(--cocoa)}
+.days .on{background:var(--cocoa);border-color:var(--cocoa);color:var(--blush)}
+.days .on b{color:var(--cream)}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.slots span{border:1px solid var(--line);border-radius:999px;text-align:center;padding:10px 0;font-size:14px}
+.slots .on{background:var(--sage);border-color:var(--sage);color:#fff;font-weight:600}
+.slots .x{color:#b8a99f;text-decoration:line-through}
+.confirm{margin-top:30px;display:flex;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid var(--line);padding-top:24px}
+.confirm p{font-size:14px;color:var(--cocoa-2)}
+.confirm button{background:var(--cocoa);color:var(--cream);border:0;border-radius:999px;padding:16px 28px;font:600 15px var(--sans)}
+footer{background:var(--cocoa);color:var(--blush);padding:90px var(--g) 34px}
+.f-top{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.f-top h2{grid-column:1/7;font-family:var(--serif);font-weight:400;font-size:clamp(44px,5vw,80px);line-height:1;color:var(--cream)}
+.f-top h2 em{font-style:italic;color:#c9d2c3}
+.f-cols{grid-column:8/13;display:grid;grid-template-columns:1fr 1fr;gap:24px;font-size:14px}
+.f-cols b{display:block;color:var(--cream);font-weight:600;margin-bottom:6px}
+.f-bot{display:flex;justify-content:space-between;align-items:end;margin-top:90px;font-size:12px;opacity:.8}
+.f-bot .logo{font-size:80px;letter-spacing:.3em;color:var(--cream);opacity:1;line-height:1}
+.concept{border:1px solid rgba(232,216,204,.35);border-radius:999px;padding:4px 12px}
+@media (max-width:900px){
+  header{grid-template-columns:1fr auto;padding:18px 20px}
+  header nav,.rdv span{display:none}
+  .logo{font-size:26px}
+  .rdv a.b{display:none}
+  .burger{display:flex;flex-direction:column;gap:6px;justify-self:end;width:44px;height:44px;justify-content:center;align-items:flex-end}
+  .burger i{height:1.5px;width:26px;background:var(--cocoa);display:block}
+  .hero,.soins,.philo,.book,.f-top{grid-template-columns:1fr}
+  .hero{padding:34px 20px 50px}
+  .hero-text,.hero-img,.soins-head,.list,.philo figure,.philo blockquote,.values,.book-head,.panel,.f-top h2,.f-cols{grid-column:1}
+  .hero h1{font-size:76px;margin:20px 0 28px}
+  .hero-row{grid-template-columns:1fr;gap:18px}
+  .hero-img{order:-1}
+  .arch{aspect-ratio:4/4.4}
+  .badge{left:auto;right:12px;bottom:-30px;width:104px;height:104px;font-size:16px}
+  .ticker{font-size:20px}
+  .soins-img{display:none}
+  .list{margin-top:30px}
+  .item{grid-template-columns:1fr auto;gap:6px 16px}
+  .item>div{grid-column:1/3}
+  .item .p{text-align:right}
+  .values{grid-template-columns:1fr;margin-top:0}
+  .panel{padding:20px}
+  .days{grid-template-columns:repeat(3,1fr)}
+  .slots{grid-template-columns:repeat(3,1fr)}
+  .confirm{flex-direction:column;align-items:stretch}
+  .f-bot{flex-direction:column;align-items:start;gap:20px}
+  .f-bot .logo{font-size:52px}
+}
+</style>
+</head>
+<body>
+<header>
+  <nav><a href="#soins">Soins</a><a href="#philosophie">Philosophie</a><a href="#institut">L’institut</a></nav>
+  <a class="logo" href="#">SÈVE</a>
+  <div class="rdv"><span>Uccle — Bruxelles</span><a class="b" href="#rendez-vous">Prendre rendez-vous</a></div>
+  <span class="burger" aria-hidden="true"><i></i><i></i></span>
+</header>
+
+<section class="hero" style="padding-top:56px">
+  <div class="hero-text">
+    <span class="lab">Institut de soins visage — Uccle</span>
+    <h1>La peau,<br><em>en saison.</em></h1>
+    <div class="hero-row">
+      <p>Des soins du visage pensés comme des rituels courts et précis : un diagnostic, des gestes manuels, des formules végétales choisies pour votre peau du moment.</p>
+      <div><p>Sur rendez-vous, du mardi au samedi.</p><a class="cta" href="#rendez-vous">Prendre rendez-vous →</a></div>
+    </div>
+  </div>
+  <div class="hero-img">
+    <div class="arch"><img src="/public/images/projects/seve-institut/render-2.webp" alt="Pot de baume posé sur des galets de travertin"></div>
+    <div class="badge">Diagnostic<br>de peau<br>offert</div>
+  </div>
+</section>
+
+<div class="ticker"><span>Diagnostic de peau</span><span>Soins manuels</span><span>Formules végétales</span><span>Rituels de saison</span><span>Massage kobido</span><span>Diagnostic de peau</span></div>
+
+<section id="soins">
+  <div class="soins">
+    <div class="soins-head">
+      <span class="lab" style="color:var(--sage-ink)">La carte</span>
+      <h2>Nos <em>soins</em></h2>
+      <p>Chaque soin commence par un échange et une lecture de la peau. Les durées incluent l’accueil et le temps de repos.</p>
+      <div class="soins-img"><img src="/public/images/projects/seve-institut/render-1.webp" alt="Flacon de sérum ambré sur un socle de pierre"></div>
+    </div>
+    <div class="list">
+      <div class="item"><div><h3>Soin éclat</h3><p>Nettoyage en deux temps, exfoliation douce, masque à l’argile rose et massage du visage.</p></div><span class="t">60 min</span><span class="p">85 €</span></div>
+      <div class="item"><div><h3>Hydratation profonde</h3><p>Pour les peaux déshydratées en hiver : sérum à l’acide hyaluronique, masque crème, modelage.</p></div><span class="t">75 min</span><span class="p">105 €</span></div>
+      <div class="item"><div><h3>Rituel Sève <span class="pill">Signature</span></h3><p>Notre soin le plus complet, avec massage du cuir chevelu, des mains et rituel aux pierres tièdes.</p></div><span class="t">90 min</span><span class="p">135 €</span></div>
+      <div class="item"><div><h3>Peeling enzymatique</h3><p>Enzymes de papaye et d’ananas pour affiner le grain de peau, sans irritation.</p></div><span class="t">45 min</span><span class="p">70 €</span></div>
+      <div class="item"><div><h3>Massage visage kobido</h3><p>Technique japonaise de massage manuel, tonique et drainant.</p></div><span class="t">50 min</span><span class="p">80 €</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="philo" id="philosophie">
+  <figure><img src="/public/images/projects/seve-institut/cover.webp" alt="Flacons Sève sur des galets, lumière de fenêtre"></figure>
+  <blockquote>« Une peau n’a pas besoin de vingt produits. Elle a besoin <em>des trois bons</em>, et de mains qui l’écoutent. »<cite>— La fondatrice, esthéticienne diplômée</cite></blockquote>
+  <div class="values" style="grid-row:2"><div><b>Peu</b><span>Trois à cinq produits par soin, jamais plus.</span></div><div><b>Juste</b><span>Des formules certifiées, des actifs dosés.</span></div><div><b>Lent</b><span>Des gestes manuels, sans appareil.</span></div></div>
+</section>
+
+<section id="rendez-vous">
+  <div class="book">
+    <div class="book-head">
+      <span class="lab" style="color:var(--sage-ink)">Réservation en ligne</span>
+      <h2>Prendre<br><em>rendez-vous</em></h2>
+      <p>Choisissez votre soin puis un créneau. Vous recevrez une confirmation par e-mail et un rappel la veille.</p>
+    </div>
+    <div class="panel">
+      <div class="steps"><span class="done">1 · Soin</span><span class="cur">2 · Créneau</span><span>3 · Coordonnées</span></div>
+      <div class="chosen"><div><b>Soin éclat</b><br><span>60 min — avec Camille</span></div><b>85 €</b></div>
+      <span class="lab">Semaine du 23 novembre</span>
+      <div class="days"><span>Mar.<b>24</b></span><span>Mer.<b>25</b></span><span class="on">Jeu.<b>26</b></span><span>Ven.<b>27</b></span><span>Sam.<b>28</b></span><span>Mar.<b>1</b></span></div>
+      <span class="lab">Jeudi 26 novembre</span>
+      <div class="slots"><span class="x">09:30</span><span>10:45</span><span>12:00</span><span class="x">13:30</span><span class="on">14:45</span><span>16:00</span><span>17:15</span><span>18:30</span></div>
+      <div class="confirm"><p>Jeudi 26 novembre, 14 h 45<br>Soin éclat · 60 min · 85 €</p><button>Continuer →</button></div>
+    </div>
+  </div>
+</section>
+
+<footer id="institut">
+  <div class="f-top">
+    <h2>Avenue des Tilleuls 9,<br><em>Uccle.</em></h2>
+    <div class="f-cols"><div><b>Horaires</b>Mar. — ven. 9 h 30 – 19 h<br>Samedi 9 h 30 – 16 h</div><div><b>Contact</b>bonjour@seve-institut.be<br>+32 2 000 00 00</div><div><b>Accès</b>Tram 4 et 92, arrêt Tilleuls</div><div><b>Suivre</b>Instagram<br>Journal de peau</div></div>
+  </div>
+  <div class="f-bot"><span class="logo">SÈVE</span><span>© 2026 Sève · <span class="concept">Concept fictif — Atelier Nova</span></span></div>
+</footer>
+</body>
+</html>
