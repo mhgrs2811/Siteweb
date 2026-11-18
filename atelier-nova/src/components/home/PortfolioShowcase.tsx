@@ -15,6 +15,8 @@ export function PortfolioShowcase() {
   return (
     <section id="realisations" data-surface="dark" aria-labelledby="portfolio-title" className="surface-dark relative overflow-hidden">
       <PortfolioScroller id="realisations" />
+      {/* Élément épinglé par GSAP : un enfant de la section, pour que React ne perde jamais la trace de ses nœuds */}
+      <div data-pin className="relative">
       <div
         data-track
         className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto lg:h-[100svh] lg:snap-none lg:overflow-visible"
@@ -113,6 +115,7 @@ export function PortfolioShowcase() {
           <span data-progress className="absolute inset-0 origin-left scale-x-0 bg-ivory" />
         </span>
         <span className="t-label tabular-nums text-ivory">{String(projects.length).padStart(2, "0")}</span>
+      </div>
       </div>
     </section>
   );

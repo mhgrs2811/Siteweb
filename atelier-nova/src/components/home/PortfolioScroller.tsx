@@ -11,10 +11,11 @@ import { getGsap, prefersReducedMotion } from "@/lib/motion";
  */
 export function PortfolioScroller({ id }: { id: string }) {
   useEffect(() => {
-    const section = document.getElementById(id);
-    const track = section?.querySelector<HTMLElement>("[data-track]");
-    const progress = section?.querySelector<HTMLElement>("[data-progress]");
-    const counter = section?.querySelector<HTMLElement>("[data-counter]");
+    const root = document.getElementById(id);
+    const section = root?.querySelector<HTMLElement>("[data-pin]");
+    const track = root?.querySelector<HTMLElement>("[data-track]");
+    const progress = root?.querySelector<HTMLElement>("[data-progress]");
+    const counter = root?.querySelector<HTMLElement>("[data-counter]");
     if (!section || !track || prefersReducedMotion()) return;
     const { gsap } = getGsap();
     const mm = gsap.matchMedia();
